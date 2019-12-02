@@ -1,4 +1,4 @@
-# René
+# Operation: René
 
 ## Overview
 The game revolves around a *nerd* called ***Hunter*** which guides one or two *robbers* called ***René*** and ***Yuri***, who must rob a building of interest at each level, such as a bank or a museum.
