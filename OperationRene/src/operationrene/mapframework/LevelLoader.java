@@ -1,7 +1,5 @@
 package operationrene.mapframework;
 
-import operationrene.mapframework.LevelMap;
-
 import java.io.*;
 
 import flexjson.*;
