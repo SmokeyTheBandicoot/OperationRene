@@ -15,6 +15,10 @@ public class LocationAndSize {
         this.width = width;
         this.height = height;
     }
+    
+    private LocationAndSize(){
+        this(0, 0, 0, 0);
+    }
 
     public int getxLocation() {
         return xLocation;

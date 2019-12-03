@@ -12,6 +12,8 @@ import java.awt.image.BufferedImage;
 
 import java.nio.file.FileSystems;
 import java.nio.file.Paths;
+import operationrene.mapframework.LevelSerializer;
+import operationrene.mapframework.LevelMap;
 
 public class OperationRene extends Game {
 
@@ -25,8 +27,8 @@ public class OperationRene extends Game {
         // System.out.println(FileSystems.getDefault().getPath("").toAbsolutePath().getParent() + "\\assets\\sprites\\prova.png");
         String str = FileSystems.getDefault().getPath("").toAbsolutePath().getParent() + "\\assets\\sprites\\prova.png";
         System.out.println(str);
-        BufferedImage[] images = this.getImages(str, 3, 4);
-        man = new AnimatedSprite(images,200,200);
+        BufferedImage[] images = this.getImages("../../../../../assets/sprites/prova.jpg", 3, 4);
+        man = new AnimatedSprite(images, 200, 200);
         man.setFrame(7);
         man.setLoopAnim(true);
         background = new ColorBackground(Color.LIGHT_GRAY);
@@ -85,6 +87,9 @@ public class OperationRene extends Game {
     }
 
     public static void main(String[] args) {
+        
+        LevelMap lm = LevelSerializer.loadLevel("assets/levels/level1.json");
+        
         GameLoader gameLoader = new GameLoader();
         gameLoader.setup(new OperationRene(), new Dimension(640, 400), false);
         gameLoader.start();
