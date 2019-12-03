@@ -9,17 +9,17 @@ public class LevelMap implements Serializable {
     // Matrix for the main level collision description
     private Integer[][] matrix;
     // Dictionary for adding behaviour to the level. This dictionary will be analyzed by the LevelBuilder object
-    private HashMap<LocationAndSize, PointOfInterest> pointsOfInterest;
-    
+    private HashMap<LocationAndSize, PointOfInterest> lockedObjects;
+    private HashMap<LocationAndSize, PointOfInterest> unlockingObjects;
 
-    // Full constructor
-    public LevelMap(Integer[][] matrix, HashMap<LocationAndSize, PointOfInterest> pointsOfInterest) {
+    public LevelMap(Integer[][] matrix, HashMap<LocationAndSize, PointOfInterest> lockedObjects, HashMap<LocationAndSize, PointOfInterest> unlockingObjects) {
         this.matrix = matrix;
-        this.pointsOfInterest = pointsOfInterest;
+        this.lockedObjects = lockedObjects;
+        this.unlockingObjects = unlockingObjects;
     }
-    
+   
     private LevelMap(){
-        this(null, null);
+        this(null, null, null);
     }
 
     public Integer[][] getMatrix() {
@@ -30,11 +30,21 @@ public class LevelMap implements Serializable {
         this.matrix = matrix;
     }
 
-    public HashMap<LocationAndSize, PointOfInterest> getPointsOfInterest() {
-        return pointsOfInterest;
+    public HashMap<LocationAndSize, PointOfInterest> getLockedObjects() {
+        return lockedObjects;
     }
 
-    public void setPointsOfInterest(HashMap<LocationAndSize, PointOfInterest> pointsOfInterest) {
-        this.pointsOfInterest = pointsOfInterest;
+    public void setLockedObjects(HashMap<LocationAndSize, PointOfInterest> lockedObjects) {
+        this.lockedObjects = lockedObjects;
     }
+
+    public HashMap<LocationAndSize, PointOfInterest> getUnlockingObjects() {
+        return unlockingObjects;
+    }
+
+    public void setUnlockingObjects(HashMap<LocationAndSize, PointOfInterest> unlockingObjects) {
+        this.unlockingObjects = unlockingObjects;
+    }
+
+    
 }

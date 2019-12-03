@@ -1,6 +1,7 @@
 package operationrene.mapframework.pointsofinterest;
 
 import java.io.Serializable;
+import operationrene.minigame.Minigame;
 
 public abstract class PointOfInterest implements Serializable {
     
@@ -17,7 +18,7 @@ public abstract class PointOfInterest implements Serializable {
         Door,
         Safe,
         AlarmZone,
-        AlarmMechanism,
+        Minigame,
         EntryPoint,
         EscapePoint
     }

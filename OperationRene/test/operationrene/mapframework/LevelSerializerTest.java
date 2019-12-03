@@ -28,12 +28,13 @@ public class LevelSerializerTest {
         System.out.println("saveLevel");
         
         Integer[][] matrix = new Integer[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-        HashMap<LocationAndSize, PointOfInterest> poi = new HashMap<>();
+        HashMap<LocationAndSize, PointOfInterest> unlocks = new HashMap<>();
+        HashMap<LocationAndSize, PointOfInterest> lockeds = new HashMap<>();
         
-        poi.put(new LocationAndSize(1, 2, 3, 4), new Key(0));
-        poi.put(new LocationAndSize(2, 3, 4, 5), new Door(false, true, 0));
+        unlocks.put(new LocationAndSize(1, 2, 3, 4), new Key(0));
+        lockeds.put(new LocationAndSize(2, 3, 4, 5), new Door(false, true, 0));
         
-        LevelMap level = new LevelMap(matrix, poi);
+        LevelMap level = new LevelMap(matrix, unlocks, lockeds);
         
         String path = "assets/levels/level_test.dat";
         LevelSerializer.saveLevel(level, path);
