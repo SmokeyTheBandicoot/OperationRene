@@ -1,8 +1,11 @@
 package operationrene.mapframework;
 
 // Class used to describe 2 parameters of an object: 
+
+import java.io.Serializable;
+
 // Location and Size expressed with ints. X,Y refers to the Top-Left corner
-public class LocationAndSize {
+public class LocationAndSize implements Serializable {
     
     private int xLocation;
     private int yLocation;
@@ -50,6 +53,11 @@ public class LocationAndSize {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+    
+    @Override
+    public String toString(){
+        return String.format("x: %d, y: %d, w: %d, h: %d", xLocation, yLocation, width, height);
     }
     
 }

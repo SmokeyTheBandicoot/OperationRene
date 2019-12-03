@@ -1,5 +1,6 @@
 package operationrene.mapframework;
 
+import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import java.io.Serializable;
 import java.util.*;
 
@@ -8,11 +9,11 @@ public class LevelMap implements Serializable {
     // Matrix for the main level collision description
     private Integer[][] matrix;
     // Dictionary for adding behaviour to the level. This dictionary will be analyzed by the LevelBuilder object
-    private HashMap<LocationAndSize, PointType> pointsOfInterest;
+    private HashMap<LocationAndSize, PointOfInterest> pointsOfInterest;
     
 
     // Full constructor
-    public LevelMap(Integer[][] matrix, HashMap<LocationAndSize, PointType> pointsOfInterest) {
+    public LevelMap(Integer[][] matrix, HashMap<LocationAndSize, PointOfInterest> pointsOfInterest) {
         this.matrix = matrix;
         this.pointsOfInterest = pointsOfInterest;
     }
@@ -29,11 +30,11 @@ public class LevelMap implements Serializable {
         this.matrix = matrix;
     }
 
-    public HashMap<LocationAndSize, PointType> getPointsOfInterest() {
+    public HashMap<LocationAndSize, PointOfInterest> getPointsOfInterest() {
         return pointsOfInterest;
     }
 
-    public void setPointsOfInterest(HashMap<LocationAndSize, PointType> pointsOfInterest) {
+    public void setPointsOfInterest(HashMap<LocationAndSize, PointOfInterest> pointsOfInterest) {
         this.pointsOfInterest = pointsOfInterest;
     }
 }
