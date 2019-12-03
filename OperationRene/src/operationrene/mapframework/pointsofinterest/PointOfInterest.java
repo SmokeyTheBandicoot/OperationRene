@@ -11,7 +11,23 @@ public abstract class PointOfInterest implements Serializable {
     public PointOfInterest(PointType pointType, int ID) {
         this.pointType = pointType;
         this.ID = ID;
-    }   
+    }  
+
+    public PointType getPointType() {
+        return pointType;
+    }
+
+    public void setPointType(PointType pointType) {
+        this.pointType = pointType;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
     
     public enum PointType {
         Key,

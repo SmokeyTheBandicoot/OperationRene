@@ -2,7 +2,9 @@ package operationrene.mapframework;
 
 import java.util.HashMap;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
+import operationrene.mapframework.pointsofinterest.PointOfInterest.PointType;
 import operationrene.utils.ProgressTree;
+import operationrene.utils.ProgressTree.Node;
 
 public class LevelBuilder {
     
@@ -22,8 +24,16 @@ public class LevelBuilder {
         
         // PressureAlarm, PulsatingLasers, EntryPoint
         
+        Node<PointOfInterest> node = null;
+        for (LocationAndSize ls : locked.keySet()) {
+            if (locked.get(ls).getPointType() == PointType.Safe) {
+                node = new Node<>(locked.get(ls));
+            }
+        }
         
-        ProgressTree progress = new ProgressTree();
+        ProgressTree progress = new ProgressTree(node);
+        
+        //TODO: Implement the rest of the progress tree
         
         return null;
     }
