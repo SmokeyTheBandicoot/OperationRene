@@ -1,6 +1,6 @@
 package operationrene.utils;
 
-import static operationrene.mapframework.LevelBuilder.*;
+import static operationrene.mapframework.levelbuilder.LevelBuilder.*;
 import operationrene.mapframework.*;
 
 public class Utils {

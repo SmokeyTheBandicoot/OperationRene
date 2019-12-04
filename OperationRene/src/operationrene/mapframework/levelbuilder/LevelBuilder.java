@@ -1,17 +1,22 @@
-package operationrene.mapframework;
+package operationrene.mapframework.levelbuilder;
 
 import java.util.HashMap;
+import operationrene.mapframework.*;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
-import operationrene.mapframework.pointsofinterest.PointOfInterest.PointType;
 import operationrene.utils.ProgressTree;
-import operationrene.utils.ProgressTree.Node;
 
 public class LevelBuilder {
     
     protected LevelMap lm;
     
-    public LevelMap addRoom(LevelMap lm, Rotation r, Flipping f) {
-        return null;
+    public boolean addRoom(LevelMap lm, Rotation r, Flipping f) {
+        if (this.lm == null){
+            this.lm = lm;
+            return true;
+        }
+        
+        
+       return false;
     }
     
     public LevelMap buildLevel(){
@@ -23,15 +28,9 @@ public class LevelBuilder {
         HashMap<Location, PointOfInterest> unlocks = lm.getUnlockingObjects();
         
         // PressureAlarm, PulsatingLasers, EntryPoint
+        HashMap<Location, PointOfInterest> other = lm.getOtherObjects();
         
-        Node<PointOfInterest> node = null;
-        for (Location ls : locked.keySet()) {
-            if (locked.get(ls).getPointType() == PointType.Safe) {
-                node = new Node<>(locked.get(ls));
-            }
-        }
-        
-        ProgressTree progress = new ProgressTree(node);
+        //ProgressTree progress = new ProgressTree(node);
         
         //TODO: Implement the rest of the progress tree
         

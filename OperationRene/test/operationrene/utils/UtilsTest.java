@@ -5,6 +5,7 @@
  */
 package operationrene.utils;
 
+import operationrene.mapframework.levelbuilder.LevelBuilder;
 import java.util.HashMap;
 import operationrene.mapframework.*;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
