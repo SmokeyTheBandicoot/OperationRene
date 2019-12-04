@@ -58,7 +58,9 @@ public class Utils {
             case VERTICAL:
                 for(int i=0; i < r/2; i++){
                     Integer[] temp = new Integer[c];
-                    System.arraycopy(mat[i], 0, mat[r-1-i], 0, mat[0].length);
+                    System.arraycopy(mat[i], 0, temp, 0, mat[i].length);
+                    System.arraycopy(mat[r-1-i], 0, mat[i], 0, mat[i].length);
+                    System.arraycopy(temp, 0, mat[r-1-i], 0, temp.length);
                 }   
                 break;
             case BOTH:
