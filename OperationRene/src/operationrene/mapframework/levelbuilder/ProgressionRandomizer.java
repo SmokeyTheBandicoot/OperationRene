@@ -33,7 +33,10 @@ public class ProgressionRandomizer {
     }
     
     
-    
+    /**
+     * Function responsible for finding the safe in the "lockeds" hashmap
+     * @return 
+     */
     private Location findSafe(){
         for (Location l : locks.keySet()) {
             if (locks.get(l).getPointType() == PointType.Safe)
