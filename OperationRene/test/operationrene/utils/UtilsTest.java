@@ -6,17 +6,10 @@
 package operationrene.utils;
 
 import java.util.HashMap;
-import operationrene.mapframework.LevelBuilder;
-import operationrene.mapframework.LevelRoom;
-import operationrene.mapframework.LocationAndSize;
-import operationrene.mapframework.pointsofinterest.PointOfInterest.PointType;
-import org.junit.After;
-import org.junit.AfterClass;
+import operationrene.mapframework.*;
+import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -35,28 +28,27 @@ public class UtilsTest {
         
         System.out.println("rotateRoom");
         
-        HashMap<LocationAndSize, PointType> hm = new HashMap<>();
         
         System.out.println("RIGHT ROTATION");
-        LevelRoom room = new LevelRoom(new Integer[][]{{1, 2, 3}, {4, 5, 6}}, hm);
+        LevelMap room = new LevelMap(-1, new Integer[][]{{1, 2, 3}, {4, 5, 6}}, null, null, null);
         LevelBuilder.Rotation r = LevelBuilder.Rotation.RIGHT;
-        LevelRoom expResult = new LevelRoom(new Integer[][]{{4, 1}, {5, 2}, {6, 3}}, hm);
-        LevelRoom result = Utils.rotateRoom(room, r);
+        LevelMap expResult = new LevelMap(-1, new Integer[][]{{4, 1}, {5, 2}, {6, 3}}, null, null, null);
+        LevelMap result = Utils.rotateRoom(room, r);
         Assert.assertArrayEquals(room.getMatrix(), expResult.getMatrix());
 
         
         System.out.println("LEFT ROTATION");
-        room = new LevelRoom(new Integer[][]{{1, 2, 3}, {4, 5, 6}}, hm);
+        room = new LevelMap(-1, new Integer[][]{{1, 2, 3}, {4, 5, 6}}, null, null, null);
         r = LevelBuilder.Rotation.LEFT;
-        expResult = new LevelRoom(new Integer[][]{{3, 6}, {2, 5}, {1, 4}}, hm);
+        expResult = new LevelMap(-1, new Integer[][]{{3, 6}, {2, 5}, {1, 4}}, null, null, null);
         result = Utils.rotateRoom(room, r);
         Assert.assertArrayEquals(room.getMatrix(), expResult.getMatrix());
         
         
         System.out.println("180 DEG ROTATION");
-        room = new LevelRoom(new Integer[][]{{1, 2, 3}, {4, 5, 6}}, hm);
+        room = new LevelMap(-1, new Integer[][]{{1, 2, 3}, {4, 5, 6}}, null, null, null);
         r = LevelBuilder.Rotation.DEG180;
-        expResult = new LevelRoom(new Integer[][]{{6, 5, 4}, {3, 2, 1}}, hm);
+        expResult = new LevelMap(-1, new Integer[][]{{6, 5, 4}, {3, 2, 1}}, null, null, null);
         result = Utils.rotateRoom(room, r);
         Assert.assertArrayEquals(room.getMatrix(), expResult.getMatrix());
     }
@@ -69,28 +61,31 @@ public class UtilsTest {
         
         System.out.println("flipRoom");
         
-        HashMap<LocationAndSize, PointType> hm = new HashMap<>();
-        
         System.out.println("HORIZONTAL FLIPPING");
-        LevelRoom room = new LevelRoom(new Integer[][]{{1, 2, 3}, {4, 5, 6}}, hm);
+        LevelMap room = new LevelMap(-1, new Integer[][]{{1, 2, 3}, {4, 5, 6}}, null, null, null);
         LevelBuilder.Flipping f = LevelBuilder.Flipping.HORIZONTAL;
-        LevelRoom expResult = new LevelRoom(new Integer[][]{{3, 2, 1}, {6, 5, 4}}, hm);
-        LevelRoom result = Utils.flipRoom(room, f);
+        LevelMap expResult = new LevelMap(-1, new Integer[][]{{3, 2, 1}, {6, 5, 4}}, null, null, null);
+        LevelMap result = Utils.flipRoom(room, f);
         Assert.assertArrayEquals(room.getMatrix(), expResult.getMatrix());
 
         
         System.out.println("VERTICAL FLIPPING");
-        room = new LevelRoom(new Integer[][]{{1, 2, 3}, {4, 5, 6}}, hm);
+        room = new LevelMap(-1, new Integer[][]{{1, 2, 3}, {4, 5, 6}}, null, null, null);
         f = LevelBuilder.Flipping.VERTICAL;
-        expResult = new LevelRoom(new Integer[][]{{4, 5, 6}, {1, 2, 3}}, hm);
-        result = Utils.flipRoom(room, f);
+        expResult = new LevelMap(-1, new Integer[][]{{4, 5, 6}, {1, 2, 3}}, null, null, null);
+        room = Utils.flipRoom(room, f);
+        
+        for (int x = 0; x < room.getMatrix().length; x++)
+            for (int y = 0; y < room.getMatrix()[0].length; y++)
+                System.out.println(room.getMatrix()[x][y]);
+        
         Assert.assertArrayEquals(room.getMatrix(), expResult.getMatrix());
         
         
         System.out.println("BOTH FLIPPING");
-        room = new LevelRoom(new Integer[][]{{1, 2, 3}, {4, 5, 6}}, hm);
+        room = new LevelMap(-1, new Integer[][]{{1, 2, 3}, {4, 5, 6}}, null, null, null);
         f = LevelBuilder.Flipping.BOTH;
-        expResult = new LevelRoom(new Integer[][]{{6, 5, 4}, {3, 2, 1}}, hm);
+        expResult = new LevelMap(-1, new Integer[][]{{6, 5, 4}, {3, 2, 1}}, null, null, null);
         result = Utils.flipRoom(room, f);
         Assert.assertArrayEquals(room.getMatrix(), expResult.getMatrix());
     }

@@ -10,22 +10,22 @@ public class LevelBuilder {
     
     protected LevelMap lm;
     
-    public LevelRoom addRoom(LevelRoom lm, Rotation r, Flipping f) {
+    public LevelMap addRoom(LevelMap lm, Rotation r, Flipping f) {
         return null;
     }
     
     public LevelMap buildLevel(){
         
         // Door, Safe, FixedLaserAlarm, CameraAlarm
-        HashMap<LocationAndSize, PointOfInterest> locked = lm.getLockedObjects();
+        HashMap<Location, PointOfInterest> locked = lm.getLockedObjects();
         
         // Key, Minigames, Magnetic keys
-        HashMap<LocationAndSize, PointOfInterest> unlocks = lm.getUnlockingObjects();
+        HashMap<Location, PointOfInterest> unlocks = lm.getUnlockingObjects();
         
         // PressureAlarm, PulsatingLasers, EntryPoint
         
         Node<PointOfInterest> node = null;
-        for (LocationAndSize ls : locked.keySet()) {
+        for (Location ls : locked.keySet()) {
             if (locked.get(ls).getPointType() == PointType.Safe) {
                 node = new Node<>(locked.get(ls));
             }

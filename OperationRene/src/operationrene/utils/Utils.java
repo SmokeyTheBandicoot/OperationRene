@@ -1,11 +1,11 @@
 package operationrene.utils;
 
 import static operationrene.mapframework.LevelBuilder.*;
-import operationrene.mapframework.LevelRoom;
+import operationrene.mapframework.*;
 
 public class Utils {
 
-    public static LevelRoom rotateRoom(LevelRoom room, Rotation r){
+    public static LevelMap rotateRoom(LevelMap room, Rotation r){
         
         Integer[][] mat = room.getMatrix();
         
@@ -39,7 +39,7 @@ public class Utils {
         return room;  
     }
     
-    public static LevelRoom flipRoom(LevelRoom room, Flipping f) {
+    public static LevelMap flipRoom(LevelMap room, Flipping f) {
         
         Integer[][] mat = room.getMatrix();
         
@@ -58,7 +58,7 @@ public class Utils {
             case VERTICAL:
                 for(int i=0; i < r/2; i++){
                     Integer[] temp = new Integer[c];
-                    System.arraycopy(mat, 0, c, 0, mat[0].length);
+                    System.arraycopy(mat[i], 0, mat[r-1-i], 0, mat[0].length);
                 }   
                 break;
             case BOTH:

@@ -1,14 +1,9 @@
 package operationrene.mapframework.pointsofinterest;
 
 public class Key extends PointOfInterest {
-    
-    public Key( int ID) {
-        super(PointType.Key, ID);
-    }
-    
-    @Override
-    public String toString(){
-        return "Type: Key; ID: " + ID;
+
+    public Key(PointType pointType, int roomID, int[] requiredKeysID, int width, int height) {
+        super(pointType, roomID, requiredKeysID, width, height);
     }
     
 }

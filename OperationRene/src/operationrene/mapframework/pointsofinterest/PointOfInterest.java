@@ -1,17 +1,22 @@
 package operationrene.mapframework.pointsofinterest;
 
 import java.io.Serializable;
-import operationrene.minigame.Minigame;
 
 public abstract class PointOfInterest implements Serializable {
     
     protected PointType pointType;
-    protected int ID;
+    protected int roomID;
+    protected int[] requiredKeysID;
+    protected int width;
+    protected int height;
 
-    public PointOfInterest(PointType pointType, int ID) {
+    public PointOfInterest(PointType pointType, int roomID, int[] requiredKeysID, int width, int height) {
         this.pointType = pointType;
-        this.ID = ID;
-    }  
+        this.roomID = roomID;
+        this.requiredKeysID = requiredKeysID;
+        this.width = width;
+        this.height = height;
+    }
 
     public PointType getPointType() {
         return pointType;
@@ -21,13 +26,39 @@ public abstract class PointOfInterest implements Serializable {
         this.pointType = pointType;
     }
 
-    public int getID() {
-        return ID;
+    public int getRoomID() {
+        return roomID;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
     }
+
+    public int[] getRequiredKeysID() {
+        return requiredKeysID;
+    }
+
+    public void setRequiredKeysID(int[] requiredKeysID) {
+        this.requiredKeysID = requiredKeysID;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    
     
     public enum PointType {
         Key,

@@ -8,6 +8,7 @@ package operationrene.mapframework;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import java.util.HashMap;
 import operationrene.mapframework.pointsofinterest.*;
+import operationrene.mapframework.pointsofinterest.PointOfInterest.PointType;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -28,13 +29,15 @@ public class LevelSerializerTest {
         System.out.println("saveLevel");
         
         Integer[][] matrix = new Integer[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-        HashMap<LocationAndSize, PointOfInterest> unlocks = new HashMap<>();
-        HashMap<LocationAndSize, PointOfInterest> lockeds = new HashMap<>();
+        HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
+        HashMap<Location, PointOfInterest> lockeds = new HashMap<>();
+        HashMap<Location, PointOfInterest> other = new HashMap<>();
         
-        unlocks.put(new LocationAndSize(1, 2, 3, 4), new Key(0));
-        lockeds.put(new LocationAndSize(2, 3, 4, 5), new Door(false, true, 0));
+        unlocks.put(new Location(1, 2), new Key(PointType.Key, -1, new int[]{-1}, 1, 1));
+        lockeds.put(new Location(2, 3), new Door(PointType.Door, -1, new int[]{-1}, 1, 1, false, true));
+        other.put(new Location(5, 6), new Alarm(PointType.AlarmZone, -1, new int[]{-1}, 5, 5, null));
         
-        LevelMap level = new LevelMap(matrix, unlocks, lockeds);
+        LevelMap level = new LevelMap(-1, matrix, unlocks, lockeds, other);
         
         String path = "assets/levels/level_test.dat";
         LevelSerializer.saveLevel(level, path);

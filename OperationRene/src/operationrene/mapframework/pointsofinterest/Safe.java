@@ -6,10 +6,12 @@ public class Safe extends PointOfInterest {
 
     private Minigame minigame;
 
-    public Safe(Minigame minigame, int ID) {
-        super(PointType.Safe, ID);
+    public Safe(PointType pointType, int roomID, int[] requiredKeysID, int width, int height, Minigame minigame) {
+        super(pointType, roomID, requiredKeysID, width, height);
         this.minigame = minigame;
     }
+
+    
     
     
     
