@@ -75,11 +75,6 @@ public class UtilsTest {
         f = LevelBuilder.Flipping.VERTICAL;
         expResult = new LevelMap(-1, new Integer[][]{{4, 5, 6}, {1, 2, 3}}, null, null, null);
         room = Utils.flipRoom(room, f);
-        
-        for (int x = 0; x < room.getMatrix().length; x++)
-            for (int y = 0; y < room.getMatrix()[0].length; y++)
-                System.out.println(room.getMatrix()[x][y]);
-        
         Assert.assertArrayEquals(room.getMatrix(), expResult.getMatrix());
         
         

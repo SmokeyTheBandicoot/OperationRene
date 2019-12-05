@@ -6,8 +6,8 @@ public class Alarm extends PointOfInterest {
     
     private Minigame minigame;
     
-    public Alarm(PointType pointType, int roomID, int[] requiredKeysID, int width, int height, Minigame minigame) {
-        super(pointType, roomID, requiredKeysID, width, height);
+    public Alarm(int roomID, int[] requiredKeysID, int width, int height, Minigame minigame) {
+        super(PointType.AlarmZone, roomID, requiredKeysID, width, height);
     }
     
     
