@@ -1,3 +1,5 @@
+package operationrene.core;
+
 public enum PlayerState {
     UP_WALK,
     DOWN_WALK,

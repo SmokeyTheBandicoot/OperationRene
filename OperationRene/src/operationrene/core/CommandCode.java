@@ -1,3 +1,5 @@
+package operationrene.core;
+
 import org.newdawn.slick.Input;
 
 public final class CommandCode {
