@@ -6,9 +6,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import operationrene.core.StateID;
+import operationrene.core.ReneGame;
 
-//TEMP IMPORT TO TEST MINIGAME
-import operationrene.minigame.Wires2;
 
 /**
  *
@@ -27,10 +26,10 @@ public class MainWindow extends BasicGameState {
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-        //settingView = new SettingWindow();
-        play = new Button("play.png", "play_pressed.png", 0, 450, 100);
-        setting = new Button("Settings.PNG", "Settings_pressed.PNG", 0, 450, 200);
-        exit = new Button("exit.PNG", "exit_pressed.PNG", 0, 450, 600);
+        
+        play = new Button("play.png", "play_pressed.png", 0, ReneGame.WIDTH/2, 100);
+        setting = new Button("Settings.PNG", "Settings_pressed.PNG", 0, ReneGame.WIDTH/2, 200);
+        exit = new Button("exit.PNG", "exit_pressed.PNG", 0, ReneGame.WIDTH/2, 600);
     }
 
     @Override
@@ -49,9 +48,7 @@ public class MainWindow extends BasicGameState {
         exit.update(gc);
 
         if (play.isClicked()) {
-            
-            //javafx.application.Application.launch(Wires2.class);
-            
+                    
 
             sbg.enterState(2);
 

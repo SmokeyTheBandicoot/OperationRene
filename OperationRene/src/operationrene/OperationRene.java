@@ -49,7 +49,7 @@ public class OperationRene extends StateBasedGame {
         AppGameContainer app = new AppGameContainer(new OperationRene("Rene"));
         app.setDisplayMode(ReneGame.WIDTH, ReneGame.HEIGHT, ReneGame.FULLSCREEN);
         app.setIcon(PATH_RESOURCES+"logo.png");
-        MUSIC = new Music(PATH_RESOURCES+"music.ogg");
+        MUSIC = new Music(PATH_RESOURCES+"music2.ogg");
         MUSIC.loop();
         app.start();
 
