@@ -62,6 +62,9 @@ public class ExplorationGame extends BasicGameState {
                 this.player.update(CommandCode.DOWN);
             }
         }
+        else if (input.isKeyDown(1)){
+            game.enterState(2);
+        }
         else{
             if(!this.map.checkCollision(this.player.posX,this.player.posY,this.player.width,this.player.height)){
                 this.player.update(CommandCode.NONE);
