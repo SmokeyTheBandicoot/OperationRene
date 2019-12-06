@@ -53,7 +53,7 @@ public class MainWindow extends BasicGameState {
             //javafx.application.Application.launch(Wires2.class);
             
 
-            //sbg.enterState(2);
+            sbg.enterState(2);
 
         }
         if (setting.isClicked()) {

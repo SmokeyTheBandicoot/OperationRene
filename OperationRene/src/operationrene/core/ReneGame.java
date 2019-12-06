@@ -8,8 +8,8 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class ReneGame extends StateBasedGame {
 
-    public static final int height = 800;
-    public static final int width = 1280;
+    public static final int height = 832;
+    public static final int width = 1536;
 
     public static boolean fullscreen = false;
 
