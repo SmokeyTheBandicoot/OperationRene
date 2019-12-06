@@ -47,7 +47,7 @@ public class OperationRene extends StateBasedGame {
     public static void main(String[] args) throws SlickException {
 
         AppGameContainer app = new AppGameContainer(new OperationRene("Rene"));
-        app.setDisplayMode(ReneGame.width, ReneGame.height, ReneGame.fullscreen);
+        app.setDisplayMode(ReneGame.WIDTH, ReneGame.HEIGHT, ReneGame.FULLSCREEN);
         app.setIcon(PATH_RESOURCES+"logo.png");
         MUSIC = new Music(PATH_RESOURCES+"music.ogg");
         MUSIC.loop();

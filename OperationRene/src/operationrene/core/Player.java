@@ -1,3 +1,5 @@
+package operationrene.core;
+
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -30,7 +32,6 @@ public class Player extends Element {
         this.state = state;
 
     }*/
-
     public Player(String imageURL, int duration, PlayerState state, int posX, int posY, int width, int height, int pace) throws SlickException {
 
         this.pace = pace;
@@ -38,41 +39,41 @@ public class Player extends Element {
         this.posY = posY;
         this.width = width;
         this.height = height;
-        this.shape = new Rectangle(posX,posY,width,height);
-        SpriteSheet spriteSheet = new SpriteSheet(imageURL,24,32);
-        this.upStop = spriteSheet.getSprite(1,0).getSubImage(4,8,16,23);
-        this.downStop = spriteSheet.getSprite(1,2).getSubImage(4,8,16,23);
-        this.rightStop = spriteSheet.getSprite(1,1).getSubImage(4,8,16,23);
-        this.leftStop = spriteSheet.getSprite(1,3).getSubImage(4,8,16,23);
-        this.upWalk = new Animation(new Image[]{spriteSheet.getSprite(0, 0).getSubImage(4,8,16,23),spriteSheet.getSprite(1, 0).getSubImage(4,8,16,23),spriteSheet.getSprite(2, 0).getSubImage(4,8,16,23)},duration);
-        this.rightWalk = new Animation(new Image[]{spriteSheet.getSprite(0, 1).getSubImage(4,8,16,23),spriteSheet.getSprite(1, 1).getSubImage(4,8,16,23),spriteSheet.getSprite(2, 1).getSubImage(4,8,16,23)},duration);
-        this.downWalk = new Animation(new Image[]{spriteSheet.getSprite(0, 2).getSubImage(4,8,16,23),spriteSheet.getSprite(1, 2).getSubImage(4,8,16,23),spriteSheet.getSprite(2, 2).getSubImage(4,8,16,23)},duration);
-        this.leftWalk = new Animation(new Image[]{spriteSheet.getSprite(0, 3).getSubImage(4,8,16,23),spriteSheet.getSprite(1, 3).getSubImage(4,8,16,23),spriteSheet.getSprite(2, 3).getSubImage(4,8,16,23)},duration);
+        this.shape = new Rectangle(posX, posY, width, height);
+        SpriteSheet spriteSheet = new SpriteSheet(imageURL, 24, 32);
+        this.upStop = spriteSheet.getSprite(1, 0).getSubImage(4, 8, 16, 23);
+        this.downStop = spriteSheet.getSprite(1, 2).getSubImage(4, 8, 16, 23);
+        this.rightStop = spriteSheet.getSprite(1, 1).getSubImage(4, 8, 16, 23);
+        this.leftStop = spriteSheet.getSprite(1, 3).getSubImage(4, 8, 16, 23);
+        this.upWalk = new Animation(new Image[]{spriteSheet.getSprite(0, 0).getSubImage(4, 8, 16, 23), spriteSheet.getSprite(1, 0).getSubImage(4, 8, 16, 23), spriteSheet.getSprite(2, 0).getSubImage(4, 8, 16, 23)}, duration);
+        this.rightWalk = new Animation(new Image[]{spriteSheet.getSprite(0, 1).getSubImage(4, 8, 16, 23), spriteSheet.getSprite(1, 1).getSubImage(4, 8, 16, 23), spriteSheet.getSprite(2, 1).getSubImage(4, 8, 16, 23)}, duration);
+        this.downWalk = new Animation(new Image[]{spriteSheet.getSprite(0, 2).getSubImage(4, 8, 16, 23), spriteSheet.getSprite(1, 2).getSubImage(4, 8, 16, 23), spriteSheet.getSprite(2, 2).getSubImage(4, 8, 16, 23)}, duration);
+        this.leftWalk = new Animation(new Image[]{spriteSheet.getSprite(0, 3).getSubImage(4, 8, 16, 23), spriteSheet.getSprite(1, 3).getSubImage(4, 8, 16, 23), spriteSheet.getSprite(2, 3).getSubImage(4, 8, 16, 23)}, duration);
         this.state = state;
 
     }
 
-    public void update(int command){
+    public void update(int command) {
 
-        switch(command) {
+        switch (command) {
             case CommandCode.DOWN:
                 this.state = PlayerState.DOWN_WALK;
-                this.posY = this.posY+this.pace;
+                this.posY = this.posY + this.pace;
                 break;
             case CommandCode.UP:
                 this.state = PlayerState.UP_WALK;
-                this.posY = this.posY-this.pace;
+                this.posY = this.posY - this.pace;
                 break;
             case CommandCode.RIGHT:
                 this.state = PlayerState.RIGHT_WALK;
-                this.posX = this.posX+this.pace;
+                this.posX = this.posX + this.pace;
                 break;
             case CommandCode.LEFT:
                 this.state = PlayerState.LEFT_WALK;
-                this.posX = this.posX-this.pace;
+                this.posX = this.posX - this.pace;
                 break;
             default:
-                switch(this.state) {
+                switch (this.state) {
                     case UP_WALK:
                         this.state = PlayerState.UP_STOP;
                         break;
@@ -87,12 +88,12 @@ public class Player extends Element {
                         break;
                 }
         }
-        this.shape.setLocation(this.posX,this.posY);
+        this.shape.setLocation(this.posX, this.posY);
     }
 
     public void draw() {
 
-        switch(this.state) {
+        switch (this.state) {
             case UP_WALK:
                 this.upWalk.draw(this.posX, this.posY, this.width, this.height);
                 break;
@@ -121,15 +122,15 @@ public class Player extends Element {
 
     }
 
-    public boolean isCollided(InteractiveObject element){
+    public boolean isCollided(InteractiveObject element) {
 
         return this.shape.intersects(element.shape);
 
     }
 
-    public InteractiveObject checkCollision(InteractiveObject[] elements){
+    public InteractiveObject checkCollision(InteractiveObject[] elements) {
 
-        for (InteractiveObject e: elements) {
+        for (InteractiveObject e : elements) {
 
             if (this.shape.intersects(e.shape)) {
                 return e;

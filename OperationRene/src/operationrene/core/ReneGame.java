@@ -5,28 +5,25 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-
 public class ReneGame extends StateBasedGame {
 
-    public static final int height = 832;
-    public static final int width = 1536;
+    public static final int HEIGHT = 832;
+    public static final int WIDTH = 1536;
 
-    public static boolean fullscreen = false;
+    public static boolean FULLSCREEN = false;
 
-    static boolean showFPS = true;
+    static boolean SHOW_FPS = true;
 
-    public static final String  title = "Operation: R.E.N.E.";
+    public static final String TITLE = "Operation: R.E.N.E.";
 
-    public static final int fpslimit = 100;
-    
+    public static final int FPS_LIMIT = 100;
+
     public static boolean MUSIC_SOUND = true;
     public static boolean EFFECT_SOUND = true;
-    
 
     public ReneGame() {
-        super(title);
+        super(TITLE);
     }
-
 
     @Override
     public void initStatesList(GameContainer gc) throws SlickException {
@@ -38,9 +35,9 @@ public class ReneGame extends StateBasedGame {
     public static void launch() throws SlickException {
 
         AppGameContainer app = new AppGameContainer(new ReneGame());
-        app.setDisplayMode(width, height, fullscreen);
-        app.setTargetFrameRate(fpslimit);
-        app.setShowFPS(showFPS);
+        app.setDisplayMode(WIDTH, HEIGHT, FULLSCREEN);
+        app.setTargetFrameRate(FPS_LIMIT);
+        app.setShowFPS(SHOW_FPS);
         app.start();
 
     }

@@ -1,3 +1,5 @@
+package operationrene.core;
+
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
@@ -17,24 +19,24 @@ public class GameMap {
         this.posY = posY;
     }
 
-    public void draw(){
+    public void draw() {
 
-        this.mappa.render(posX,posY);
+        this.mappa.render(posX, posY);
 
     }
 
-    public boolean checkCollision(int posX, int posY,int width,int height){
+    public boolean checkCollision(int posX, int posY, int width, int height) {
 
-        int  objectLayer = mappa.getLayerIndex("objects");
-        if(mappa.getTileId(posX/32,posY/32,objectLayer)!=0){
+        int objectLayer = mappa.getLayerIndex("objects");
+        if (mappa.getTileId(posX / 32, posY / 32, objectLayer) != 0) {
             return true;
-        }else if(mappa.getTileId((posX+width)/32,(posY+height)/32,objectLayer)!=0){
+        } else if (mappa.getTileId((posX + width) / 32, (posY + height) / 32, objectLayer) != 0) {
             return true;
-        }else if(mappa.getTileId((posX+width)/32,posY/32,objectLayer)!=0){
+        } else if (mappa.getTileId((posX + width) / 32, posY / 32, objectLayer) != 0) {
             return true;
-        }else if(mappa.getTileId(posX/32,(posY+height)/32,objectLayer)!=0){
+        } else if (mappa.getTileId(posX / 32, (posY + height) / 32, objectLayer) != 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
 

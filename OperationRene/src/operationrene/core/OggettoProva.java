@@ -1,3 +1,5 @@
+package operationrene.core;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -9,7 +11,7 @@ public class OggettoProva extends InteractiveObject {
         this.posY = posY;
         this.width = width;
         this.height = height;
-        this.shape = new Rectangle(posX,posY,width,height);
+        this.shape = new Rectangle(posX, posY, width, height);
 
     }
 
