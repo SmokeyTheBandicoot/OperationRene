@@ -27,9 +27,9 @@ public class MainWindow extends BasicGameState {
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         
-        play = new Button("play.png", "play_pressed.png", 0, ReneGame.WIDTH/2, 100);
-        setting = new Button("Settings.PNG", "Settings_pressed.PNG", 0, ReneGame.WIDTH/2, 200);
-        exit = new Button("exit.PNG", "exit_pressed.PNG", 0, ReneGame.WIDTH/2, 600);
+        play = new Button(ButtonType.PLAY, ReneGame.WIDTH/2, 100);
+        setting = new Button(ButtonType.SETTINGS, ReneGame.WIDTH/2, 200);
+        exit = new Button(ButtonType.EXIT, ReneGame.WIDTH/2, 600);
     }
 
     @Override

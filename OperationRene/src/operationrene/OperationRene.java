@@ -35,7 +35,7 @@ public class OperationRene extends StateBasedGame {
     public void initStatesList(GameContainer gc) throws SlickException {
         this.addState(new MainWindow());
         this.addState(new SettingWindow());
-        this.addState(new ExplorationGame());
+        //this.addState(new ExplorationGame());
 //        this.getState(StateID.EXPLORATION_ID).init(gc, this);
 //        this.getState(StateID.MENU_ID).init(gc, this);
 //        this.getState(StateID.SETTING_ID).init(gc, this);
