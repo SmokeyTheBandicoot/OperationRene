@@ -16,13 +16,13 @@ import org.newdawn.slick.tests.xml.Entity;
  */
 public class Button extends Entity {
 
-    private String _PATHIMAGES = "C:\\Users\\Rickma\\Documents\\NetBeansProjects\\Slick2D\\src\\extra\\Menu\\";
+    private final String _PATHIMAGES = "C:\\Users\\**\\Documents\\NetBeansProjects\\Slick2D\\src\\extra\\Menu\\";
 
-    private String imageName;
+    //private String imageName;
     private final Rectangle button;
     private final Image buttonImage;
     private final Image buttonImagePressed;
-    private boolean buttonDown = false;
+    private boolean buttonPressed = false;
     private boolean buttonReleased = false;
     private final Vector2f position;
     private final float width;
@@ -30,8 +30,24 @@ public class Button extends Entity {
     private Image renderImage;
     private final int type;
     private boolean value = true;
-    // Type = 0 is a button that apply changes or change view screen. Type = 1 is a button that set on/off its value.
+    
+    
+    
+    
+    public Button(ButtonType buttonType, float x, float y) {
+        this.buttonImage = this.loadImage(buttonType.image);
+        this.buttonImagePressed = this.loadImage(buttonType.imageInv);
+        this.width = this.buttonImage.getWidth();
+        this.height = this.buttonImage.getHeight();
+        this.position = new Vector2f(x - this.width / 2, y - this.height / 2);
+        this.button = new Rectangle(position.x, position.y, this.width, this.height);
+        this.renderImage = this.buttonImage;
+        this.type = buttonType.type;
+    }
 
+    /*
+    OLD CONSTRUCTOR
+    
     public Button(String image, String image2, int type, float x, float y) {
         this.buttonImage = this.loadImage(image);
         this.buttonImagePressed = this.loadImage(image2);
@@ -42,6 +58,7 @@ public class Button extends Entity {
         this.renderImage = this.buttonImage;
         this.type = type;
     }
+*/
 
     private Image loadImage(String image) {
         try {
@@ -58,13 +75,13 @@ public class Button extends Entity {
         buttonReleased = false;
         if (button.contains(gc.getInput().getMouseX(), gc.getInput().getMouseY())) {
             if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-                buttonDown = true;
+                buttonPressed = true;
                 if (type == 0) {
                     renderImage = buttonImagePressed;
                 }
             } else {
-                if (buttonDown) {
-                    buttonDown = false;
+                if (buttonPressed) {
+                    buttonPressed = false;
                     buttonReleased = true;
                     if (type == 1) {
                         this.SwapImage();
@@ -73,11 +90,9 @@ public class Button extends Entity {
                         renderImage = buttonImage;
                     }
                 }
-
-                //renderImage = image.getSubImage(0, this.image.getHeight() / 3, this.image.getWidth(), this.image.getHeight() / 3);
             }
         } else {
-            buttonDown = false;
+            buttonPressed = false;
             if (type == 0) {
                 renderImage = buttonImage;
             }
