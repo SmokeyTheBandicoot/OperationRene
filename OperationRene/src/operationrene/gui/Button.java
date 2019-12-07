@@ -16,6 +16,7 @@ import org.newdawn.slick.tests.xml.Entity;
  */
 public class Button extends Entity {
 
+
     private final String _PATHIMAGES = "C:\\Users\\**\\Documents\\NetBeansProjects\\Slick2D\\src\\extra\\Menu\\";
 
     //private String imageName;
