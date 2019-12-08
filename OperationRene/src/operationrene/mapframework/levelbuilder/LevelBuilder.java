@@ -1,39 +1,38 @@
 package operationrene.mapframework.levelbuilder;
 
-import java.util.HashMap;
 import operationrene.mapframework.*;
-import operationrene.mapframework.pointsofinterest.PointOfInterest;
-import operationrene.utils.ProgressTree;
+import operationrene.mapframework.pointsofinterest.PointOfInterest.PointType;
+import operationrene.mapframework.pointsofinterest.*;
 
 public class LevelBuilder {
     
     protected LevelMap lm;
     
     public boolean addRoom(LevelMap lm, Rotation r, Flipping f) {
-        if (this.lm == null){
+        if (this.lm == null) {
             this.lm = lm;
             return true;
         }
         
+        for (Location l : lm.getOtherObjects().keySet()) {
+            if (lm.getOtherObjects().get(l).getPointType() == PointType.Room) {
+                Room room = (Room) lm.getOtherObjects().get(l);
+                
+            }    
+        }
         
-       return false;
+        return false;
+    }
+    
+    private boolean canAddInMatrix(Integer[][] originMatrix, Integer[][] toAddMatrix, int x, int y) {
+        
+        
+        return false;
     }
     
     public LevelMap buildLevel(){
         
-        // Door, Safe, FixedLaserAlarm, CameraAlarm
-        HashMap<Location, PointOfInterest> locked = lm.getLockedObjects();
-        
-        // Key, Minigames, Magnetic keys
-        HashMap<Location, PointOfInterest> unlocks = lm.getUnlockingObjects();
-        
-        // PressureAlarm, PulsatingLasers, EntryPoint
-        HashMap<Location, PointOfInterest> other = lm.getOtherObjects();
-        
-        //ProgressTree progress = new ProgressTree(node);
-        
-        //TODO: Implement the rest of the progress tree
-        
+        // Implement randomization of rooms
         return null;
     }
     

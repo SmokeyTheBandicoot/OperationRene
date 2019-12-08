@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package operationrene.alarm;
+package operationrene.mapframework.pointsofinterest;
 
 /**
  *
  * @author Miky Gargiulo
  */
-public class Alarm {
+public class EntryPoint extends PointOfInterest {
+    
+    public EntryPoint(int roomID) {
+        super(PointType.EntryPoint, roomID, new int[]{-1}, 1, 1);
+    }
     
 }

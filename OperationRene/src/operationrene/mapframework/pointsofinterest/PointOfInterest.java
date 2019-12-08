@@ -1,6 +1,7 @@
 package operationrene.mapframework.pointsofinterest;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public abstract class PointOfInterest implements Serializable {
     
@@ -57,6 +58,11 @@ public abstract class PointOfInterest implements Serializable {
     public void setHeight(int height) {
         this.height = height;
     }
+    
+    @Override
+    public String toString() {
+        return String.format("POINT_OF_INTEREST: %s, roomID: %d, reqKeys: %s, w: %d, h: %d", pointType.toString(), roomID, Arrays.toString(requiredKeysID), width, height);
+    }
 
     
     
@@ -64,6 +70,7 @@ public abstract class PointOfInterest implements Serializable {
         Key,
         Door,
         Safe,
+        Room,
         AlarmZone,
         Minigame,
         EntryPoint,

@@ -12,7 +12,6 @@ import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import operationrene.mapframework.pointsofinterest.PointOfInterest.PointType;
 import operationrene.mapframework.pointsofinterest.*;
 import operationrene.utils.ProgressTree;
-import operationrene.utils.ProgressTree.Node;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -30,9 +29,9 @@ public class ProgressionRandomizerTest {
     HashMap<Location, PointOfInterest> other = new HashMap<>();
     
     public ProgressionRandomizerTest() {
-        lockeds.put(new Location(0, 0), new Safe(0, new int[]{}, 1, 1, null));
-        lockeds.put(new Location(1, 1), new Door(0, new int[]{}, 1, 1, false, true));
-        unlockeds.put(new Location(2, 2), new Key(0, new int[]{57}, 1, 1));
+        lockeds.put(new Location(0, 0), new Safe(0, new int[]{}, 1, 1));
+        lockeds.put(new Location(1, 1), new Door(0, new int[]{}, 1, 1, false));
+        unlockeds.put(new Location(2, 2), new Key(0, new int[]{57}));
     }
 
     /**

@@ -1,14 +1,13 @@
 package operationrene.mapframework.pointsofinterest;
 
-import operationrene.minigame.Minigame;
-
 public class Alarm extends PointOfInterest {
     
-    private Minigame minigame;
-    
-    public Alarm(int roomID, int[] requiredKeysID, int width, int height, Minigame minigame) {
-        super(PointType.AlarmZone, roomID, requiredKeysID, width, height);
+    public Alarm(int roomID, int width, int height) {
+        super(PointType.AlarmZone, roomID, new int []{-1}, width, height);
     }
     
-    
+    @Override
+    public String toString() {
+        return String.format("ALARM: roomID: %d, w: %d, h: %d", roomID, width, height);
+    }
 }

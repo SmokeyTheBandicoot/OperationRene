@@ -8,7 +8,6 @@ package operationrene.mapframework;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import java.util.HashMap;
 import operationrene.mapframework.pointsofinterest.*;
-import operationrene.mapframework.pointsofinterest.PointOfInterest.PointType;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -20,6 +19,7 @@ public class LevelSerializerTest {
     
     public LevelSerializerTest() {
     }
+
 
     /**
      * Test of saveLevel and loadLevel methods, of class LevelSerializer.
@@ -33,9 +33,9 @@ public class LevelSerializerTest {
         HashMap<Location, PointOfInterest> lockeds = new HashMap<>();
         HashMap<Location, PointOfInterest> other = new HashMap<>();
         
-        unlocks.put(new Location(1, 2), new Key(-1, new int[]{-1}, 1, 1));
-        lockeds.put(new Location(2, 3), new Door(-1, new int[]{-1}, 1, 1, false, true));
-        other.put(new Location(5, 6), new Alarm(-1, new int[]{-1}, 5, 5, null));
+        unlocks.put(new Location(1, 2), new Key(-1, new int[]{-1}));
+        lockeds.put(new Location(2, 3), new Door(-1, new int[]{-1}, 1, 1, false));
+        other.put(new Location(5, 6), new Alarm(-1, 5, 5));
         
         LevelMap level = new LevelMap(-1, matrix, unlocks, lockeds, other);
         
@@ -52,5 +52,4 @@ public class LevelSerializerTest {
         //TODO: Check for Points of interest also
         
     }
-    
 }
