@@ -1,10 +1,12 @@
 package operationrene;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import operationrene.mapframework.*;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import operationrene.mapframework.pointsofinterest.*;
+import operationrene.mapframework.pointsofinterest.Room.Direction;
 
 public class ProceduralLevelPartsGenerator {
 
@@ -41,9 +43,10 @@ public class ProceduralLevelPartsGenerator {
         lm = generateHorizontalCorridor(8, 6, MAX_MATRIX_HEIGHT / 2 - 5);
         LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/corridor4.dat");
         
-        for (int x = 0; x <= 10; x++) {
-            lm = generateEasyRoom(10 + x, 8 + x / 2, 5 + x, x + 3);
-            String s = String.format("assets/levels/proceduralgeneration/room%dx%d_%d.dat", 10 + x, 8 + x, x);
+        final int offset = 8;
+        for (int x = 0; x <= 14; x++) {
+            lm = generateEasyRoom(offset + x, offset - 2 + x / 2, (new Random()).nextInt(offset - 3 + x/2) + 1, x + 3);
+            String s = String.format("assets/levels/proceduralgeneration/room%dx%d_%d.dat", offset + x, offset - 2 + x / 2, x);
             System.out.println(s);
             LevelSerializer.saveLevel(lm, s);
         }
@@ -65,7 +68,7 @@ public class ProceduralLevelPartsGenerator {
         return matrix;
     }
     
-    private static void debugMatrix(Integer [][] matrix) {
+    public static void debugMatrix(Integer [][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++)
                 System.out.print(matrix[i][j] + " ");
@@ -77,16 +80,24 @@ public class ProceduralLevelPartsGenerator {
     private static void debugPoints(HashMap<Location, PointOfInterest> map) {
         for (Location key : map.keySet())
             System.out.println(key.toString() + " --> " + map.get(key).toString());
-        System.out.println("\n");
+        // System.out.println("\n");
     }
     
     private static void debugRooms(HashMap<Location, Room> map) {
         for (Location key : map.keySet())
             System.out.println(key.toString() + " --> " + map.get(key).toString());
-        System.out.println("\n");
+        // System.out.println("\n");
     }
     
-    
+    private static int getBiggestMinigame(List<Size> sizes, Size availableSpace) {
+        
+        for (Size s : sizes) {
+            
+        }
+        
+        return -1;
+        
+    }
     
     // Safe rooms
     private static LevelMap generateSafeRoom1() {
@@ -98,10 +109,10 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(3, 7), new Safe(-1, new int[]{}, 1, 1));
-        lockeds.put(new Location(3, 0), new Door(1, new int []{}, 1, 1, false));
+        lockeds.put(new Location(3, 7), new Safe(-1, new int[]{}, new Size(1, 1)));
+        lockeds.put(new Location(3, 0), new Door(1, new int []{}, new Size(1, 1), false));
         unlocks.put(new Location(2, 7), new Key(-1, new int []{}));
-        others.put(new Location(1, 2), new Alarm(-1, 5, 5));
+        others.put(new Location(1, 2), new Alarm(-1, new Size(5, 5)));
         
         // Put the door in
         matrix[3][0] = 0;
@@ -123,10 +134,10 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(4, 11), new Safe(-1, new int[]{}, 1, 1));
-        lockeds.put(new Location(4, 0), new Door(1, new int []{}, 1, 1, false));
+        lockeds.put(new Location(4, 11), new Safe(-1, new int[]{}, new Size(1, 1)));
+        lockeds.put(new Location(4, 0), new Door(1, new int []{}, new Size(1, 1), false));
         unlocks.put(new Location(7, 11), new Key(-1, new int []{}));
-        others.put(new Location(1, 2), new Alarm(-1, 7, 7));
+        others.put(new Location(1, 2), new Alarm(-1, new Size(7, 7)));
         
         matrix[4][0] = 0;
         
@@ -147,10 +158,10 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(1, 11), new Safe(-1, new int[]{}, 1, 1));
-        lockeds.put(new Location(2, 0), new Door(1, new int []{}, 1, 1, false));
+        lockeds.put(new Location(1, 11), new Safe(-1, new int[]{}, new Size(1, 1)));
+        lockeds.put(new Location(2, 0), new Door(1, new int []{}, new Size(1, 1), false));
         unlocks.put(new Location(9, 11), new Key(-1, new int []{}));
-        others.put(new Location(1, 2), new Alarm(-1, 9, 9));
+        others.put(new Location(1, 2), new Alarm(-1, new Size(9, 9)));
         
         matrix[2][0] = 0;
         
@@ -205,6 +216,7 @@ public class ProceduralLevelPartsGenerator {
             
     // Minigame rooms with alarm
     private static LevelMap generateEasyRoom(int width, int height, int doorOffset, int unlockOffset) {
+        
         Integer [][] matrix = generateMatrix(height, width);
         
         HashMap<Location, PointOfInterest> lockeds = new HashMap<>();   
@@ -212,10 +224,24 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
         // Generate door randomly in the left door
-        lockeds.put(new Location(doorOffset, 0), new Door(-1, new int[]{}, 1, 1, false));
+        lockeds.put(new Location(doorOffset, 0), new Door(-1, new int[]{}, new Size(1, 1), false));
         unlocks.put(new Location(unlockOffset, width - 2), new Key(-1, new int[]{-1}));
         
-        others.put(new Location(1, 1), new Alarm(-1, height-2, height-2));
+        // In order to put a potential alarm, get the maximum useful area
+        final int maxW = width - 4;
+        final int maxH = height - 4;
+        int curX = 0;
+        
+        // There are 5x5, 7x5, 7x7, 9x9, and 11x9
+        //Try with the maximum-size minigame (85% chance)
+        if (maxW >= 11)
+            if (maxH >= 9)
+                  if (new Random().nextInt(100) <= 84){
+                      // Get largest minigame and put it
+                      
+                  }
+        
+        others.put(new Location(1, 2), new Alarm(-1, new Size(height-2, height-2)));
         
         matrix[doorOffset][0] = 0;
         
@@ -256,8 +282,10 @@ public class ProceduralLevelPartsGenerator {
         int curID = 1;
         
         do {
-            rooms.put(new Location(0, curYOffset), new Room(curID++, leftRoomsWidth, maxRoomHeight));
-            rooms.put(new Location(rightRoomsOffset, curYOffset), new Room(curID++, rightRoomsWidth, maxRoomHeight));
+            // Rooms to the left of the corridor
+            rooms.put(new Location(0, curYOffset), new Room(curID++, new Size(leftRoomsWidth, maxRoomHeight), Direction.Right));
+            // Right rooms
+            rooms.put(new Location(rightRoomsOffset, curYOffset), new Room(curID++, new Size(rightRoomsWidth, maxRoomHeight), Direction.Left));
             curYOffset += maxRoomHeight;
         } while (curYOffset + maxRoomHeight < MAX_MATRIX_HEIGHT);
         
@@ -298,8 +326,10 @@ public class ProceduralLevelPartsGenerator {
         int curID = 1;
         
         do {
-            rooms.put(new Location(curXOffset, 0), new Room(curID++, maxRoomWidth, upperRoomsHeight));
-            rooms.put(new Location(curXOffset, bottomRoomsOffset), new Room(curID++, maxRoomWidth, bottomRoomsHeight));
+            // Upper rooms
+            rooms.put(new Location(curXOffset, 0), new Room(curID++, new Size(maxRoomWidth, upperRoomsHeight), Direction.Down));
+            // Bottom rooms
+            rooms.put(new Location(curXOffset, bottomRoomsOffset), new Room(curID++, new Size(maxRoomWidth, bottomRoomsHeight), Direction.Up));
             curXOffset += maxRoomWidth;
         } while (curXOffset + maxRoomWidth < MAX_MATRIX_WIDTH);
         

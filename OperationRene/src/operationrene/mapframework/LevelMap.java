@@ -89,7 +89,20 @@ public class LevelMap implements Serializable {
         this.otherObjects = otherObjects;
     }
 
-    
+    public int getRoomID() {
+        return roomID;
+    }
 
-    
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
+    }
+
+    public HashMap<Integer, Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(HashMap<Integer, Room> rooms) {
+        this.rooms = rooms;
+    }
+
 }

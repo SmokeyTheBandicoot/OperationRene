@@ -2,21 +2,20 @@ package operationrene.mapframework.pointsofinterest;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import operationrene.mapframework.Size;
 
 public abstract class PointOfInterest implements Serializable {
     
     protected PointType pointType;
     protected int roomID;
     protected int[] requiredKeysID;
-    protected int width;
-    protected int height;
+    protected Size size;
 
-    public PointOfInterest(PointType pointType, int roomID, int[] requiredKeysID, int width, int height) {
+    public PointOfInterest(PointType pointType, int roomID, int[] requiredKeysID, Size size) {
         this.pointType = pointType;
         this.roomID = roomID;
         this.requiredKeysID = requiredKeysID;
-        this.width = width;
-        this.height = height;
+        this.size = size;
     }
 
     public PointType getPointType() {
@@ -43,25 +42,17 @@ public abstract class PointOfInterest implements Serializable {
         this.requiredKeysID = requiredKeysID;
     }
 
-    public int getWidth() {
-        return width;
+    public Size getSize() {
+        return size;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
+    public void setSize(Size size) {
+        this.size = size;
     }
     
     @Override
     public String toString() {
-        return String.format("POINT_OF_INTEREST: %s, roomID: %d, reqKeys: %s, w: %d, h: %d", pointType.toString(), roomID, Arrays.toString(requiredKeysID), width, height);
+        return String.format("POINT_OF_INTEREST: %s, roomID: %d, reqKeys: %s, w: %d, h: %d", pointType.toString(), roomID, Arrays.toString(requiredKeysID), size.getWidth(), size.getHeight());
     }
 
     

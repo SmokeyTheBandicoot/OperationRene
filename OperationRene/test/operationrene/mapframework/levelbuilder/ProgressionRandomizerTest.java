@@ -8,6 +8,7 @@ package operationrene.mapframework.levelbuilder;
 import java.util.HashMap;
 import operationrene.mapframework.LevelMap;
 import operationrene.mapframework.Location;
+import operationrene.mapframework.Size;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import operationrene.mapframework.pointsofinterest.PointOfInterest.PointType;
 import operationrene.mapframework.pointsofinterest.*;
@@ -29,8 +30,8 @@ public class ProgressionRandomizerTest {
     HashMap<Location, PointOfInterest> other = new HashMap<>();
     
     public ProgressionRandomizerTest() {
-        lockeds.put(new Location(0, 0), new Safe(0, new int[]{}, 1, 1));
-        lockeds.put(new Location(1, 1), new Door(0, new int[]{}, 1, 1, false));
+        lockeds.put(new Location(0, 0), new Safe(0, new int[]{}, new Size(1, 1)));
+        lockeds.put(new Location(1, 1), new Door(0, new int[]{}, new Size(1, 1), false));
         unlockeds.put(new Location(2, 2), new Key(0, new int[]{57}));
     }
 

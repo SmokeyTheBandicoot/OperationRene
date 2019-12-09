@@ -1,21 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package operationrene.mapframework;
 
+import operationrene.ProceduralLevelPartsGenerator;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import java.util.HashMap;
 import operationrene.mapframework.pointsofinterest.*;
 import org.junit.Assert;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
-/**
- *
- * @author Miky Gargiulo
- */
+
 public class LevelSerializerTest {
     
     public LevelSerializerTest() {
@@ -35,8 +28,8 @@ public class LevelSerializerTest {
         HashMap<Location, PointOfInterest> other = new HashMap<>();
         
         unlocks.put(new Location(1, 2), new Key(-1, new int[]{-1}));
-        lockeds.put(new Location(2, 3), new Door(-1, new int[]{-1}, 1, 1, false));
-        other.put(new Location(5, 6), new Alarm(-1, 5, 5));
+        lockeds.put(new Location(2, 3), new Door(-1, new int[]{-1}, new Size(1, 1), false));
+        other.put(new Location(5, 6), new Alarm(-1, new Size(5, 5)));
         
         LevelMap level = new LevelMap(-1, matrix, unlocks, lockeds, other);
         
@@ -46,6 +39,9 @@ public class LevelSerializerTest {
         System.out.println("loadLevel");
         
         LevelMap loaded = LevelSerializer.loadLevel(path);
+        
+        ProceduralLevelPartsGenerator.debugMatrix(loaded.getMatrix());
+        ProceduralLevelPartsGenerator.debugMatrix(level.getMatrix());
         
         Assert.assertArrayEquals(loaded.getMatrix(), level.getMatrix());
         System.out.println("matrix ok");

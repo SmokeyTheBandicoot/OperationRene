@@ -15,12 +15,12 @@ public class Location implements Serializable {
         this.y = y;
     }
     
-    private Location(){
+    private Location() {
         this(0, 0);
     }
     
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("x: %d, y: %d", x, y);
     }
     
