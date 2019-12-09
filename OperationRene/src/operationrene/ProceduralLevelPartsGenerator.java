@@ -1,6 +1,7 @@
 package operationrene;
 
 import java.util.HashMap;
+import java.util.Random;
 import operationrene.mapframework.*;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import operationrene.mapframework.pointsofinterest.*;
@@ -39,6 +40,14 @@ public class ProceduralLevelPartsGenerator {
         
         lm = generateHorizontalCorridor(8, 6, MAX_MATRIX_HEIGHT / 2 - 5);
         LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/corridor4.dat");
+        
+        for (int x = 0; x <= 10; x++) {
+            lm = generateEasyRoom(10 + x, 8 + x / 2, 5 + x, x + 3);
+            String s = String.format("assets/levels/proceduralgeneration/room%dx%d_%d.dat", 10 + x, 8 + x, x);
+            System.out.println(s);
+            LevelSerializer.saveLevel(lm, s);
+        }
+        
     }
     
     
@@ -62,40 +71,44 @@ public class ProceduralLevelPartsGenerator {
                 System.out.print(matrix[i][j] + " ");
             System.out.print("\n");
         }
-        System.out.println("\n\n");
+        // System.out.println("\n\n");
     }
     
     private static void debugPoints(HashMap<Location, PointOfInterest> map) {
         for (Location key : map.keySet())
             System.out.println(key.toString() + " --> " + map.get(key).toString());
+        System.out.println("\n");
     }
     
     private static void debugRooms(HashMap<Location, Room> map) {
         for (Location key : map.keySet())
             System.out.println(key.toString() + " --> " + map.get(key).toString());
+        System.out.println("\n");
     }
+    
+    
     
     // Safe rooms
     private static LevelMap generateSafeRoom1() {
         
-        Integer [][] matrix = generateMatrix(9, 7);
+        Integer [][] matrix = generateMatrix(7, 9);
         
         // Safe Room 1: 9x7 room, with safe, 1 minigame and locked door
         HashMap<Location, PointOfInterest> lockeds = new HashMap<>();
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(7, 3), new Safe(-1, new int[]{}, 1, 1));
-        lockeds.put(new Location(0, 3), new Door(1, new int []{}, 1, 1, false));
-        unlocks.put(new Location(7, 2), new Key(-1, new int []{}));
-        others.put(new Location(2, 1), new Alarm(-1, 5, 5));
+        lockeds.put(new Location(3, 7), new Safe(-1, new int[]{}, 1, 1));
+        lockeds.put(new Location(3, 0), new Door(1, new int []{}, 1, 1, false));
+        unlocks.put(new Location(2, 7), new Key(-1, new int []{}));
+        others.put(new Location(1, 2), new Alarm(-1, 5, 5));
         
         // Put the door in
-        matrix[0][3] = 0;
+        matrix[3][0] = 0;
         
         LevelMap lm = new LevelMap(-1, matrix, lockeds, unlocks, others, null);
         
-        System.out.println("Generated room safe1");
+        System.out.println("Room: SAFE_1");
         debugMatrix(matrix);
         
         return lm;
@@ -103,97 +116,122 @@ public class ProceduralLevelPartsGenerator {
     
     private static LevelMap generateSafeRoom2() {
         
-        Integer [][] matrix = generateMatrix(13, 9);
+        Integer [][] matrix = generateMatrix(9, 13);
         
         // Safe Room 1
         HashMap<Location, PointOfInterest> lockeds = new HashMap<>();
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(11, 4), new Safe(-1, new int[]{}, 1, 1));
-        lockeds.put(new Location(0, 4), new Door(1, new int []{}, 1, 1, false));
-        unlocks.put(new Location(11, 7), new Key(-1, new int []{}));
-        others.put(new Location(2, 1), new Alarm(-1, 7, 7));
+        lockeds.put(new Location(4, 11), new Safe(-1, new int[]{}, 1, 1));
+        lockeds.put(new Location(4, 0), new Door(1, new int []{}, 1, 1, false));
+        unlocks.put(new Location(7, 11), new Key(-1, new int []{}));
+        others.put(new Location(1, 2), new Alarm(-1, 7, 7));
         
-        matrix[0][4] = 0;
+        matrix[4][0] = 0;
         
         LevelMap lm = new LevelMap(-1, matrix, lockeds, unlocks, others, null);
+        
+        System.out.println("Room: SAFE_2");
         debugMatrix(matrix);
+        debugPoints(others);
         
         return lm;
     }
     
     private static LevelMap generateSafeRoom3() {
-        // Safe Room 1
+        
+        Integer [][] matrix = generateMatrix(11, 13);
+        
         HashMap<Location, PointOfInterest> lockeds = new HashMap<>();
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(11, 1), new Safe(-1, new int[]{}, 1, 1));
-        lockeds.put(new Location(0, 2), new Door(1, new int []{}, 1, 1, false));
-        unlocks.put(new Location(11, 9), new Key(-1, new int []{}));
-        others.put(new Location(2, 1), new Alarm(-1, 9, 9));
+        lockeds.put(new Location(1, 11), new Safe(-1, new int[]{}, 1, 1));
+        lockeds.put(new Location(2, 0), new Door(1, new int []{}, 1, 1, false));
+        unlocks.put(new Location(9, 11), new Key(-1, new int []{}));
+        others.put(new Location(1, 2), new Alarm(-1, 9, 9));
         
+        matrix[2][0] = 0;
         
-        LevelMap lm = new LevelMap(-1, 
-                new Integer[][]{
-                  // 0  1  2  3  4  5  6  7  8  9 10 11 12
-                    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // 0
-                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 1
-                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 2
-                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 3
-                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 4
-                    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 5
-                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 6
-                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 7
-                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 8
-                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 9
-                    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}},// 10
-            // Lockeds, Unlockeds, Others, Rooms
-            lockeds, unlocks, others, null);
+        LevelMap lm = new LevelMap(-1, matrix, lockeds, unlocks, others, null);
+        
+        System.out.println("Room SAFE_3");
+        debugMatrix(matrix);
+        debugPoints(others);
         
         return lm;
     }
     
     
     // Minigame rooms without alarm
-    private static LevelMap generateMinigame1() {
-        // Minigame room 1
+    /** private static LevelMap generateMinigame1() {
+         
+        Integer [][] matrix = generateMatrix(11, 13);
+
         HashMap<Location, PointOfInterest> lockeds = new HashMap<>();
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(11, 1), new Safe(-1, new int[]{}, 1, 1));
-        lockeds.put(new Location(0, 2), new Door(1, new int []{}, 1, 1, false));
-        unlocks.put(new Location(11, 9), new Key(-1, new int []{}));
-        others.put(new Location(2, 1), new Alarm(-1, 9, 9));
+        lockeds.put(new Location(2, 0), new Door(1, new int []{}, 1, 1, false));
+        unlocks.put(new Location(9, 11), new Key(-1, new int []{}));
+        others.put(new Location(1, 2), new Alarm(-1, 9, 9));
         
+        matrix [2][0] = 0;
         
-        LevelMap lm = new LevelMap(-1, 
-                new Integer[][]{
-                  // 0  1  2  3  4  5  6  7  8  9 10 11 12
-                    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // 0
-                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 1
-                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 2
-                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 3
-                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 4
-                    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 5
-                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 6
-                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 7
-                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 8
-                    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, // 9
-                    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}},// 10
-            // Lockeds, Unlockeds, Others, Rooms
-            lockeds, unlocks, others, null);
+        LevelMap lm = new LevelMap(-1, matrix, lockeds, unlocks, others, null);
         
         return lm;
     } 
+    
+    private static LevelMap generateMinigame2() {
+         
+        Integer [][] matrix = generateMatrix(11, 15);
+
+        HashMap<Location, PointOfInterest> lockeds = new HashMap<>();
+        HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
+        HashMap<Location, PointOfInterest> others = new HashMap<>();
+
+        lockeds.put(new Location(2, 0), new Door(1, new int []{}, 1, 1, false));
+        unlocks.put(new Location(9, 11), new Key(-1, new int []{}));
+        others.put(new Location(1, 2), new Alarm(-1, 9, 9));
+        
+        matrix [2][0] = 0;
+        
+        LevelMap lm = new LevelMap(-1, matrix, lockeds, unlocks, others, null);
+        
+        return lm;
+    } **/
             
     // Minigame rooms with alarm
+    private static LevelMap generateEasyRoom(int width, int height, int doorOffset, int unlockOffset) {
+        Integer [][] matrix = generateMatrix(height, width);
+        
+        HashMap<Location, PointOfInterest> lockeds = new HashMap<>();   
+        HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
+        HashMap<Location, PointOfInterest> others = new HashMap<>();
+        
+        // Generate door randomly in the left door
+        lockeds.put(new Location(doorOffset, 0), new Door(-1, new int[]{}, 1, 1, false));
+        unlocks.put(new Location(unlockOffset, width - 2), new Key(-1, new int[]{-1}));
+        
+        others.put(new Location(1, 1), new Alarm(-1, height-2, height-2));
+        
+        matrix[doorOffset][0] = 0;
+        
+        LevelMap lm = new LevelMap(-1, matrix, lockeds, unlocks, others, null);
+        
+        debugMatrix(matrix);
+        debugPoints(lockeds);
+        debugPoints(unlocks);
+        debugPoints(others);
+        
+        return lm;
+    }
+    
     
     
     // Corridors
-    
     /// Straight corridors
     private static LevelMap generateVerticalCorridor(int width, int roomNumber, int leftRoomsOffset) {
         

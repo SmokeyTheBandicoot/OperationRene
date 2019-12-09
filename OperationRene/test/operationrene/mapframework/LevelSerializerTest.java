@@ -8,6 +8,7 @@ package operationrene.mapframework;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import java.util.HashMap;
 import operationrene.mapframework.pointsofinterest.*;
+import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -46,7 +47,7 @@ public class LevelSerializerTest {
         
         LevelMap loaded = LevelSerializer.loadLevel(path);
         
-        assertEquals(loaded.getMatrix(), level.getMatrix());
+        Assert.assertArrayEquals(loaded.getMatrix(), level.getMatrix());
         System.out.println("matrix ok");
 
         //TODO: Check for Points of interest also
