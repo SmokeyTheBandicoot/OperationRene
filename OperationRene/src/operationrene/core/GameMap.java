@@ -12,7 +12,7 @@ public class GameMap {
     private int posY;
 
     public GameMap(String mappaURL, int width, int height, int posX, int posY) throws SlickException {
-        this.mappa = this.mappa = new TiledMap(mappaURL);
+        this.mappa = new TiledMap(mappaURL);
         this.width = width;
         this.height = height;
         this.posX = posX;
@@ -40,6 +40,19 @@ public class GameMap {
             return false;
         }
 
+    }
+    
+    public void setTileId(int x, int y, int layer, int id){
+        
+        mappa.setTileId(x, y, layer, id);
+    }
+    
+    public void unlockroom(int x,int y, int xdim,int ydim){
+        for(int i=x;i<x+xdim;i++){
+            for(int j=y;j<y+ydim;j++){
+               mappa.setTileId(i, j, 1, 56);
+            }
+        }
     }
 
 }

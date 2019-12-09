@@ -29,6 +29,7 @@ import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.RootPaneUI;
 import static java.lang.Thread.sleep;
+import operationrene.core.ExplorationGame;
 
 /**
  *
@@ -36,14 +37,14 @@ import static java.lang.Thread.sleep;
  */
 public class Wires2 extends Application {
     
-    private final String PATH = "C:\\Users\\Rickma\\Documents\\NetBeansProjects\\OperationRene\\OperationRene\\assets\\sprites\\minigames\\";
+    private final String PATH = "assets/sprites/minigames/";
 
     /**
      * @param args the command line arguments
      */
         Thread t;
         Pane root = new Pane();
-        Integer time = 30;
+        Integer time = 20;
         TextField ltime=new TextField(time.toString());
         Line[] arrayline = new Line[4];
         ArrayList array = new ArrayList();
@@ -94,7 +95,9 @@ public class Wires2 extends Application {
                 JOptionPane.showMessageDialog(null, 
                               "HAI PERSO", 
                               "HAI PERSO", 
-                              JOptionPane.WARNING_MESSAGE);}
+                              JOptionPane.WARNING_MESSAGE);
+                    ExplorationGame.resultMiniGame = -1;
+                ExplorationGame.GAMEOVER = true;}
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
@@ -520,6 +523,7 @@ public class Wires2 extends Application {
     }
      //FUNZIONE CHE LANCIA UN AVVISO DI SUCCESSO E CHIUDE L'APPLICAZIONE
     public void handleOK(Stage stage){
+        ExplorationGame.resultMiniGame = 1;
         Alert alertOK = new Alert(Alert.AlertType.INFORMATION);
         alertOK.setContentText("YOU HAVE SUCCESSFULLY COMPLETED THE MINIGAME!");
         risolto= true;

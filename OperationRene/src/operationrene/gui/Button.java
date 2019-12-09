@@ -17,7 +17,7 @@ import org.newdawn.slick.tests.xml.Entity;
 public class Button extends Entity {
 
 
-    private final String _PATHIMAGES = "C:\\Users\\**\\Documents\\NetBeansProjects\\Slick2D\\src\\extra\\Menu\\";
+    private final String _PATHIMAGES = "assets/sprites/controls/";
 
     //private String imageName;
     private final Rectangle button;
@@ -31,8 +31,6 @@ public class Button extends Entity {
     private Image renderImage;
     private final int type;
     private boolean value = true;
-    
-    
     
     
     public Button(ButtonType buttonType, float x, float y) {

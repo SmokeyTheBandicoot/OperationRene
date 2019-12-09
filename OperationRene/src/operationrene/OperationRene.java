@@ -21,7 +21,8 @@ import org.newdawn.slick.state.StateBasedGame;
 public class OperationRene extends StateBasedGame {
     
     public static Music MUSIC;
-    public static final String PATH_RESOURCES = "C:\\Users\\**\\Documents\\NetBeansProjects\\Slick2D\\src\\extra\\";
+    public static final String PATH_RESOURCES = "assets/sprites/";
+    public static final String PATH_MUSIC = "assets/music/";
     
 
     public OperationRene(String title) {
@@ -35,11 +36,11 @@ public class OperationRene extends StateBasedGame {
     public void initStatesList(GameContainer gc) throws SlickException {
         this.addState(new MainWindow());
         this.addState(new SettingWindow());
-        //this.addState(new ExplorationGame());
-//        this.getState(StateID.EXPLORATION_ID).init(gc, this);
-//        this.getState(StateID.MENU_ID).init(gc, this);
-//        this.getState(StateID.SETTING_ID).init(gc, this);
-//        this.enterState(StateID.MENU_ID);
+        this.addState(new ExplorationGame());
+        this.getState(StateID.EXPLORATION_ID).init(gc, this);
+        this.getState(StateID.MENU_ID).init(gc, this);
+        this.getState(StateID.SETTING_ID).init(gc, this);
+        this.enterState(StateID.MENU_ID);
         
         
     }
@@ -48,8 +49,8 @@ public class OperationRene extends StateBasedGame {
 
         AppGameContainer app = new AppGameContainer(new OperationRene("Rene"));
         app.setDisplayMode(ReneGame.WIDTH, ReneGame.HEIGHT, ReneGame.FULLSCREEN);
-        app.setIcon(PATH_RESOURCES+"logo.png");
-        MUSIC = new Music(PATH_RESOURCES+"music2.ogg");
+        //app.setIcon(PATH_RESOURCES+"logo.png");
+        MUSIC = new Music(PATH_MUSIC+"music2.ogg");
         MUSIC.loop();
         app.start();
 

@@ -1,5 +1,8 @@
 package operationrene.gui;
 
+
+import operationrene.core.ExplorationGame;
+import static operationrene.core.ExplorationGame.GAMEOVER;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -7,6 +10,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import operationrene.core.StateID;
 import operationrene.core.ReneGame;
+import org.newdawn.slick.Image;
 
 
 /**
@@ -18,6 +22,8 @@ public class MainWindow extends BasicGameState {
     Button play;
     Button setting;
     Button exit;
+    boolean test = true;
+    Image title;
 
     @Override
     public int getID() {
@@ -26,10 +32,11 @@ public class MainWindow extends BasicGameState {
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+        title = new Image("assets/sprites/controls/title.PNG");
         
-        play = new Button(ButtonType.PLAY, ReneGame.WIDTH/2, 100);
-        setting = new Button(ButtonType.SETTINGS, ReneGame.WIDTH/2, 200);
-        exit = new Button(ButtonType.EXIT, ReneGame.WIDTH/2, 600);
+        play = new Button(ButtonType.PLAY, ReneGame.WIDTH/2, 450);
+        setting = new Button(ButtonType.SETTINGS, ReneGame.WIDTH/2,550);
+        exit = new Button(ButtonType.EXIT, ReneGame.WIDTH/2, 650);
     }
 
     @Override
@@ -37,6 +44,9 @@ public class MainWindow extends BasicGameState {
         play.render(grphcs);
         setting.render(grphcs);
         exit.render(grphcs);
+        title.draw(ReneGame.WIDTH/2 - title.getWidth()/2, 0);
+        
+        
 
     }
 
@@ -50,7 +60,20 @@ public class MainWindow extends BasicGameState {
         if (play.isClicked()) {
                     
 
+            //sbg.getState(2).leave(gc, sbg);
             sbg.enterState(2);
+            
+            if (GAMEOVER == true){
+                GAMEOVER = false;
+                ExplorationGame.resultMiniGame = 0;
+                ExplorationGame.time= 0;
+            sbg.getState(2).init(gc, sbg);
+            sbg.getState(0).init(gc, sbg);
+            sbg.getState(1).init(gc, sbg);
+            sbg.enterState(2);
+            }
+            
+            
 
         }
         if (setting.isClicked()) {
