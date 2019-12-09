@@ -20,6 +20,7 @@ public class OperationRene extends Game {
     private AnimatedSprite man = null;
     private ColorBackground background = null;
 
+    @Override
     public void initResources() {
 
         //BufferedImage[] images = this.getImages("../../../sprites/prova2.png",3,4);
@@ -35,6 +36,7 @@ public class OperationRene extends Game {
 
     }
 
+    @Override
     public void update(long elapsedTime) {
 
         if (this.keyDown(KeyEvent.VK_A)){
@@ -81,6 +83,7 @@ public class OperationRene extends Game {
         man.update(elapsedTime);
     }
 
+    @Override
     public void render(Graphics2D g) {
         background.render(g);
         man.render(g);
