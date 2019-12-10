@@ -20,6 +20,9 @@ public class ProceduralLevelPartsGenerator {
      */
     public static void main(String[] args) {
         
+        
+        
+        
         LevelMap lm;
           
         lm = generateSafeRoom1();
@@ -89,15 +92,7 @@ public class ProceduralLevelPartsGenerator {
         // System.out.println("\n");
     }
     
-    private static int getBiggestMinigame(List<Size> sizes, Size availableSpace) {
-        
-        for (Size s : sizes) {
-            
-        }
-        
-        return -1;
-        
-    }
+    
     
     // Safe rooms
     private static LevelMap generateSafeRoom1() {

@@ -5,8 +5,10 @@
  */
 package operationrene.utils;
 
+import java.util.ArrayList;
 import operationrene.mapframework.levelbuilder.LevelBuilder;
 import java.util.HashMap;
+import java.util.List;
 import operationrene.mapframework.*;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import org.junit.Assert;
@@ -19,6 +21,32 @@ import org.junit.Test;
 public class UtilsTest {
     
     public UtilsTest() {
+    }
+    
+     /**
+     * Test of getBiggestFittingSize method, of class Utils.
+     */
+    @Test
+    public void testGetBiggestFittingSize() {
+        
+        List<Size> sizes = new ArrayList<>();
+            sizes.add(new Size(5, 5));
+            sizes.add(new Size(7, 7));
+            sizes.add(new Size(9, 9));
+            sizes.add(new Size(7, 5));
+            sizes.add(new Size(11, 9));
+           
+        Size available = null;
+        int [] expected = new int [(81)];
+        int [] results = new int [81];
+            
+        for (int i = 4; i <= 12; i++)
+            for (int j = 4; j <= 12; j++) {
+                available = new Size(i, j);
+                int k = Utils.getBiggestFittingSize(sizes, available, true);
+                
+            }
+        
     }
 
     /**
