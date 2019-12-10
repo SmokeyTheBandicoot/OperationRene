@@ -1,10 +1,13 @@
 package operationrene;
 
+import java.util.Timer;
 import operationrene.core.ExplorationGame;
 import operationrene.core.ReneGame;
 import operationrene.core.StateID;
 import operationrene.gui.MainWindow;
 import operationrene.gui.SettingWindow;
+import operationrene.minigame.KeyPadGame;
+import operationrene.minigame.WiresGame;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Music;
@@ -22,7 +25,10 @@ public class OperationRene extends StateBasedGame {
     
     public static Music MUSIC;
     public static final String PATH_RESOURCES = "assets/sprites/";
-    public static final String PATH_MUSIC = "assets/music/";
+    private static final String PATH_MUSIC = "assets/music/";
+    public static final int MAXIMUM_TIME= 120;
+    public static int REMAINING_TIME;
+    public static int CURRENT_TIME = 0;
     
 
     public OperationRene(String title) {

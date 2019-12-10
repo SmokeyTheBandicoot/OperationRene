@@ -17,6 +17,6 @@ public class OggettoProva extends InteractiveObject {
 
     @Override
     public void interact(GameContainer gc) {
-        System.out.println("OKOK");
+        //System.out.println("OKOK");
     }
 }

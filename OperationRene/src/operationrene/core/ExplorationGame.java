@@ -6,18 +6,22 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import static operationrene.OperationRene.PATH_RESOURCES;
-import operationrene.minigame.Wires2;
+import static operationrene.minigame.WiresGame.resultWires;
+import static operationrene.minigame.KeyPadGame.resultKeyPad;
+import static operationrene.OperationRene.REMAINING_TIME;
+import static operationrene.OperationRene.MAXIMUM_TIME;
+import static operationrene.OperationRene.CURRENT_TIME;
+import operationrene.minigame.KeyPadGame;
+import operationrene.minigame.WiresGame;
 
 public class ExplorationGame extends BasicGameState {
 
     private Player player = null;
     private GameMap map = null;
-    private InteractiveObject e = null;
-    public static int resultMiniGame = 0;
+    private InteractiveObject door1 = null;
+    private InteractiveObject door2 = null;
     public static boolean GAMEOVER = false;
-    public static int time = 0;
-    private final int MAXIMUM_TIME= 60;
-    private int REMAINING_TIME;
+    
 
     @Override
     public int getID() {
@@ -27,9 +31,13 @@ public class ExplorationGame extends BasicGameState {
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
 
-        this.player = new Player(PATH_RESOURCES + "character/Rene.png", 100, PlayerState.DOWN_STOP, ReneGame.WIDTH / 2, ReneGame.HEIGHT / 2 + (4 * 32), 32, 40, 1);
+        this.player = new Player(PATH_RESOURCES + "character/Rene.png", 100, PlayerState.DOWN_STOP, ReneGame.WIDTH / 8, ReneGame.HEIGHT / 8 + (4 * 32), 32, 40, 1);
         this.map = new GameMap("assets/tilesets/Livello1.tmx", ReneGame.WIDTH, ReneGame.HEIGHT, 0, 0);
-        this.e = new OggettoProva(975, 590, 20, 35);
+        this.door1 = new OggettoProva(400, 688, 16, 32);
+        this.door2 = new OggettoProva(1136, 448, 32, 16);
+        this.map.drawMap();
+        this.map.drawroom(14, 1, 33, 12,69);
+        this.map.drawroom(14, 14, 33, 11,69);
 
     }
 
@@ -47,8 +55,8 @@ public class ExplorationGame extends BasicGameState {
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         
-        time +=delta;
-        REMAINING_TIME = (MAXIMUM_TIME - time/1000);
+        CURRENT_TIME +=delta;
+        REMAINING_TIME = (MAXIMUM_TIME - CURRENT_TIME/1000);
         
         if(REMAINING_TIME < 0 ){
             JOptionPane.showMessageDialog(null, 
@@ -85,34 +93,48 @@ public class ExplorationGame extends BasicGameState {
             }
         }
 
-        if (this.player.isCollided(this.e)){
-            e.shape.setLocation(0, 0);
-            new Thread() {
-            @Override
-            public void run() {
-                javafx.application.Application.launch(Wires2.class);
-            }
-        }.start();
-            System.out.println(e.shape.getX());
+        if (this.player.isCollided(this.door1)){
+            door1.shape.setLocation(0, 0);
+            game.addState(new WiresGame());
+            game.getState(StateID.WIRES_ID).init(container, game);
+            game.enterState(StateID.WIRES_ID);
         } else {
-            this.e.interact(container);
+            this.door1.interact(container);
         }
         
-        if (resultMiniGame == 1){
+        if (this.player.isCollided(this.door2)){
+            // CODICE SECONDO MINIGIOCO
+            System.out.println("Secondo minigioco");
+            door2.shape.setLocation(0, 0);
+            game.addState(new KeyPadGame());
+            game.getState(StateID.KEYPAD_ID).init(container, game);
+            game.enterState(StateID.KEYPAD_ID);
+        }
+        
+        if (resultWires == 1){
             //minigame superato
             
-            e.shape.setX(0);
-            e.shape.setY(0);
-            map.setTileId(31, 18, 1, 0);
-            map.setTileId(31, 19, 1, 0);
-            map.unlockroom(7, 1, 12, 12);
+            door1.shape.setX(0);
+            door1.shape.setY(0);
+            map.setTileId(13, 21, 1, 92);
+            map.setTileId(13, 22, 1, 92);
+            map.drawroom(14 , 14, 33, 11,92);
             
-            resultMiniGame = 0;
+            resultWires = 0;
         }
-        if (resultMiniGame == -1){
+        if (resultWires== -1){
             System.out.println("aaaaaa");
             game.enterState(0);
         }
+        
+        if (resultKeyPad == 1){
+            door2.shape.setLocation(0,0);
+            map.setTileId(35, 13, 1, 92);
+            map.setTileId(36, 13, 1, 92);
+            map.drawroom(14, 1, 33, 12, 92);
+            resultKeyPad = 0;
+        }
+        
 
     }
 
