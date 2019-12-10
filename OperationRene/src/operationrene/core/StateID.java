@@ -8,5 +8,7 @@ public final class StateID {
     public static final int MENU_ID = 0;
     public static final int SETTING_ID = 1;
     public static final int EXPLORATION_ID = 2;
+    public static final int WIRES_ID = 3;
+    public static final int KEYPAD_ID = 4;
 
 }

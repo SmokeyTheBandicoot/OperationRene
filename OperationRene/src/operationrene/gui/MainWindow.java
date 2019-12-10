@@ -1,7 +1,11 @@
 package operationrene.gui;
 
 
-import operationrene.core.ExplorationGame;
+import operationrene.OperationRene;
+import static operationrene.OperationRene.MAXIMUM_TIME;
+import static operationrene.OperationRene.REMAINING_TIME;
+import static operationrene.OperationRene.CURRENT_TIME;
+import static operationrene.OperationRene.MUSIC;
 import static operationrene.core.ExplorationGame.GAMEOVER;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -10,7 +14,9 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import operationrene.core.StateID;
 import operationrene.core.ReneGame;
+import static operationrene.minigame.KeyPadGame.resultKeyPad;
 import org.newdawn.slick.Image;
+import static operationrene.minigame.WiresGame.resultWires;
 
 
 /**
@@ -65,11 +71,13 @@ public class MainWindow extends BasicGameState {
             
             if (GAMEOVER == true){
                 GAMEOVER = false;
-                ExplorationGame.resultMiniGame = 0;
-                ExplorationGame.time= 0;
-            sbg.getState(2).init(gc, sbg);
-            sbg.getState(0).init(gc, sbg);
-            sbg.getState(1).init(gc, sbg);
+                resultWires = 0;
+                resultKeyPad = 0;
+                REMAINING_TIME= MAXIMUM_TIME;
+                CURRENT_TIME = 0;
+                MUSIC.setPosition(0);
+            sbg.getState(StateID.EXPLORATION_ID).init(gc, sbg);
+            sbg.getState(StateID.WIRES_ID).init(gc, sbg);
             sbg.enterState(2);
             }
             
