@@ -228,7 +228,7 @@ public class ProceduralLevelPartsGenerator {
         final int maxH = height - 4;
         int curX = 0;
         
-        
+        Size minigameSize = MapAlarm.getMinigameSizes().get(Utils.getBiggestFittingSize(MapAlarm.getMinigameSizes(), new Size(maxW, maxH), true));
         
         others.put(new Location(1, 2), new Alarm(-1, new Size(height-2, height-2)));
         

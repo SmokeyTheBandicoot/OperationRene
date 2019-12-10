@@ -18,13 +18,13 @@ public class LevelMap implements Serializable {
     protected HashMap<Location, PointOfInterest> otherObjects;
     
     // List containing all the rooms in the level
-    protected HashMap<Integer, Room> rooms;
+    protected HashMap<Location, Room> rooms;
 
     public LevelMap(int roomID, Integer[][] matrix, 
             HashMap<Location, PointOfInterest> lockedObjects, 
             HashMap<Location, PointOfInterest> unlockingObjects, 
             HashMap<Location, PointOfInterest> otherObjects,
-            HashMap<Integer, Room> rooms) {
+            HashMap<Location, Room> rooms) {
         this.matrix = matrix;
         this.roomID = roomID;
         this.lockedObjects = lockedObjects;
@@ -97,11 +97,11 @@ public class LevelMap implements Serializable {
         this.roomID = roomID;
     }
 
-    public HashMap<Integer, Room> getRooms() {
+    public HashMap<Location, Room> getRooms() {
         return rooms;
     }
 
-    public void setRooms(HashMap<Integer, Room> rooms) {
+    public void setRooms(HashMap<Location, Room> rooms) {
         this.rooms = rooms;
     }
 
