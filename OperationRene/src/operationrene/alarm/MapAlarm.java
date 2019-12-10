@@ -1,16 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package operationrene.alarm;
 
-/**
- *
- * @author Miky Gargiulo
- */
+import java.util.ArrayList;
+import operationrene.mapframework.Size;
+
 public abstract class MapAlarm {
 
+    
+    
     public enum Dimension {
         SMALL,
         MEDIUM,
@@ -24,6 +20,16 @@ public abstract class MapAlarm {
     protected int white = 0;
     protected int blue = 0;
     protected int red = 0;
+    
+    public static final ArrayList<Size> getMinigameSizes() {
+        ArrayList<Size> sizes = new ArrayList<>();
+        sizes.add(new Size(5, 5));
+        sizes.add(new Size(7, 7));
+        sizes.add(new Size(9, 9));
+        sizes.add(new Size(7, 5));
+        sizes.add(new Size(11, 9));
+        return sizes;
+    }
 
     public MapAlarm(Dimension dim) {
         

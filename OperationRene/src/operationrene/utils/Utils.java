@@ -111,14 +111,14 @@ public class Utils {
                     else 
                         if (fitHeight) {
                             // Otherwise, check dimensions and set current selected accordingly
-                            if (curSize.getHeight() >= s.getHeight())
-                                if (curSize.getWidth() > s.getWidth()) curSize = s;
+                            if (s.getHeight() >= curSize.getHeight())
+                                if (s.getWidth() > curSize.getWidth()) curSize = s;
                         } else {
-                            if (curSize.getWidth() >= s.getWidth())
-                            if (curSize.getHeight() > s.getHeight()) curSize = s;
+                            if (s.getWidth() >= curSize.getWidth())
+                            if (s.getHeight() > curSize.getHeight()) curSize = s;
                         }   
         }
-        return -1;
+        return sizes.indexOf(curSize);
         
     }
 }

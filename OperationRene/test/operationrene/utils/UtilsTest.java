@@ -28,7 +28,7 @@ public class UtilsTest {
      */
     @Test
     public void testGetBiggestFittingSize() {
-        
+        System.out.println("getBiggestFittingSize");
         List<Size> sizes = new ArrayList<>();
             sizes.add(new Size(5, 5));
             sizes.add(new Size(7, 7));
@@ -37,15 +37,24 @@ public class UtilsTest {
             sizes.add(new Size(11, 9));
            
         Size available = null;
-        int [] expected = new int [(81)];
+        int [] expected = new int []{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
+            0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, -1, 3, 3, 1, 
+            1, 1, 1, 1, 1, -1, 3, 3, 1, 1, 1, 1, 1, 1, -1, 3, 3, 1, 1, 2, 2, 
+            2, 2, -1, 3, 3, 1, 1, 2, 2, 2, 2, -1, 3, 3, 1, 1, 4, 4, 4, 4, -1, 
+            3, 3, 1, 1, 4, 4, 4, 4, };
         int [] results = new int [81];
+        int index = 0;
             
         for (int i = 4; i <= 12; i++)
             for (int j = 4; j <= 12; j++) {
                 available = new Size(i, j);
                 int k = Utils.getBiggestFittingSize(sizes, available, true);
-                
+                results[index++] = k;
             }
+
+        
+        Assert.assertArrayEquals(expected, results);
+        // Assert.assertArrayEquals(expected, results);
         
     }
 

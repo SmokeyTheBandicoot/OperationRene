@@ -1,12 +1,13 @@
 package operationrene;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
+import operationrene.alarm.MapAlarm;
 import operationrene.mapframework.*;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import operationrene.mapframework.pointsofinterest.*;
 import operationrene.mapframework.pointsofinterest.Room.Direction;
+import operationrene.utils.Utils;
 
 public class ProceduralLevelPartsGenerator {
 
@@ -227,14 +228,7 @@ public class ProceduralLevelPartsGenerator {
         final int maxH = height - 4;
         int curX = 0;
         
-        // There are 5x5, 7x5, 7x7, 9x9, and 11x9
-        //Try with the maximum-size minigame (85% chance)
-        if (maxW >= 11)
-            if (maxH >= 9)
-                  if (new Random().nextInt(100) <= 84){
-                      // Get largest minigame and put it
-                      
-                  }
+        
         
         others.put(new Location(1, 2), new Alarm(-1, new Size(height-2, height-2)));
         
