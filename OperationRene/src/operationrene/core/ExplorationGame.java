@@ -21,6 +21,7 @@ public class ExplorationGame extends BasicGameState {
     private InteractiveObject door1 = null;
     private InteractiveObject door2 = null;
     public static boolean GAMEOVER = false;
+
     
 
     @Override
@@ -108,6 +109,7 @@ public class ExplorationGame extends BasicGameState {
             door2.shape.setLocation(0, 0);
             game.addState(new KeyPadGame());
             game.getState(StateID.KEYPAD_ID).init(container, game);
+
             game.enterState(StateID.KEYPAD_ID);
         }
         

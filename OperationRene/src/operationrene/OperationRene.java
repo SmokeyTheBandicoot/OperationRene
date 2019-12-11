@@ -43,9 +43,13 @@ public class OperationRene extends StateBasedGame {
         this.addState(new MainWindow());
         this.addState(new SettingWindow());
         this.addState(new ExplorationGame());
+        this.addState(new WiresGame());
+        this.addState(new KeyPadGame());
         this.getState(StateID.EXPLORATION_ID).init(gc, this);
         this.getState(StateID.MENU_ID).init(gc, this);
         this.getState(StateID.SETTING_ID).init(gc, this);
+        this.getState(StateID.WIRES_ID).init(gc, this);
+        this.getState(StateID.KEYPAD_ID).init(gc, this);
         this.enterState(StateID.MENU_ID);
         
         
@@ -56,6 +60,7 @@ public class OperationRene extends StateBasedGame {
         AppGameContainer app = new AppGameContainer(new OperationRene("Rene"));
         app.setDisplayMode(ReneGame.WIDTH, ReneGame.HEIGHT, ReneGame.FULLSCREEN);
         //app.setIcon(PATH_RESOURCES+"logo.png");
+        app.setTargetFrameRate(200);
         MUSIC = new Music(PATH_MUSIC+"music2.ogg");
         MUSIC.loop();
         app.start();
