@@ -56,14 +56,18 @@ public class GameMap {
     public boolean checkCollision(int posX, int posY, int width, int height) {
 
         int objectLayer = mappa.getLayerIndex("objects");
-        if (mappa.getTileId(posX / 32, posY / 32, objectLayer) != 92) {
+        if (mappa.getTileId(posX / 32, posY / 32, objectLayer) != 92) {//ANGOLO ALTO-SINISTRA
             return true;
-        } else if (mappa.getTileId((posX + width) / 32, (posY + height) / 32, objectLayer) != 92) {
+        } else if (mappa.getTileId((posX + width) / 32, (posY + height) / 32, objectLayer) != 92) {//ANGOLO BASSO-DESTRA
             return true;
-        } else if (mappa.getTileId((posX + width) / 32, posY / 32, objectLayer) != 92) {
+        } else if (mappa.getTileId((posX + width) / 32, posY / 32, objectLayer) != 92) {//ANGOLO ALTO-DESTRA
             return true;
-        } else if (mappa.getTileId(posX / 32, (posY + height) / 32, objectLayer) != 92) {
+        } else if (mappa.getTileId(posX / 32, (posY + height) / 32, objectLayer) != 92) {//ANGOLO BASSO-SINISTRA
             return true;
+        } else if (mappa.getTileId(posX / 32, (posY + (height/2)) / 32, objectLayer) != 92) {//CENTRO SINISTRA
+            return true;
+        } else if (mappa.getTileId((posX + width) / 32, (posY + (height/2)) / 32, objectLayer) != 92) {//CENTRO DESTRA
+            return true;    
         } else {
             return false;
         }

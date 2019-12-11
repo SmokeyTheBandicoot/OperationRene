@@ -16,7 +16,7 @@ public class ReneGame extends StateBasedGame {
 
     public static final String TITLE = "Operation: R.E.N.E.";
 
-    public static final int FPS_LIMIT = 100;
+    public static final int FPS_LIMIT = 200;
 
     public static boolean MUSIC_SOUND = true;
     public static boolean EFFECT_SOUND = true;

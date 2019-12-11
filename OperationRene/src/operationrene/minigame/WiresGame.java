@@ -146,11 +146,11 @@ public class WiresGame extends BasicGameState{
                 if(this.colorPosition[ColorID.RED].size() == 0 ) { 
                     this.solution=1;
                 }else if(this.lineColor[this.arrayline.length-1] == Color.white){
-                    this.solution=this.arrayline.length-1;
+                    this.solution=2;
                 }else if(this.colorPosition[ColorID.BLUE].size()>1){
                     this.solution=this.colorPosition[ColorID.BLUE].get(this.colorPosition[ColorID.BLUE].size()-1);
                 }else{
-                    this.solution=this.arrayline.length-1;
+                    this.solution=2;
                 }
                 break;
             case 4:
@@ -161,7 +161,7 @@ public class WiresGame extends BasicGameState{
                 }else if(this.colorPosition[ColorID.BLUE].size() == 1){
                     this.solution=0;
                 }else if(this.colorPosition[ColorID.YELLOW].size()>1){
-                    this.solution=this.colorPosition[3].get(this.colorPosition[3].size()-1);
+                    this.solution=3;
                 }else{
                     this.solution=1;
                 }
