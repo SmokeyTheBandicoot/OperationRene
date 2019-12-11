@@ -8,8 +8,6 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 import operationrene.OperationRene;
 import static operationrene.OperationRene.font;
-import static operationrene.core.ExplorationGame.GAMEOVER;
-import operationrene.core.StateID;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -19,6 +17,8 @@ import org.newdawn.slick.geom.Line;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import static operationrene.core.ExplorationGame.GAMEOVER;
+import operationrene.core.StateID;
 
 public class WiresGame extends BasicGameState{
 
@@ -42,9 +42,8 @@ public class WiresGame extends BasicGameState{
     private Image circuit = null;
     private Image screw = null;
     public static int resultWires = 0;
-    
+     
     private final String PATH = "assets/sprites/minigames/wires/";
-    
     
     @Override
     public int getID() {
@@ -54,12 +53,15 @@ public class WiresGame extends BasicGameState{
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         
-        this.circuit = (new Image(PATH+"circuit.png"));
-        this.screw =  (new Image(PATH+"screw.png"));
+        this.circuit = (new Image(PATH+"/circuit.jpg")).getScaledCopy(640, 350);
         
+        //this.screw =  (new Image("C:/Users/gavos/Desktop/images/vite.png")).getScaledCopy(15,15);
+        //gc.setMouseCursor((new Image("C:/Users/gavos/Desktop/images/scissor.png")).getScaledCopy((float)1), 50, 50);
         
         Random rand = new Random();
-        int num = rand.nextInt(4)+3;
+        
+        //int num =rand.nextInt(4)+3;
+        int num = 6;
         
         Integer[] yPositions = new Integer[num];
         for (int i=0; i<num; i++){ 
@@ -109,6 +111,7 @@ public class WiresGame extends BasicGameState{
                 grphcs.draw(this.arrayline[i]);
             }
         }
+        
         font.drawString(10, 50, "TIME REMAINING: " + OperationRene.REMAINING_TIME, Color.red);
         
     }
@@ -141,11 +144,11 @@ public class WiresGame extends BasicGameState{
                 if(this.colorPosition[ColorID.RED].size() == 0 ) { 
                     this.solution=1;
                 }else if(this.lineColor[this.arrayline.length-1] == Color.white){
-                    this.solution=this.arrayline.length-1;
+                    this.solution=2;
                 }else if(this.colorPosition[ColorID.BLUE].size()>1){
                     this.solution=this.colorPosition[ColorID.BLUE].get(this.colorPosition[ColorID.BLUE].size()-1);
                 }else{
-                    this.solution=this.arrayline.length-1;
+                    this.solution=2;
                 }
                 break;
             case 4:
@@ -156,7 +159,7 @@ public class WiresGame extends BasicGameState{
                 }else if(this.colorPosition[ColorID.BLUE].size() == 1){
                     this.solution=0;
                 }else if(this.colorPosition[ColorID.YELLOW].size()>1){
-                    this.solution=this.colorPosition[3].get(this.colorPosition[3].size()-1);
+                    this.solution=3;
                 }else{
                     this.solution=1;
                 }
