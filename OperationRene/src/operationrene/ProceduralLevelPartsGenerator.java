@@ -3,6 +3,8 @@ package operationrene;
 import java.util.HashMap;
 import java.util.Random;
 import operationrene.alarm.MapAlarm;
+import operationrene.alarm.MapAlarm.Dimension;
+import operationrene.alarm.MapAlarmFactory;
 import operationrene.mapframework.*;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import operationrene.mapframework.pointsofinterest.*;
@@ -59,12 +61,12 @@ public class ProceduralLevelPartsGenerator {
     
     
     // Utils
-    private static Integer[][] generateMatrix(int width, int height) {
-        Integer [][] matrix = new Integer[width][height];
+    private static Integer[][] generateMatrix(int height, int width) {
+        Integer [][] matrix = new Integer[height][width];
         
-        for (int i = 0; i < width; i++)
-            for (int j = 0; j < height; j++)
-                if (i == 0 || j == 0 || i == width - 1 || j == height - 1) 
+        for (int i = 0; i < height; i++)
+            for (int j = 0; j < width; j++)
+                if (i == 0 || j == 0 || i == height - 1 || j == width - 1) 
                     matrix[i][j] = 1;
                 else 
                     matrix[i][j] = 0;
@@ -228,9 +230,12 @@ public class ProceduralLevelPartsGenerator {
         final int maxH = height - 4;
         int curX = 0;
         
-        Size minigameSize = MapAlarm.getMinigameSizes().get(Utils.getBiggestFittingSize(MapAlarm.getMinigameSizes(), new Size(maxW, maxH), true));
+        Dimension minigameDim = MapAlarm.getMinigameDimensions().get(Utils.getBiggestFittingSize(MapAlarm.getMinigameDimensions(), new Size(maxW, maxH), true));
+
+        MapAlarmFactory factory = new MapAlarmFactory();
+        factory.createRandomMapAlarm(minigameDim);
         
-        others.put(new Location(1, 2), new Alarm(-1, new Size(height-2, height-2)));
+        others.put(new Location(1, 2), new Alarm(-1, minigameDim.getDimSize()));
         
         matrix[doorOffset][0] = 0;
         

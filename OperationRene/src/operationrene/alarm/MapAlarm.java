@@ -8,11 +8,22 @@ public abstract class MapAlarm {
     
     
     public enum Dimension {
-        SMALL,
-        MEDIUM,
-        LARGE,
-        RECT_SMALL,
-        RECT_LARGE
+        SMALL(new Size(5, 5)),
+        MEDIUM(new Size(7, 7)),
+        LARGE(new Size(9, 9)),
+        RECT_SMALL(new Size(7, 5)),
+        RECT_LARGE(new Size(11, 9));
+        
+        private final Size size;
+        
+        Dimension(Size s) {
+            size = s;
+        }
+        
+        public Size getDimSize() {
+            return size;
+        }
+                
     }
     
     private int[][] matrix;
@@ -21,14 +32,14 @@ public abstract class MapAlarm {
     protected int blue = 0;
     protected int red = 0;
     
-    public static final ArrayList<Size> getMinigameSizes() {
-        ArrayList<Size> sizes = new ArrayList<>();
-        sizes.add(new Size(5, 5));
-        sizes.add(new Size(7, 7));
-        sizes.add(new Size(9, 9));
-        sizes.add(new Size(7, 5));
-        sizes.add(new Size(11, 9));
-        return sizes;
+    public static final ArrayList<Dimension> getMinigameDimensions() {
+        ArrayList<Dimension> dims = new ArrayList<>();
+        dims.add(Dimension.SMALL);
+        dims.add(Dimension.MEDIUM);
+        dims.add(Dimension.LARGE);
+        dims.add(Dimension.RECT_SMALL);
+        dims.add(Dimension.RECT_LARGE);
+        return dims;
     }
 
     public MapAlarm(Dimension dim) {

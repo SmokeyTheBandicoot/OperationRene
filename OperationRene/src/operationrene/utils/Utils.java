@@ -1,6 +1,8 @@
 package operationrene.utils;
 
 import java.util.List;
+import operationrene.alarm.MapAlarm;
+import operationrene.alarm.MapAlarm.Dimension;
 import static operationrene.mapframework.levelbuilder.LevelBuilder.*;
 import operationrene.mapframework.*;
 
@@ -95,30 +97,35 @@ public class Utils {
      * @return ndex of the sizes list corresponding to the chosen size. -1 if
      * none of the provided sizes can fit in the space or availableSpace is null
      */
-    public static int getBiggestFittingSize(List<Size> sizes, Size availableSpace, boolean fitHeight) {
+    public static int getBiggestFittingSize(List<Dimension> dims, Size availableSpace, boolean fitHeight) {
         
         if (availableSpace == null) return -1;
         
         Size curSize = null;
-        for (Size s : sizes) {
+        for (Dimension d : dims) {
             // Can the current size fit in the available 
-            if (s.getHeight() <= availableSpace.getHeight())
-                if (s.getWidth() <= availableSpace.getWidth())
+            if (d.getDimSize().getHeight() <= availableSpace.getHeight())
+                if (d.getDimSize().getWidth() <= availableSpace.getWidth())
                         
                    // Is the current size bigger than the current selected size?
                     // If current selected is null, then current iteration will be the current selected size
-                    if (curSize == null) curSize = s;
+                    if (curSize == null) curSize = d.getDimSize();
                     else 
                         if (fitHeight) {
                             // Otherwise, check dimensions and set current selected accordingly
-                            if (s.getHeight() >= curSize.getHeight())
-                                if (s.getWidth() > curSize.getWidth()) curSize = s;
+                            if (d.getDimSize().getHeight() >= curSize.getHeight())
+                                if (d.getDimSize().getWidth() > curSize.getWidth()) curSize = d.getDimSize();
                         } else {
-                            if (s.getWidth() >= curSize.getWidth())
-                            if (s.getHeight() > curSize.getHeight()) curSize = s;
+                            if (d.getDimSize().getWidth() >= curSize.getWidth())
+                            if (d.getDimSize().getHeight() > curSize.getHeight()) curSize = d.getDimSize();
                         }   
         }
-        return sizes.indexOf(curSize);
         
+        for (Dimension d : dims)
+            if (d.getDimSize() == curSize)
+                return dims.indexOf(d);
+        
+        return -1;
     }
+    
 }

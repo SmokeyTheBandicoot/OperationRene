@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import operationrene.mapframework.levelbuilder.LevelBuilder;
 import java.util.HashMap;
 import java.util.List;
+import operationrene.alarm.MapAlarm;
 import operationrene.mapframework.*;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import org.junit.Assert;
@@ -29,12 +30,6 @@ public class UtilsTest {
     @Test
     public void testGetBiggestFittingSize() {
         System.out.println("getBiggestFittingSize");
-        List<Size> sizes = new ArrayList<>();
-            sizes.add(new Size(5, 5));
-            sizes.add(new Size(7, 7));
-            sizes.add(new Size(9, 9));
-            sizes.add(new Size(7, 5));
-            sizes.add(new Size(11, 9));
            
         Size available = null;
         int [] expected = new int []{-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
@@ -48,7 +43,7 @@ public class UtilsTest {
         for (int i = 4; i <= 12; i++)
             for (int j = 4; j <= 12; j++) {
                 available = new Size(i, j);
-                int k = Utils.getBiggestFittingSize(sizes, available, true);
+                int k = Utils.getBiggestFittingSize(MapAlarm.getMinigameDimensions(), available, true);
                 results[index++] = k;
             }
 
