@@ -1,6 +1,6 @@
 package operationrene.minigame;
 
-import java.awt.Font;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,19 +9,21 @@ import javax.swing.JOptionPane;
 import static operationrene.OperationRene.CURRENT_TIME;
 import static operationrene.OperationRene.MAXIMUM_TIME;
 import static operationrene.OperationRene.REMAINING_TIME;
+import static operationrene.OperationRene.font;
 import static operationrene.core.ExplorationGame.GAMEOVER;
-import operationrene.core.ReneGame;
 import operationrene.core.StateID;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.RoundedRectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import operationrene.OperationRene;
+import static operationrene.OperationRene.font;
+import org.newdawn.slick.TrueTypeFont;
 
 
 public class KeyPadGame extends BasicGameState {
@@ -38,6 +40,7 @@ public class KeyPadGame extends BasicGameState {
     private String playerInput =null;
     public static int resultKeyPad = 0;
     private final String PATH = "assets/sprites/minigames/keypad/";
+    private TrueTypeFont fontMinigame;
      
     
     @Override
@@ -80,8 +83,8 @@ public class KeyPadGame extends BasicGameState {
         padValues = getRandomIndices(7);
         
         this.box = new Rectangle(0,0,600,600);
-        this.box.setCenterX(ReneGame.WIDTH/2);
-        this.box.setCenterY(ReneGame.HEIGHT/2);
+        this.box.setCenterX(OperationRene.WIDTH/2);
+        this.box.setCenterY(OperationRene.HEIGHT/2);
         
         this.enterButton = new RoundedRectangle(this.box.getCenterX()-160,this.box.getY()+50,140,70,10);
         this.deleteButton = new RoundedRectangle(this.box.getCenterX()+20,this.box.getY()+50,140,70,10);
@@ -117,6 +120,7 @@ public class KeyPadGame extends BasicGameState {
         Collections.sort(sortedPadValues);
         solution =sortedPadValues.get(0).toString()+sortedPadValues.get(1).toString()+sortedPadValues.get(2).toString()+sortedPadValues.get(3).toString();
         playerInput = "";
+        fontMinigame = new TrueTypeFont(new java.awt.Font("Arial Black",java.awt.Font.BOLD,28),false);
         
     }
 
@@ -132,9 +136,8 @@ public class KeyPadGame extends BasicGameState {
         grphcs.fill(this.enterButton);
         grphcs.setColor(Color.red);
         grphcs.fill(this.deleteButton);
-        TrueTypeFont f =new TrueTypeFont(new Font("Arial Black",Font.BOLD,28),false);
-        f.drawString(this.enterButton.getX()+10, this.enterButton.getY()+12, "ENTER",Color.black);
-        f.drawString(this.deleteButton.getX()+5, this.deleteButton.getY()+12, "DELETE",Color.black);
+        fontMinigame.drawString(this.enterButton.getX()+10, this.enterButton.getY()+12, "ENTER",Color.black);
+        fontMinigame.drawString(this.deleteButton.getX()+5, this.deleteButton.getY()+12, "DELETE",Color.black);
         
         for(int i=0;i<4;i++){
             grphcs.setColor(Color.white);
@@ -143,8 +146,7 @@ public class KeyPadGame extends BasicGameState {
             grphcs.fill(this.padLeds[i]);
             grphcs.drawImage(this.padImages[i], this.padButtons[i].getX(),this.padButtons[i].getY());
         }
-        grphcs.setColor(Color.red);
-        grphcs.drawString("TIME REMAINING: " + REMAINING_TIME, 10, 50);
+        font.drawString(10, 50, "TIME REMAINING: " + REMAINING_TIME, Color.red);
 
     }
 

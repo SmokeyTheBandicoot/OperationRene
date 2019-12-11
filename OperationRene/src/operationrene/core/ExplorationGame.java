@@ -8,11 +8,10 @@ import org.newdawn.slick.state.StateBasedGame;
 import static operationrene.OperationRene.PATH_RESOURCES;
 import static operationrene.minigame.WiresGame.resultWires;
 import static operationrene.minigame.KeyPadGame.resultKeyPad;
-import static operationrene.OperationRene.REMAINING_TIME;
-import static operationrene.OperationRene.MAXIMUM_TIME;
-import static operationrene.OperationRene.CURRENT_TIME;
 import operationrene.minigame.KeyPadGame;
 import operationrene.minigame.WiresGame;
+import  static operationrene.OperationRene.font;
+import operationrene.OperationRene;
 
 public class ExplorationGame extends BasicGameState {
 
@@ -21,6 +20,7 @@ public class ExplorationGame extends BasicGameState {
     private InteractiveObject door1 = null;
     private InteractiveObject door2 = null;
     public static boolean GAMEOVER = false;
+    
 
     
 
@@ -31,9 +31,8 @@ public class ExplorationGame extends BasicGameState {
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-
-        this.player = new Player(PATH_RESOURCES + "character/Rene.png", 100, PlayerState.DOWN_STOP, ReneGame.WIDTH / 8, ReneGame.HEIGHT / 8 + (4 * 32), 32, 40, 1);
-        this.map = new GameMap("assets/tilesets/Livello1.tmx", ReneGame.WIDTH, ReneGame.HEIGHT, 0, 0);
+                this.player = new Player(PATH_RESOURCES + "character/Rene.png", 100, PlayerState.DOWN_STOP, OperationRene.WIDTH / 8, OperationRene.HEIGHT / 8 + (4 * 32), 32, 40, 1);
+        this.map = new GameMap("assets/tilesets/Livello1.tmx", OperationRene.WIDTH, OperationRene.HEIGHT, 0, 0);
         this.door1 = new OggettoProva(400, 688, 16, 32);
         this.door2 = new OggettoProva(1136, 448, 32, 16);
         this.map.drawMap();
@@ -47,19 +46,18 @@ public class ExplorationGame extends BasicGameState {
 
         this.map.draw();
         this.player.draw();
-        g.setColor(Color.red);
-        g.draw(new Rectangle(1, 1, ReneGame.WIDTH - 1, ReneGame.HEIGHT - 1));
-        g.drawString("TIME REMAINING: " + REMAINING_TIME, 10, 50);
+        g.draw(new Rectangle(1, 1, OperationRene.WIDTH - 1, OperationRene.HEIGHT - 1));
+        font.drawString(10, 50, "TIME REMAINING: " + OperationRene.REMAINING_TIME, Color.red);
 
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         
-        CURRENT_TIME +=delta;
-        REMAINING_TIME = (MAXIMUM_TIME - CURRENT_TIME/1000);
+        OperationRene.CURRENT_TIME +=delta;
+        OperationRene.REMAINING_TIME = (OperationRene.MAXIMUM_TIME - OperationRene.CURRENT_TIME/1000);
         
-        if(REMAINING_TIME < 0 ){
+        if(OperationRene.REMAINING_TIME < 0 ){
             JOptionPane.showMessageDialog(null, 
                               "HAI PERSO. TEMPO SCADUTO.\nSEI STATO CATTURATO POLLASTRO.", 
                               "TEMPO SCADUTO", 
@@ -109,7 +107,6 @@ public class ExplorationGame extends BasicGameState {
             door2.shape.setLocation(0, 0);
             game.addState(new KeyPadGame());
             game.getState(StateID.KEYPAD_ID).init(container, game);
-
             game.enterState(StateID.KEYPAD_ID);
         }
         

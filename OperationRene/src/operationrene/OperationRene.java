@@ -1,70 +1,69 @@
 package operationrene;
 
-import java.util.Timer;
+import java.io.File;
 import operationrene.core.ExplorationGame;
-import operationrene.core.ReneGame;
 import operationrene.core.StateID;
 import operationrene.gui.MainWindow;
 import operationrene.gui.SettingWindow;
-import operationrene.minigame.KeyPadGame;
-import operationrene.minigame.WiresGame;
+import org.lwjgl.LWJGLUtil;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
-
-
 
 /**
  *
  * @author Rickma
  */
-
 public class OperationRene extends StateBasedGame {
-    
+
+    public static final int HEIGHT = 832;
+    public static final int WIDTH = 1536;
+    public static boolean FULLSCREEN = false;
+    static boolean SHOW_FPS = true;
+    public static final String TITLE = "Operation: R.E.N.E.";
+    public static final int FPS_LIMIT = 200;
+    public static boolean MUSIC_SOUND = true;
+    public static boolean EFFECT_SOUND = true;
     public static Music MUSIC;
     public static final String PATH_RESOURCES = "assets/sprites/";
     private static final String PATH_MUSIC = "assets/music/";
-    public static final int MAXIMUM_TIME= 120;
+    public static final int MAXIMUM_TIME = 120;
     public static int REMAINING_TIME;
     public static int CURRENT_TIME = 0;
-    
+    public static TrueTypeFont font;
 
     public OperationRene(String title) {
-        super(title+" Options");
+        super(title + " Options");
     }
 
-   
-   
-    
     @Override
     public void initStatesList(GameContainer gc) throws SlickException {
         this.addState(new MainWindow());
         this.addState(new SettingWindow());
         this.addState(new ExplorationGame());
-        this.addState(new WiresGame());
-        this.addState(new KeyPadGame());
         this.getState(StateID.EXPLORATION_ID).init(gc, this);
         this.getState(StateID.MENU_ID).init(gc, this);
         this.getState(StateID.SETTING_ID).init(gc, this);
-        this.getState(StateID.WIRES_ID).init(gc, this);
-        this.getState(StateID.KEYPAD_ID).init(gc, this);
         this.enterState(StateID.MENU_ID);
-        
-        
+        font = new TrueTypeFont(new java.awt.Font("Cominc Sans", java.awt.Font.BOLD, 28), false);
+
     }
 
     public static void main(String[] args) throws SlickException {
-
+        System.setProperty("org.lwjgl.librarypath", new File(System.getProperty("user.dir"), "lib/natives/" + LWJGLUtil.getPlatformName()).getAbsolutePath());
+        System.setProperty("net.java.games.input.librarypath", System.getProperty("org.lwjgl.librarypath"));
         AppGameContainer app = new AppGameContainer(new OperationRene("Rene"));
-        app.setDisplayMode(ReneGame.WIDTH, ReneGame.HEIGHT, ReneGame.FULLSCREEN);
         //app.setIcon(PATH_RESOURCES+"logo.png");
-        app.setTargetFrameRate(200);
-        MUSIC = new Music(PATH_MUSIC+"music2.ogg");
+        app.setDisplayMode(WIDTH, HEIGHT, FULLSCREEN);
+        app.setTargetFrameRate(FPS_LIMIT);
+        app.setShowFPS(SHOW_FPS);
+        MUSIC = new Music(PATH_MUSIC + "music2.ogg");
         MUSIC.loop();
         app.start();
 
     }
-       
+
 }

@@ -6,11 +6,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import javax.swing.JOptionPane;
-import static operationrene.OperationRene.CURRENT_TIME;
-import static operationrene.OperationRene.MAXIMUM_TIME;
-import static operationrene.OperationRene.REMAINING_TIME;
+import operationrene.OperationRene;
+import static operationrene.OperationRene.font;
 import static operationrene.core.ExplorationGame.GAMEOVER;
-import operationrene.core.ReneGame;
 import operationrene.core.StateID;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -65,7 +63,7 @@ public class WiresGame extends BasicGameState{
         
         Integer[] yPositions = new Integer[num];
         for (int i=0; i<num; i++){ 
-            yPositions[i]=(ReneGame.HEIGHT/2-90)+(180*i/(num-1));
+            yPositions[i]=(OperationRene.HEIGHT/2-90)+(180*i/(num-1));
         }
         
         List<Integer> yList = Arrays.asList(yPositions);
@@ -81,7 +79,7 @@ public class WiresGame extends BasicGameState{
         
         for (int i=0; i<num; i++){ 
            
-            this.arrayline[i]=new Line(ReneGame.WIDTH/2-280,(ReneGame.HEIGHT/2-90)+(180*i/(num-1)),ReneGame.WIDTH/2+280,yPositions[i]);
+            this.arrayline[i]=new Line(OperationRene.WIDTH/2-280,(OperationRene.HEIGHT/2-90)+(180*i/(num-1)),OperationRene.WIDTH/2+280,yPositions[i]);
             int c=rand.nextInt(this.arrayColors.length);
             lineColor[i]=arrayColors[c];
             this.colorPosition[c].add(i);
@@ -96,14 +94,14 @@ public class WiresGame extends BasicGameState{
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         
-        grphcs.drawImage(this.circuit,ReneGame.WIDTH/2-(this.circuit.getWidth()/2),ReneGame.HEIGHT/2-(this.circuit.getHeight()/2));
+        grphcs.drawImage(this.circuit,OperationRene.WIDTH/2-(this.circuit.getWidth()/2),OperationRene.HEIGHT/2-(this.circuit.getHeight()/2));
         
         grphcs.setColor(Color.gray);
         grphcs.setLineWidth(1);
         grphcs.fillRect(this.arrayline[0].getX1()-7, this.arrayline[0].getY1()-20, 20, 220);
         grphcs.fillRect(this.arrayline[0].getX2()-10, this.arrayline[0].getY1()-20, 20, 220);
         grphcs.setLineWidth(10);
-        grphcs.drawRect(ReneGame.WIDTH/2-(this.circuit.getWidth()/2), ReneGame.HEIGHT/2-(this.circuit.getHeight()/2), this.circuit.getWidth(), this.circuit.getHeight());
+        grphcs.drawRect(OperationRene.WIDTH/2-(this.circuit.getWidth()/2), OperationRene.HEIGHT/2-(this.circuit.getHeight()/2), this.circuit.getWidth(), this.circuit.getHeight());
         grphcs.setLineWidth(10);
         for(int i = this.arrayline.length-1; i>-1;i--){
             if(!this.deletedLines.contains(i)){
@@ -111,18 +109,17 @@ public class WiresGame extends BasicGameState{
                 grphcs.draw(this.arrayline[i]);
             }
         }
-        grphcs.setColor(Color.red);
-        grphcs.drawString("TIME REMAINING: " + REMAINING_TIME, 10, 50);
+        font.drawString(10, 50, "TIME REMAINING: " + OperationRene.REMAINING_TIME, Color.red);
         
     }
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         
-        CURRENT_TIME +=delta;
-        REMAINING_TIME = (MAXIMUM_TIME - CURRENT_TIME/1000);
+        OperationRene.CURRENT_TIME +=delta;
+        OperationRene.REMAINING_TIME = (OperationRene.MAXIMUM_TIME - OperationRene.CURRENT_TIME/1000);
         
-        if(REMAINING_TIME < 0 ){
+        if(OperationRene.REMAINING_TIME < 0 ){
             JOptionPane.showMessageDialog(null, 
                               "HAI PERSO. TEMPO SCADUTO.\nSEI STATO CATTURATO POLLASTRO.", 
                               "TEMPO SCADUTO", 
@@ -214,7 +211,7 @@ public class WiresGame extends BasicGameState{
                         
                     }else{
                         this.deletedLines.add(i);
-                        CURRENT_TIME += 5000;
+                        OperationRene.CURRENT_TIME += 5000;
                     }
 
                 }

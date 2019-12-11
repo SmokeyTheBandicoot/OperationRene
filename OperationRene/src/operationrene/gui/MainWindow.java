@@ -2,10 +2,7 @@ package operationrene.gui;
 
 
 import operationrene.OperationRene;
-import static operationrene.OperationRene.MAXIMUM_TIME;
-import static operationrene.OperationRene.REMAINING_TIME;
-import static operationrene.OperationRene.CURRENT_TIME;
-import static operationrene.OperationRene.MUSIC;
+import static operationrene.OperationRene.*;
 import static operationrene.core.ExplorationGame.GAMEOVER;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -13,7 +10,6 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import operationrene.core.StateID;
-import operationrene.core.ReneGame;
 import static operationrene.minigame.KeyPadGame.resultKeyPad;
 import org.newdawn.slick.Image;
 import static operationrene.minigame.WiresGame.resultWires;
@@ -40,9 +36,9 @@ public class MainWindow extends BasicGameState {
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         title = new Image("assets/sprites/controls/title.PNG");
         
-        play = new Button(ButtonType.PLAY, ReneGame.WIDTH/2, 450);
-        setting = new Button(ButtonType.SETTINGS, ReneGame.WIDTH/2,550);
-        exit = new Button(ButtonType.EXIT, ReneGame.WIDTH/2, 650);
+        play = new Button(ButtonType.PLAY, OperationRene.WIDTH/2, 450);
+        setting = new Button(ButtonType.SETTINGS, OperationRene.WIDTH/2,550);
+        exit = new Button(ButtonType.EXIT, OperationRene.WIDTH/2, 650);
     }
 
     @Override
@@ -50,7 +46,7 @@ public class MainWindow extends BasicGameState {
         play.render(grphcs);
         setting.render(grphcs);
         exit.render(grphcs);
-        title.draw(ReneGame.WIDTH/2 - title.getWidth()/2, 0);
+        title.draw(OperationRene.WIDTH/2 - title.getWidth()/2, 0);
         
         
 

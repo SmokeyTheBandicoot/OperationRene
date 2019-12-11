@@ -7,7 +7,6 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import operationrene.core.StateID;
 import operationrene.OperationRene;
-import operationrene.core.ReneGame;
 
 /**
  *
@@ -27,9 +26,9 @@ public class SettingWindow extends BasicGameState {
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-        musicButton = new Button(ButtonType.MUSIC_SOUND, ReneGame.WIDTH/2, 150);
-        effectMusicButton = new Button(ButtonType.EFFECT_SOUND, ReneGame.WIDTH/2, 250);
-        returnButton = new Button(ButtonType.RETURN, ReneGame.WIDTH/5, 650);
+        musicButton = new Button(ButtonType.MUSIC_SOUND, OperationRene.WIDTH/2, 150);
+        effectMusicButton = new Button(ButtonType.EFFECT_SOUND, OperationRene.WIDTH/2, 250);
+        returnButton = new Button(ButtonType.RETURN, OperationRene.WIDTH/5, 650);
 
     }
 
@@ -48,11 +47,11 @@ public class SettingWindow extends BasicGameState {
         returnButton.update(gc);
 
         if (returnButton.isClicked()) {
-            ReneGame.EFFECT_SOUND = effectMusicButton.getValue();
-            ReneGame.MUSIC_SOUND = musicButton.getValue();
-            if (OperationRene.MUSIC.playing() && ReneGame.MUSIC_SOUND == false) {
+            OperationRene.EFFECT_SOUND = effectMusicButton.getValue();
+            OperationRene.MUSIC_SOUND = musicButton.getValue();
+            if (OperationRene.MUSIC.playing() && OperationRene.MUSIC_SOUND == false) {
                 OperationRene.MUSIC.pause();
-            } else if (!OperationRene.MUSIC.playing() && ReneGame.MUSIC_SOUND == true) {
+            } else if (!OperationRene.MUSIC.playing() && OperationRene.MUSIC_SOUND == true) {
                 OperationRene.MUSIC.resume();
             }
             sbg.enterState(0);
