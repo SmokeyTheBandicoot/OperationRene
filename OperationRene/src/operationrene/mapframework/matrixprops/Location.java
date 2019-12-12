@@ -1,4 +1,4 @@
-package operationrene.mapframework;
+package operationrene.mapframework.matrixprops;
 
 // Class used to describe 2 parameters of an object: 
 

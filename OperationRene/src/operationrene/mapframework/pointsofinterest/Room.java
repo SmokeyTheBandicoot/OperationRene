@@ -1,5 +1,6 @@
 package operationrene.mapframework.pointsofinterest;
 
+import operationrene.mapframework.matrixprops.Size;
 import operationrene.mapframework.*;
 
 public class Room extends PointOfInterest {

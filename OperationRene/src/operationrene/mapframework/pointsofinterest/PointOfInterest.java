@@ -2,7 +2,7 @@ package operationrene.mapframework.pointsofinterest;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import operationrene.mapframework.Size;
+import operationrene.mapframework.matrixprops.Size;
 
 public abstract class PointOfInterest implements Serializable {
     

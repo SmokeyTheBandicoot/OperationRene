@@ -1,8 +1,9 @@
-package operationrene.mapframework;
+package operationrene.mapframework.levelbuilder;
 
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import operationrene.mapframework.LevelMap;
 
 public class LevelSerializer {
 
@@ -22,18 +23,6 @@ public class LevelSerializer {
         return lm;
     }
 
-    public static void saveLevel(LevelMap level, String path) {
-        try {
-            FileOutputStream fo = new FileOutputStream(path);
-            ObjectOutputStream oo = new ObjectOutputStream(fo);
-            
-            oo.writeObject(level);
-            oo.close();
-            
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-        }
-    }
     
     
 

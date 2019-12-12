@@ -1,24 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package operationrene.utils;
 
-import java.util.ArrayList;
+import operationrene.mapframework.matrixprops.Size;
+import operationrene.mapframework.matrixprops.Location;
 import operationrene.mapframework.levelbuilder.LevelBuilder;
-import java.util.HashMap;
-import java.util.List;
 import operationrene.alarm.MapAlarm;
 import operationrene.mapframework.*;
-import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- *
- * @author Miky Gargiulo
- */
 public class UtilsTest {
     
     public UtilsTest() {

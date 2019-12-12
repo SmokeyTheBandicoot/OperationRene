@@ -1,5 +1,6 @@
 package operationrene.mapframework;
 
+import operationrene.mapframework.matrixprops.Location;
 import java.io.Serializable;
 import java.util.*;
 import operationrene.mapframework.pointsofinterest.*;

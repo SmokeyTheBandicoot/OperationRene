@@ -7,8 +7,8 @@ package operationrene.mapframework.levelbuilder;
 
 import java.util.HashMap;
 import operationrene.mapframework.LevelMap;
-import operationrene.mapframework.Location;
-import operationrene.mapframework.Size;
+import operationrene.mapframework.matrixprops.Location;
+import operationrene.mapframework.matrixprops.Size;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import operationrene.mapframework.pointsofinterest.PointOfInterest.PointType;
 import operationrene.mapframework.pointsofinterest.*;

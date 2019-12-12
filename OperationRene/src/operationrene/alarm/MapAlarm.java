@@ -1,7 +1,7 @@
 package operationrene.alarm;
 
 import java.util.ArrayList;
-import operationrene.mapframework.Size;
+import operationrene.mapframework.matrixprops.Size;
 
 public abstract class MapAlarm {
 

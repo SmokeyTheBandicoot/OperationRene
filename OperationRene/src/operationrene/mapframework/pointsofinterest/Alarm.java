@@ -1,6 +1,6 @@
 package operationrene.mapframework.pointsofinterest;
 
-import operationrene.mapframework.Size;
+import operationrene.mapframework.matrixprops.Size;
 
 public class Alarm extends PointOfInterest {
     

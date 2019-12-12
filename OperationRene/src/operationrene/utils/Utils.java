@@ -1,8 +1,11 @@
 package operationrene.utils;
 
+import operationrene.mapframework.matrixprops.Size;
+import operationrene.mapframework.matrixprops.Rotation;
+import operationrene.mapframework.matrixprops.Location;
+import operationrene.mapframework.matrixprops.Flipping;
 import java.util.List;
 import operationrene.alarm.MapAlarm.Dimension;
-import static operationrene.mapframework.levelbuilder.LevelBuilder.*;
 import operationrene.mapframework.*;
 import operationrene.mapframework.pointsofinterest.Room.Direction;
 

@@ -1,9 +1,13 @@
 
 package operationrene.mapframework;
 
+import operationrene.mapframework.levelbuilder.LevelSerializer;
+import operationrene.mapframework.matrixprops.Size;
+import operationrene.mapframework.matrixprops.Location;
 import operationrene.utils.*;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import java.util.HashMap;
+import operationrene.mapframework.levelbuilder.LevelBuilder;
 import operationrene.mapframework.pointsofinterest.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -34,7 +38,7 @@ public class LevelSerializerTest {
         LevelMap level = new LevelMap(-1, matrix, unlocks, lockeds, other);
         
         String path = "assets/levels/level_test.dat";
-        LevelSerializer.saveLevel(level, path);
+        LevelBuilder.saveLevel(level, path);
         
         System.out.println("loadLevel");
         

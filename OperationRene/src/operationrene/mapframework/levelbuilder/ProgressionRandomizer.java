@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import operationrene.mapframework.LevelMap;
-import operationrene.mapframework.Location;
+import operationrene.mapframework.matrixprops.Location;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import operationrene.mapframework.pointsofinterest.PointOfInterest.PointType;
 import operationrene.datastructures.ProgressTree;

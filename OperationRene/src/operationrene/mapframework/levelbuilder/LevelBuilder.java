@@ -1,34 +1,53 @@
 package operationrene.mapframework.levelbuilder;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import operationrene.mapframework.matrixprops.Size;
+import operationrene.mapframework.matrixprops.Rotation;
+import operationrene.mapframework.matrixprops.Location;
+import operationrene.mapframework.matrixprops.Flipping;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import operationrene.mapframework.*;
 import operationrene.mapframework.pointsofinterest.*;
-import operationrene.mapframework.pointsofinterest.Room.Direction;
-import operationrene.utils.Utils;
+import operationrene.utils.*;
 
 public class LevelBuilder {
+
+    public static void saveLevel(LevelMap level, String path) {
+        try {
+            FileOutputStream fo = new FileOutputStream(path);
+            ObjectOutputStream oo = new ObjectOutputStream(fo);
+            oo.writeObject(level);
+            oo.close();
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+    }
     
-    private static final int NROOM = 10;
-    private static final int NCORRIDOR = 3;
     
     protected LevelMap buildingLevel;
     
     
-    public boolean buildLevel(){
+    public void buildLevel(){
         
         // Loads a random corridor
-        this.buildingLevel = LevelSerializer.loadLevel("assets/levels/proceduralgeneration/corridor"
-    +(new Integer(((new Random()).nextInt(NCORRIDOR)))).toString()+".dat");
+        ArrayList<String> corridors = FileUtils.listFilesInDirectory("assets/levels/proceduralgeneration/corridors");
+        int randomCorridor = RandomUtils.genRandomInt(0, corridors.size() - 1);
+        
+        // Loads the choosen corridor
+        this.buildingLevel = LevelSerializer.loadLevel(corridors.get(randomCorridor));
        
         // Gets the keyset of the Array
         HashMap <Location, Room> rooms = buildingLevel.getRooms();
         // Transforms it into an arraylist
         List<Location> roomArray = new ArrayList<>(rooms.keySet());
 
-        Random rand = new Random();
+        
+        // TODO: select safe room
+        
     
         // Iteration on all rooms
         for (int i = 0; i < buildingLevel.getRooms().size(); i++) {
@@ -37,31 +56,33 @@ public class LevelBuilder {
             Size levelsize = rooms.get(roomArray.get(i)).getSize();
             
             // To avoid generating the same room twice
-            ArrayList<Integer> memory = new ArrayList<>();
+            ArrayList<String> availableFiles = FileUtils.listFilesInDirectory("assets/levels/proceduralgeneration/rooms");
             
             // Generate a random int to randomly choose a room
-            while (true) {
-                int j = rand.nextInt(NROOM);
-        
-                // If room has already been chosen in a previous iteration
-                if(!memory.contains(j)) {
-                    // Save the choosed room
-                    memory.add(j);
-                    // Load level from memory
-                    LevelMap room = LevelSerializer.loadLevel("assets/levels/proceduralgeneration/room"+j+".dat");
+            while (!availableFiles.isEmpty()) {
+                
+                // Gets a random available file
+                int random = RandomUtils.genRandomInt(0, availableFiles.size() - 1);
+                String path = availableFiles.get(random);
+                
+                // Load level from memory
+                LevelMap room = LevelSerializer.loadLevel(path);
+                
+                // Removes path for already-choosen rooms
+                availableFiles.remove(path);
                     
-                    if (Utils.isGood((Utils.calculateRotation(rooms.get(roomArray.get(i)).getDir())), new Size(room.getMatrixHeight(), room.getMatrixWidth()), levelsize)){
+                if (Utils.isGood((Utils.calculateRotation(rooms.get(roomArray.get(i)).getDir())), new Size(room.getMatrixHeight(), room.getMatrixWidth()), levelsize)){
                     
                     //Rotation Room (variable for caching)
                     Rotation rot = Utils.calculateRotation(rooms.get(roomArray.get(i)).getDir());
                     if (rot == Rotation.DEG180){
-                        if (j % 2 == 0){
+                        if (RandomUtils.genRandomInt(0, 1) == 0){
                             room = Utils.rotateRoom(room,Rotation.DEG180);
                         } else {
                             room = Utils.flipRoom(room,Flipping.HORIZONTAL);
                         }    
                     } else if (Utils.calculateRotation(rooms.get(roomArray.get(i)).getDir()) == Rotation.NONE){
-                        if (j % 2 != 0){
+                        if (RandomUtils.genRandomInt(0, 1) != 0){
                             room = Utils.flipRoom(room,Flipping.VERTICAL);
                         }    
                     } else {
@@ -70,15 +91,12 @@ public class LevelBuilder {
                     
                     //adding the room at the matrix
                     addRoom(room, roomArray.get(i));
-                    
                     break;
                 }
-            }
-         
+            } 
         }   
     }
-    return true;
-}
+
     
     /**
      * Function responsible for overwriting the matrix and chaining the hashmaps
@@ -90,20 +108,6 @@ public class LevelBuilder {
         buildingLevel.getUnlockingObjects().putAll(lm.getUnlockingObjects());
         buildingLevel.getOtherObjects().putAll(lm.getOtherObjects());
         buildingLevel.setMatrix(Utils.addMatrix(buildingLevel.getMatrix(), lm.getMatrix(), loc));
-    }
-    
-    public enum Rotation {
-        NONE,
-        LEFT,
-        RIGHT,
-        DEG180
-    }
-    
-    public enum Flipping {
-        NONE,
-        HORIZONTAL,
-        VERTICAL,
-        BOTH
     }
     
 }

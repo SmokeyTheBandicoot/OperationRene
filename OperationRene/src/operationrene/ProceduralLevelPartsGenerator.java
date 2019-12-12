@@ -1,11 +1,14 @@
 package operationrene;
 
+import operationrene.mapframework.matrixprops.Size;
+import operationrene.mapframework.matrixprops.Location;
 import java.util.HashMap;
 import java.util.Random;
 import operationrene.alarm.MapAlarm;
 import operationrene.alarm.MapAlarm.Dimension;
 import operationrene.alarm.MapAlarmFactory;
 import operationrene.mapframework.*;
+import operationrene.mapframework.levelbuilder.LevelBuilder;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import operationrene.mapframework.pointsofinterest.*;
 import operationrene.mapframework.pointsofinterest.Room.Direction;
@@ -30,32 +33,32 @@ public class ProceduralLevelPartsGenerator {
         LevelMap lm;
           
         lm = generateSafeRoom1();
-        LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/safe1.dat");
+        LevelBuilder.saveLevel(lm, "assets/levels/proceduralgeneration/safe1.dat");
         
         lm = generateSafeRoom2();
-        LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/safe2.dat");
+        LevelBuilder.saveLevel(lm, "assets/levels/proceduralgeneration/safe2.dat");
         
         lm = generateSafeRoom3();
-        LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/safe3.dat");
+        LevelBuilder.saveLevel(lm, "assets/levels/proceduralgeneration/safe3.dat");
         
         lm = generateVerticalCorridor(8, 4, MAX_MATRIX_WIDTH / 2 - 5);
-        LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/corridor1.dat");
+        LevelBuilder.saveLevel(lm, "assets/levels/proceduralgeneration/corridor1.dat");
         
         lm = generateVerticalCorridor(8, 6, MAX_MATRIX_WIDTH / 2 - 5);
-        LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/corridor2.dat");
+        LevelBuilder.saveLevel(lm, "assets/levels/proceduralgeneration/corridor2.dat");
         
         lm = generateHorizontalCorridor(8, 4, MAX_MATRIX_HEIGHT / 2 - 5);
-        LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/corridor3.dat");
+        LevelBuilder.saveLevel(lm, "assets/levels/proceduralgeneration/corridor3.dat");
         
         lm = generateHorizontalCorridor(8, 6, MAX_MATRIX_HEIGHT / 2 - 5);
-        LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/corridor4.dat");
+        LevelBuilder.saveLevel(lm, "assets/levels/proceduralgeneration/corridor4.dat");
         
         final int offset = 8;
         for (int x = 0; x <= 14; x++) {
             lm = generateEasyRoom(offset + x, offset - 2 + x / 2, (new Random()).nextInt(offset - 3 + x/2) + 1, x + 3);
             String s = String.format("assets/levels/proceduralgeneration/room%dx%d_%d.dat", offset + x, offset - 2 + x / 2, x);
             System.out.println(s);
-            LevelSerializer.saveLevel(lm, s);
+            LevelBuilder.saveLevel(lm, s);
         }
         
     }

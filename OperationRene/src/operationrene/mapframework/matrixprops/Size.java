@@ -1,4 +1,4 @@
-package operationrene.mapframework;
+package operationrene.mapframework.matrixprops;
 
 import java.io.Serializable;
 
