@@ -12,8 +12,8 @@ public class PressureTilesAlarm extends MapAlarm {
     @Override
     public void randomizeS() {
         
-        blue = MAUtils.getRandomIntBetween(0, 5);
-        red = MAUtils.getRandomIntBetween(0, 5);
+        blue = RandomUtils.getRandomIntBetween(0, 5);
+        red = RandomUtils.getRandomIntBetween(0, 5);
         
         // Size S rules
         if(red > 3)
@@ -29,8 +29,8 @@ public class PressureTilesAlarm extends MapAlarm {
     @Override
     public void randomizeM() {
         
-        blue = MAUtils.getRandomIntBetween(0, 7);
-        red = MAUtils.getRandomIntBetween(0, 7);
+        blue = RandomUtils.getRandomIntBetween(0, 7);
+        red = RandomUtils.getRandomIntBetween(0, 7);
         
         // Size M rules
         if(red > 4)
@@ -46,8 +46,8 @@ public class PressureTilesAlarm extends MapAlarm {
     @Override
     public void randomizeL() {
         
-        blue = MAUtils.getRandomIntBetween(0, 10);
-        red = MAUtils.getRandomIntBetween(0, 10);
+        blue = RandomUtils.getRandomIntBetween(0, 10);
+        red = RandomUtils.getRandomIntBetween(0, 10);
         
         // Size L rules
         if(red > 5)
@@ -63,8 +63,8 @@ public class PressureTilesAlarm extends MapAlarm {
     @Override
     public void randomizeRS() {
         
-        blue = MAUtils.getRandomIntBetween(0, 6);
-        red = MAUtils.getRandomIntBetween(0, 6);
+        blue = RandomUtils.getRandomIntBetween(0, 6);
+        red = RandomUtils.getRandomIntBetween(0, 6);
         
         // Size RS rules
         if(red > blue)
@@ -78,8 +78,8 @@ public class PressureTilesAlarm extends MapAlarm {
     @Override
     public void randomizeRL() {
         
-        blue = MAUtils.getRandomIntBetween(0, 10);
-        red = MAUtils.getRandomIntBetween(0, 10);
+        blue = RandomUtils.getRandomIntBetween(0, 10);
+        red = RandomUtils.getRandomIntBetween(0, 10);
         
         //Size RL rules
         if(blue > red)

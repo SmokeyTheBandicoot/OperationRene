@@ -40,8 +40,8 @@ public class LevelSerializerTest {
         
         LevelMap loaded = LevelSerializer.loadLevel(path);
         
-        Utils.debugMatrix(loaded.getMatrix());
-        Utils.debugMatrix(level.getMatrix());
+        MatrixUtils.debugMatrix(loaded.getMatrix());
+        MatrixUtils.debugMatrix(level.getMatrix());
         
         Assert.assertArrayEquals(loaded.getMatrix(), level.getMatrix());
         System.out.println("matrix ok");

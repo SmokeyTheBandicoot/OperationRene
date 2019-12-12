@@ -3,6 +3,7 @@ package operationrene.alarm;
 import java.util.ArrayList;
 import operationrene.mapframework.Size;
 
+
 public abstract class MapAlarm {
 
     
@@ -121,7 +122,7 @@ public abstract class MapAlarm {
     public void updateColoredTile(int i, int j) {
         
         if(white > 0 && blue > 0 && red > 0) {
-            int newTile = MAUtils.getRandomIntBetween(1, 3);
+            int newTile = RandomUtils.getRandomIntBetween(1, 3);
             this.getMatrix()[i][j] = newTile;
             controlTile(newTile);
         }
@@ -153,16 +154,6 @@ public abstract class MapAlarm {
             case 3:
                 red--;
                 break;
-        }
-    }
-    
-    public void printMatrix() {
-        
-        for(int i = 0; i < this.getMatrix().length; i++) {
-            for(int j = 0; j < this.getMatrix()[0].length; j++)
-                System.out.print(this.getMatrix()[i][j] + " ");
-            
-            System.out.println("");
         }
     }
 }

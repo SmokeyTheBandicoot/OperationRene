@@ -9,7 +9,7 @@ package operationrene.alarm;
  *
  * @author Amministratore
  */
-public class MAUtils {
+public class RandomUtils {
     
     public static int getRandomIntBetween(int min, int max) {
         int x = (int) (Math.random()*((max - min) + 1) + min);
