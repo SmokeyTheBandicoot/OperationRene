@@ -118,4 +118,39 @@ public class UtilsTest {
         Assert.assertArrayEquals(room.getMatrix(), expResult.getMatrix());
     }
     
+    /**
+     * Test of addMatrix method, of class Utils.
+     */
+    @Test
+    public void testAddMatrix() {
+        System.out.println("addMatrix");
+        Integer [][] matrix = new Integer [][]{
+            {0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 1, 0, 0, 0, 0, 2, 0},
+            {0, 0, 1, 0, 0, 0, 2, 0},
+            {0, 0, 0, 1, 0, 0, 2, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0}
+        };
+        
+        Integer [][] paste = new Integer [][]{
+            {3, 3, 3},
+            {4, 4, 4},
+            {5, 5, 5}
+        };
+        
+        Integer [][] expected = new Integer [][]{
+            {0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 1, 3, 3, 3, 0, 2, 0},
+            {0, 0, 4, 4, 4, 0, 2, 0},
+            {0, 0, 5, 5, 5, 0, 2, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0}
+        };
+        
+        Integer [][] actual = Utils.addMatrix(matrix, paste, new Location(1, 2));     
+        Assert.assertArrayEquals(expected, actual);
+        
+    }
+    
+    
+    
 }

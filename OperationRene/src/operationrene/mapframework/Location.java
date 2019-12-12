@@ -19,6 +19,14 @@ public class Location implements Serializable {
         this(0, 0);
     }
     
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+    
     @Override
     public String toString() {
         return String.format("x: %d, y: %d", x, y);

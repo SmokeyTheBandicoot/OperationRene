@@ -1,13 +1,14 @@
 package operationrene.utils;
 
 import java.util.List;
-import operationrene.alarm.MapAlarm;
 import operationrene.alarm.MapAlarm.Dimension;
 import static operationrene.mapframework.levelbuilder.LevelBuilder.*;
 import operationrene.mapframework.*;
+import operationrene.mapframework.pointsofinterest.Room.Direction;
 
 public class Utils {
 
+    // Utils for rotation
     public static LevelMap rotateRoom(LevelMap room, Rotation r){
         
         Integer[][] mat = room.getMatrix();
@@ -87,8 +88,10 @@ public class Utils {
         return arr;
     }
     
+    
+    // Utils for size
     /**
-     * @param sizes The available sizes. The only assumption is that 
+     * @param dims The available dimensions. The only assumption is that 
      * width >= height for all sizes
      * @param availableSpace The rectangle where to set the size in
      * @param fitHeight Wheter or not to search for the tallest size to fit, 
@@ -127,5 +130,73 @@ public class Utils {
         
         return -1;
     }
+    
+    public static boolean checkSize(Size size1, Size size2){
+        if((size1.getHeight() < size2.getHeight()) || (size1.getWidth()) < size2.getWidth()){
+            return true;
+        } else 
+            return false;
+    }
+    
+    
+    
+    // Utils for matrix
+    /**
+     * Pastes a matrix into another matrix with a fixed offset
+     * @param levelMatrix Matrix where to paste roomMatrix
+     * @param roomMatrix Matrix to paste
+     * @param loc Offset
+     * @return levelMatrix with the roomMatrix pasted in at the desired location (offset)
+     */
+    public static Integer[][] addMatrix (Integer [][] levelMatrix, Integer [][] roomMatrix, Location loc){
+        for (int i = 0; i < roomMatrix.length; i++)
+            for (int j = 0; j < roomMatrix[0].length; j++){
+                levelMatrix[loc.getX() + i][loc.getY() + j] = roomMatrix[i][j];
+            }     
+        return levelMatrix;
+    }
+    
+    /**
+     * Prints a matrix in stdout
+     * @param matrix matrix to print
+     */
+    public static void debugMatrix(Integer [][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++)
+                System.out.print(matrix[i][j] + " ");
+            System.out.print("\n");
+        }
+        // System.out.println("\n\n");
+    }
+    
+    // Utils for Rotation
+    // check if the dimension of the room in good 
+    public static boolean isGood(Rotation r, Size level, Size room){
+        if(r == Rotation.NONE || r == Rotation.DEG180){
+            return checkSize(level, room);
+        } else {
+            return checkSize(room, level);
+        }
+    }
+    
+    /**
+     * Calculates the rotation to do, assuming that the initial rotation is LEFT
+     * @param leveldir Derired direction
+     * @return The rotation needed to achieve the desired direction
+     */
+    public static Rotation calculateRotation(Direction leveldir){
+        if (null != leveldir)switch (leveldir) {
+            case Up:
+                return Rotation.RIGHT;
+            case Down:
+                return Rotation.LEFT;
+            case Left:
+                return Rotation.NONE;
+            default:
+                return Rotation.DEG180;
+        }
+        return null;
+    }
+    
     
 }

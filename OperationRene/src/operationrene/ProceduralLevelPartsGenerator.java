@@ -10,6 +10,7 @@ import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import operationrene.mapframework.pointsofinterest.*;
 import operationrene.mapframework.pointsofinterest.Room.Direction;
 import operationrene.utils.Utils;
+import static operationrene.utils.Utils.debugMatrix;
 
 public class ProceduralLevelPartsGenerator {
 
@@ -74,15 +75,6 @@ public class ProceduralLevelPartsGenerator {
         return matrix;
     }
     
-    public static void debugMatrix(Integer [][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++)
-                System.out.print(matrix[i][j] + " ");
-            System.out.print("\n");
-        }
-        // System.out.println("\n\n");
-    }
-    
     private static void debugPoints(HashMap<Location, PointOfInterest> map) {
         for (Location key : map.keySet())
             System.out.println(key.toString() + " --> " + map.get(key).toString());
@@ -118,7 +110,7 @@ public class ProceduralLevelPartsGenerator {
         LevelMap lm = new LevelMap(-1, matrix, lockeds, unlocks, others, null);
         
         System.out.println("Room: SAFE_1");
-        debugMatrix(matrix);
+        Utils.debugMatrix(matrix);
         
         return lm;
     }

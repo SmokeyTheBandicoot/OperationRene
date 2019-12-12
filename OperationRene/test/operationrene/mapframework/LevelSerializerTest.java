@@ -1,7 +1,7 @@
 
 package operationrene.mapframework;
 
-import operationrene.ProceduralLevelPartsGenerator;
+import operationrene.utils.*;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import java.util.HashMap;
 import operationrene.mapframework.pointsofinterest.*;
@@ -40,8 +40,8 @@ public class LevelSerializerTest {
         
         LevelMap loaded = LevelSerializer.loadLevel(path);
         
-        ProceduralLevelPartsGenerator.debugMatrix(loaded.getMatrix());
-        ProceduralLevelPartsGenerator.debugMatrix(level.getMatrix());
+        Utils.debugMatrix(loaded.getMatrix());
+        Utils.debugMatrix(level.getMatrix());
         
         Assert.assertArrayEquals(loaded.getMatrix(), level.getMatrix());
         System.out.println("matrix ok");

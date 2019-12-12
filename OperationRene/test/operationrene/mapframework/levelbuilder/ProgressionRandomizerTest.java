@@ -12,7 +12,7 @@ import operationrene.mapframework.Size;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import operationrene.mapframework.pointsofinterest.PointOfInterest.PointType;
 import operationrene.mapframework.pointsofinterest.*;
-import operationrene.utils.ProgressTree;
+import operationrene.datastructures.ProgressTree;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

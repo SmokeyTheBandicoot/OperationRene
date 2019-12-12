@@ -8,7 +8,7 @@ import operationrene.mapframework.LevelMap;
 import operationrene.mapframework.Location;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import operationrene.mapframework.pointsofinterest.PointOfInterest.PointType;
-import operationrene.utils.ProgressTree;
+import operationrene.datastructures.ProgressTree;
 
 public class ProgressionRandomizer {
     
