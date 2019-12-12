@@ -22,7 +22,7 @@ public class FileUtils {
    
         if (dirFiles != null) {
             for (File child : dirFiles) {
-                files.add(child.getName());
+                files.add(path + "/" + child.getName());
             }
         }
         
