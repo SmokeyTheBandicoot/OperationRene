@@ -84,8 +84,8 @@ public class ExplorationGame extends BasicGameState {
         
         if(OperationRene.REMAINING_TIME < 0 ){
             JOptionPane.showMessageDialog(null, 
-                              "HAI PERSO. TEMPO SCADUTO.\nSEI STATO CATTURATO.", 
-                              "TEMPO SCADUTO", 
+                              "YOU LOSE. TIME OVER.\nYOU'VE BEEN CAUGHT.", 
+                              "TIME OVER", 
                               JOptionPane.WARNING_MESSAGE);
             GAMEOVER = true;
             game.enterState(0);
@@ -120,8 +120,8 @@ public class ExplorationGame extends BasicGameState {
         if (this.player.isCollided(this.door1)){
             if(resultKeyPad == 1){
             JOptionPane.showMessageDialog(null, 
-                              "COMPLIEMENTI HAI VINTO!", 
-                              "HAI VINTO", 
+                              "CONGRATULATIONS. YOU WON!", 
+                              "YOU WON", 
                               JOptionPane.WARNING_MESSAGE);
             GAMEOVER = true;
             game.enterState(StateID.MENU_ID);
@@ -129,8 +129,8 @@ public class ExplorationGame extends BasicGameState {
             }
             else {
                 JOptionPane.showMessageDialog(null, 
-                              "NON HAI COMPLETATO IL LIVELLO", 
-                              "ATTENZIONE", 
+                              "LEVEL NOT COMPLETED!", 
+                              "ATTENTION", 
                               JOptionPane.WARNING_MESSAGE);
                 player.posY+=20;
                 robot.keyRelease(KeyEvent.VK_RIGHT);

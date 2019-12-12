@@ -158,8 +158,8 @@ public class KeyPadGame extends BasicGameState {
         
         if(REMAINING_TIME < 0 ){
             JOptionPane.showMessageDialog(null, 
-                              "HAI PERSO. TEMPO SCADUTO.\nSEI STATO CATTURATO.", 
-                              "TEMPO SCADUTO", 
+                              "YOU LOSE. TIME OVER.\nYOU'VE BEEN CAUGHT.", 
+                              "TIME OVER", 
                               JOptionPane.WARNING_MESSAGE);
             GAMEOVER = true;
             sbg.enterState(0);
