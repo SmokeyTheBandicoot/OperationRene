@@ -12,8 +12,11 @@ import operationrene.mapframework.levelbuilder.LevelBuilder;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import operationrene.mapframework.pointsofinterest.*;
 import operationrene.mapframework.pointsofinterest.Room.Direction;
-import operationrene.utils.Utils;
-import static operationrene.utils.Utils.debugMatrix;
+import operationrene.utils.MatrixUtils;
+import static operationrene.utils.MatrixUtils.*;
+import operationrene.utils.SizeUtils;
+
+
 
 public class ProceduralLevelPartsGenerator {
 
@@ -113,7 +116,7 @@ public class ProceduralLevelPartsGenerator {
         LevelMap lm = new LevelMap(-1, matrix, lockeds, unlocks, others, null);
         
         System.out.println("Room: SAFE_1");
-        Utils.debugMatrix(matrix);
+        MatrixUtils.debugMatrix(matrix);
         
         return lm;
     }
@@ -225,7 +228,7 @@ public class ProceduralLevelPartsGenerator {
         final int maxH = height - 4;
         int curX = 0;
         
-        Dimension minigameDim = MapAlarm.getMinigameDimensions().get(Utils.getBiggestFittingSize(MapAlarm.getMinigameDimensions(), new Size(maxW, maxH), true));
+        Dimension minigameDim = MapAlarm.getMinigameDimensions().get(SizeUtils.getBiggestFittingSize(MapAlarm.getMinigameDimensions(), new Size(maxW, maxH), true));
 
         MapAlarmFactory factory = new MapAlarmFactory();
         factory.createRandomMapAlarm(minigameDim);

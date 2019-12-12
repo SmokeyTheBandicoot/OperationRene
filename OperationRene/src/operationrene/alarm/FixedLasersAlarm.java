@@ -5,6 +5,8 @@
  */
 package operationrene.alarm;
 
+import operationrene.utils.RandomUtils;
+
 /**
  *
  * @author Amministratore
@@ -22,8 +24,8 @@ public class FixedLasersAlarm extends MapAlarm {
     @Override
     public void randomizeS() {
         
-        blue = MAUtils.getRandomIntBetween(0, 5);
-        red = MAUtils.getRandomIntBetween(0, 5);
+        blue = RandomUtils.genRandomInt(0, 5);
+        red = RandomUtils.genRandomInt(0, 5);
         
         // Size S rules
         if(red > 2)
@@ -37,8 +39,8 @@ public class FixedLasersAlarm extends MapAlarm {
     @Override
     public void randomizeM() {
         
-        blue = MAUtils.getRandomIntBetween(0, 7);
-        red = MAUtils.getRandomIntBetween(0, 7);
+        blue = RandomUtils.genRandomInt(0, 7);
+        red = RandomUtils.genRandomInt(0, 7);
         
         // Size M rules
         if(blue > 1 && blue < 6)
@@ -52,8 +54,8 @@ public class FixedLasersAlarm extends MapAlarm {
     @Override
     public void randomizeL() {
         
-        blue = MAUtils.getRandomIntBetween(0, 10);
-        red = MAUtils.getRandomIntBetween(0, 10);
+        blue = RandomUtils.genRandomInt(0, 10);
+        red = RandomUtils.genRandomInt(0, 10);
         
         // Size L rules
         if(red > 6)
@@ -67,8 +69,8 @@ public class FixedLasersAlarm extends MapAlarm {
     @Override
     public void randomizeRS() {
         
-        blue = MAUtils.getRandomIntBetween(0, 6);
-        red = MAUtils.getRandomIntBetween(0, 6);
+        blue = RandomUtils.genRandomInt(0, 6);
+        red = RandomUtils.genRandomInt(0, 6);
         
         // Size RS rules
         if(red % 2 == 0)
@@ -80,8 +82,8 @@ public class FixedLasersAlarm extends MapAlarm {
     @Override
     public void randomizeRL() {
         
-        blue = MAUtils.getRandomIntBetween(0, 10);
-        red = MAUtils.getRandomIntBetween(0, 10);
+        blue = RandomUtils.genRandomInt(0, 10);
+        red = RandomUtils.genRandomInt(0, 10);
         
         // Size RL rules
         if(blue % 2 == 0)

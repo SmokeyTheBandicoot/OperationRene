@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package operationrene.alarm;
 
+import operationrene.utils.RandomUtils;
+
 /**
- *
- * @author Amministratore
+ * 
+ * @author DonPedro
  */
 public class PulsatingLasersAlarm extends MapAlarm {
     
@@ -30,7 +27,7 @@ public class PulsatingLasersAlarm extends MapAlarm {
     @Override
     public void randomizeS() {
         
-        int config = MAUtils.getRandomIntBetween(1, 3);
+        int config = RandomUtils.genRandomInt(1, 3);
         
         switch(config) {
             case 1:
@@ -48,7 +45,7 @@ public class PulsatingLasersAlarm extends MapAlarm {
     @Override
     public void randomizeM() {
         
-        int config = MAUtils.getRandomIntBetween(1, 3);
+        int config = RandomUtils.genRandomInt(1, 3);
         
         switch(config) {
             case 1:
@@ -66,7 +63,7 @@ public class PulsatingLasersAlarm extends MapAlarm {
     @Override
     public void randomizeL() {
         
-        int config = MAUtils.getRandomIntBetween(1, 3);
+        int config = RandomUtils.genRandomInt(1, 3);
         
         switch(config) {
             case 1:
@@ -84,7 +81,7 @@ public class PulsatingLasersAlarm extends MapAlarm {
     @Override
     public void randomizeRS() {
         
-        int config = MAUtils.getRandomIntBetween(1, 2);
+        int config = RandomUtils.genRandomInt(1, 2);
         
         switch(config) {
             case 1:
@@ -99,7 +96,7 @@ public class PulsatingLasersAlarm extends MapAlarm {
     @Override
     public void randomizeRL() {
         
-        int config = MAUtils.getRandomIntBetween(1, 2);
+        int config = RandomUtils.genRandomInt(1, 2);
         
         switch(config) {
             case 1:
