@@ -79,6 +79,22 @@ public class GameMap {
         
         mappa.setTileId(x, y, layer, id);
     }
+    public void unlockroom(int x, int y,int xdim, int ydim){
+        for(int i=x;i<x+xdim;i++){
+            for(int j=y;j<y+ydim;j++){
+               for(int z=0;z<=2;z++){
+                        mappa.setTileId(i,j,3,mappa.getTileId(i, j, z));
+               }
+            }
+        }
+    }
+    public void drawblackroom(int x,int y, int xdim,int ydim){
+        for(int i=x;i<x+xdim;i++){
+            for(int j=y;j<y+ydim;j++){
+               mappa.setTileId(i,j,3,69);
+            }
+        }
+    }
     /*
     public void drawMap(){
        for(int i=0;i<matrix.length;i++){

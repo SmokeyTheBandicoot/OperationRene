@@ -47,6 +47,7 @@ public class ExplorationGame extends BasicGameState {
                     }
         this.player = new Player(PATH_RESOURCES + "character/Rene.png", 100, PlayerState.DOWN_STOP, OperationRene.WIDTH / 8+50, OperationRene.HEIGHT / 8 + (4 * 32), 32, 40, 1);
         this.map = new GameMap("assets/tilesets/Livello1.tmx", OperationRene.WIDTH, OperationRene.HEIGHT, 0, 0);
+        this.map.drawblackroom(16, 5, 25, 7);
         this.door1 = new OggettoProva(336,160, 32, 16);
         this.door2 = new OggettoProva(1040, 416, 32, 16);
         this.safe = new OggettoProva(512, 150, 80, 80);
@@ -160,10 +161,12 @@ public class ExplorationGame extends BasicGameState {
             //minigame superato
             
             door2.shape.setLocation(0, 0);
+            map.unlockroom(16, 5, 25, 7);
             map.setTileId(32, 12, 1, 160);
             map.setTileId(33, 12, 1, 160);
             map.setTileId(32, 12, 0, 160);
             map.setTileId(33, 12, 0, 160);
+            
             //map.drawroom(14 , 14, 33, 11,92);
             
             resultWires = 0;
@@ -175,10 +178,10 @@ public class ExplorationGame extends BasicGameState {
         
         if (resultKeyPad == 1){
             safe.shape.setLocation(0,0);
-            map.setTileId(16, 5, 2, 183);
-            map.setTileId(17, 5, 2, 184);
-            map.setTileId(16, 6, 2, 193);
-            map.setTileId(17, 6, 2, 194);
+            map.setTileId(16, 5, 3, 183);
+            map.setTileId(17, 5, 3, 184);
+            map.setTileId(16, 6, 3, 193);
+            map.setTileId(17, 6, 3, 194);
             map.setTileId(10, 4, 1, 160);
             map.setTileId(11, 4, 1, 160);
             goal = "Escape from the building";
