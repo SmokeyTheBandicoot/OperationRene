@@ -10,7 +10,7 @@ public class GameMap {
     private int height;
     private int posX;
     private int posY;
-    Integer[][] matrix = new Integer [][]{
+    /*Integer[][] matrix = new Integer [][]{
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
@@ -37,7 +37,7 @@ public class GameMap {
             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
-        };
+        };*/
 
     public GameMap(String mappaURL, int width, int height, int posX, int posY) throws SlickException {
         this.mappa = new TiledMap(mappaURL);
@@ -55,18 +55,19 @@ public class GameMap {
 
     public boolean checkCollision(int posX, int posY, int width, int height) {
 
-        int objectLayer = mappa.getLayerIndex("objects");
-        if (mappa.getTileId(posX / 32, posY / 32, objectLayer) != 92) {//ANGOLO ALTO-SINISTRA
+        int objectLayer = mappa.getLayerIndex("floor");
+        int test = mappa.getTileId(posX/32, posY/32, objectLayer);
+        if (mappa.getTileId(posX / 32, posY / 32, objectLayer) != 160) {//ANGOLO ALTO-SINISTRA
             return true;
-        } else if (mappa.getTileId((posX + width) / 32, (posY + height) / 32, objectLayer) != 92) {//ANGOLO BASSO-DESTRA
+        } else if (mappa.getTileId((posX + width) / 32, (posY + height) / 32, objectLayer) != 160) {//ANGOLO BASSO-DESTRA
             return true;
-        } else if (mappa.getTileId((posX + width) / 32, posY / 32, objectLayer) != 92) {//ANGOLO ALTO-DESTRA
+        } else if (mappa.getTileId((posX + width) / 32, posY / 32, objectLayer) != 160) {//ANGOLO ALTO-DESTRA
             return true;
-        } else if (mappa.getTileId(posX / 32, (posY + height) / 32, objectLayer) != 92) {//ANGOLO BASSO-SINISTRA
+        } else if (mappa.getTileId(posX / 32, (posY + height) / 32, objectLayer) != 160) {//ANGOLO BASSO-SINISTRA
             return true;
-        } else if (mappa.getTileId(posX / 32, (posY + (height/2)) / 32, objectLayer) != 92) {//CENTRO SINISTRA
+        } else if (mappa.getTileId(posX / 32, (posY + (height/2)) / 32, objectLayer) != 160) {//CENTRO SINISTRA
             return true;
-        } else if (mappa.getTileId((posX + width) / 32, (posY + (height/2)) / 32, objectLayer) != 92) {//CENTRO DESTRA
+        } else if (mappa.getTileId((posX + width) / 32, (posY + (height/2)) / 32, objectLayer) != 160) {//CENTRO DESTRA
             return true;    
         } else {
             return false;
@@ -78,7 +79,7 @@ public class GameMap {
         
         mappa.setTileId(x, y, layer, id);
     }
-    
+    /*
     public void drawMap(){
        for(int i=0;i<matrix.length;i++){
            for (int j = 0; j < matrix[0].length; j++) {
@@ -95,7 +96,9 @@ public class GameMap {
            }
        }
     }
+    */
     
+    /*
     public void drawroom(int x,int y, int xdim,int ydim,int id){
         for(int i=x;i<x+xdim;i++){
             for(int j=y;j<y+ydim;j++){
@@ -103,5 +106,5 @@ public class GameMap {
             }
         }
     }
-
+*/
 }

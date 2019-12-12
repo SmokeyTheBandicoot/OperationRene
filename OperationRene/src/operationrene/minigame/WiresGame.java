@@ -124,7 +124,7 @@ public class WiresGame extends BasicGameState{
         
         if(OperationRene.REMAINING_TIME < 0 ){
             JOptionPane.showMessageDialog(null, 
-                              "HAI PERSO. TEMPO SCADUTO.\nSEI STATO CATTURATO POLLASTRO.", 
+                              "HAI PERSO. TEMPO SCADUTO.\nSEI STATO CATTURATO.", 
                               "TEMPO SCADUTO", 
                               JOptionPane.WARNING_MESSAGE);
             GAMEOVER = true;

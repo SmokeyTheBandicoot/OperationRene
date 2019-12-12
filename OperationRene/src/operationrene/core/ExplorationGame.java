@@ -1,5 +1,10 @@
 package operationrene.core;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
@@ -19,8 +24,11 @@ public class ExplorationGame extends BasicGameState {
     private GameMap map = null;
     private InteractiveObject door1 = null;
     private InteractiveObject door2 = null;
+    private InteractiveObject safe = null;
     public static boolean GAMEOVER = false;
-    
+    public Input input;
+    private Robot robot;
+    private String goal = "Steal the safe!";
 
     
 
@@ -31,13 +39,28 @@ public class ExplorationGame extends BasicGameState {
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
-                this.player = new Player(PATH_RESOURCES + "character/Rene.png", 100, PlayerState.DOWN_STOP, OperationRene.WIDTH / 8, OperationRene.HEIGHT / 8 + (4 * 32), 32, 40, 1);
+         try {
+                        robot = new Robot();
+                        
+                    } catch (AWTException ex) {
+                        Logger.getLogger(ExplorationGame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+        this.player = new Player(PATH_RESOURCES + "character/Rene.png", 100, PlayerState.DOWN_STOP, OperationRene.WIDTH / 8+50, OperationRene.HEIGHT / 8 + (4 * 32), 32, 40, 1);
         this.map = new GameMap("assets/tilesets/Livello1.tmx", OperationRene.WIDTH, OperationRene.HEIGHT, 0, 0);
-        this.door1 = new OggettoProva(400, 688, 16, 32);
-        this.door2 = new OggettoProva(1136, 448, 32, 16);
-        this.map.drawMap();
-        this.map.drawroom(14, 1, 33, 12,69);
-        this.map.drawroom(14, 14, 33, 11,69);
+        this.door1 = new OggettoProva(336,160, 32, 16);
+        this.door2 = new OggettoProva(1040, 416, 32, 16);
+        this.safe = new OggettoProva(512, 150, 80, 80);
+        if(input != null){
+            robot.keyRelease(KeyEvent.VK_RIGHT);
+                robot.keyRelease(KeyEvent.VK_LEFT);
+                robot.keyRelease(KeyEvent.VK_UP);
+                robot.keyRelease(KeyEvent.VK_DOWN);
+                   
+            
+        }
+        //this.map.drawMap();
+        //this.map.drawroom(14, 1, 33, 12,69);
+        //this.map.drawroom(14, 14, 33, 11,69);
 
     }
 
@@ -48,6 +71,7 @@ public class ExplorationGame extends BasicGameState {
         this.player.draw();
         g.draw(new Rectangle(1, 1, OperationRene.WIDTH - 1, OperationRene.HEIGHT - 1));
         font.drawString(10, 50, "TIME REMAINING: " + OperationRene.REMAINING_TIME, Color.red);
+        font.drawString(10, 80, "GOAL: "+goal, Color.green);
 
     }
 
@@ -59,14 +83,14 @@ public class ExplorationGame extends BasicGameState {
         
         if(OperationRene.REMAINING_TIME < 0 ){
             JOptionPane.showMessageDialog(null, 
-                              "HAI PERSO. TEMPO SCADUTO.\nSEI STATO CATTURATO POLLASTRO.", 
+                              "HAI PERSO. TEMPO SCADUTO.\nSEI STATO CATTURATO.", 
                               "TEMPO SCADUTO", 
                               JOptionPane.WARNING_MESSAGE);
             GAMEOVER = true;
             game.enterState(0);
             }
 
-        Input input = container.getInput();
+        input = container.getInput();
 
         if (input.isKeyDown(CommandCode.LEFT)) {
             if (!this.map.checkCollision(this.player.posX - 1, this.player.posY, this.player.width, this.player.height)) {
@@ -91,20 +115,42 @@ public class ExplorationGame extends BasicGameState {
                 this.player.update(CommandCode.NONE);
             }
         }
-
+        
         if (this.player.isCollided(this.door1)){
-            door1.shape.setLocation(0, 0);
+            if(resultKeyPad == 1){
+            JOptionPane.showMessageDialog(null, 
+                              "COMPLIEMENTI HAI VINTO!", 
+                              "HAI VINTO", 
+                              JOptionPane.WARNING_MESSAGE);
+            GAMEOVER = true;
+            game.enterState(StateID.MENU_ID);
+            
+            }
+            else {
+                JOptionPane.showMessageDialog(null, 
+                              "NON HAI COMPLETATO IL LIVELLO", 
+                              "ATTENZIONE", 
+                              JOptionPane.WARNING_MESSAGE);
+                player.posY+=20;
+                robot.keyRelease(KeyEvent.VK_RIGHT);
+                robot.keyRelease(KeyEvent.VK_LEFT);
+                robot.keyRelease(KeyEvent.VK_UP);
+                robot.keyRelease(KeyEvent.VK_DOWN);
+                
+               
+            }
+        }
+
+        if (this.player.isCollided(this.door2)){
+            door2.shape.setLocation(0, 0);
             game.addState(new WiresGame());
             game.getState(StateID.WIRES_ID).init(container, game);
             game.enterState(StateID.WIRES_ID);
-        } else {
-            this.door1.interact(container);
         }
         
-        if (this.player.isCollided(this.door2)){
+        if (this.player.isCollided(this.safe)){
             // CODICE SECONDO MINIGIOCO
-            System.out.println("Secondo minigioco");
-            door2.shape.setLocation(0, 0);
+            safe.shape.setLocation(0, 0);
             game.addState(new KeyPadGame());
             game.getState(StateID.KEYPAD_ID).init(container, game);
             game.enterState(StateID.KEYPAD_ID);
@@ -113,11 +159,12 @@ public class ExplorationGame extends BasicGameState {
         if (resultWires == 1){
             //minigame superato
             
-            door1.shape.setX(0);
-            door1.shape.setY(0);
-            map.setTileId(13, 21, 1, 92);
-            map.setTileId(13, 22, 1, 92);
-            map.drawroom(14 , 14, 33, 11,92);
+            door2.shape.setLocation(0, 0);
+            map.setTileId(32, 12, 1, 160);
+            map.setTileId(33, 12, 1, 160);
+            map.setTileId(32, 12, 0, 160);
+            map.setTileId(33, 12, 0, 160);
+            //map.drawroom(14 , 14, 33, 11,92);
             
             resultWires = 0;
         }
@@ -127,11 +174,16 @@ public class ExplorationGame extends BasicGameState {
         }
         
         if (resultKeyPad == 1){
-            door2.shape.setLocation(0,0);
-            map.setTileId(35, 13, 1, 92);
-            map.setTileId(36, 13, 1, 92);
-            map.drawroom(14, 1, 33, 12, 92);
-            resultKeyPad = 0;
+            safe.shape.setLocation(0,0);
+            map.setTileId(16, 5, 2, 183);
+            map.setTileId(17, 5, 2, 184);
+            map.setTileId(16, 6, 2, 193);
+            map.setTileId(17, 6, 2, 194);
+            map.setTileId(10, 4, 1, 160);
+            map.setTileId(11, 4, 1, 160);
+            goal = "Escape from the building";
+            //map.drawroom(14, 1, 33, 12, 92);
+            //resultKeyPad = 0;
         }
         
 
