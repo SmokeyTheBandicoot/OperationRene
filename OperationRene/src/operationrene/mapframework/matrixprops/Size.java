@@ -27,5 +27,14 @@ public class Size implements Serializable {
         this.height = height;
     }
     
+    public int getArea() {
+        return width * height;
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("width: %d; height: %d", width, height);
+    }
+    
     
 }

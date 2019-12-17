@@ -1,18 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package operationrene.utils;
 
 import operationrene.mapframework.LevelMap;
-import operationrene.mapframework.pointsofinterest.Room;
 import operationrene.mapframework.matrixprops.*;
 
-/**
- *
- * @author Giuse
- */
 public class RoomUtils {
     
     // Utils for rotation
@@ -100,14 +90,14 @@ public class RoomUtils {
      * @param leveldir Derired direction
      * @return The rotation needed to achieve the desired direction
      */
-    public static Rotation calculateRotation(Room.Direction leveldir){
+    public static Rotation calculateRotation(Direction leveldir){
         if (leveldir != null)
             switch (leveldir) {
-                case Up:
+                case UP:
                     return Rotation.RIGHT;
-                case Down:
+                case DOWN:
                     return Rotation.LEFT;
-                case Left:
+                case LEFT:
                     return Rotation.NONE;
                 default:
                     return Rotation.DEG180;

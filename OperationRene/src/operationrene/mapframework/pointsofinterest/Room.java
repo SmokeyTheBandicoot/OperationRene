@@ -1,24 +1,15 @@
 package operationrene.mapframework.pointsofinterest;
 
-import operationrene.mapframework.matrixprops.Size;
-import operationrene.mapframework.*;
+import java.io.Serializable;
+import operationrene.mapframework.matrixprops.*;
 
-public class Room extends PointOfInterest {
+public class Room extends PointOfInterest implements Serializable {
     
-    protected Size size;
     protected Direction dir;
     
     public Room(int roomID, Size size, Direction dir) {
         super(PointType.Room, roomID, new int []{-1}, size);
         this.dir = dir;
-    }
-
-    public Size getSize() {
-        return size;
-    }
-
-    public void setSize(Size size) {
-        this.size = size;
     }
 
     public Direction getDir() {
@@ -27,13 +18,6 @@ public class Room extends PointOfInterest {
 
     public void setDir(Direction dir) {
         this.dir = dir;
-    }
-    
-    public enum Direction {
-        Right,
-        Left,
-        Up,
-        Down
     }
     
 }

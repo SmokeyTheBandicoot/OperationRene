@@ -48,7 +48,7 @@ public class ExplorationGame extends BasicGameState {
         this.player = new Player(PATH_RESOURCES + "character/Rene.png", 100, PlayerState.DOWN_STOP, OperationRene.WIDTH / 8+50, OperationRene.HEIGHT / 8 + (4 * 32), 32, 40, 1);
         this.map = new GameMap("assets/tilesets/Livello1.tmx", OperationRene.WIDTH, OperationRene.HEIGHT, 0, 0);
         this.map.drawblackroom(16, 5, 25, 7);
-        this.door1 = new OggettoProva(336,160, 32, 16);
+        this.door1 = new OggettoProva(336, 160, 32, 16);
         this.door2 = new OggettoProva(1040, 416, 32, 16);
         this.safe = new OggettoProva(512, 150, 80, 80);
         if(input != null){

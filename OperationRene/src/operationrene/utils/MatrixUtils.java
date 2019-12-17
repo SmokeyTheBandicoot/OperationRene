@@ -18,14 +18,62 @@ public class MatrixUtils {
      * @param levelMatrix Matrix where to paste roomMatrix
      * @param roomMatrix Matrix to paste
      * @param loc Offset
+     * @param originSize Max size of the rectangle where to paste
+     * @param anchor Where to paste the matrix. UP = UpLeft corner, RIGHT = UpRight, DOWN = BottomRight, LEFT = BottomLeft
      * @return levelMatrix with the roomMatrix pasted in at the desired location (offset)
      */
-    public static Integer[][] addMatrix (Integer [][] levelMatrix, Integer [][] roomMatrix, Location loc){
-        for (int i = 0; i < roomMatrix.length; i++)
-            for (int j = 0; j < roomMatrix[0].length; j++){
-                levelMatrix[loc.getX() + i][loc.getY() + j] = roomMatrix[i][j];
+    public static Integer[][] pasteMatrix (Integer [][] levelMatrix, Integer [][] roomMatrix, Location loc, Size originSize, Direction anchor){
+        
+        /*
+        Location offSetLocation;
+        if (anchor == Direction.UP) offSetLocation = loc;
+        if (anchor == Direction.RIGHT) offSetLocation = new Location(loc.getX() + originSize.getWidth() - roomMatrix[0].length, loc.getY());
+        if (anchor == Direction.DOWN) offSetLocation = new Location(loc.getY(), loc.getY() + originSize.getHeight() - roomMatrix.length);
+        else offSetLocation = new Location(loc.getX() + originSize.getWidth() - roomMatrix[0].length, loc.getY() + originSize.getHeight() - roomMatrix.length);
+        
+        
+        for (int y = 0; y < roomMatrix[0].length; y++)
+            for (int x = 0; x < roomMatrix.length; x++){
+                int curY = offSetLocation.getY() + y;
+                int curX = offSetLocation.getX() + x;
+                try {
+                    levelMatrix[curY][curX] = roomMatrix[y][x];
+                } catch (Exception ex) {
+                    System.out.println("curY: " + curY + " curX: " + curX);
+                }
+                         
             }     
         return levelMatrix;
+        */
+        
+        Location offsetLoc = getOffsetLoc(loc, new Size(roomMatrix[0].length, roomMatrix.length), originSize, anchor);
+        
+        for (int y = 0; y < roomMatrix.length; y++) {
+            for (int x = 0; x < roomMatrix[0].length; x++) {
+                levelMatrix[offsetLoc.getY() + y][offsetLoc.getX() + x] = roomMatrix[y][x];
+            }
+        }
+        
+        return levelMatrix;
+    }
+    
+    private static Location getOffsetLoc(Location loc, Size matrixSize, Size originSize, Direction dir) {
+        
+        if (null != dir) switch (dir) {
+            case LEFT:
+                return loc;
+            case UP:
+                return loc;
+            case DOWN:
+                int Yoffset = originSize.getHeight() - matrixSize.getHeight();
+                return new Location(loc.getX(), loc.getY() + Yoffset);
+            case RIGHT:
+                int Xoffset = originSize.getWidth() - matrixSize.getWidth();
+                return new Location(loc.getX() + Xoffset, loc.getY());
+            default:
+                return null;
+        }
+        return null;
     }
     
     /**
