@@ -1,9 +1,8 @@
  package operationrene.core;
 
-import java.util.ArrayList;
 import operationrene.mapframework.pointsofinterest.Door;
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.state.StateBasedGame;
 
 public class DoorElement extends Element implements InteractiveObjectInterface{
 
@@ -15,34 +14,35 @@ public class DoorElement extends Element implements InteractiveObjectInterface{
         this.info = info;
         this.posX = posX;
         this.posY = posY;
-        this.width = this.info.getSize().getWidth();
-        this.height = this.info.getSize().getHeight();
-        this.shape = new Rectangle(posX-5, posY-5, width+10, height+10);
+        this.width = this.info.getSize().getWidth() * 32;
+        this.height = this.info.getSize().getHeight() * 32;
+        this.shape = new Rectangle((posX*32)-5, (posY*32)-5, this.width+10, this.height+10);
         
     }
     
     @Override
-    public void interact(ArrayList<Integer> keys) {
+    public void interact(StateBasedGame sbg) {
 
-        boolean flag = true;
+        ExplorationGame game = (ExplorationGame)sbg.getState(StateID.EXPLORATION_ID);
         
-        int[] requiredKeys = this.info.getRequiredKeysID();
-        for(int k : requiredKeys){
+        if((this.info.getRequiredKeysID()==null)||(game.getKeys().containsAll(this.info.getRequiredKeysID()))){
             
-            if(!keys.contains(k)){
-                flag = false;
-                break;
+            for(int x = this.posX;x<(this.posX+this.info.getSize().getWidth());x++){
+                
+                for(int y = this.posY;y<(this.posY+this.info.getSize().getHeight());y++){
+                
+                    game.getMap().deleteTile(x, y, "walls");
+
+                }
+                
             }
             
-        }
-        
-        if (flag){
+            game.getMap().getElements().remove(this);
             
-            // aprire la porta, cancellare le caselle
             
         }else{
-            //porta resta chiusa
-            System.out.println("PORTA BLOCCATA");
+            System.out.println("False");
+            
         }
         
     }

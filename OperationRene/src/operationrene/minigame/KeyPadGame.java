@@ -144,16 +144,6 @@ public class KeyPadGame extends MinigameState {
         font.drawString(10, 50, "TIME REMAINING: " + this.timer.getTime(), Color.red);
 
     }
-
-    @Override
-    public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-              
-        super.update(gc, sbg, delta);
-        
-        if (this.completed)
-            sbg.enterState(StateID.EXPLORATION_ID);
-        
-    }
     
     @Override
     public void  mouseReleased(int button, int x, int y){

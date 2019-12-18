@@ -5,7 +5,7 @@ import operationrene.mapframework.matrixprops.Size;
 public class Alarm extends PointOfInterest {
     
     public Alarm(int roomID, Size size) {
-        super(PointType.AlarmZone, roomID, new int []{-1}, size);
+        super(PointType.AlarmZone, roomID, null, size);
     }
     
     @Override

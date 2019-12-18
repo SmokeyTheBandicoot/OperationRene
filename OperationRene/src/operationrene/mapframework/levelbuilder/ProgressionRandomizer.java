@@ -174,16 +174,16 @@ public class ProgressionRandomizer {
         // which are unlocking object by construction of the ProgressTree
         if (locked.left == null && locked.right == null) {
             // Otherwise it is empty, so it is unlocked
-            lm.getLockedObjects().get(locked.key).setRequiredKeysID(new int[]{});
+            //lm.getLockedObjects().get(locked.key).setRequiredKeysID(new int[]{});------------------------------------------------------------------------------------da int[] ad arraylist
             return;
         }
         
         // Unlock objects only have 1 requiredKeyID
-        ids.add(lm.getUnlockingObjects().get(locked.left.key).getRequiredKeysID()[0]);
+        //ids.add(lm.getUnlockingObjects().get(locked.left.key).getRequiredKeysID()[0]);------------------------------------------------------------------------------------da int[] ad arraylist
         if (locked.right != null)
             // Unlock objects only have 1 requiredKeyID
-            ids.add(lm.getUnlockingObjects().get(locked.right.key).getRequiredKeysID()[0]);
-        
+            //ids.add(lm.getUnlockingObjects().get(locked.right.key).getRequiredKeysID()[0]);------------------------------------------------------------------------------------da int[] ad arraylist
+            System.out.println("CANCELLA QUESTA STAMPA SERVE SOLO PER NON GENERARE ERRORE");
         // Transform ArrayList<Integer> into int[]
         int[] reqIds = new int[ids.size()];
         for (int x = 0; x < ids.size(); x++){
@@ -191,7 +191,7 @@ public class ProgressionRandomizer {
         }
         
         // Set the req keys ID for the locked object
-        lm.getLockedObjects().get(locked.key).setRequiredKeysID(reqIds);
+        //lm.getLockedObjects().get(locked.key).setRequiredKeysID(reqIds);------------------------------------------------------------------------------------da int[] ad arraylist
         
         // Then do this recursively
         setIDs(locked.left.left);

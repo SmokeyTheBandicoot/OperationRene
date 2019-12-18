@@ -5,7 +5,7 @@ import operationrene.mapframework.matrixprops.Size;
 public class EntryPoint extends PointOfInterest {
     
     public EntryPoint(int roomID) {
-        super(PointType.EntryPoint, roomID, new int[]{-1}, new Size(1, 1));
+        super(PointType.EntryPoint, roomID, null, new Size(1, 1));
     }
     
 }

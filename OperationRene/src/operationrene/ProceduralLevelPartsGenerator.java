@@ -105,9 +105,9 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(3, 7), new Safe(-1, new int[]{}, new Size(1, 1)));
-        lockeds.put(new Location(3, 0), new Door(1, new int []{}, new Size(1, 1), false));
-        unlocks.put(new Location(2, 7), new Key(-1, new int []{}));
+        lockeds.put(new Location(3, 7), new Safe(-1, null, new Size(1, 1)));
+        lockeds.put(new Location(3, 0), new Door(1, null, new Size(1, 1), false));
+        //unlocks.put(new Location(2, 7), new Key(-1, new int []{}));------------------------------------------------------------------------------------da int[] ad arraylist
         others.put(new Location(1, 2), new Alarm(-1, new Size(5, 5)));
         
         // Put the door in
@@ -130,9 +130,9 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(4, 11), new Safe(-1, new int[]{}, new Size(1, 1)));
-        lockeds.put(new Location(4, 0), new Door(1, new int []{}, new Size(1, 1), false));
-        unlocks.put(new Location(7, 11), new Key(-1, new int []{}));
+        //lockeds.put(new Location(4, 11), new Safe(-1, new int[]{}, new Size(1, 1)));------------------------------------------------------------------------------------da int[] ad arraylist
+        //lockeds.put(new Location(4, 0), new Door(1, new int []{}, new Size(1, 1), false));------------------------------------------------------------------------------------da int[] ad arraylist
+        //unlocks.put(new Location(7, 11), new Key(-1, new int []{}));------------------------------------------------------------------------------------da int[] ad arraylist
         others.put(new Location(1, 2), new Alarm(-1, new Size(7, 7)));
         
         matrix[4][0] = 0;
@@ -154,9 +154,9 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(1, 11), new Safe(-1, new int[]{}, new Size(1, 1)));
-        lockeds.put(new Location(2, 0), new Door(1, new int []{}, new Size(1, 1), false));
-        unlocks.put(new Location(9, 11), new Key(-1, new int []{}));
+        //lockeds.put(new Location(1, 11), new Safe(-1, new int[]{}, new Size(1, 1)));------------------------------------------------------------------------------------da int[] ad arraylist
+        //lockeds.put(new Location(2, 0), new Door(1, new int []{}, new Size(1, 1), false));------------------------------------------------------------------------------------da int[] ad arraylist
+        //unlocks.put(new Location(9, 11), new Key(-1, new int []{}));------------------------------------------------------------------------------------da int[] ad arraylist
         others.put(new Location(1, 2), new Alarm(-1, new Size(9, 9)));
         
         matrix[2][0] = 0;
@@ -220,8 +220,8 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
         // Generate door randomly in the left door
-        lockeds.put(new Location(doorOffset, 0), new Door(-1, new int[]{}, new Size(1, 1), false));
-        unlocks.put(new Location(unlockOffset, width - 2), new Key(-1, new int[]{-1}));
+        //lockeds.put(new Location(doorOffset, 0), new Door(-1, new int[]{}, new Size(1, 1), false));------------------------------------------------------------------------------------da int[] ad arraylist
+        //unlocks.put(new Location(unlockOffset, width - 2), new Key(-1, new int[]{-1}));------------------------------------------------------------------------------------da int[] ad arraylist
         
         // In order to put a potential alarm, get the maximum useful area
         final int maxW = width - 4;

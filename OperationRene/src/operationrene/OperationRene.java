@@ -27,9 +27,6 @@ public class OperationRene extends StateBasedGame {
     public static final String PATH_RESOURCES = "assets/sprites/";
     private static final String PATH_MUSIC = "assets/music/";
     public static TrueTypeFont font;
-    
-    public int elementID;
-    public ArrayList<Integer> keysID;
 
     public OperationRene(String title) {
         super(title + " Options");

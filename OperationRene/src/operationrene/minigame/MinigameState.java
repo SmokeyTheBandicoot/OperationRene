@@ -1,8 +1,10 @@
 package operationrene.minigame;
 
 import java.util.ArrayList;
-import operationrene.OperationRene;
+import operationrene.core.CommandCode;
+import operationrene.core.ExplorationGame;
 import operationrene.core.GameplayState;
+import operationrene.core.StateID;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
@@ -10,6 +12,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public abstract class MinigameState extends GameplayState{
     
     protected boolean completed;
+    protected boolean escPressed;
     protected int elementID;
     protected ArrayList<Integer> keysID;
     
@@ -17,22 +20,50 @@ public abstract class MinigameState extends GameplayState{
     public void init(GameContainer gc, StateBasedGame sbg, int elementID, ArrayList<Integer> keysID) throws SlickException {
         
         super.init(gc, sbg);
-        
+        this.completed = false;
+        this.escPressed = false;
         this.elementID = elementID;
         this.keysID = keysID;
         
     }
     
     @Override
+    public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+        
+        super.update(gc, sbg, delta);
+        
+        if(this.completed || this.escPressed){
+            sbg.enterState(StateID.EXPLORATION_ID);
+            System.out.println("MA lo fa");
+        }
+    }
+    
+    @Override
     public void leave(GameContainer container, StateBasedGame game) throws SlickException{
         
         if(this.completed){
-            OperationRene sbg = (OperationRene)game;
-
-            sbg.elementID = this.elementID;
-            sbg.keysID.addAll(this.keysID);
+            
+            ((ExplorationGame)game.getState(StateID.EXPLORATION_ID)).addKeys(this.keysID);
+            ((ExplorationGame)game.getState(StateID.EXPLORATION_ID)).setElementID(elementID);
+           
         }
         
     }
     
+    public void enter(GameContainer container, StateBasedGame game) throws SlickException{
+        
+        this.escPressed = false;
+        
+    }
+    
+    @Override
+    public void keyReleased(int key, char c){
+        
+        if(key == CommandCode.ESC){
+            
+            this.escPressed = true;
+            
+        }
+        
+    }
 }

@@ -24,7 +24,7 @@ public class WiresGame extends MinigameState{
         private ColorID(){}
 
         public static final int RED= 0;
-        public static final int WHITE=1;
+        public static final  int WHITE=1;
         public static final int BLUE=2;
         public static final int YELLOW=3;
         public static final int BLACK=4;
@@ -112,17 +112,6 @@ public class WiresGame extends MinigameState{
         }
         
         font.drawString(10, 50, "TIME REMAINING: " + this.timer.getTime(), Color.red);
-        
-    }
-
-    @Override
-    public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-        
-        super.update(gc, sbg, delta);
-        
-        if(this.completed)
-            sbg.enterState(StateID.EXPLORATION_ID);
-        
         
     }
     

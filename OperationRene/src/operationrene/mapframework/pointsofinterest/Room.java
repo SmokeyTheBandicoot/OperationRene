@@ -9,7 +9,7 @@ public class Room extends PointOfInterest {
     protected Direction dir;
     
     public Room(int roomID, Size size, Direction dir) {
-        super(PointType.Room, roomID, new int []{-1}, size);
+        super(PointType.Room, roomID, null, size);
         this.dir = dir;
     }
 
