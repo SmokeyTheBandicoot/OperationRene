@@ -33,8 +33,13 @@ public class KeyPadGame extends MinigameState {
     private String playerInput =null;
     private final String PATH = "assets/sprites/minigames/keypad/";
     private TrueTypeFont fontMinigame;
-     
+
     
+    public KeyPadGame(int difficulty) {
+        super(difficulty);
+    }
+     
+   
     @Override
     public int getID() {
         return StateID.KEYPAD_ID;
@@ -209,6 +214,11 @@ public class KeyPadGame extends MinigameState {
         } 
         this.playerInput = "";
         
+    }
+
+    @Override
+    public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

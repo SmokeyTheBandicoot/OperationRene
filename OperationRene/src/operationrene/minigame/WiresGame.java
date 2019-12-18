@@ -41,6 +41,12 @@ public class WiresGame extends MinigameState{
      
     private final String PATH = "assets/sprites/minigames/wires/";
     
+    
+    public WiresGame(int difficulty) {
+        super(difficulty);
+    }
+    
+    
     @Override
     public int getID() {
         return StateID.WIRES_ID;

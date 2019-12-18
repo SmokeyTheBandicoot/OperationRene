@@ -19,16 +19,26 @@ public class ExplorationGame extends GameplayState {
     private ArrayList<Integer> keys = null;
     private int elementID;
     
+    private char mapLevel;
+    
     private StateBasedGame sbg;
     
     private Element collisionedElement; 
 
+    
+    public ExplorationGame(int difficulty, char mapLevel){
+        
+        super(difficulty);
+        this.mapLevel = mapLevel;
+        
+    }
+    
     @Override
     public int getID() {
         return StateID.EXPLORATION_ID;
     }
 
-    @Override
+    
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         
         super.init(container, game);
@@ -37,7 +47,7 @@ public class ExplorationGame extends GameplayState {
         this.elementID = -1;
         this.collisionedElement = null;
         this.sbg = game;
-        this.map = new GameMap('2');
+        this.map = new GameMap(this.mapLevel);
         this.player = new Player(PATH_RESOURCES + "character/Rene.png",PATH_RESOURCES + "character/ExclamationPoint.png", 100, PlayerState.DOWN_STOP, this.map.getPlayerStartPosition().getWidth()*32, this.map.getPlayerStartPosition().getHeight()*32, 32, 40, 1);
         //this.map.drawblackroom(16, 5, 25, 7);
         //this.map.drawMap();

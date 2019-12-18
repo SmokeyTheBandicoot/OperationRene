@@ -50,27 +50,24 @@ public class GameMap {
         
         this.elements = new ArrayList<Element>();
         
+        
         switch (type){
             
             case '1':
-                this.map = new TiledMap("assets/tilesets/Level1/Livello1.tmx");
+                this.map = new TiledMap("assets/tilesets/level1/Livello1.tmx");
                 this.width = OperationRene.WIDTH;
                 this.height = OperationRene.HEIGHT;
                 this.posX = 0;
                 this.posY = 0;
-                ArrayList<Integer> array1 = new ArrayList<Integer>();
-                array1.add(3);
-                this.elements.add(new DoorElement(new Door(0,array1,new Size(2,1),false),1,320/32,130/32));
-                ArrayList<Integer> array2 = new ArrayList<Integer>();
-                array2.add(3);
-                this.elements.add(new DoorElement(new Door(0,array2,new Size(2,1),false),0,1025/32,385/32));
-                ArrayList<Integer> array3 = new ArrayList<Integer>();
-                array3.add(3);
-                //this.elements.add(new MinigameElement(new Key(1,StateID.MEMORY_ID,array3),4,200,200));
-                //this.elements.add(new DoorElement(new Door(0,new int[]{2},new Size(32,16),false),0,336,160));                //this.elements.add(new DoorElement(new Door(0,new int[]{2},new Size(32,16),false),0,336,160));
+                this.playerStartPosition = new Size(29,7);
+                this.elements.add(new DoorElement(new Door(0,this.getFilledArray(new int[]{1}),new Size(1,2),true),1,24,13));
+                this.elements.add(new DoorElement(new Door(0,this.getFilledArray(new int[]{2}),new Size(1,2),true),2,31,7));
+                this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{1})),3,15,9));
+                this.elements.add(new MinigameElement(new Key(0,StateID.STRONGBOX_ID,this.getFilledArray(new int[]{2})),4,29,19));
+                break;
             
             case '2':
-                this.map = new TiledMap("assets/tilesets/Level2/Livello2.tmx");
+                this.map = new TiledMap("assets/tilesets/level2/Livello2.tmx");
                 this.width = OperationRene.WIDTH;
                 this.height = OperationRene.HEIGHT;
                 this.posX = 0;
@@ -82,8 +79,31 @@ public class GameMap {
                 this.elements.add(new DoorElement(new Door(0,this.getFilledArray(new int[]{2}),new Size(1,2),true),3,8,12));
                 this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{0})),4,11,5));
                 this.elements.add(new MinigameElement(new Key(0,StateID.KEYPAD_ID,this.getFilledArray(new int[]{1})),5,27,17));
-                this.elements.add(new MinigameElement(new Key(0,StateID.MEMORY_ID,this.getFilledArray(new int[]{2})),6,34,5));
+                this.elements.add(new MinigameElement(new Key(0,StateID.STRONGBOX_ID,this.getFilledArray(new int[]{2})),6,34,5));
+                break;
+            
+            case '3':
+                this.map = new TiledMap("assets/tilesets/level3/Livello3.tmx");
+                this.width = OperationRene.WIDTH;
+                this.height = OperationRene.HEIGHT;
+                this.posX = 0;
+                this.posY = 0;
+                this.playerStartPosition = new Size(7,16);
+                this.elements.add(new DoorElement(new Door(0,null,new Size(2,1),true),1,8,14));
+                this.elements.add(new DoorElement(new Door(0,null,new Size(2,1),true),2,8,19));
+                this.elements.add(new DoorElement(new Door(0,this.getFilledArray(new int[]{1,2}),new Size(1,2),true),3,12,16));
+                this.elements.add(new DoorElement(new Door(0,null,new Size(2,1),true),4,20,19));
+                this.elements.add(new DoorElement(new Door(0,null,new Size(1,2),true),5,22,15));
+                this.elements.add(new DoorElement(new Door(0,this.getFilledArray(new int[]{4,5}),new Size(2,1),true),6,17,13));
+                this.elements.add(new DoorElement(new Door(0,this.getFilledArray(new int[]{6}),new Size(1,2),true),7,5,16));
                 
+                this.elements.add(new MinigameElement(new Key(0,StateID.STRONGBOX_ID,this.getFilledArray(new int[]{1})),8,14,3));
+                this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{2})),9,18,21));
+                this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{4})),10,32,22));
+                this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{5})),11,41,21));
+                this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{6})),12,40,7));
+                break;
+
         }
         
     }
@@ -105,11 +125,11 @@ public class GameMap {
             return true;
         } else if ((map.getTileId((posX + width) / 32, posY / 32, objectLayer) != 0)||(map.getTileId((posX + width) / 32, posY / 32, wallLayer) != 0)) {//ANGOLO ALTO-DESTRA
             return true;
-        } else if ((map.getTileId(posX / 32, (posY + height) / 32, objectLayer) != 0)||(map.getTileId(posX / 32, (posY + height) / 32, objectLayer) != 0)) {//ANGOLO BASSO-SINISTRA
+        } else if ((map.getTileId(posX / 32, (posY + height) / 32, objectLayer) != 0)||(map.getTileId(posX / 32, (posY + height) / 32, wallLayer) != 0)) {//ANGOLO BASSO-SINISTRA
             return true;
-        } else if ((map.getTileId(posX / 32, (posY + (height/2)) / 32, objectLayer) != 0)||(map.getTileId(posX / 32, (posY + (height/2)) / 32, objectLayer) != 0)) {//CENTRO SINISTRA
+        } else if ((map.getTileId(posX / 32, (posY + (height/2)) / 32, objectLayer) != 0)||(map.getTileId(posX / 32, (posY + (height/2)) / 32, wallLayer) != 0)) {//CENTRO SINISTRA
             return true;
-        } else if ((map.getTileId((posX + width) / 32, (posY + (height/2)) / 32, objectLayer) != 0)|(map.getTileId((posX + width) / 32, (posY + (height/2)) / 32, objectLayer) != 0)) {//CENTRO DESTRA
+        } else if ((map.getTileId((posX + width) / 32, (posY + (height/2)) / 32, objectLayer) != 0)|(map.getTileId((posX + width) / 32, (posY + (height/2)) / 32, wallLayer) != 0)) {//CENTRO DESTRA
             return true;    
         } else {
             return false;

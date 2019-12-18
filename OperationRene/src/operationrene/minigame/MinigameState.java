@@ -16,6 +16,11 @@ public abstract class MinigameState extends GameplayState{
     protected int elementID;
     protected ArrayList<Integer> keysID;
     
+
+    public MinigameState(int difficulty) {
+        super(difficulty);
+    }
+    
     
     public void init(GameContainer gc, StateBasedGame sbg, int elementID, ArrayList<Integer> keysID) throws SlickException {
         

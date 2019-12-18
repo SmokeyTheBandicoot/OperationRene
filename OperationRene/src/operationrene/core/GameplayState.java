@@ -12,8 +12,15 @@ public abstract class GameplayState extends BasicGameState {
 
     public GameTimer timer = null;
     private boolean outOfTime;
+    protected int difficulty;
 
-    @Override
+    
+    public GameplayState(int difficulty){
+        
+        this.difficulty = difficulty;
+        
+    }
+    
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         
         this.timer = GameTimer.getIstance();

@@ -31,6 +31,11 @@ public class MemoryGame extends MinigameState{
     private int[] positions = null;
     
     private int solution;
+    
+
+    public MemoryGame(int difficulty) {
+        super(difficulty);
+    }
        
 
     @Override

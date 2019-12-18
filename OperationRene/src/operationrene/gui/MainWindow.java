@@ -51,7 +51,7 @@ public class MainWindow extends BasicGameState {
         exit.update(gc);
 
         if (play.isClicked()) {
-            sbg.addState(new ExplorationGame());
+            sbg.addState(new ExplorationGame(1,'1'));
             sbg.getState(StateID.EXPLORATION_ID).init(gc, sbg);
             sbg.enterState(2);
         }
