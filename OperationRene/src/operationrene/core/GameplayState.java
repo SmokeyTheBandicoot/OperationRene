@@ -1,6 +1,8 @@
 package operationrene.core;
 
 import javax.swing.JOptionPane;
+import operationrene.gui.GameOverWindow;
+import operationrene.gui.PlayWindow;
 import operationrene.utils.GameTimer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -38,7 +40,9 @@ public abstract class GameplayState extends BasicGameState {
                               "TIME OVER", 
                               JOptionPane.WARNING_MESSAGE);
             this.outOfTime = true;
-            
+            sbg.addState(new GameOverWindow());
+            sbg.getState(StateID.GAME_OVER_ID).init(gc, sbg);
+            sbg.enterState(StateID.GAME_OVER_ID);
             }
         
     }

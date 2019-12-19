@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import operationrene.core.StateID;
 import operationrene.gui.MainWindow;
-import operationrene.gui.SettingWindow;
 import org.lwjgl.LWJGLUtil;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
@@ -36,9 +35,7 @@ public class OperationRene extends StateBasedGame {
     public void initStatesList(GameContainer gc) throws SlickException {
         font = new TrueTypeFont(new java.awt.Font("Cominc Sans", java.awt.Font.BOLD, 28), false);
         this.addState(new MainWindow());
-        this.addState(new SettingWindow());
         this.getState(StateID.MENU_ID).init(gc, this);
-        this.getState(StateID.SETTING_ID).init(gc, this);
         this.enterState(StateID.MENU_ID);
 
     }

@@ -20,20 +20,23 @@ public class Button extends Entity {
     private final String _PATHIMAGES = "assets/sprites/controls/";
 
     //private String imageName;
-    private final Rectangle button;
-    private final Image buttonImage;
-    private final Image buttonImagePressed;
-    private boolean buttonPressed = false;
-    private boolean buttonReleased = false;
-    private final Vector2f position;
-    private final float width;
-    private final float height;
-    private Image renderImage;
-    private final int type;
-    private boolean value = true;
+    protected final Rectangle button;
+    protected final Image buttonImage;
+    protected final Image buttonImagePressed;
+    protected final Image buttonImageLabel;
+    protected boolean buttonPressed = false;
+    protected boolean buttonReleased = false;
+    protected final Vector2f position;
+    protected final float width;
+    protected final float height;
+    protected Image renderImage;
+    protected final int type;
+    protected boolean value = true;
+    
     
     
     public Button(ButtonType buttonType, float x, float y) {
+        
         this.buttonImage = this.loadImage(buttonType.image);
         this.buttonImagePressed = this.loadImage(buttonType.imageInv);
         this.width = this.buttonImage.getWidth();
@@ -42,6 +45,12 @@ public class Button extends Entity {
         this.button = new Rectangle(position.x, position.y, this.width, this.height);
         this.renderImage = this.buttonImage;
         this.type = buttonType.type;
+        
+        if(buttonType.type>2){
+            this.buttonImageLabel=this.loadImage(buttonType.imageLab);
+            
+        }else
+        this.buttonImageLabel=null;
     }
 
     /*
@@ -98,12 +107,14 @@ public class Button extends Entity {
         }
 
     }
+    
 
     public void render(Graphics gr) {
         renderImage.draw(position.x, position.y, width, height);
-
         gr.setColor(Color.black);
-
+        if(buttonImageLabel!= null)
+        buttonImageLabel.draw(position.x,position.y+height);
+        
     }
 
     public boolean isClicked() {
@@ -115,7 +126,7 @@ public class Button extends Entity {
     }
 
     public void SwapImage() {
-
+        
         if (renderImage == buttonImage) {
             renderImage = buttonImagePressed;
             this.value = false;

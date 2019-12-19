@@ -9,6 +9,7 @@ import static operationrene.OperationRene.PATH_RESOURCES;
 
 import  static operationrene.OperationRene.font;
 import operationrene.OperationRene;
+import static operationrene.gui.PauseWindow.setPauseInstance;
 import operationrene.minigame.WiresGame;
 
 public class ExplorationGame extends GameplayState {
@@ -94,7 +95,8 @@ public class ExplorationGame extends GameplayState {
                 this.player.update(CommandCode.DOWN);
             }
         } else if (input.isKeyDown(1)) {
-            game.enterState(0);//da modificare
+            setPauseInstance(container,game,getID());
+            game.enterState(StateID.PAUSE_MENU_ID);
         } else {
             if (!this.map.checkCollision(this.player.posX, this.player.posY, this.player.width, this.player.height)) {
                 this.player.update(CommandCode.NONE);

@@ -18,6 +18,28 @@ public class SettingWindow extends BasicGameState {
     Button effectMusicButton;
     Button returnButton;
     Button applyButton;
+    int previous_state;
+    
+    private static SettingWindow INSTANCE;
+    
+    /// VOID SINGLETHON
+    public SettingWindow(int id){
+        this.previous_state=id;
+    }
+    
+    public static void setSettingInstance(GameContainer gc,StateBasedGame sbg,int ID) throws SlickException{
+        if(INSTANCE==null){
+          INSTANCE= new SettingWindow(ID);
+          sbg.addState(INSTANCE);
+          sbg.getState(StateID.SETTING_ID).init(gc, sbg);
+        }
+       
+        
+    }
+     public static void setSettingInstance(GameContainer gc,StateBasedGame sbg) throws SlickException{
+        setSettingInstance(gc,sbg,StateID.MENU_ID);    
+    } 
+    
 
     @Override
     public int getID() {
@@ -54,7 +76,7 @@ public class SettingWindow extends BasicGameState {
             } else if (!OperationRene.MUSIC.playing() && OperationRene.MUSIC_SOUND == true) {
                 OperationRene.MUSIC.resume();
             }
-            sbg.enterState(0);
+            sbg.enterState(this.previous_state);
 
         }
 
