@@ -40,7 +40,7 @@ public class PlayWindow extends BasicGameState{
         campaign = new Button(ButtonType.CAMPAIGN, OperationRene.WIDTH / 2, 200);
         quickMach = new Button(ButtonType.QUICK_PLAY, OperationRene.WIDTH / 2, 400);
         difficultyButton = new ToggleButton(ButtonType.DIFFICULTY, OperationRene.WIDTH / 2, 600);
-        undo = new Button(ButtonType.RETURN, OperationRene.WIDTH / 4, 800);
+        undo = new Button(ButtonType.RETURN, OperationRene.WIDTH / 4, 700);
     }
 
     @Override
@@ -67,19 +67,21 @@ public class PlayWindow extends BasicGameState{
         if (undo.isClicked()) {
             sbg.enterState(StateID.MENU_ID);
         }
-        if (quickMach.isClicked()){
-            sbg.addState(new ExplorationGame(difficulty,MapID.LEVEL_RANDOM));
-            sbg.getState(StateID.EXPLORATION_ID).init(gc, sbg);
-            sbg.enterState(StateID.EXPLORATION_ID);
-         
-            if (!info) {
+//        if (quickMach.isClicked()){
+//            sbg.addState(new ExplorationGame(difficulty,MapID.LEVEL_RANDOM));
+//            sbg.getState(StateID.EXPLORATION_ID).init(gc, sbg);
+//            sbg.enterState(StateID.EXPLORATION_ID);
+//         
+//            
+//        }
+        
+        if (!info) {
                 JOptionPane.showMessageDialog(null,
                         "PER INTERAGIRE CON PORTE O OGGETTI, PREMERE LA BARRA SPAZIATRICE",
                         "ATTENZIONE",
                         JOptionPane.WARNING_MESSAGE);
             }
            info = true;
-        }
     } 
 
     
