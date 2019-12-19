@@ -10,6 +10,7 @@ import operationrene.mapframework.pointsofinterest.Door;
 import operationrene.mapframework.pointsofinterest.Key;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.tiled.TiledMap;
 
 public class GameMap {
@@ -103,7 +104,7 @@ public class GameMap {
                 this.elements.add(new DoorElement(new Door(0,this.getFilledArray(new int[]{4,5}),new Size(2,1),true),6,17,13));
                 this.elements.add(new DoorElement(new Door(0,this.getFilledArray(new int[]{6}),new Size(1,2),true),7,5,16));
                 
-                this.elements.add(new MinigameElement(new Key(0,StateID.STRONGBOX_ID,this.getFilledArray(new int[]{1})),8,14,3));
+                this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{1})),8,14,3));
                 this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{2})),9,18,21));
                 this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{4})),10,32,22));
                 this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{5})),11,41,21));
@@ -193,16 +194,17 @@ public class GameMap {
     }
     
     
-    public boolean checkAlarmCollision(int posX, int posY, int width, int height){
+    public boolean checkAlarmCollision(Shape playerShape ){
         
         for(Rectangle e: this.alarms){
-            //if(e.intersects(e)){
-                
-            //}
+            if(e.intersects(playerShape)){
+                return true;
+            }
         }
         return false;
     }
 
+    
     public boolean checkCollision(int posX, int posY, int width, int height) {
 
         int wallLayer = map.getLayerIndex("walls");

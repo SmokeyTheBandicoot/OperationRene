@@ -67,10 +67,6 @@ public class ExplorationGame extends GameplayState {
             g.draw(e.shape );
         }
         
-        for(Rectangle e: this.map.getAlarms()){
-            g.fill(e);
-        }
-        
         font.drawString(10, 50, "TIME REMAINING: " + this.timer.getTime(), Color.red);
         font.drawString(10, 80, "GOAL: "+goal, Color.green);
         
@@ -81,6 +77,10 @@ public class ExplorationGame extends GameplayState {
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 
         super.update(container, game, delta);
+        
+        if(this.map.checkAlarmCollision(this.player.shape)){
+            this.timer.setTime(0);
+        }
         
         Input input = container.getInput();
 

@@ -22,5 +22,7 @@ public final class StateID {
     public static final int LEVEL_MENU_ID=10;
     public static final int GAME_OVER_ID=11;
     public static final int GAME_WIN_ID=12;
-    public static final int SIMONSAYS_ID=12;
+    public static final int SIMONSAYS_ID=13;
+    public static final int WORDS_ID = 14;
+    
 }

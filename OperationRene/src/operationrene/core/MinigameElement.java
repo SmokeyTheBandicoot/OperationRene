@@ -9,6 +9,7 @@ import operationrene.minigame.MemoryGame;
 import operationrene.minigame.SimonSays;
 import operationrene.minigame.StrongBoxGame;
 import operationrene.minigame.WiresGame;
+import operationrene.minigame.WordsMinigame;
 
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
@@ -146,7 +147,18 @@ public class MinigameElement extends Element implements InteractiveObjectInterfa
                             Logger.getLogger(MinigameElement.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         sbg.enterState(StateID.SIMONSAYS_ID);
-                        break;    
+                        break;   
+                        
+                    case StateID.WORDS_ID:
+                        
+                        sbg.addState(new WordsMinigame(exg.difficulty));
+                        try {
+                            ((WordsMinigame)sbg.getState(StateID.WORDS_ID)).init(sbg.getContainer(), sbg, this.elementId, this.info.getRequiredKeysID());
+                        } catch (SlickException ex) {
+                            Logger.getLogger(MinigameElement.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        sbg.enterState(StateID.WORDS_ID);
+                        break;
                         
             }
         
