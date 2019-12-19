@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import operationrene.mapframework.pointsofinterest.Key;
 import operationrene.minigame.KeyPadGame;
 import operationrene.minigame.MemoryGame;
+import operationrene.minigame.SimonSays;
 import operationrene.minigame.StrongBoxGame;
 import operationrene.minigame.WiresGame;
 
@@ -135,6 +136,17 @@ public class MinigameElement extends Element implements InteractiveObjectInterfa
                         }
                         sbg.enterState(StateID.STRONGBOX_ID);
                         break;
+                        
+                    case StateID.SIMONSAYS_ID:
+                        
+                        sbg.addState(new SimonSays(exg.difficulty));
+                        try {
+                            ((SimonSays)sbg.getState(StateID.SIMONSAYS_ID)).init(sbg.getContainer(), sbg, this.elementId, this.info.getRequiredKeysID());
+                        } catch (SlickException ex) {
+                            Logger.getLogger(MinigameElement.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        sbg.enterState(StateID.SIMONSAYS_ID);
+                        break;    
                         
             }
         

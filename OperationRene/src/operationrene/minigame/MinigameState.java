@@ -17,6 +17,8 @@ public abstract class MinigameState extends GameplayState{
     protected int elementID;
     protected ArrayList<Integer> keysID;
     
+    private int countErrors;
+    
 
     public MinigameState(int difficulty) {
         super(difficulty);
@@ -30,6 +32,11 @@ public abstract class MinigameState extends GameplayState{
         this.escPressed = false;
         this.elementID = elementID;
         this.keysID = keysID;
+        if(this.difficulty == Difficulty.MEDIUM){
+            this.countErrors = 0;
+        }else{
+            this.countErrors = -1;
+        }
         
     }
     
@@ -79,15 +86,20 @@ public abstract class MinigameState extends GameplayState{
         switch(this.difficulty){
 
             case Difficulty.EASY:
-                // diminuisce il tempo 
+                this.timer.increaseTime(-10);
                 System.out.println("Easy");
                 break;
             case Difficulty.MEDIUM:
-                //diminuisce il tempo max 3 tentativi
+                if(this.countErrors<3){
+                    this.countErrors++;
+                    this.timer.increaseTime(-10);
+                }else{
+                    this.timer.setTime(0);
+                }
                 System.out.println("Medium");
                 break;
             case Difficulty.HARD:
-                //perdi merda
+                this.timer.setTime(0);
                 System.out.println("HARD");
                 break;
                 
