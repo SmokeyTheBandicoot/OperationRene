@@ -274,6 +274,8 @@ public class MemoryGame extends MinigameState{
                     
                 }
                 else{
+                    
+                    this.errorDone();
                     this.resetAll();
                 }
             }

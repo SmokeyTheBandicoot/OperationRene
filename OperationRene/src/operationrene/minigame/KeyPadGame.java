@@ -159,15 +159,12 @@ public class KeyPadGame extends MinigameState {
          
             if(this.solution.compareTo(this.playerInput)==0){
             
-                System.out.println("corretto");
                 this.completed = true;
                 
             }else{
                 
-                this.resetInput();//TEMPO DA DIMINUIREEEEE
-                System.out.println("Sbagliato!");
-                this.timer.increaseTime(-10);
-                
+                this.errorDone();
+                this.resetInput();
                 
             }
             

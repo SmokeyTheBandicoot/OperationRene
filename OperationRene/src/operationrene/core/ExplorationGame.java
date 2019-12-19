@@ -19,14 +19,14 @@ public class ExplorationGame extends GameplayState {
     private ArrayList<Integer> keys = null;
     private int elementID;
     
-    private char mapLevel;
+    private int mapLevel;
     
     private StateBasedGame sbg;
     
     private Element collisionedElement; 
 
     
-    public ExplorationGame(int difficulty, char mapLevel){
+    public ExplorationGame(int difficulty, int mapLevel){
         
         super(difficulty);
         this.mapLevel = mapLevel;
@@ -48,7 +48,7 @@ public class ExplorationGame extends GameplayState {
         this.collisionedElement = null;
         this.sbg = game;
         this.map = new GameMap(this.mapLevel);
-        this.player = new Player(PATH_RESOURCES + "character/Rene.png",PATH_RESOURCES + "character/ExclamationPoint.png", 100, PlayerState.DOWN_STOP, this.map.getPlayerStartPosition().getWidth()*32, this.map.getPlayerStartPosition().getHeight()*32, 32, 40, 1);
+        this.player = new Player(PATH_RESOURCES + "character/Rene.png",PATH_RESOURCES + "character/ExclamationPoint.png", 100, PlayerState.DOWN_STOP, this.map.getPlayerStartPosition().getX()*32, this.map.getPlayerStartPosition().getY()*32, 32, 40, 1);
         //this.map.drawblackroom(16, 5, 25, 7);
         //this.map.drawMap();
         //this.map.drawroom(14, 1, 33, 12,69);

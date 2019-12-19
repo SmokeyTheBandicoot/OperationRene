@@ -197,8 +197,10 @@ public class WiresGame extends MinigameState{
                         this.completed = true;
                         
                     }else{
+                        
+                        this.errorDone();
                         this.deletedLines.add(i);
-                        this.timer.increaseTime(-10);
+                        
                     }
 
                 }

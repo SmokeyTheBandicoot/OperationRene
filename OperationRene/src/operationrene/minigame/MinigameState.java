@@ -2,6 +2,7 @@ package operationrene.minigame;
 
 import java.util.ArrayList;
 import operationrene.core.CommandCode;
+import operationrene.core.Difficulty;
 import operationrene.core.ExplorationGame;
 import operationrene.core.GameplayState;
 import operationrene.core.StateID;
@@ -67,6 +68,29 @@ public abstract class MinigameState extends GameplayState{
         if(key == CommandCode.ESC){
             
             this.escPressed = true;
+            
+        }
+        
+    }
+    
+    
+    protected void errorDone(){
+        
+        switch(this.difficulty){
+
+            case Difficulty.EASY:
+                // diminuisce il tempo 
+                System.out.println("Easy");
+                break;
+            case Difficulty.MEDIUM:
+                //diminuisce il tempo max 3 tentativi
+                System.out.println("Medium");
+                break;
+            case Difficulty.HARD:
+                //perdi merda
+                System.out.println("HARD");
+                break;
+                
             
         }
         
