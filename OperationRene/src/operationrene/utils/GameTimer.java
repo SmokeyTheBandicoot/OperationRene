@@ -44,7 +44,7 @@ public class GameTimer {
                 }
             }
 
-        }, 1500, 1500);
+        }, 0, 1000);
         
     }
     

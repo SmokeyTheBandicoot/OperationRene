@@ -50,7 +50,7 @@ public class SettingWindow extends BasicGameState {
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         musicButton = new Button(ButtonType.MUSIC_SOUND, OperationRene.WIDTH/2, 150);
         effectMusicButton = new Button(ButtonType.EFFECT_SOUND, OperationRene.WIDTH/2, 250);
-        returnButton = new Button(ButtonType.RETURN, OperationRene.WIDTH/5, 650);
+        returnButton = new Button(ButtonType.RETURN, OperationRene.WIDTH/2, 700);
 
     }
 

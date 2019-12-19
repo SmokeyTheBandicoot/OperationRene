@@ -37,10 +37,10 @@ public class PlayWindow extends BasicGameState{
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         
-        campaign = new Button(ButtonType.CAMPAIGN, OperationRene.WIDTH / 2, 200);
-        quickMach = new Button(ButtonType.QUICK_PLAY, OperationRene.WIDTH / 2, 400);
-        difficultyButton = new ToggleButton(ButtonType.DIFFICULTY, OperationRene.WIDTH / 2, 600);
-        undo = new Button(ButtonType.RETURN, OperationRene.WIDTH / 4, 700);
+        campaign = new Button(ButtonType.CAMPAIGN, OperationRene.WIDTH / 3, 200);
+        quickMach = new Button(ButtonType.QUICK_PLAY, OperationRene.WIDTH / 3*2, 200);
+        difficultyButton = new ToggleButton(ButtonType.DIFFICULTY, OperationRene.WIDTH / 2, 400);
+        undo = new Button(ButtonType.RETURN, OperationRene.WIDTH / 2, 700);
     }
 
     @Override
@@ -83,7 +83,12 @@ public class PlayWindow extends BasicGameState{
             }
            info = true;
     } 
-
+    
+    public static int getDifficulty () {
+    
+        return difficulty;
+    }
+    
     
     
 }
