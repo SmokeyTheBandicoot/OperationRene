@@ -140,9 +140,18 @@ public class ExplorationGame extends GameplayState {
                 
                 if(e.elementId == this.elementID){
                     
+                    if(e.getClass() == SafeElement.class){
+                        this.goal = "ESCAPE !!!!!";
+                        SafeElement s = (SafeElement)e;
+                        this.map.setTileId(s.posX, s.posY, 2, 13);
+                        this.map.setTileId(s.posX+1, s.posY, 2, 14);
+                        this.map.setTileId(s.posX, s.posY+1, 2, 23);
+                        this.map.setTileId(s.posX+1, s.posY+1, 2, 24);
+                    }
+                    
                     iterator.remove();
                     flag = true;
-                    
+                    break;
                 }
                 
             }

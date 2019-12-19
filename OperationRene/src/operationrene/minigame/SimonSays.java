@@ -1,6 +1,7 @@
 package operationrene.minigame;
 
 import java.util.ArrayList;
+import operationrene.OperationRene;
 import static operationrene.OperationRene.font;
 import operationrene.core.StateID;
 import operationrene.minigame.MinigameState;
@@ -36,7 +37,6 @@ public class SimonSays extends MinigameState {
     private int serialnumber;
     private color[][][] btpress = new color[2][3][4];
     private int strike = 0;
-    private color colorflash;
     int buttonpressed = -1;
     int currentColor = -1; 
     int iteration;
@@ -93,22 +93,23 @@ public class SimonSays extends MinigameState {
         super.init(gc, sbg, elementID, keysID);
         
         this.box = new Rectangle(0,0,600,600);
-        this.box.setCenterX(1536/4);
-        this.box.setCenterY(832/4);
+        this.box.setCenterX(OperationRene.WIDTH/2);
+        this.box.setCenterY(OperationRene.HEIGHT/2);
         int centerX = (int) this.box.getCenterX();
+        System.out.println(centerX);
         int centerY = (int) this.box.getCenterY()+60;
-        this.errors[0]= new Rectangle(60,215,80,35);
-        this.errors[1]= new Rectangle(60,170,80,35);
-        this.buttons[color.BLUE.num]=new Rectangle(centerX-180, centerY-180,150,150);
-        this.buttons[color.GREEN.num]=new Rectangle(centerX+10, centerY-180,150,150);
-        this.buttons[color.RED.num]=new Rectangle(centerX-180, centerY+10,150,150);
-        this.buttons[color.YELLOW.num]=new Rectangle(centerX+10, centerY+10,150,150);
+        this.errors[0]= new Rectangle(centerX-240,centerY+5,80,35);
+        this.errors[1]= new Rectangle(centerX-240,centerY-40,80,35);
+        this.buttons[color.BLUE.num]=new Rectangle(centerX-50, centerY-150,150,150);
+        this.buttons[color.GREEN.num]=new Rectangle(centerX-50, centerY+20,150,150);
+        this.buttons[color.RED.num]=new Rectangle(centerX+120, centerY-150,150,150);
+        this.buttons[color.YELLOW.num]=new Rectangle(centerX+120, centerY+20,150,150);
         this.images[0]= new Image(PATH+"LensRED.png");
         this.images[1]= new Image(PATH+"LensBLUE.png");
         this.images[2]= new Image(PATH+"LensGREEN.png");
-        this.images[3]= new Image(PATH+"LensYELLOW.png");;
+        this.images[3]= new Image(PATH+"LensYELLOW.png");
         
-        this.errorspace = new Rectangle(50,160,100,100);
+        this.errorspace = new Rectangle(centerX-250,centerY-50,100,100);
         iteration = 0;
         endgame = 4;
         btpress[0]=new color[][]{
@@ -121,10 +122,8 @@ public class SimonSays extends MinigameState {
             {color.RED,color.BLUE,color.YELLOW,color.GREEN},
             {color.YELLOW,color.GREEN,color.BLUE,color.RED}
         };
-        this.serialnumber = ((int)(Math.random()*10))%2;
+        this.serialnumber = ((int)(Math.random()*100));
         this.currentColor=((int)(Math.random()*10))%4;
-
-System.out.println("seriale "+serialnumber);
         this.strike=0;
     
     }
@@ -133,17 +132,16 @@ System.out.println("seriale "+serialnumber);
         super.mouseReleased(button,x,y);
         for(int i=0;i<4;i++){
             if (buttons[i].contains(x, y)){
-                if(color.getcolor(i) == btpress[serialnumber][strike][this.currentColor]){
+                if(color.getcolor(i) == btpress[serialnumber%2][strike][this.currentColor]){
                     this.currentColor=((int)(Math.random()*10))%4;
-                    System.out.println("corretto");
                     iteration++;
                 } else {
                     this.errorDone();
-                    strike++;
-                    System.out.println("errore");
+                    if (strike <2){
+                        strike++;
+                    }
                     this.currentColor=((int)(Math.random()*10))%4;
                     iteration=0;
-                    endgame +=4;
                 }
         }
         }
@@ -155,24 +153,23 @@ System.out.println("seriale "+serialnumber);
     
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
+        Image background = new Image(PATH+"metallo.jpg");
+        grphcs.drawImage(background.getScaledCopy(600, 600), this.box.getX(), this.box.getY());
         grphcs.draw(this.box);
         for(int i=0;i<4;i++){
             grphcs.setColor(this.getColor(i));
             grphcs.fill(this.buttons[i]);
             }
-        grphcs.drawImage(images[currentColor], 500,0);
+        grphcs.drawImage(images[currentColor], 850,200);
         grphcs.setColor(Color.gray);
         grphcs.fill(errorspace);
-        if (strike <=2){
-            for (int i=0;i<strike;i++){
-                grphcs.setColor(Color.yellow);
-                grphcs.fill(errors[i]);
-            }
-        }else{
-            System.exit(1);
-            //perso gioco finito
+        for (int i=0;i<strike;i++){
+            grphcs.setColor(Color.yellow);
+            grphcs.fill(errors[i]);
         }
         font.drawString(10, 50, "TIME REMAINING: " + this.timer.getTime(), Color.red);
+        font.drawString(518,385,"Strikes:",Color.red);
+        font.drawString(518, 350, "Seriale: "+serialnumber);
     }
 
 }

@@ -126,18 +126,7 @@ public class MinigameElement extends Element implements InteractiveObjectInterfa
                         }
                         sbg.enterState(StateID.KEYPAD_ID);
                         break;
-                        
-                    case StateID.STRONGBOX_ID:
-                        
-                        sbg.addState(new StrongBoxGame(exg.difficulty));
-                        try {
-                            ((StrongBoxGame)sbg.getState(StateID.STRONGBOX_ID)).init(sbg.getContainer(), sbg, this.elementId, this.info.getRequiredKeysID());
-                        } catch (SlickException ex) {
-                            Logger.getLogger(MinigameElement.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        sbg.enterState(StateID.STRONGBOX_ID);
-                        break;
-                        
+                  
                     case StateID.SIMONSAYS_ID:
                         
                         sbg.addState(new SimonSays(exg.difficulty));
