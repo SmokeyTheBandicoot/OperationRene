@@ -62,8 +62,6 @@ public class WiresGame extends MinigameState{
         //this.screw =  (new Image("C:/Users/gavos/Desktop/images/vite.png")).getScaledCopy(15,15);
         //gc.setMouseCursor((new Image("C:/Users/gavos/Desktop/images/scissor.png")).getScaledCopy((float)1), 5, 5); aggiungere forbici forse
         
-        this.completed = false;
-        
         Random rand = new Random();
         
         int num =rand.nextInt(4)+3;

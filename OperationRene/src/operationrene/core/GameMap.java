@@ -2,11 +2,14 @@ package operationrene.core;
 
 import java.util.ArrayList;
 import operationrene.OperationRene;
+import operationrene.alarm.MapAlarm;
+import operationrene.alarm.MapAlarmFactory;
 import operationrene.mapframework.matrixprops.Location;
 import operationrene.mapframework.matrixprops.Size;
 import operationrene.mapframework.pointsofinterest.Door;
 import operationrene.mapframework.pointsofinterest.Key;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.tiled.TiledMap;
 
 public class GameMap {
@@ -17,6 +20,7 @@ public class GameMap {
     private int posX;
     private int posY;
     private ArrayList<Element> elements;
+    private ArrayList<Rectangle> alarms;
     private Location playerStartPosition;
     /*Integer[][] matrix = new Integer [][]{
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
@@ -50,6 +54,7 @@ public class GameMap {
     public GameMap(int type) throws SlickException {
         
         this.elements = new ArrayList<Element>();
+        this.alarms = null;
         
         
         switch (type){
@@ -103,6 +108,73 @@ public class GameMap {
                 this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{4})),10,32,22));
                 this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{5})),11,41,21));
                 this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{6})),12,40,7));
+               
+                this.alarms = new ArrayList<Rectangle>();
+                
+                //colonna 1
+                this.alarms.add(new Rectangle((25*32), (4*32), 32, 32));
+                this.alarms.add(new Rectangle((25*32), (5*32), 32, 32));
+                this.alarms.add(new Rectangle((25*32), (6*32), 32, 32));
+                this.alarms.add(new Rectangle((25*32), (7*32), 32, 32));
+                this.alarms.add(new Rectangle((25*32), (8*32), 32, 32));
+                this.alarms.add(new Rectangle((25*32), (9*32), 32, 32));
+                this.alarms.add(new Rectangle((25*32), (12*32), 32, 32));
+                
+                //colonna 2
+                this.alarms.add(new Rectangle((26*32), (9*32), 32, 32));
+                this.alarms.add(new Rectangle((26*32), (12*32), 32, 32));
+                
+                //colonna 3
+                this.alarms.add(new Rectangle((27*32), (9*32), 32, 32));
+                this.alarms.add(new Rectangle((27*32), (12*32), 32, 32));
+                
+                //colonna 4
+                this.alarms.add(new Rectangle((28*32), (6*32), 32, 32));
+                this.alarms.add(new Rectangle((28*32), (9*32), 32, 32));
+                this.alarms.add(new Rectangle((28*32), (12*32), 32, 32));
+                
+                //colonna 5
+                this.alarms.add(new Rectangle((29*32), (6*32), 32, 32));
+                this.alarms.add(new Rectangle((29*32), (9*32), 32, 32));
+                this.alarms.add(new Rectangle((29*32), (12*32), 32, 32));
+                
+                //colonna 6
+                this.alarms.add(new Rectangle((30*32), (6*32), 32, 32));
+                this.alarms.add(new Rectangle((30*32), (9*32), 32, 32));
+                this.alarms.add(new Rectangle((30*32), (12*32), 32, 32));
+                
+                //colonna 7
+                this.alarms.add(new Rectangle((31*32), (6*32), 32, 32));
+                this.alarms.add(new Rectangle((31*32), (9*32), 32, 32));
+                this.alarms.add(new Rectangle((31*32), (12*32), 32, 32));
+                
+                //colonna 8
+                this.alarms.add(new Rectangle((32*32), (6*32), 32, 32));
+                this.alarms.add(new Rectangle((32*32), (12*32), 32, 32));
+                
+                //colonna 9
+                this.alarms.add(new Rectangle((33*32), (6*32), 32, 32));
+                this.alarms.add(new Rectangle((33*32), (12*32), 32, 32));
+                
+                //colonna 10
+                this.alarms.add(new Rectangle((34*32), (6*32), 32, 32));
+                this.alarms.add(new Rectangle((34*32), (7*32), 32, 32));
+                this.alarms.add(new Rectangle((34*32), (8*32), 32, 32));
+                this.alarms.add(new Rectangle((34*32), (9*32), 32, 32));
+                this.alarms.add(new Rectangle((34*32), (10*32), 32, 32));
+                this.alarms.add(new Rectangle((34*32), (11*32), 32, 32));
+                this.alarms.add(new Rectangle((34*32), (12*32), 32, 32));
+                
+                //colonna 11
+                this.alarms.add(new Rectangle((35*32), (6*32), 32, 32));
+                this.alarms.add(new Rectangle((35*32), (7*32), 32, 32));
+                this.alarms.add(new Rectangle((35*32), (8*32), 32, 32));
+                this.alarms.add(new Rectangle((35*32), (9*32), 32, 32));
+                this.alarms.add(new Rectangle((35*32), (10*32), 32, 32));
+                this.alarms.add(new Rectangle((35*32), (11*32), 32, 32));
+                this.alarms.add(new Rectangle((35*32), (12*32), 32, 32));
+                
+                
                 break;
                
             case MapID.LEVEL_RANDOM:
@@ -116,7 +188,19 @@ public class GameMap {
     public void draw() {
 
         this.map.render(posX, posY);
+        
 
+    }
+    
+    
+    public boolean checkAlarmCollision(int posX, int posY, int width, int height){
+        
+        for(Rectangle e: this.alarms){
+            //if(e.intersects(e)){
+                
+            //}
+        }
+        return false;
     }
 
     public boolean checkCollision(int posX, int posY, int width, int height) {
@@ -136,7 +220,7 @@ public class GameMap {
             return true;
         } else if ((map.getTileId((posX + width) / 32, (posY + (height/2)) / 32, objectLayer) != 0)|(map.getTileId((posX + width) / 32, (posY + (height/2)) / 32, wallLayer) != 0)) {//CENTRO DESTRA
             return true;    
-        } else {
+        }else {
             return false;
         }
 
@@ -147,6 +231,14 @@ public class GameMap {
         return elements;
         
     }
+    
+    
+    public ArrayList<Rectangle> getAlarms(){
+        
+        return this.alarms;
+        
+    }
+    
     
     public void setTileId(int x, int y, int layer, int id){
         

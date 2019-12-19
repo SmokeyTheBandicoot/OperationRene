@@ -1,6 +1,7 @@
 package operationrene.minigame;
 
 import java.util.ArrayList;
+import static operationrene.OperationRene.font;
 import operationrene.core.StateID;
 import operationrene.minigame.MinigameState;
 import org.newdawn.slick.AppGameContainer;
@@ -40,6 +41,8 @@ public class SimonSays extends MinigameState {
     int currentColor = -1; 
     int iteration;
     int endgame;
+    
+    private final String PATH = "assets/sprites/minigames/simonsays/";
 
     @Override
     public int getID() {
@@ -67,7 +70,7 @@ public class SimonSays extends MinigameState {
                 default:
                     return YELLOW;
             }
-   }
+      }
         
     }
      public Color getColor(int n){
@@ -86,6 +89,9 @@ public class SimonSays extends MinigameState {
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg, int elementID, ArrayList<Integer> keysID) throws SlickException {
+        
+        super.init(gc, sbg, elementID, keysID);
+        
         this.box = new Rectangle(0,0,600,600);
         this.box.setCenterX(1536/4);
         this.box.setCenterY(832/4);
@@ -97,10 +103,10 @@ public class SimonSays extends MinigameState {
         this.buttons[color.GREEN.num]=new Rectangle(centerX+10, centerY-180,150,150);
         this.buttons[color.RED.num]=new Rectangle(centerX-180, centerY+10,150,150);
         this.buttons[color.YELLOW.num]=new Rectangle(centerX+10, centerY+10,150,150);
-        this.images[0]= new Image("LensRED.png");
-        this.images[1]= new Image("LensBLUE.png");
-        this.images[2]= new Image("LensGREEN.png");
-        this.images[3]= new Image("LensYELLOW.png");;
+        this.images[0]= new Image(PATH+"LensRED.png");
+        this.images[1]= new Image(PATH+"LensBLUE.png");
+        this.images[2]= new Image(PATH+"LensGREEN.png");
+        this.images[3]= new Image(PATH+"LensYELLOW.png");;
         
         this.errorspace = new Rectangle(50,160,100,100);
         iteration = 0;
@@ -117,15 +123,11 @@ public class SimonSays extends MinigameState {
         };
         this.serialnumber = ((int)(Math.random()*10))%2;
         this.currentColor=((int)(Math.random()*10))%4;
-        System.out.println("seriale "+serialnumber);
+
+System.out.println("seriale "+serialnumber);
         this.strike=0;
     
     }
-    public void update(GameContainer gc, int i) throws SlickException {
-      
-    }
-    
-   
     
     public void  mouseReleased(int button, int x, int y){
         super.mouseReleased(button,x,y);
@@ -136,6 +138,7 @@ public class SimonSays extends MinigameState {
                     System.out.println("corretto");
                     iteration++;
                 } else {
+                    this.errorDone();
                     strike++;
                     System.out.println("errore");
                     this.currentColor=((int)(Math.random()*10))%4;
@@ -145,14 +148,14 @@ public class SimonSays extends MinigameState {
         }
         }
         if (iteration >= endgame){
-            System.exit(0);
-            //gioco finito superato
+            this.completed = true;
         }
     }
     
     
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
+        grphcs.draw(this.box);
         for(int i=0;i<4;i++){
             grphcs.setColor(this.getColor(i));
             grphcs.fill(this.buttons[i]);
@@ -169,7 +172,7 @@ public class SimonSays extends MinigameState {
             System.exit(1);
             //perso gioco finito
         }
+        font.drawString(10, 50, "TIME REMAINING: " + this.timer.getTime(), Color.red);
     }
 
 }
-   

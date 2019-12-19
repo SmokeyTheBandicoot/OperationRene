@@ -51,9 +51,7 @@ public class KeyPadGame extends MinigameState {
         super.init(gc, sbg, elementID, keysID);
         
         int[] column; 
-        
-        this.completed = false;
-        
+                
         switch((new Random()).nextInt(6)){
             
             case 0:
