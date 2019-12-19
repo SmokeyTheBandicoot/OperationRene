@@ -31,8 +31,8 @@ public class LevelSerializerTest {
         HashMap<Location, PointOfInterest> lockeds = new HashMap<>();
         HashMap<Location, PointOfInterest> other = new HashMap<>();
         
-        unlocks.put(new Location(1, 2), new Key(-1, new int[]{-1}));
-        lockeds.put(new Location(2, 3), new Door(-1, new int[]{-1}, new Size(1, 1), false));
+        //unlocks.put(new Location(1, 2), new Key(-1, new int[]{-1}));
+        //lockeds.put(new Location(2, 3), new Door(-1, new int[]{-1}, new Size(1, 1), false));
         other.put(new Location(5, 6), new Alarm(-1, new Size(5, 5)));
         
         LevelMap level = new LevelMap(-1, matrix, unlocks, lockeds, other);

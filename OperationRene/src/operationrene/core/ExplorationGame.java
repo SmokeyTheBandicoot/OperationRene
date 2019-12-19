@@ -143,10 +143,33 @@ public class ExplorationGame extends GameplayState {
                     if(e.getClass() == SafeElement.class){
                         this.goal = "ESCAPE !!!!!";
                         SafeElement s = (SafeElement)e;
-                        this.map.setTileId(s.posX, s.posY, 2, 13);
-                        this.map.setTileId(s.posX+1, s.posY, 2, 14);
-                        this.map.setTileId(s.posX, s.posY+1, 2, 23);
-                        this.map.setTileId(s.posX+1, s.posY+1, 2, 24);
+                        switch (this.mapLevel){
+                            
+                            case MapID.LEVEL_1:
+                                this.map.setTileId(s.posX, s.posY, 2, 13);
+                                this.map.setTileId(s.posX+1, s.posY, 2, 14);
+                                this.map.setTileId(s.posX, s.posY+1, 2, 23);
+                                this.map.setTileId(s.posX+1, s.posY+1, 2, 24);
+                                break;
+                            
+                            case MapID.LEVEL_2:
+                                this.map.setTileId(s.posX, s.posY, 2, 183);
+                                this.map.setTileId(s.posX+1, s.posY, 2, 184);
+                                this.map.setTileId(s.posX, s.posY+1, 2, 193);
+                                this.map.setTileId(s.posX+1, s.posY+1, 2, 194);
+                                break;
+                                
+                            case MapID.LEVEL_3:
+                                this.map.setTileId(s.posX, s.posY, 2, 183);
+                                this.map.setTileId(s.posX+1, s.posY, 2, 184);
+                                this.map.setTileId(s.posX, s.posY+1, 2, 193);
+                                this.map.setTileId(s.posX+1, s.posY+1, 2, 194);
+                                break;
+                            
+                            case MapID.LEVEL_RANDOM:
+                                break;
+                                
+                        }
                     }
                     
                     iterator.remove();
