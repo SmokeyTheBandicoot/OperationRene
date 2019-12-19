@@ -15,7 +15,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import static operationrene.gui.PlayWindow.difficulty;
+import static operationrene.gui.PlayWindow.getDifficulty;
 
 
 public class LevelMenuWindow extends BasicGameState {
@@ -32,10 +32,10 @@ public class LevelMenuWindow extends BasicGameState {
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-        Level1 = new Button(ButtonType.LEVEL1, OperationRene.WIDTH / 3, 150);
-        Level2 = new Button(ButtonType.LEVEL2, OperationRene.WIDTH / 3*2, 150);
-        Level3 = new Button(ButtonType.LEVEL3, OperationRene.WIDTH / 2, 400);
-        undo= new Button(ButtonType.RETURN, OperationRene.WIDTH / 4, 700);
+        Level1 = new Button(ButtonType.LEVEL1,250 , 300);
+        Level2 = new Button(ButtonType.LEVEL2, OperationRene.WIDTH / 2, 300);
+        Level3 = new Button(ButtonType.LEVEL3, OperationRene.WIDTH - 250 , 300);
+        undo= new Button(ButtonType.RETURN, OperationRene.WIDTH / 2, 700);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class LevelMenuWindow extends BasicGameState {
         
         if (Level1.isClicked()){
             
-            sbg.addState(new ExplorationGame(difficulty,MapID.LEVEL_1));
+            sbg.addState(new ExplorationGame(getDifficulty(),MapID.LEVEL_1));
             sbg.getState(StateID.EXPLORATION_ID).init(gc, sbg);
             sbg.enterState(StateID.EXPLORATION_ID);
             if (!info) {
@@ -72,7 +72,7 @@ public class LevelMenuWindow extends BasicGameState {
         }
         if (Level2.isClicked()){
             
-            sbg.addState(new ExplorationGame(difficulty,MapID.LEVEL_2));
+            sbg.addState(new ExplorationGame(getDifficulty(),MapID.LEVEL_2));
             sbg.getState(StateID.EXPLORATION_ID).init(gc, sbg);
             sbg.enterState(StateID.EXPLORATION_ID);
             if (!info) {
@@ -85,7 +85,7 @@ public class LevelMenuWindow extends BasicGameState {
         }
         if (Level3.isClicked()){
             
-            sbg.addState(new ExplorationGame(difficulty,MapID.LEVEL_3));
+            sbg.addState(new ExplorationGame(getDifficulty(),MapID.LEVEL_3));
             sbg.getState(StateID.EXPLORATION_ID).init(gc, sbg);
             sbg.enterState(StateID.EXPLORATION_ID);
             if (!info) {

@@ -27,7 +27,7 @@ public class CreditsWindow extends BasicGameState{
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-       returnButton = new  Button (ButtonType.RETURN, OperationRene.WIDTH/4, 600);
+       returnButton = new  Button (ButtonType.RETURN, OperationRene.WIDTH/2, 700);
     }
 
     @Override

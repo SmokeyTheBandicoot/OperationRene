@@ -35,14 +35,14 @@ public class GameOverWindow extends BasicGameState{
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         title = new Image("assets/sprites/controls/GameOver.PNG");
-        menu = new Button(ButtonType.MENU, OperationRene.WIDTH / 2, 400);
+        menu = new Button(ButtonType.MENU, OperationRene.WIDTH / 2, 600);
         
     }
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         menu.render(grphcs);
-        title.draw(OperationRene.WIDTH / 2 - title.getWidth() / 2, 0);
+        title.draw(OperationRene.WIDTH / 2 - title.getWidth() / 2, 100);
     }
 
     @Override

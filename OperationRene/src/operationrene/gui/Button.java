@@ -84,7 +84,7 @@ public class Button extends Entity {
         if (button.contains(gc.getInput().getMouseX(), gc.getInput().getMouseY())) {
             if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 buttonPressed = true;
-                if (type == 0) {
+                if (type == 0 || type == 3) {
                     renderImage = buttonImagePressed;
                 }
             } else {
@@ -94,14 +94,14 @@ public class Button extends Entity {
                     if (type == 1) {
                         this.SwapImage();
                     }
-                    if (type == 0) {
+                    if (type == 0  || type == 3) {
                         renderImage = buttonImage;
                     }
                 }
             }
         } else {
             buttonPressed = false;
-            if (type == 0) {
+            if (type == 0  || type == 3) {
                 renderImage = buttonImage;
             }
         }
@@ -113,7 +113,7 @@ public class Button extends Entity {
         renderImage.draw(position.x, position.y, width, height);
         gr.setColor(Color.black);
         if(buttonImageLabel!= null)
-        buttonImageLabel.draw(position.x,position.y+height);
+        buttonImageLabel.draw(position.x+ width/2- buttonImageLabel.getWidth()/2,position.y+height);
         
     }
 

@@ -26,9 +26,9 @@ public enum ButtonType {
     CAMPAIGN("CampaignMode.PNG","CampaignMode_pressed.PNG",0),
     RESUME("Resume.PNG","Resume_pressed.PNG",0),
     MENU("Menu.PNG","Menu_pressed.PNG",0),
-    LEVEL1("Level1.PNG","Level1_pressed.PNG","Level1_pressed.PNG",3),
-    LEVEL2("Level2.PNG","Level2_pressed.PNG","Level2_pressed.PNG",3),
-    LEVEL3("Level3.PNG","Level3_pressed.PNG","Level3_pressed.PNG",3),
+    LEVEL1("screenLv1.PNG","screenLv1_pressed.PNG","Level1.PNG",3),
+    LEVEL2("screenLv2.PNG","screenLv2_pressed.PNG","Level2.PNG",3),
+    LEVEL3("screenLv3.PNG","screenLv3_pressed.PNG","Level3.PNG",3),
     DIFFICULTY("easy.PNG","medium.PNG","hard.PNG",4);
     
     public final String image;
