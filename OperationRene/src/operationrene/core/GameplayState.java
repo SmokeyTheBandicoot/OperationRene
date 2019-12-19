@@ -8,6 +8,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 
 public abstract class GameplayState extends BasicGameState {
@@ -35,14 +37,10 @@ public abstract class GameplayState extends BasicGameState {
         
         if(this.timer.getTime() <= 0 ){
             
-            JOptionPane.showMessageDialog(null, 
-                              "YOU LOSE. TIME OVER.\nYOU'VE BEEN CAUGHT.", 
-                              "TIME OVER", 
-                              JOptionPane.WARNING_MESSAGE);
             this.outOfTime = true;
             sbg.addState(new GameOverWindow());
             sbg.getState(StateID.GAME_OVER_ID).init(gc, sbg);
-            sbg.enterState(StateID.GAME_OVER_ID);
+            sbg.enterState(StateID.GAME_OVER_ID, new  FadeOutTransition(),new FadeInTransition());
             }
         
     }

@@ -8,6 +8,8 @@ import operationrene.mapframework.pointsofinterest.EscapePoint;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class EscapePointElement extends Element implements InteractiveObjectInterface{
     
@@ -36,7 +38,7 @@ public class EscapePointElement extends Element implements InteractiveObjectInte
             } catch (SlickException ex) {
                 Logger.getLogger(EscapePointElement.class.getName()).log(Level.SEVERE, null, ex);
             }
-            sbg.enterState(StateID.GAME_WIN_ID);
+            sbg.enterState(StateID.GAME_WIN_ID, new  FadeOutTransition(),new FadeInTransition());
         }
         
     }

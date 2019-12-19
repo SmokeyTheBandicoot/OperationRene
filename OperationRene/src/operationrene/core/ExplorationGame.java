@@ -43,7 +43,7 @@ public class ExplorationGame extends GameplayState {
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         
         super.init(container, game);
-        this.timer.startTimer(120);
+        this.timer.startTimer(300);
         this.keys = new ArrayList<Integer>();
         this.elementID = -1;
         this.collisionedElement = null;
@@ -62,10 +62,10 @@ public class ExplorationGame extends GameplayState {
 
         this.map.draw();
         this.player.draw();
-        g.draw(new Rectangle(1, 1, OperationRene.WIDTH - 1, OperationRene.HEIGHT - 1));
-        for(Element e: this.map.getElements()){
+        
+        /*for(Element e: this.map.getElements()){
             g.draw(e.shape );
-        }
+        }*/
         
         font.drawString(10, 50, "TIME REMAINING: " + this.timer.getTime(), Color.red);
         font.drawString(10, 80, "GOAL: "+goal, Color.green);

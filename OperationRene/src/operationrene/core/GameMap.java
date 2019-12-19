@@ -84,7 +84,7 @@ public class GameMap {
                 this.elements.add(new DoorElement(new Door(0,null,new Size(2,1),true),1,23,15));
                 this.elements.add(new DoorElement(new Door(0,this.getFilledArray(new int[]{0,1}),new Size(1,2),true),2,29,12));
                 this.elements.add(new EscapePointElement(new EscapePoint(0,this.getFilledArray(new int[]{2})),3,8,12));
-                this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{0})),4,11,5));
+                this.elements.add(new MinigameElement(new Key(0,StateID.SIMONSAYS_ID,this.getFilledArray(new int[]{0})),4,11,5));
                 this.elements.add(new MinigameElement(new Key(0,StateID.KEYPAD_ID,this.getFilledArray(new int[]{1})),5,27,17));
                 this.elements.add(new SafeElement(new Safe(0,this.getFilledArray(new int[]{2}),new Size(1,1)),6,34,5));
                 break;
@@ -105,9 +105,9 @@ public class GameMap {
                 this.elements.add(new EscapePointElement(new EscapePoint(0,this.getFilledArray(new int[]{6})),7,5,16));
                 
                 this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{1})),8,14,3));
-                this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{2})),9,18,21));
-                this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{4})),10,32,22));
-                this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{5})),11,41,21));
+                this.elements.add(new MinigameElement(new Key(0,StateID.WORDS_ID,this.getFilledArray(new int[]{2})),9,18,21));
+                this.elements.add(new MinigameElement(new Key(0,StateID.MEMORY_ID,this.getFilledArray(new int[]{4})),10,32,22));
+                this.elements.add(new MinigameElement(new Key(0,StateID.KEYPAD_ID,this.getFilledArray(new int[]{5})),11,41,21));
                 this.elements.add(new SafeElement(new Safe(0, this.getFilledArray(new int[]{6}), new Size(1,1)),12,40,7));
                
                 this.alarms = new ArrayList<Rectangle>();
