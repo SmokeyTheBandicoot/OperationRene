@@ -9,10 +9,9 @@ import operationrene.alarm.MapAlarm.Dimension;
 import operationrene.alarm.MapAlarmFactory;
 import operationrene.mapframework.*;
 import operationrene.mapframework.levelbuilder.LevelSerializer;
-import operationrene.mapframework.matrixprops.Direction;
+import operationrene.mapframework.matrixprops.*;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import operationrene.mapframework.pointsofinterest.*;
-import operationrene.utils.MatrixUtils;
 import static operationrene.utils.MatrixUtils.*;
 import operationrene.utils.RandomUtils;
 import operationrene.utils.SizeUtils;
@@ -32,15 +31,6 @@ public class ProceduralLevelPartsGenerator {
     public static void main(String[] args) {
         
         LevelMap lm;
-          
-        lm = generateSafeRoom1();
-        LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/safes/safe1.dat");
-        
-        lm = generateSafeRoom2();
-        LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/safes/safe2.dat");
-        
-        lm = generateSafeRoom3();
-        LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/safes/safe3.dat");
         
         lm = generateVerticalCorridor(8, 4, MAX_MATRIX_WIDTH / 2 - 5);
         LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/corridors/corridor1.dat");
@@ -53,6 +43,18 @@ public class ProceduralLevelPartsGenerator {
         
         lm = generateHorizontalCorridor(8, 6, MAX_MATRIX_HEIGHT / 2 - 5);
         LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/corridors/corridor4.dat");
+        
+        lm = generateSafeRoom1();
+        LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/safes/safe1.dat");
+        
+        lm = generateSafeRoom2();
+        LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/safes/safe2.dat");
+        
+        lm = generateSafeRoom3();
+        LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/safes/safe3.dat");
+        
+        lm = generateSafeRoom4();
+        LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/safes/safe4.dat");
         
         final int offset = 8;
         for (int x = 0; x <= 14; x++) {
@@ -101,17 +103,17 @@ public class ProceduralLevelPartsGenerator {
     // Safe rooms
     private static LevelMap generateSafeRoom1() {
         
-        Integer [][] matrix = generateMatrix(7, 9);
+        Integer [][] matrix = generateMatrix(7, 11);
         
-        // Safe Room 1: 9x7 room, with safe, 1 minigame and locked door
+        // Safe Room 1: 11x7 (internal 9x5) room, with safe, 1 alarm and locked door
         HashMap<Location, PointOfInterest> lockeds = new HashMap<>();
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(3, 7), new Safe(-1, new int[]{}, new Size(1, 1)));
-        lockeds.put(new Location(3, 0), new Door(1, new int []{}, new Size(1, 2), false));
-        unlocks.put(new Location(2, 7), new Key(-1, new int []{}));
-        others.put(new Location(1, 2), new Alarm(-1, new Size(5, 5)));
+        lockeds.put(new Location(9, 1), new Safe(1, new int[]{}, new Size(1, 1)));
+        lockeds.put(new Location(0, 3), new Door(1, new int []{}, new Size(1, 2), false));
+        unlocks.put(new Location(9, 5), new Key(1, new int []{}));
+        others.put(new Location(3, 1), new Alarm(1, new Size(5, 5)));
         
         // Put the door in
         matrix[3][0] = 2;
@@ -120,7 +122,10 @@ public class ProceduralLevelPartsGenerator {
         LevelMap lm = new LevelMap(-1, matrix, lockeds, unlocks, others, null);
         
         System.out.println("Room: SAFE_1");
-        MatrixUtils.debugMatrix(matrix);
+        debugMatrix(matrix);
+        debugPoints(lockeds);
+        debugPoints(unlocks);
+        debugPoints(others);
         
         return lm;
     }
@@ -134,10 +139,10 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(4, 11), new Safe(-1, new int[]{}, new Size(1, 1)));
-        lockeds.put(new Location(4, 0), new Door(1, new int []{}, new Size(1, 2), false));
-        unlocks.put(new Location(7, 11), new Key(-1, new int []{}));
-        others.put(new Location(1, 2), new Alarm(-1, new Size(7, 7)));
+        lockeds.put(new Location(11, 1), new Safe(1, new int[]{}, new Size(1, 1)));
+        lockeds.put(new Location(0, 4), new Door(1, new int []{}, new Size(1, 2), false));
+        unlocks.put(new Location(11, 11), new Key(1, new int []{}));
+        others.put(new Location(3, 1), new Alarm(1, new Size(7, 7)));
         
         matrix[4][0] = 2;
         matrix[5][0] = 2;
@@ -146,6 +151,8 @@ public class ProceduralLevelPartsGenerator {
         
         System.out.println("Room: SAFE_2");
         debugMatrix(matrix);
+        debugPoints(lockeds);
+        debugPoints(unlocks);
         debugPoints(others);
         
         return lm;
@@ -153,16 +160,16 @@ public class ProceduralLevelPartsGenerator {
     
     private static LevelMap generateSafeRoom3() {
         
-        Integer [][] matrix = generateMatrix(11, 13);
+        Integer [][] matrix = generateMatrix(11, 15);
         
         HashMap<Location, PointOfInterest> lockeds = new HashMap<>();
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(1, 11), new Safe(-1, new int[]{}, new Size(1, 1)));
-        lockeds.put(new Location(2, 0), new Door(1, new int []{}, new Size(1, 2), false));
-        unlocks.put(new Location(9, 11), new Key(-1, new int []{}));
-        others.put(new Location(1, 2), new Alarm(-1, new Size(9, 9)));
+        lockeds.put(new Location(13, 1), new Safe(1, new int[]{}, new Size(1, 1)));
+        lockeds.put(new Location(0, 2), new Door(1, new int []{}, new Size(1, 2), false));
+        unlocks.put(new Location(13, 9), new Key(1, new int []{}));
+        others.put(new Location(3, 1), new Alarm(1, new Size(9, 9)));
         
         matrix[2][0] = 2;
         matrix[3][0] = 2;
@@ -171,6 +178,35 @@ public class ProceduralLevelPartsGenerator {
         
         System.out.println("Room SAFE_3");
         debugMatrix(matrix);
+        debugPoints(lockeds);
+        debugPoints(unlocks);
+        debugPoints(others);
+        
+        return lm;
+    }
+    
+    private static LevelMap generateSafeRoom4() {
+        
+        Integer [][] matrix = generateMatrix(7, 9);
+        
+        HashMap<Location, PointOfInterest> lockeds = new HashMap<>();
+        HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
+        HashMap<Location, PointOfInterest> others = new HashMap<>();
+        
+        lockeds.put(new Location(7, 1), new Safe(1, new int[]{}, new Size(1, 1)));
+        lockeds.put(new Location(0, 3), new Door(1, new int []{}, new Size(1, 2), false));
+        unlocks.put(new Location(7, 5), new Key(1, new int []{}));
+        
+        // Put the door in
+        matrix[3][0] = 2;
+        matrix[4][0] = 2;
+        
+        LevelMap lm = new LevelMap(-1, matrix, lockeds, unlocks, others, null);
+        
+        System.out.println("Room: SAFE_4");
+        debugMatrix(matrix);
+        debugPoints(lockeds);
+        debugPoints(unlocks);
         debugPoints(others);
         
         return lm;

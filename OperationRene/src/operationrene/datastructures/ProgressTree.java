@@ -1,5 +1,8 @@
 package operationrene.datastructures;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 
 public class ProgressTree<T> {
@@ -64,15 +67,75 @@ public class ProgressTree<T> {
     }
     
     public Node<T> getNode(T key, Node<T> subtreeRoot) {
-        System.out.println("###");
+        if (key == null) return null;
         if (subtreeRoot == null) return null;
         if (subtreeRoot.key == key) return subtreeRoot;
-        if (subtreeRoot.left != null && subtreeRoot.left.key == key) return root.left;
-        if (subtreeRoot.right != null && subtreeRoot.right.key == key) return root.right;
+        boolean t1 = subtreeRoot.left != null;
+        boolean t2 = subtreeRoot.left.key == key;
+        if (t1 && t2) return subtreeRoot.left;
+        if (subtreeRoot.right != null && subtreeRoot.right.key == key) return subtreeRoot.right;
         Node<T> resultLeft = getNode(key, subtreeRoot.left);
         if (resultLeft != null) return resultLeft;
         else return getNode(key, subtreeRoot.right);             
     }
+    
+    public int height(T key) {
+        if (key == null) return 0;
+        if (root == null) return 0;
+        Node<T> node = getNode(key, root);
+        if (node.left == null && node.right == null) return 1;
+        if (node.right == null) return 1 + height(node.left.key);
+        int lheight = height(node.left.key);
+        int rheight = height(node.right.key);
+        return 1 + Math.max(lheight, rheight);
+    }
+    
+    public String printTree(String separator) {
+        return recurseTree(root, "", "", separator);
+    }
+    
+    private String recurseTree(Node<T> node, String indent, String result, String separator) {
+        if (node == null) return indent + "~null";
+        else {
+            result += indent + "(" + node.key.toString() + ")"
+                    + "\n" + recurseTree(node.left, indent + separator, result, separator) 
+                    + "\n" + recurseTree(node.right, indent + separator, result, separator);
+            return result;
+        }
+    }
+
+    public List<T> toListBreadthFirst(Node<T> root) {
+        List<T> list = new ArrayList<>();
+        if (root == null) return new ArrayList<>();
+        list.add(root.key);
+        list.addAll(toListBreadthFirst(root.left));
+        list.addAll(toListBreadthFirst(root.right));
+        return list;
+    }
+    
+    
+    
+    /*public String printTree() {
+        StringBuilder s = new StringBuilder();
+        int h = height(root.key);
+        for (int i = 0; i < h; i++)
+            s.append(printLevel(root, i, ".   "));
+        return s.toString();
+    }
+    
+    private String printLevel(Node<T> node, int level, String separator) {
+        StringBuilder s = new StringBuilder();
+        if (separator == null) separator = ".   ";
+        if (node == null) return "~null";
+        if (node.key == null) return "~null";
+        if (level == 0) return "(" + node.key.toString() + ")\n";
+        
+        s.append(separator);
+        s.append(printLevel(node.left, level - 1, separator));
+        
+        s.append("\n").append(separator);
+        s.append(printLevel(node.right, level - 1, separator));
+    }*/
     
     // Node class
     public static class Node<T> {
@@ -96,6 +159,5 @@ public class ProgressTree<T> {
             this.parent = parent;
         }
     }
-    
-    
+
 }

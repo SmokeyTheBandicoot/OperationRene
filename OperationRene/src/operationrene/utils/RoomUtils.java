@@ -17,20 +17,61 @@ public class RoomUtils {
         if (null != r)
             switch (r) {
             case RIGHT:
+                // Rotate matrix
                 for (int i=0; i<n; i++)
                     for (int j=0;j<m; j++)
                         output [j][n-1-i] = mat[i][j];
+                // Rotate HashMaps
+                room.setLockedObjects(
+                        HashMapUtils.rotate(room.getLockedObjects(), 
+                        Rotation.RIGHT, 
+                        new Size(room.getMatrixHeight(), room.getMatrixWidth())));
+                room.setUnlockingObjects(
+                        HashMapUtils.rotate(room.getUnlockingObjects(), 
+                        Rotation.RIGHT, 
+                        new Size(room.getMatrixHeight(), room.getMatrixWidth())));
+                room.setOtherObjects(
+                        HashMapUtils.rotate(room.getOtherObjects(), 
+                        Rotation.RIGHT, 
+                        new Size(room.getMatrixHeight(), room.getMatrixWidth())));
+                
                 break;
             case LEFT:
                 for (int i=0; i<n; i++)
                     for (int j=0;j<m; j++)
                         output [j][n-1-i] = mat[n-1-i][m-1-j];
+                // Rotate HashMaps
+                room.setLockedObjects(
+                        HashMapUtils.rotate(room.getLockedObjects(), 
+                        Rotation.LEFT, 
+                        new Size(room.getMatrixHeight(), room.getMatrixWidth())));
+                room.setUnlockingObjects(
+                        HashMapUtils.rotate(room.getUnlockingObjects(), 
+                        Rotation.LEFT, 
+                        new Size(room.getMatrixHeight(), room.getMatrixWidth())));
+                room.setOtherObjects(
+                        HashMapUtils.rotate(room.getOtherObjects(), 
+                        Rotation.LEFT, 
+                        new Size(room.getMatrixHeight(), room.getMatrixWidth())));
                 break;
             case DEG180:
                 output = new Integer[n][m];
                 for (int i=0; i<n; i++)
                     for (int j=0;j<m; j++)
                         output [i][j] = mat[n-1-i][m-1-j];
+                // Rotate HashMaps
+                room.setLockedObjects(
+                        HashMapUtils.rotate(room.getLockedObjects(), 
+                        Rotation.DEG180, 
+                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
+                room.setUnlockingObjects(
+                        HashMapUtils.rotate(room.getUnlockingObjects(), 
+                        Rotation.DEG180, 
+                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
+                room.setOtherObjects(
+                        HashMapUtils.rotate(room.getOtherObjects(), 
+                        Rotation.DEG180, 
+                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
                 break;
             default:
                 break;
@@ -55,6 +96,19 @@ public class RoomUtils {
                 for (int i = 0; i < r; i++){
                     mat[i] = reverseArray(mat[i]);
                 }
+                // Rotate HashMaps
+                room.setLockedObjects(
+                        HashMapUtils.flip(room.getLockedObjects(), 
+                        Flipping.HORIZONTAL, 
+                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
+                room.setUnlockingObjects(
+                        HashMapUtils.flip(room.getUnlockingObjects(), 
+                        Flipping.HORIZONTAL, 
+                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
+                room.setOtherObjects(
+                        HashMapUtils.flip(room.getOtherObjects(), 
+                        Flipping.HORIZONTAL, 
+                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
                 break;
             case VERTICAL:
                 for(int i=0; i < r/2; i++){
@@ -62,7 +116,20 @@ public class RoomUtils {
                     System.arraycopy(mat[i], 0, temp, 0, mat[i].length);
                     System.arraycopy(mat[r-1-i], 0, mat[i], 0, mat[i].length);
                     System.arraycopy(temp, 0, mat[r-1-i], 0, temp.length);
-                }   
+                }
+                // Rotate HashMaps
+                room.setLockedObjects(
+                        HashMapUtils.flip(room.getLockedObjects(), 
+                        Flipping.VERTICAL, 
+                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
+                room.setUnlockingObjects(
+                        HashMapUtils.flip(room.getUnlockingObjects(), 
+                        Flipping.VERTICAL, 
+                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
+                room.setOtherObjects(
+                        HashMapUtils.flip(room.getOtherObjects(), 
+                        Flipping.VERTICAL, 
+                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
                 break;
             case BOTH:
                 return rotateRoom(room, Rotation.DEG180);

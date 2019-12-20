@@ -8,7 +8,7 @@ public class Room extends PointOfInterest implements Serializable {
     protected Direction dir;
     
     public Room(int roomID, Size size, Direction dir) {
-        super(PointType.Room, roomID, new int []{-1}, size);
+        super(PointType.Room, roomID, new int []{}, size);
         this.dir = dir;
     }
 
