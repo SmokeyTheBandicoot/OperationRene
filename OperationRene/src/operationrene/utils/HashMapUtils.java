@@ -16,7 +16,7 @@ public class HashMapUtils {
      * @return 
      */
     public static HashMap<Location, PointOfInterest> rotate(HashMap<Location, PointOfInterest> hash, Rotation rot, Size s) {
-        
+        if (hash == null) return null;
         if (rot == Rotation.NONE) return hash;
         
         int n = s.getHeight();
@@ -70,6 +70,7 @@ public class HashMapUtils {
      * @return 
      */
     public static HashMap<Location, PointOfInterest> flip(HashMap<Location, PointOfInterest> hash, Flipping fl, Size s) {
+        if (hash == null) return null;
         if (fl == Flipping.NONE) return hash;
         
         int n = s.getHeight();
@@ -116,6 +117,7 @@ public class HashMapUtils {
      * @return 
      */
     public static HashMap<Location, PointOfInterest> traslate(HashMap<Location, PointOfInterest> hash, Location offset) {
+        if (hash == null) return null;
         Set<Location> set = new HashSet<>(hash.keySet());
         for (Location oldLoc : set) {
             PointOfInterest POI = hash.remove(oldLoc);
