@@ -57,7 +57,7 @@ public class MatrixUtils {
         return levelMatrix;
     }
     
-    private static Location getOffsetLoc(Location loc, Size matrixSize, Size originSize, Direction dir) {
+    public static Location getOffsetLoc(Location loc, Size matrixSize, Size originSize, Direction dir) {
         
         if (null != dir) switch (dir) {
             case LEFT:

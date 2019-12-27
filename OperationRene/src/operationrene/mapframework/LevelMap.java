@@ -17,6 +17,7 @@ public class LevelMap implements Serializable {
     protected HashMap<Location, PointOfInterest> lockedObjects;
     protected HashMap<Location, PointOfInterest> unlockingObjects;
     protected HashMap<Location, PointOfInterest> otherObjects;
+    protected int clearingTime = 100;
     
     // List containing all the rooms in the level
     protected HashMap<Location, Room> rooms;

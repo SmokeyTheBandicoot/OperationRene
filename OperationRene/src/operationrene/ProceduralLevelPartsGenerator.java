@@ -141,7 +141,7 @@ public class ProceduralLevelPartsGenerator {
         
         lockeds.put(new Location(11, 1), new Safe(1, new int[]{}, new Size(1, 1)));
         lockeds.put(new Location(0, 4), new Door(1, new int []{}, new Size(1, 2), false));
-        unlocks.put(new Location(11, 11), new Key(1, new int []{}));
+        unlocks.put(new Location(11, 7), new Key(1, new int []{}));
         others.put(new Location(3, 1), new Alarm(1, new Size(7, 7)));
         
         matrix[4][0] = 2;
@@ -223,8 +223,11 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
         // Generate door randomly in the left door
-        lockeds.put(new Location(doorOffset, 0), new Door(-1, new int[]{}, new Size(1, 2), false));
-        unlocks.put(new Location(unlockOffset, width - 2), new Key(-1, new int[]{-1}));
+        // lockeds.put(new Location(doorOffset, 0), new Door(-1, new int[]{}, new Size(1, 2), false));
+        lockeds.put(new Location(0, doorOffset), new Door(-1, new int[]{}, new Size(1, 2), false));
+        // unlocks.put(new Location(unlockOffset, width - 2), new Key(-1, new int[]{-1}));
+        // unlocks.put(new Location(width - 2, unlockOffset), new Key(-1, new int[]{-1}));
+        unlocks.put(new Location(width - 2, 1), new Key(-1, new int[]{-1}));
         
         // In order to put a potential alarm, get the maximum useful area
         final int maxW = width - 4;
@@ -293,19 +296,19 @@ public class ProceduralLevelPartsGenerator {
         
         
         
-        others.put(new Location(leftRoomsOffset + width / 2, 1), new EntryPoint(0));
+        others.put(new Location(leftRoomsOffset + width / 2, 2), new EntryPoint(0));
         
         // Put escape point
         if (RandomUtils.genRandomInt(0, 1) == 0){
             // Generate escape point on top
             matrix[0][leftRoomsOffset + width / 2 - 1] = 2;
             matrix[0][leftRoomsOffset + width / 2] = 2;
-            others.put(new Location(0, leftRoomsOffset + width / 2), new EscapePoint(0));
+            others.put(new Location(leftRoomsOffset + width / 2, 1), new EscapePoint(0));
         } else {
             // Generate escape point on bottom
             matrix[MAX_MATRIX_HEIGHT - 1][leftRoomsOffset + width / 2 - 1] = 2;
             matrix[MAX_MATRIX_HEIGHT - 1][leftRoomsOffset + width / 2] = 2;
-            others.put(new Location(MAX_MATRIX_HEIGHT - 1, leftRoomsOffset + width / 2), new EscapePoint(0));
+            others.put(new Location(leftRoomsOffset + width / 2,MAX_MATRIX_HEIGHT - 2), new EscapePoint(0));
         }
         
         LevelMap lm = new LevelMap(0, matrix, null, null, others, rooms);
@@ -350,19 +353,19 @@ public class ProceduralLevelPartsGenerator {
         } while (curXOffset + maxRoomWidth < MAX_MATRIX_WIDTH);
         
 
-        others.put(new Location(1, upperRoomsOffset + width / 2), new EntryPoint(0));
+        others.put(new Location(2, upperRoomsOffset + width / 2), new EntryPoint(0));
         
         // Put escape point in the corridor
         if (RandomUtils.genRandomInt(0, 1) == 0) {
             // Put escape point to the left
             matrix[upperRoomsOffset + width / 2 - 1][0] = 2;
             matrix[upperRoomsOffset + width / 2][0] = 2;
-            others.put(new Location(upperRoomsOffset + width / 2 -1, 0), new EscapePoint(0));
+            others.put(new Location(0, upperRoomsOffset + width / 2 -1), new EscapePoint(0));
         } else {
             // Put escape point to the right
             matrix[upperRoomsOffset + width / 2 - 1][MAX_MATRIX_WIDTH - 1] = 2;
             matrix[upperRoomsOffset + width / 2][MAX_MATRIX_WIDTH - 1] = 2;
-            others.put(new Location(upperRoomsOffset + width / 2 -1, 0), new EscapePoint(0));
+            others.put(new Location(0, upperRoomsOffset + width / 2 -1), new EscapePoint(0));
         }
         
         LevelMap lm = new LevelMap(0, matrix, null, null, others, rooms);

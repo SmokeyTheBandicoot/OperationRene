@@ -25,16 +25,15 @@ public class RoomUtils {
                 room.setLockedObjects(
                         HashMapUtils.rotate(room.getLockedObjects(), 
                         Rotation.RIGHT, 
-                        new Size(room.getMatrixHeight(), room.getMatrixWidth())));
+                        new Size(m, n)));
                 room.setUnlockingObjects(
                         HashMapUtils.rotate(room.getUnlockingObjects(), 
                         Rotation.RIGHT, 
-                        new Size(room.getMatrixHeight(), room.getMatrixWidth())));
+                        new Size(m, n)));
                 room.setOtherObjects(
                         HashMapUtils.rotate(room.getOtherObjects(), 
                         Rotation.RIGHT, 
-                        new Size(room.getMatrixHeight(), room.getMatrixWidth())));
-                
+                        new Size(m, n)));
                 break;
             case LEFT:
                 for (int i=0; i<n; i++)
@@ -44,15 +43,15 @@ public class RoomUtils {
                 room.setLockedObjects(
                         HashMapUtils.rotate(room.getLockedObjects(), 
                         Rotation.LEFT, 
-                        new Size(room.getMatrixHeight(), room.getMatrixWidth())));
+                        new Size(m, n)));
                 room.setUnlockingObjects(
                         HashMapUtils.rotate(room.getUnlockingObjects(), 
                         Rotation.LEFT, 
-                        new Size(room.getMatrixHeight(), room.getMatrixWidth())));
+                        new Size(m, n)));
                 room.setOtherObjects(
                         HashMapUtils.rotate(room.getOtherObjects(), 
                         Rotation.LEFT, 
-                        new Size(room.getMatrixHeight(), room.getMatrixWidth())));
+                        new Size(m, n)));
                 break;
             case DEG180:
                 output = new Integer[n][m];
@@ -63,15 +62,15 @@ public class RoomUtils {
                 room.setLockedObjects(
                         HashMapUtils.rotate(room.getLockedObjects(), 
                         Rotation.DEG180, 
-                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
+                        new Size(n, m)));
                 room.setUnlockingObjects(
                         HashMapUtils.rotate(room.getUnlockingObjects(), 
                         Rotation.DEG180, 
-                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
+                        new Size(n, m)));
                 room.setOtherObjects(
                         HashMapUtils.rotate(room.getOtherObjects(), 
                         Rotation.DEG180, 
-                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
+                        new Size(n, m)));
                 break;
             default:
                 break;
@@ -100,15 +99,15 @@ public class RoomUtils {
                 room.setLockedObjects(
                         HashMapUtils.flip(room.getLockedObjects(), 
                         Flipping.HORIZONTAL, 
-                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
+                        new Size(c, r)));
                 room.setUnlockingObjects(
                         HashMapUtils.flip(room.getUnlockingObjects(), 
                         Flipping.HORIZONTAL, 
-                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
+                        new Size(c, r)));
                 room.setOtherObjects(
                         HashMapUtils.flip(room.getOtherObjects(), 
                         Flipping.HORIZONTAL, 
-                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
+                        new Size(c, r)));
                 break;
             case VERTICAL:
                 for(int i=0; i < r/2; i++){
@@ -121,15 +120,15 @@ public class RoomUtils {
                 room.setLockedObjects(
                         HashMapUtils.flip(room.getLockedObjects(), 
                         Flipping.VERTICAL, 
-                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
+                        new Size(c, r)));
                 room.setUnlockingObjects(
                         HashMapUtils.flip(room.getUnlockingObjects(), 
                         Flipping.VERTICAL, 
-                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
+                        new Size(c, r)));
                 room.setOtherObjects(
                         HashMapUtils.flip(room.getOtherObjects(), 
                         Flipping.VERTICAL, 
-                        new Size(room.getMatrixWidth(), room.getMatrixHeight())));
+                        new Size(c, r)));
                 break;
             case BOTH:
                 return rotateRoom(room, Rotation.DEG180);

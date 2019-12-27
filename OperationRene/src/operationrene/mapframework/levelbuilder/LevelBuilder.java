@@ -30,6 +30,8 @@ public class LevelBuilder {
 
     public void buildLevel() {
         
+        // ####################### - PHASE 1: Building the levelroom by room
+        
         // Loads the choosen corridor
         this.buildingLevel = loadRandomCorridor();
 
@@ -66,16 +68,8 @@ public class LevelBuilder {
             // Loads the choosen safe room into the corridor
             safe = LevelSerializer.loadLevel(safes.get(randomSafe));
 
-            System.out.println("SAFE:");
-            MatrixUtils.debugMatrix(safe.getMatrix());
-            System.out.println(String.format("Trying to fit: %d %d in room %s", safe.getMatrixWidth(), safe.getMatrixHeight(), roomS.getSize()));
-            System.out.println("Room rotation: " + roomS.getDir().toString());
-            System.out.println("Room size:" + roomS.getSize().toString());
-            System.out.println("Final virdict: " + SizeUtils.fitsInside((RoomUtils.calculateRotation(roomS.getDir())), roomS.getSize(), new Size(safe.getMatrixWidth(), safe.getMatrixHeight())));
-            
             if (SizeUtils.fitsInside((RoomUtils.calculateRotation(roomS.getDir())), roomS.getSize(), new Size(safe.getMatrixWidth(), safe.getMatrixHeight()))) {
                 safeGenerated = true;
-                System.out.println("SAFE GENERATED");
                 buildingLevel.getRooms().get(roomLoc).setRoomID(1);
             } else {
                 safes.remove(randomSafe);
@@ -101,9 +95,9 @@ public class LevelBuilder {
             }
         }
 
-        // Adding safe room...
-        System.out.println("roomLoc: " + roomLoc + "; roomS: " + roomS.getSize().toString() + "; Dir: " + roomS.getDir());
-        addRoom(1, safe, roomLoc, roomS.getSize(), roomS.getDir());
+        // Adding safe room
+        addRoom(1, safe, roomLoc, roomS.getSize(), roomS.getDir()); 
+        // ---# Set the room id in the building level
 
         // Iteration on all rooms
         for (int i = 0; i < rooms.size(); i++) {
@@ -172,12 +166,16 @@ public class LevelBuilder {
                     // Add the room to the matrix
                     // roomID starts from 2 because 0 is the corridor and 1 is 
                     // the room containing the safe, generated above
+                    System.out.println("Choosen room with ID " + i+2 + ": " + path);
                     addRoom(i + 2, room, roomArray.get(i), levelSize, roomDir);
+                    // ---# change room id of the building level
                     break;
                 }
             }
         }
 
+        // ####################### - PHASE 2: Randomize the progression in the rooms
+        
         // Row randomize progression
         ProgressionRandomizer pr = new ProgressionRandomizer(buildingLevel);
         try {
@@ -186,8 +184,12 @@ public class LevelBuilder {
             Logger.getLogger(LevelBuilder.class.getName()).log(Level.SEVERE, null, ex);
             // System.out.println(Arrays.toString(ex.getStackTrace()));
         }
-
-
+        
+        // ####################### - PHASE 3: Setting up traps
+        
+        
+        
+        
     }
     
     private LevelMap loadRandomCorridor(){
@@ -199,8 +201,6 @@ public class LevelBuilder {
         return LevelSerializer.loadLevel(corridors.get(randomCorridor));
     }
     
-    
-
     /**
      * Function responsible for overwriting the matrix and chaining the hashmaps
      *
@@ -212,37 +212,55 @@ public class LevelBuilder {
      */
     public void addRoom(int roomID, LevelMap lm, Location loc, Size maxSize, Direction dir) {
 
+        this.buildingLevel.getRooms().get(loc).setRoomID(roomID);
+        Location offsetLocation = loc;
+        /*Location offsetLocation = new Location(
+                loc.getX() + maxSize.getWidth() - lm.getMatrixWidth(),
+                loc.getY() + maxSize.getHeight() - lm.getMatrixHeight()
+        );*/
+        
+        if (null != dir) switch (dir) {
+            case RIGHT:
+                offsetLocation = new Location(loc.getX() + maxSize.getWidth() - lm.getMatrixWidth(), loc.getY());
+                break;
+            case DOWN:
+                offsetLocation = new Location(loc.getX(), loc.getY() + maxSize.getHeight() - lm.getMatrixHeight());
+                break;
+            default:
+                break;
+        }
+        
         if (lm.getLockedObjects() != null) {
             if (buildingLevel.getLockedObjects() == null) {
-                buildingLevel.setLockedObjects(HashMapUtils.traslate(lm.getLockedObjects(), loc));
+                buildingLevel.setLockedObjects(HashMapUtils.traslate(lm.getLockedObjects(), offsetLocation));
             } else {
                 for (Location iter : lm.getLockedObjects().keySet()) {
                     lm.getLockedObjects().get(iter).setRoomID(roomID);
                     
                 }
-                buildingLevel.getLockedObjects().putAll(HashMapUtils.traslate(lm.getLockedObjects(), loc));
+                buildingLevel.getLockedObjects().putAll(HashMapUtils.traslate(lm.getLockedObjects(), offsetLocation));
             }
         }
 
         if (lm.getUnlockingObjects() != null) {
             if (buildingLevel.getUnlockingObjects() == null) {
-                buildingLevel.setUnlockingObjects(HashMapUtils.traslate(lm.getUnlockingObjects(), loc));
+                buildingLevel.setUnlockingObjects(HashMapUtils.traslate(lm.getUnlockingObjects(), offsetLocation));
             } else {
                 for (Location iter : lm.getUnlockingObjects().keySet()) {
                     lm.getUnlockingObjects().get(iter).setRoomID(roomID);
                 }
-                buildingLevel.getUnlockingObjects().putAll(HashMapUtils.traslate(lm.getUnlockingObjects(), loc));
+                buildingLevel.getUnlockingObjects().putAll(HashMapUtils.traslate(lm.getUnlockingObjects(), offsetLocation));
             }
         }
 
         if (lm.getOtherObjects() != null) {
             if (getBuildingLevel().getOtherObjects() == null) {
-                buildingLevel.setOtherObjects(HashMapUtils.traslate(lm.getOtherObjects(), loc));
+                buildingLevel.setOtherObjects(HashMapUtils.traslate(lm.getOtherObjects(), offsetLocation));
             } else {
                 for (Location iter : lm.getOtherObjects().keySet()) {
                     lm.getOtherObjects().get(iter).setRoomID(roomID);
                 }
-                buildingLevel.getOtherObjects().putAll(HashMapUtils.traslate(lm.getOtherObjects(), loc));
+                buildingLevel.getOtherObjects().putAll(HashMapUtils.traslate(lm.getOtherObjects(), offsetLocation));
             }
         }
 
