@@ -1,6 +1,7 @@
 package operationrene.mapframework.levelbuilder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -51,8 +52,8 @@ public class ProgressionRandomizer {
     private LevelMap lm = null;
 
     // Cache Hashmaps
-    private HashMap<Location, PointOfInterest> locks;
-    private HashMap<Location, PointOfInterest> unlocks;
+    private final HashMap<Location, PointOfInterest> locks;
+    private final HashMap<Location, PointOfInterest> unlocks;
 
     public ProgressionRandomizer(LevelMap lm) {
         // Creates a SHALLOW COPY of the hashmaps of the LevelMap
@@ -73,8 +74,13 @@ public class ProgressionRandomizer {
         // Generate random IDs for the keys
         int [] randomIDs = generateRandomIDs(unlocks.size());
         int k = 0;
+        
         for (Location l : unlocks.keySet()) {
-            unlocks.get(l).setRequiredKeysID(new int[]{randomIDs[k++]});
+            ArrayList<Integer> req = new ArrayList<>();
+            req.clear();
+            req.add(randomIDs[k++]);
+            unlocks.get(l).setRequiredKeysID(req);
+            req.clear();
         
         }
         
@@ -240,7 +246,7 @@ public class ProgressionRandomizer {
         HashMap<Location, PointOfInterest> unlocksCache = lm.getUnlockingObjects();
 
         // Get the children IDs and store them
-        List<Integer> ids = new ArrayList<>();
+        ArrayList<Integer> ids = new ArrayList<>();
 
         // System.out.println(locked.key);
         // Inspects left and right children of the locked object, 
@@ -248,25 +254,22 @@ public class ProgressionRandomizer {
         if (locked.left == null && locked.right == null) {
             // Otherwise it is empty, so it is unlocked
             // System.out.println(lm.getLockedObjects().get(locked.key));
-            lm.getLockedObjects().get(locked.key).setRequiredKeysID(new int[]{});
+            lm.getLockedObjects().get(locked.key).setRequiredKeysID(ids);
             return;
         }
 
         // Unlock objects only have 1 requiredKeyID
-        ids.add(lm.getUnlockingObjects().get(locked.left.key).getRequiredKeysID()[0]);
+        PointOfInterest poi = lm.getUnlockingObjects().get(locked.left.key);
+        Integer i = poi.getRequiredKeysID().get(0); 
+        ids.add(i);
         if (locked.right != null) // Unlock objects only have 1 requiredKeyID
         {
-            ids.add(lm.getUnlockingObjects().get(locked.right.key).getRequiredKeysID()[0]);
-        }
-
-        // Transform ArrayList<Integer> into int[]
-        int[] reqIds = new int[ids.size()];
-        for (int x = 0; x < ids.size(); x++) {
-            reqIds[x] = ids.get(x);
+            Integer ii = lm.getUnlockingObjects().get(locked.right.key).getRequiredKeysID().get(0);
+            ids.add(ii);
         }
 
         // Set the req keys ID for the locked object
-        lm.getLockedObjects().get(locked.key).setRequiredKeysID(reqIds);
+        lm.getLockedObjects().get(locked.key).setRequiredKeysID(ids);
 
         // Then do this recursively
         setIDs(locked.left.left);
@@ -294,7 +297,13 @@ public class ProgressionRandomizer {
         }
         return null;
     }
-
+    
+    /**
+     * Finds another element in the inspectedMap with room id roomID
+     * @param roomID roomID of the searched element
+     * @param inspectedMap map where to search for the element
+     * @return reference to the found element, null otherwise
+     */
     private Location findByRoomID(int roomID, HashMap<Location, PointOfInterest> inspectedMap) {
         if (inspectedMap == null) {
             return null;
@@ -307,6 +316,11 @@ public class ProgressionRandomizer {
         return null;
     }
 
+    /**
+     * Generates a random array of IDs for the keys
+     * @param num number of random elements to generate
+     * @return array of num length of random integers
+     */
     private static int[] generateRandomIDs(int num) {
         int[] arr = new int[num];
         int cur = 10;
@@ -318,14 +332,22 @@ public class ProgressionRandomizer {
         return arr;
     }
 
+    /**
+     * Sets random key IDs to the keys in the level map (unlocking hashmap)
+     */
     private void setRandomKeysIDtoUnlockings() {
         
         // At the beginning, start to assign random numbers for KeyIDs
-        int[] randomIDs = generateRandomIDs(lm.getUnlockingObjects().size());
+        int [] arr = generateRandomIDs(lm.getUnlockingObjects().size());
+        ArrayList<Integer> randomIDs = new ArrayList<>();
+        for (int i : arr)
+            randomIDs.add(i);
 
         int index = 0;
         for (Location loc : lm.getUnlockingObjects().keySet()) {
-            lm.getUnlockingObjects().get(loc).setRequiredKeysID(new int[]{randomIDs[index]});
+            ArrayList<Integer> tempArr = new ArrayList<>();
+            tempArr.add(randomIDs.get(index));
+            lm.getUnlockingObjects().get(loc).setRequiredKeysID(tempArr);
             index++;
         }
     }

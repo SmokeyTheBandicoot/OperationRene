@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import javax.swing.JOptionPane;
 import operationrene.OperationRene;
 import static operationrene.OperationRene.font;
 import org.newdawn.slick.Color;
@@ -15,19 +14,17 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Line;
 import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import static operationrene.core.ExplorationGame.GAMEOVER;
 import operationrene.core.StateID;
 
-public class WiresGame extends BasicGameState{
+public class WiresGame extends MinigameState{
 
     private final class ColorID {
 
         private ColorID(){}
 
         public static final int RED= 0;
-        public static final int WHITE=1;
+        public static final  int WHITE=1;
         public static final int BLUE=2;
         public static final int YELLOW=3;
         public static final int BLACK=4;
@@ -41,9 +38,14 @@ public class WiresGame extends BasicGameState{
     private int solution;
     private Image circuit = null;
     private Image screw = null;
-    public static int resultWires = 0;
      
     private final String PATH = "assets/sprites/minigames/wires/";
+    
+    
+    public WiresGame(int difficulty) {
+        super(difficulty);
+    }
+    
     
     @Override
     public int getID() {
@@ -51,17 +53,18 @@ public class WiresGame extends BasicGameState{
     }
 
     @Override
-    public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+    public void init(GameContainer gc, StateBasedGame sbg, int elementID, ArrayList<Integer> keysID) throws SlickException {
         
+        super.init(gc, sbg, elementID, keysID);
+
         this.circuit = (new Image(PATH+"/circuit.jpg")).getScaledCopy(640, 350);
         
         //this.screw =  (new Image("C:/Users/gavos/Desktop/images/vite.png")).getScaledCopy(15,15);
-        //gc.setMouseCursor((new Image("C:/Users/gavos/Desktop/images/scissor.png")).getScaledCopy((float)1), 50, 50);
+        //gc.setMouseCursor((new Image("C:/Users/gavos/Desktop/images/scissor.png")).getScaledCopy((float)1), 5, 5); aggiungere forbici forse
         
         Random rand = new Random();
         
-        //int num =rand.nextInt(4)+3;
-        int num = 6;
+        int num =rand.nextInt(4)+3;
         
         Integer[] yPositions = new Integer[num];
         for (int i=0; i<num; i++){ 
@@ -95,7 +98,7 @@ public class WiresGame extends BasicGameState{
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
-        
+
         grphcs.drawImage(this.circuit,OperationRene.WIDTH/2-(this.circuit.getWidth()/2),OperationRene.HEIGHT/2-(this.circuit.getHeight()/2));
         
         grphcs.setColor(Color.gray);
@@ -112,27 +115,7 @@ public class WiresGame extends BasicGameState{
             }
         }
         
-        font.drawString(10, 50, "TIME REMAINING: " + OperationRene.REMAINING_TIME, Color.red);
-        
-    }
-
-    @Override
-    public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-        
-        OperationRene.CURRENT_TIME +=delta;
-        OperationRene.REMAINING_TIME = (OperationRene.MAXIMUM_TIME - OperationRene.CURRENT_TIME/1000);
-        
-        if(OperationRene.REMAINING_TIME < 0 ){
-            JOptionPane.showMessageDialog(null, 
-                              "YOU LOSE. TIME OVER.\nYOU'VE BEEN CAUGHT.", 
-                              "TIME OVER", 
-                              JOptionPane.WARNING_MESSAGE);
-            GAMEOVER = true;
-            sbg.enterState(0);
-            }
-        
-        if(resultWires == 1)
-            sbg.enterState(StateID.EXPLORATION_ID);
+        font.drawString(10, 50, "TIME REMAINING: " + this.timer.getTime(), Color.red);
         
     }
     
@@ -209,12 +192,13 @@ public class WiresGame extends BasicGameState{
                     flag = false;
                     if(i==this.solution){
                         
-                        System.out.println("Corretto");
-                        resultWires = 1;
+                        this.completed = true;
                         
                     }else{
+                        
+                        this.errorDone();
                         this.deletedLines.add(i);
-                        OperationRene.CURRENT_TIME += 5000;
+                        
                     }
 
                 }

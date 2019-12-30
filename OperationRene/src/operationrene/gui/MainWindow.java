@@ -1,18 +1,16 @@
 package operationrene.gui;
 
-import javax.swing.JOptionPane;
+
 import operationrene.OperationRene;
-import static operationrene.OperationRene.*;
-import static operationrene.core.ExplorationGame.GAMEOVER;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import operationrene.core.StateID;
-import static operationrene.minigame.KeyPadGame.resultKeyPad;
 import org.newdawn.slick.Image;
-import static operationrene.minigame.WiresGame.resultWires;
+
 
 /**
  *
@@ -23,6 +21,8 @@ public class MainWindow extends BasicGameState {
     Button play;
     Button setting;
     Button exit;
+    Button credits;
+    
     boolean test = true;
     Image title;
     private boolean info = true;
@@ -39,7 +39,8 @@ public class MainWindow extends BasicGameState {
 
         play = new Button(ButtonType.PLAY, OperationRene.WIDTH / 2, 450);
         setting = new Button(ButtonType.SETTINGS, OperationRene.WIDTH / 2, 550);
-        exit = new Button(ButtonType.EXIT, OperationRene.WIDTH / 2, 650);
+        exit = new Button(ButtonType.EXIT, OperationRene.WIDTH / 2, 750);
+        credits= new Button (ButtonType.CREDITS,OperationRene.WIDTH/2,650);
     }
 
     @Override
@@ -48,6 +49,7 @@ public class MainWindow extends BasicGameState {
         setting.render(grphcs);
         exit.render(grphcs);
         title.draw(OperationRene.WIDTH / 2 - title.getWidth() / 2, 0);
+        credits.render(grphcs);
 
     }
 
@@ -57,41 +59,26 @@ public class MainWindow extends BasicGameState {
         play.update(gc);
         setting.update(gc);
         exit.update(gc);
+        credits.update(gc);
 
         if (play.isClicked()) {
-
-            if (GAMEOVER == true) {
-                GAMEOVER = false;
-                resultWires = 0;
-                resultKeyPad = 0;
-                REMAINING_TIME = MAXIMUM_TIME;
-                CURRENT_TIME = 0;
-                MUSIC.setPosition(0);
-                sbg.getState(StateID.EXPLORATION_ID).init(gc, sbg);
-                if (sbg.getState(StateID.WIRES_ID) != null) {
-                    sbg.getState(StateID.WIRES_ID).init(gc, sbg);
-                }
-                if (sbg.getState(StateID.KEYPAD_ID) != null) {
-                    sbg.getState(StateID.KEYPAD_ID).init(gc, sbg);
-                }
-
-            }
-            sbg.enterState(2);
-            if (!info) {
-                JOptionPane.showMessageDialog(null,
-                        "PER INTERAGIRE CON PORTE O OGGETTI, PREMERE LA BARRA SPAZIATRICE",
-                        "ATTENZIONE",
-                        JOptionPane.WARNING_MESSAGE);
-            }
-            info = true;
+            sbg.addState(new PlayWindow());
+            sbg.getState(StateID.GAME_MENU_ID).init(gc, sbg);
+            sbg.enterState(StateID.GAME_MENU_ID);
 
         }
         if (setting.isClicked()) {
-            sbg.enterState(1);
-
+            SettingWindow.setSettingInstance(gc, sbg);
+            sbg.enterState(StateID.SETTING_ID);
+           
         }
         if (exit.isClicked()) {
             System.exit(0);
+        }
+        if (credits.isClicked()){
+            sbg.addState(new CreditsWindow());
+            sbg.getState(StateID.CREDITS_MENU_ID).init(gc, sbg);
+            sbg.enterState(StateID.CREDITS_MENU_ID);
         }
 
     }

@@ -1,5 +1,6 @@
 package operationrene;
 
+import java.util.ArrayList;
 import operationrene.mapframework.matrixprops.Size;
 import operationrene.mapframework.matrixprops.Location;
 import java.util.HashMap;
@@ -110,9 +111,9 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(9, 1), new Safe(1, new int[]{}, new Size(1, 1)));
-        lockeds.put(new Location(0, 3), new Door(1, new int []{}, new Size(1, 2), false));
-        unlocks.put(new Location(9, 5), new Key(1, new int []{}));
+        lockeds.put(new Location(9, 1), new Safe(1, null, new Size(1, 1)));
+        lockeds.put(new Location(0, 3), new Door(1, null, new Size(1, 2), false));
+        unlocks.put(new Location(9, 5), new Key(1, -1, null));
         others.put(new Location(3, 1), new Alarm(1, new Size(5, 5)));
         
         // Put the door in
@@ -139,9 +140,9 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(11, 1), new Safe(1, new int[]{}, new Size(1, 1)));
-        lockeds.put(new Location(0, 4), new Door(1, new int []{}, new Size(1, 2), false));
-        unlocks.put(new Location(11, 7), new Key(1, new int []{}));
+        lockeds.put(new Location(11, 1), new Safe(1, null, new Size(1, 1)));
+        lockeds.put(new Location(0, 4), new Door(1, null, new Size(1, 2), false));
+        unlocks.put(new Location(11, 7), new Key(1, -1, null));
         others.put(new Location(3, 1), new Alarm(1, new Size(7, 7)));
         
         matrix[4][0] = 2;
@@ -166,10 +167,6 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(13, 1), new Safe(1, new int[]{}, new Size(1, 1)));
-        lockeds.put(new Location(0, 2), new Door(1, new int []{}, new Size(1, 2), false));
-        unlocks.put(new Location(13, 9), new Key(1, new int []{}));
-        others.put(new Location(3, 1), new Alarm(1, new Size(9, 9)));
         
         matrix[2][0] = 2;
         matrix[3][0] = 2;
@@ -193,9 +190,9 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(7, 1), new Safe(1, new int[]{}, new Size(1, 1)));
-        lockeds.put(new Location(0, 3), new Door(1, new int []{}, new Size(1, 2), false));
-        unlocks.put(new Location(7, 5), new Key(1, new int []{}));
+        lockeds.put(new Location(7, 1), new Safe(1, null, new Size(1, 1)));
+        lockeds.put(new Location(0, 3), new Door(1, null, new Size(1, 2), false));
+        unlocks.put(new Location(7, 5), new Key(1, -1, null));
         
         // Put the door in
         matrix[3][0] = 2;
@@ -214,6 +211,50 @@ public class ProceduralLevelPartsGenerator {
     
             
     // Minigame rooms with alarm
+    /* private static LevelMap generateEasyRoom(int width, int height, int doorOffset, int unlockOffset) {
+        
+        Integer [][] matrix = generateMatrix(height, width);
+        
+        HashMap<Location, PointOfInterest> lockeds = new HashMap<>();   
+        HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
+        HashMap<Location, PointOfInterest> others = new HashMap<>();
+        
+        // Generate door randomly in the left door
+        // lockeds.put(new Location(13, 1), new Safe(1, null, new Size(1, 1)));
+        lockeds.put(new Location(0, 2), new Door(1, null, new Size(1, 2), false));
+        unlocks.put(new Location(13, 9), new Key(1, -1, null));
+        others.put(new Location(3, 1), new Alarm(1, new Size(9, 9)));
+        
+        // In order to put a potential alarm, get the maximum useful area
+        final int maxW = width - 4;
+        final int maxH = height - 4;
+        int curX = 0;
+        
+        int index = SizeUtils.getBiggestFittingSize(MapAlarm.getMinigameDimensions(), new Size(maxW, maxH), true);
+        Dimension minigameDim = null;
+        if (index != -1)
+            minigameDim = MapAlarm.getMinigameDimensions().get(index);
+
+        if (minigameDim != null) {
+            MapAlarmFactory factory = new MapAlarmFactory();
+            factory.createRandomMapAlarm(minigameDim);
+            others.put(new Location(1, 2), new Alarm(-1, minigameDim.getDimSize()));
+        }
+        
+        matrix[doorOffset][0] = 2;
+        matrix[doorOffset + 1][0] = 2;
+        
+        LevelMap lm = new LevelMap(-1, matrix, lockeds, unlocks, others, null);
+        
+        debugMatrix(matrix);
+        debugPoints(lockeds);
+        debugPoints(unlocks);
+        debugPoints(others);
+        
+        return lm;
+    }*/
+    
+    // Minigame rooms with alarm
     private static LevelMap generateEasyRoom(int width, int height, int doorOffset, int unlockOffset) {
         
         Integer [][] matrix = generateMatrix(height, width);
@@ -224,10 +265,10 @@ public class ProceduralLevelPartsGenerator {
         
         // Generate door randomly in the left door
         // lockeds.put(new Location(doorOffset, 0), new Door(-1, new int[]{}, new Size(1, 2), false));
-        lockeds.put(new Location(0, doorOffset), new Door(-1, new int[]{}, new Size(1, 2), false));
+        lockeds.put(new Location(0, doorOffset), new Door(-1, new ArrayList<>(), new Size(1, 2), false));
         // unlocks.put(new Location(unlockOffset, width - 2), new Key(-1, new int[]{-1}));
         // unlocks.put(new Location(width - 2, unlockOffset), new Key(-1, new int[]{-1}));
-        unlocks.put(new Location(width - 2, 1), new Key(-1, new int[]{-1}));
+        unlocks.put(new Location(width - 2, 1), new Key(-1, -1, new ArrayList<>()));
         
         // In order to put a potential alarm, get the maximum useful area
         final int maxW = width - 4;
@@ -303,12 +344,12 @@ public class ProceduralLevelPartsGenerator {
             // Generate escape point on top
             matrix[0][leftRoomsOffset + width / 2 - 1] = 2;
             matrix[0][leftRoomsOffset + width / 2] = 2;
-            others.put(new Location(leftRoomsOffset + width / 2, 1), new EscapePoint(0));
+            others.put(new Location(leftRoomsOffset + width / 2, 1), new EscapePoint(0, new ArrayList<>()));
         } else {
             // Generate escape point on bottom
             matrix[MAX_MATRIX_HEIGHT - 1][leftRoomsOffset + width / 2 - 1] = 2;
             matrix[MAX_MATRIX_HEIGHT - 1][leftRoomsOffset + width / 2] = 2;
-            others.put(new Location(leftRoomsOffset + width / 2,MAX_MATRIX_HEIGHT - 2), new EscapePoint(0));
+            others.put(new Location(leftRoomsOffset + width / 2,MAX_MATRIX_HEIGHT - 2), new EscapePoint(0, new ArrayList<>()));
         }
         
         LevelMap lm = new LevelMap(0, matrix, null, null, others, rooms);
@@ -360,12 +401,12 @@ public class ProceduralLevelPartsGenerator {
             // Put escape point to the left
             matrix[upperRoomsOffset + width / 2 - 1][0] = 2;
             matrix[upperRoomsOffset + width / 2][0] = 2;
-            others.put(new Location(0, upperRoomsOffset + width / 2 -1), new EscapePoint(0));
+            others.put(new Location(0, upperRoomsOffset + width / 2 -1), new EscapePoint(0, new ArrayList<>()));
         } else {
             // Put escape point to the right
             matrix[upperRoomsOffset + width / 2 - 1][MAX_MATRIX_WIDTH - 1] = 2;
             matrix[upperRoomsOffset + width / 2][MAX_MATRIX_WIDTH - 1] = 2;
-            others.put(new Location(0, upperRoomsOffset + width / 2 -1), new EscapePoint(0));
+            others.put(new Location(0, upperRoomsOffset + width / 2 -1), new EscapePoint(0, new ArrayList<>()));
         }
         
         LevelMap lm = new LevelMap(0, matrix, null, null, others, rooms);

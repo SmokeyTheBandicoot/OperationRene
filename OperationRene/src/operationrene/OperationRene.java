@@ -1,10 +1,9 @@
 package operationrene;
 
 import java.io.File;
-import operationrene.core.ExplorationGame;
+import java.util.ArrayList;
 import operationrene.core.StateID;
 import operationrene.gui.MainWindow;
-import operationrene.gui.SettingWindow;
 import org.lwjgl.LWJGLUtil;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
@@ -13,10 +12,6 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
 
-/**
- *
- * @author Rickma
- */
 public class OperationRene extends StateBasedGame {
 
     public static final int HEIGHT = 832;
@@ -30,9 +25,6 @@ public class OperationRene extends StateBasedGame {
     public static Music MUSIC;
     public static final String PATH_RESOURCES = "assets/sprites/";
     private static final String PATH_MUSIC = "assets/music/";
-    public static final int MAXIMUM_TIME = 120;
-    public static int REMAINING_TIME;
-    public static int CURRENT_TIME = 0;
     public static TrueTypeFont font;
 
     public OperationRene(String title) {
@@ -41,14 +33,10 @@ public class OperationRene extends StateBasedGame {
 
     @Override
     public void initStatesList(GameContainer gc) throws SlickException {
-        this.addState(new MainWindow());
-        this.addState(new SettingWindow());
-        this.addState(new ExplorationGame());
-        this.getState(StateID.EXPLORATION_ID).init(gc, this);
-        this.getState(StateID.MENU_ID).init(gc, this);
-        this.getState(StateID.SETTING_ID).init(gc, this);
-        this.enterState(StateID.MENU_ID);
         font = new TrueTypeFont(new java.awt.Font("Cominc Sans", java.awt.Font.BOLD, 28), false);
+        this.addState(new MainWindow());
+        this.getState(StateID.MENU_ID).init(gc, this);
+        this.enterState(StateID.MENU_ID);
 
     }
 

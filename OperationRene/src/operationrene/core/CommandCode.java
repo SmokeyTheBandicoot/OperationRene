@@ -13,4 +13,6 @@ public final class CommandCode {
     public static final int LEFT = Input.KEY_LEFT;
     public static final int NONE = -2;
     public static final int INTERACT = Input.KEY_SPACE;
+    public static final int ESC = Input.KEY_E;
+    
 }

@@ -188,6 +188,35 @@ public class LevelBuilder {
         // ####################### - PHASE 3: Setting up traps
         
         
+        // ####################### - PHASE 3: Setting up minigames (KEY gameType)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
     }

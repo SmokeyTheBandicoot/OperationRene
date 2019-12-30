@@ -5,12 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import javax.swing.JOptionPane;
-import static operationrene.OperationRene.CURRENT_TIME;
-import static operationrene.OperationRene.MAXIMUM_TIME;
-import static operationrene.OperationRene.REMAINING_TIME;
-import static operationrene.OperationRene.font;
-import static operationrene.core.ExplorationGame.GAMEOVER;
 import operationrene.core.StateID;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -19,14 +13,13 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.RoundedRectangle;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import operationrene.OperationRene;
 import static operationrene.OperationRene.font;
 import org.newdawn.slick.TrueTypeFont;
 
 
-public class KeyPadGame extends BasicGameState {
+public class KeyPadGame extends MinigameState {
     
     private Rectangle box = null;
     private RoundedRectangle enterButton = null;
@@ -38,22 +31,27 @@ public class KeyPadGame extends BasicGameState {
     private ArrayList<Integer> padValues = null;
     private String solution = null;
     private String playerInput =null;
-    public static int resultKeyPad = 0;
     private final String PATH = "assets/sprites/minigames/keypad/";
     private TrueTypeFont fontMinigame;
-     
+
     
+    public KeyPadGame(int difficulty) {
+        super(difficulty);
+    }
+     
+   
     @Override
     public int getID() {
         return StateID.KEYPAD_ID;
     }
 
     @Override
-    public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+    public void init(GameContainer gc, StateBasedGame sbg, int elementID, ArrayList<Integer> keysID) throws SlickException {
         
+        super.init(gc, sbg, elementID, keysID);
         
         int[] column; 
-        
+                
         switch((new Random()).nextInt(6)){
             
             case 0:
@@ -146,27 +144,8 @@ public class KeyPadGame extends BasicGameState {
             grphcs.fill(this.padLeds[i]);
             grphcs.drawImage(this.padImages[i], this.padButtons[i].getX(),this.padButtons[i].getY());
         }
-        font.drawString(10, 50, "TIME REMAINING: " + REMAINING_TIME, Color.red);
+        font.drawString(10, 50, "TIME REMAINING: " + this.timer.getTime(), Color.red);
 
-    }
-
-    @Override
-    public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-        
-        CURRENT_TIME +=delta;
-        REMAINING_TIME = (MAXIMUM_TIME - CURRENT_TIME/1000);
-        
-        if(REMAINING_TIME < 0 ){
-            JOptionPane.showMessageDialog(null, 
-                              "YOU LOSE. TIME OVER.\nYOU'VE BEEN CAUGHT.", 
-                              "TIME OVER", 
-                              JOptionPane.WARNING_MESSAGE);
-            GAMEOVER = true;
-            sbg.enterState(0);
-            }
-        
-        if (resultKeyPad ==1)
-            sbg.enterState(StateID.EXPLORATION_ID);
     }
     
     @Override
@@ -178,15 +157,12 @@ public class KeyPadGame extends BasicGameState {
          
             if(this.solution.compareTo(this.playerInput)==0){
             
-                System.out.println("corretto");
-                resultKeyPad = 1;
+                this.completed = true;
                 
             }else{
                 
-                this.resetInput();//TEMPO DA DIMINUIREEEEE
-                System.out.println("Sbagliato!");
-                CURRENT_TIME += 5000;
-                
+                this.errorDone();
+                this.resetInput();
                 
             }
             
@@ -233,6 +209,11 @@ public class KeyPadGame extends BasicGameState {
         } 
         this.playerInput = "";
         
+    }
+
+    @Override
+    public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

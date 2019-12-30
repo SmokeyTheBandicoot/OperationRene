@@ -1,5 +1,6 @@
 package operationrene.core;
 
+import java.util.ArrayList;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -15,7 +16,8 @@ public class Player extends Element {
     private Image downStop;
     private Image rightStop;
     private Image leftStop;
-
+    private Image exclamationPoint;
+    private boolean interact;
     private int pace;
 
     /*public Player(String imageURL, int duration, PlayerState state) throws SlickException {
@@ -32,13 +34,16 @@ public class Player extends Element {
         this.state = state;
 
     }*/
-    public Player(String imageURL, int duration, PlayerState state, int posX, int posY, int width, int height, int pace) throws SlickException {
+    public Player(String imageURL, String exclamationPointURL,int duration, PlayerState state, int posX, int posY, int width, int height, int pace) throws SlickException {
 
+        this.elementId = -1;
         this.pace = pace;
         this.posX = posX;
         this.posY = posY;
         this.width = width;
         this.height = height;
+        this.interact = false;
+        this.exclamationPoint = new Image(exclamationPointURL);
         this.shape = new Rectangle(posX, posY, width, height);
         SpriteSheet spriteSheet = new SpriteSheet(imageURL, 24, 32);
         this.upStop = spriteSheet.getSprite(1, 0).getSubImage(4, 8, 16, 23);
@@ -116,27 +121,33 @@ public class Player extends Element {
                 this.leftStop.draw(this.posX, this.posY, this.width, this.height);
                 break;
             case RIGHT_STOP:
-                this.rightStop.draw(this.posX, this.posY, this.width, this.height);
+                this.rightStop.draw(this.posX+10, this.posY, this.width, this.height);
                 break;
+        }
+        if(this.interact){
+            
+            this.exclamationPoint.draw(posX+20, posY-20,25,20);
+                    
         }
 
     }
 
-    public boolean isCollided(InteractiveObject element) {
+    public boolean isCollided(InteractiveObjectInterface element) {
 
-        return this.shape.intersects(element.shape);
+        return this.shape.intersects(((Element)element).shape);
 
     }
 
-    public InteractiveObject checkCollision(InteractiveObject[] elements) {
+    public Element checkCollision(ArrayList<Element> elements) {
 
-        for (InteractiveObject e : elements) {
-
-            if (this.shape.intersects(e.shape)) {
+        for (Element e : elements) {
+            
+            if (this.shape.intersects(((Element)e).shape)) {
+                this.interact = true;
                 return e;
             }
         }
-
+        this.interact = false;
         return null;
 
     }
