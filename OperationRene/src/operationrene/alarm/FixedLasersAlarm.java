@@ -96,12 +96,12 @@ public class FixedLasersAlarm extends MapAlarm {
 
     public void randomizeS1() {
         
-        white = 13 - (blue + red);
+        white = 11 - (blue + red);
         
         for(int i = 0; i < 5; i++)
             for(int j = 0; j < 5; j++)
-                if((i >= 2 && i <= 3 && j <= 3) ||
-                   (i >= 0 && i <= 1 && j >= 2))
+                if((i <= 1 && j >= 2) ||
+                   (i >= 2 && i <= 3 && j <= 3))
                     this.getMatrix()[i][j] = 0;
                 else
                     updateColoredTile(i, j);
@@ -126,7 +126,8 @@ public class FixedLasersAlarm extends MapAlarm {
         
         for(int i = 0; i < 5; i++)
             for(int j = 0; j < 5; j++)
-                if(i <= 1 || j >= 3)
+                if((i >= 1 && i <= 2) ||
+                   (j >= 3))
                     this.getMatrix()[i][j] = 0;
                 else
                     updateColoredTile(i, j);
@@ -162,13 +163,12 @@ public class FixedLasersAlarm extends MapAlarm {
 
     public void randomizeM3() {
         
-        white = 21 - (blue + red);
+        white = 27 - (blue + red);
         
         for(int i = 0; i < 7; i++)
             for(int j = 0; j < 7; j++)
-                if((i <= 1) ||
-                   (j <= 1) ||
-                   (i <= 3 && j >= 5))
+                if((i >= 1 && j <= 1) ||
+                   (i >= 1 && i <= 2))
                     this.getMatrix()[i][j] = 0;
                 else
                     updateColoredTile(i, j);
@@ -176,7 +176,7 @@ public class FixedLasersAlarm extends MapAlarm {
 
     public void randomizeL1() {
         
-        white = 61 - (blue + red);
+        white = 59 - (blue + red);
         
         for(int i = 0; i < 9; i++)
             for(int j = 0; j < 9; j++)
@@ -189,15 +189,13 @@ public class FixedLasersAlarm extends MapAlarm {
 
     public void randomizeL2() {
         
-        white = 49 - (blue + red);
+        white = 53 - (blue + red);
         
         for(int i = 0; i < 9; i++)
             for(int j = 0; j < 9; j++)
-                if((i <= 3 && j >= 2 && j <= 3) ||
-                   (i >= 2 && i <= 3 && j >= 2 && j <= 6) ||
-                   (i >= 2 && i <= 6 && j >= 5 && j <= 6) ||
-                   (i >= 5 && i <= 6 && j >= 1 && j <= 6) ||
-                   (i >= 5 && j >= 1 && j <= 2))
+                if((i >= 2 && i <= 3 && j >= 3 && j <= 7) ||
+                   (i >= 4 && i <= 5 && j >= 3 && j != 5) ||
+                   (i >= 5 && i <= 6 && j <= 4))
                     this.getMatrix()[i][j] = 0;
                 else
                     updateColoredTile(i, j);
@@ -205,15 +203,13 @@ public class FixedLasersAlarm extends MapAlarm {
 
     public void randomizeL3() {
         
-        white = 49 - (blue + red);
+        white = 53 - (blue + red);
         
         for(int i = 0; i < 9; i++)
             for(int j = 0; j < 9; j++)
-                if((i <= 2 && j <= 1) ||
-                   (i >= 1 && i <= 2 && j <= 6) ||
-                   (i >= 1 && i <= 7 && j >= 5 && j <= 6) ||
-                   (i >= 6 && i <= 7 && j >= 2 && j <= 6) ||
-                   (i >= 6 && j >= 2 && j <= 3))
+                if((i >= 1 && i <= 2 && j <= 6) ||
+                   (i >= 3 && i <= 7 && j >= 5 && j <= 6) ||
+                   (i >= 6 && i <= 7 && j >= 7))
                     this.getMatrix()[i][j] = 0;
                 else
                     updateColoredTile(i, j);
@@ -233,11 +229,12 @@ public class FixedLasersAlarm extends MapAlarm {
 
     public void randomizeRS2() {
         
-        white = 15 - (blue + red);
+        white = 17 - (blue + red);
         
         for(int i = 0; i < 5; i++)
             for(int j = 0; j < 7; j++)
-                if(j <= 1 || i >= 3)
+                if((i >= 1 && j <= 1) ||
+                   (i >= 3))
                     this.getMatrix()[i][j] = 0;
                 else
                     updateColoredTile(i, j);
@@ -263,10 +260,8 @@ public class FixedLasersAlarm extends MapAlarm {
         
         for(int i = 0; i < 9; i++)
             for(int j = 0; j < 11; j++)
-                if((i <= 1 && j <= 3) ||
-                   (i <= 3 && j >= 2 && j <= 3) ||
-                   (i >= 2 && i <= 3 && j >= 2 && j <= 7) ||
-                   (i >= 2 && i <= 7 && j >= 6 && j <= 7) ||
+                if((i >= 2 && i <= 3 && j <= 7) ||
+                   (i >= 3 && i <= 4 && j >= 6 && j <= 7) ||
                    (i >= 6 && i <= 7 && j >= 6))
                     this.getMatrix()[i][j] = 0;
                 else

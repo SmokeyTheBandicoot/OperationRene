@@ -96,11 +96,11 @@ public class PressureTilesAlarm extends MapAlarm {
     // Size S type 1 minigame
     public void randomizeS1() {
         
-        white = 11 - (blue + red);
+        white = 13 - (blue + red);
         
         for(int i = 0; i < 5; i++)
             for(int j = 0; j < 5; j++)
-                if((i <= 3 && j <= 1) ||
+                if((i == 1 && j <= 1) ||
                    (i >= 2 && i <= 3))
                     this.getMatrix()[i][j] = 0;
                 else
@@ -114,7 +114,7 @@ public class PressureTilesAlarm extends MapAlarm {
         
         for(int i = 0; i < 5; i++)
             for(int j = 0; j < 5; j++)
-                if(j >= 3)
+                if(i >= 3)
                     this.getMatrix()[i][j] = 0;
                 else
                     updateColoredTile(i, j);
@@ -138,12 +138,11 @@ public class PressureTilesAlarm extends MapAlarm {
     // Size M type 1 minigame
     public void randomizeM1() {
         
-        white = 27 - (blue + red);
+        white = 31 - (blue + red);
         
         for(int i = 0; i < 7; i++)
             for(int j = 0; j < 7; j++)
-                if((i <= 1 && j <= 2) ||
-                   (i >= 2 && i <= 3 && j >= 1 && j <= 3) ||
+                if((i >= 2 && i <= 3 && j <= 3) ||
                    (i >= 4 && i <= 5 && j >= 2))
                     this.getMatrix()[i][j] = 0;
                 else
@@ -153,12 +152,13 @@ public class PressureTilesAlarm extends MapAlarm {
     // Size M type 2 minigame
     public void randomizeM2() {
         
-        white = 33 - (blue + red);
+        white = 27 - (blue + red);
         
         for(int i = 0; i < 7; i++)
             for(int j = 0; j < 7; j++)
-                if((i <= 2 && j >= 3 && j <= 4) ||
-                   (i >= 1 && j >= 2 && j <= 3))
+                if((i >= 1 && i <= 2 && j <= 2) ||
+                   (i >= 3 && i <= 4 && j >= 1 && j <= 3) ||
+                   (i >= 5 && j >= 2))
                     this.getMatrix()[i][j] = 0;
                 else
                     updateColoredTile(i, j);
@@ -167,11 +167,11 @@ public class PressureTilesAlarm extends MapAlarm {
     // Size M type 3 minigame
     public void randomizeM3() {
         
-        white = 21 - (blue + red);
+        white = 25 - (blue + red);
         
         for(int i = 0; i < 7; i++)
             for(int j = 0; j < 7; j++)
-                if((j <= 1) ||
+                if((i >= 2 && j <= 1) ||
                    (i >= 5 && j <= 5) ||
                    (i >= 3 && i <= 4 && j >= 4))
                     this.getMatrix()[i][j] = 0;
@@ -182,15 +182,13 @@ public class PressureTilesAlarm extends MapAlarm {
     // Size L type 1 minigame
     public void randomizeL1() {
         
-        white = 41 - (blue + red);
+        white = 43 - (blue + red);
         
         for(int i = 0; i < 9; i++)
             for(int j = 0; j < 9; j++)
-                if((i <= 7 && j >= 1 && j <= 2) ||
-                   (i >= 6 && i <= 7 && j >= 1 && j <= 5) ||
-                   (i >= 1 && i <= 7 && j >= 4 && j <= 5) ||
-                   (i >= 1 && i <= 2 && j >= 4) ||
-                   (i >= 0 && i <= 1 && j == 0))
+                if((i >= 1 && i <= 2 && j != 3) ||
+                   (i >= 3 && i <= 7 && (j >= 1 && j <= 2 || j >= 4 && j <= 5)) ||
+                   (i >= 7 && i <= 8 && j == 3))
                     this.getMatrix()[i][j] = 0;
                 else
                     updateColoredTile(i, j);
@@ -244,12 +242,11 @@ public class PressureTilesAlarm extends MapAlarm {
     // Size RS type 2 minigame
     public void randomizeRS2() {
         
-        white = 15 - (blue + red);
+        white = 17 - (blue + red);
         
         for(int i = 0; i < 5; i++)
             for(int j = 0; j < 7; j++)
-                if((i <= 1 && j <= 2) ||
-                   (i == 2 && j >= 1 && j <= 2) ||
+                if((i >= 1 && i <= 2 && j <= 2) ||
                    (i >= 3 && j >= 1))
                     this.getMatrix()[i][j] = 0;
                 else
@@ -276,14 +273,13 @@ public class PressureTilesAlarm extends MapAlarm {
     // Size RL type 2 minigame
     public void randomizeRL2() {
         
-        white = 63 - (blue + red);
+        white = 61 - (blue + red);
         
         for(int i = 0; i < 9; i++)
             for(int j = 0; j < 11; j++)
-                if((i <= 6 && j >= 1 && j <= 2) ||
-                   (i >= 5 && i <= 6 && j >= 1 && j <= 5) ||
-                   (i >= 3 && i <= 4 && j >= 4) ||
-                   (i >= 0 && i <= 1 && j == 0))
+                if((i >= 1 && i <= 2 && j <= 2) ||
+                   (i >= 3 && i <= 4 && j != 0 && j != 3) ||
+                   (i >= 5 && i <= 6 && j >= 1 && j <= 5))
                     this.getMatrix()[i][j] = 0;
                 else
                     updateColoredTile(i, j);
