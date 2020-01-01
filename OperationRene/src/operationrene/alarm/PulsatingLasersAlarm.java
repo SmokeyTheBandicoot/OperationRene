@@ -224,11 +224,11 @@ public class PulsatingLasersAlarm extends MapAlarm {
         
         for(int i = 0; i < 9; i++)
             for(int j = 0; j < 9; j++)
-                if((i >= 2 && j <= 5) ||
-                   (j == 8 && (i <= 1 || (i >= 3 && i <= 4))))
+                if((i >= 3 && j <= 5) ||
+                   (i <= 6 && j == 8))
                     this.getMatrix()[i][j] = 4;
-                else if((i <= 1 && (j == 2 || j == 5)) ||
-                        (j >= 6 && (i == 2 || i == 5)))
+                else if((i <= 2 && (j == 2 || j == 5)) ||
+                        (j >= 6 && j <= 7 && (i == 3 || i == 6)))
                     this.getMatrix()[i][j] = 1;
                 else
                     this.getMatrix()[i][j] = 0;
@@ -270,10 +270,10 @@ public class PulsatingLasersAlarm extends MapAlarm {
         
         for(int i = 0; i < 5; i++)
             for(int j = 0; j < 7; j++)
-                if((i >= 3 && j <= 1) ||
-                   (i <= 2 && j >= 4))
+                if((i <= 2 && j >= 4) ||
+                   (i >= 3 && j <= 1))
                     this.getMatrix()[i][j] = 4;
-                else if((i == 2 && j >= 2 && j <= 3) ||
+                else if((i <= 2 && j >= 2 && j <= 3) ||
                         (i >= 3 && j == 4))
                     this.getMatrix()[i][j] = 1;
                 else

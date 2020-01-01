@@ -123,20 +123,20 @@ public abstract class MapAlarm {
     public void updateColoredTile(int i, int j) {
         
         if(white > 0 && blue > 0 && red > 0) {
-            int newTile = RandomUtils.genRandomInt(1, 3);
+            int newTile = RandomUtils.genRandomInt(3, 5);
             this.getMatrix()[i][j] = newTile;
             controlTile(newTile);
         }
         else if(white > 0) {
-            this.getMatrix()[i][j] = 1;
+            this.getMatrix()[i][j] = 3;
             white--;
         }
         else if(blue > 0) {
-            this.getMatrix()[i][j] = 2;
+            this.getMatrix()[i][j] = 4;
             blue--;
         }
         else if(red > 0) {
-            this.getMatrix()[i][j] = 3;
+            this.getMatrix()[i][j] = 5;
             red--;
         }
     }
@@ -146,13 +146,13 @@ public abstract class MapAlarm {
     public void controlTile(int tile) {
         
         switch(tile) {
-            case 1:
+            case 3:
                 white--;
                 break;
-            case 2:
+            case 4:
                 blue--;
                 break;
-            case 3:
+            case 5:
                 red--;
                 break;
         }
