@@ -39,11 +39,12 @@ public class ProceduralLevelPartsGenerator {
         lm = generateVerticalCorridor(8, 6, MAX_MATRIX_WIDTH / 2 - 5);
         LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/corridors/corridor2.dat");
         
-        lm = generateHorizontalCorridor(8, 4, MAX_MATRIX_HEIGHT / 2 - 5);
+        /*lm = generateHorizontalCorridor(8, 4, MAX_MATRIX_HEIGHT / 2 - 5);
         LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/corridors/corridor3.dat");
         
         lm = generateHorizontalCorridor(8, 6, MAX_MATRIX_HEIGHT / 2 - 5);
         LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/corridors/corridor4.dat");
+        */
         
         lm = generateSafeRoom1();
         LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/safes/safe1.dat");
@@ -111,10 +112,11 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(9, 1), new Safe(1, null, new Size(1, 1)));
+        lockeds.put(new Location(8, 2), new Safe(1, null, new Size(2, 2)));
         lockeds.put(new Location(0, 3), new Door(1, null, new Size(1, 2), false));
         unlocks.put(new Location(9, 5), new Key(1, -1, null));
         others.put(new Location(3, 1), new Alarm(1, new Size(5, 5)));
+        others.put(new Location(2, 1), new MinigameIdentifier(1, MinigameIdentifier.AlarmType.UNSELECTED));
         
         // Put the door in
         matrix[3][0] = 2;
@@ -143,7 +145,8 @@ public class ProceduralLevelPartsGenerator {
         lockeds.put(new Location(11, 1), new Safe(1, null, new Size(1, 1)));
         lockeds.put(new Location(0, 4), new Door(1, null, new Size(1, 2), false));
         unlocks.put(new Location(11, 7), new Key(1, -1, null));
-        others.put(new Location(3, 1), new Alarm(1, new Size(7, 7)));
+        others.put(new Location(3, 1), new Alarm(1, new Size(7, 7)));    
+        others.put(new Location(2, 1), new MinigameIdentifier(1, MinigameIdentifier.AlarmType.UNSELECTED));
         
         matrix[4][0] = 2;
         matrix[5][0] = 2;
@@ -167,6 +170,11 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
+        lockeds.put(new Location(13, 1), new Safe(1, null, new Size(1, 1)));
+        lockeds.put(new Location(0, 4), new Door(1, null, new Size(1, 2), false));
+        unlocks.put(new Location(13, 9), new Key(1, -1, null));
+        others.put(new Location(3, 1), new Alarm(1, new Size(9, 9)));    
+        others.put(new Location(2, 1), new MinigameIdentifier(1, MinigameIdentifier.AlarmType.UNSELECTED));
         
         matrix[2][0] = 2;
         matrix[3][0] = 2;

@@ -1,15 +1,9 @@
 package operationrene.core;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import operationrene.mapframework.pointsofinterest.Key;
-import operationrene.minigame.KeyPadGame;
-import operationrene.minigame.MemoryGame;
-import operationrene.minigame.SimonSays;
-import operationrene.minigame.StrongBoxGame;
-import operationrene.minigame.WiresGame;
-import operationrene.minigame.WordsMinigame;
+import operationrene.minigame.*;
 
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;

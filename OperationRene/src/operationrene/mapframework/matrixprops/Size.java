@@ -36,5 +36,13 @@ public class Size implements Serializable {
         return String.format("width: %d; height: %d", width, height);
     }
     
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (this == null) return false;
+        if (!(o instanceof Size)) return false;
+        Size s = (Size) o;
+        return (this.height == s.height && this.width == s.width);
+    }
     
 }

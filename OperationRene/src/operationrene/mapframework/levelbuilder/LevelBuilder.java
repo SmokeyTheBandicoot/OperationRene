@@ -9,6 +9,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import operationrene.alarm.FixedLasersAlarm;
+import operationrene.alarm.MapAlarm;
+import operationrene.alarm.MapAlarm.Dimension;
+import operationrene.alarm.MapAlarmFactory;
+import operationrene.alarm.PressureTilesAlarm;
+import operationrene.core.StateID;
 import operationrene.datastructures.ProgressTree;
 import operationrene.mapframework.*;
 import operationrene.mapframework.matrixprops.Direction;
@@ -186,37 +192,84 @@ public class LevelBuilder {
         }
         
         // ####################### - PHASE 3: Setting up traps
+        // This part is responsible for randomly choosing which alarms to show and 
+        // setting up the corresponding identifiers in the matrix
+        HashMap<Location, PointOfInterest> cache = buildingLevel.getOtherObjects();
+        ArrayList<Location> alarmLocations = new ArrayList<>();
+        for (Location loc : cache.keySet()){
+            if (cache.get(loc).getPointType() == PointOfInterest.PointType.AlarmZone) {
+                alarmLocations.add(loc);
+            }
+        }
+        
+        // For each AlarmZone, generate a random MapAlarm
+        for (Location l : alarmLocations) {
+            MapAlarmFactory mapFactory = new MapAlarmFactory();
+            Alarm alarm = (Alarm) buildingLevel.getOtherObjects().get(l);
+            ArrayList<Dimension> sizes = MapAlarm.getMinigameDimensions();
+            Dimension d = sizes.get(SizeUtils.getBiggestFittingSize(sizes, alarm.getSize(), true));
+            
+            MapAlarm ma = mapFactory.createRandomMapAlarm(MapAlarm.Dimension.MEDIUM);
+            
+            // Get the room in which the alarm is contained (needed for rotation)
+            int roomID = alarm.getRoomID();
+            Rotation rot = null;
+            for (Location loc : buildingLevel.getRooms().keySet())
+                if (buildingLevel.getRooms().get(loc).getRoomID() == roomID)
+                    // Store the rotation needed for this particular alarm
+                    rot = RoomUtils.calculateRotation(buildingLevel.getRooms().get(loc).getDir());
+            
+            // Get the Location where the Location of the MapAlarmIdentifier is ubicated
+            // This is done assuming that the identifier is always next to the top-left
+            // corner of the alarm (adjacent on the left)
+            Location identifierLoc = null;
+            if (null != rot) switch (rot) {
+                case NONE:
+                    identifierLoc = new Location(l.getX() - 1, l.getY());
+                    break;
+                case RIGHT:
+                    identifierLoc = new Location(l.getX(), l.getY() - 1);
+                    break;
+                case DEG180:
+                    identifierLoc = new Location(l.getX() + alarm.getSize().getWidth(), l.getY() + alarm.getSize().getHeight() - 1);
+                    break; 
+            }
+            
+            if (ma instanceof PressureTilesAlarm) {
+                
+            } else if (ma instanceof FixedLasersAlarm) {
+                
+            } else if (ma instanceof PressureTilesAlarm) {
+                
+            }
+            
+        }
         
         
-        // ####################### - PHASE 3: Setting up minigames (KEY gameType)
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        // ####################### - PHASE 4: Setting up minigames (KEY gameType)
+        for (Location loc : buildingLevel.getUnlockingObjects().keySet()) {
+            Key key = (Key) buildingLevel.getUnlockingObjects().get(loc);
+            switch (RandomUtils.genRandomInt(0, 5)) {
+                case 0:
+                    key.setGameType(StateID.KEYPAD_ID);
+                    break;
+                case 1:
+                    key.setGameType(StateID.MEMORY_ID);
+                    break;
+                case 2:
+                    key.setGameType(StateID.SIMONSAYS_ID);
+                    break;
+                case 3:
+                    key.setGameType(StateID.STRONGBOX_ID);
+                    break;
+                case 4:
+                    key.setGameType(StateID.WIRES_ID);
+                    break;
+                case 5:
+                    key.setGameType(StateID.WORDS_ID);
+                    break;
+            }
+        }
         
         
     }

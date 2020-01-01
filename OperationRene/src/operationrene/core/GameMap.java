@@ -104,10 +104,10 @@ public class GameMap {
                 this.elements.add(new DoorElement(new Door(0,this.getFilledArray(new int[]{4,5}),new Size(2,1),true),6,17,13));
                 this.elements.add(new EscapePointElement(new EscapePoint(0,this.getFilledArray(new int[]{6})),7,5,16));
                 
-                this.elements.add(new MinigameElement(new Key(0,StateID.WIRES_ID,this.getFilledArray(new int[]{1})),8,14,3));
-                this.elements.add(new MinigameElement(new Key(0,StateID.WORDS_ID,this.getFilledArray(new int[]{2})),9,18,21));
-                this.elements.add(new MinigameElement(new Key(0,StateID.MEMORY_ID,this.getFilledArray(new int[]{4})),10,32,22));
-                this.elements.add(new MinigameElement(new Key(0,StateID.KEYPAD_ID,this.getFilledArray(new int[]{5})),11,41,21));
+                this.elements.add(new MinigameElement(new Key(0, StateID.WIRES_ID, this.getFilledArray(new int[]{1})),8,14,3));
+                this.elements.add(new MinigameElement(new Key(0, StateID.WORDS_ID, this.getFilledArray(new int[]{2})),9,18,21));
+                this.elements.add(new MinigameElement(new Key(0, StateID.MEMORY_ID ,this.getFilledArray(new int[]{4})),10,32,22));
+                this.elements.add(new MinigameElement(new Key(0, StateID.KEYPAD_ID, this.getFilledArray(new int[]{5})),11,41,21));
                 this.elements.add(new SafeElement(new Safe(0, this.getFilledArray(new int[]{6}), new Size(2,2)),12,40,7));
                
                 this.alarms = new ArrayList<Rectangle>();
