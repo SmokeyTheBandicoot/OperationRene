@@ -15,7 +15,7 @@ public class Key extends PointOfInterest {
         this.gameType = gameType;
     }
     
-    public Key(int roomID, int gameType,ArrayList<Integer> requiredKeysID) {
+    public Key(int roomID, int gameType, ArrayList<Integer> requiredKeysID) {
         
         super(PointType.Key, roomID, requiredKeysID, new Size(1, 1));
         this.gameType = gameType;

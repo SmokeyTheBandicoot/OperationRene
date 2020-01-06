@@ -1,19 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package operationrene.utils;
 
 import java.util.List;
 import operationrene.alarm.MapAlarm;
 import operationrene.mapframework.matrixprops.*;
-import operationrene.mapframework.levelbuilder.LevelBuilder;
 
-/**
- *
- * @author Giuse
- */
 public class SizeUtils {
     // Utils for size
     /**
@@ -58,19 +48,25 @@ public class SizeUtils {
     }
     
     // Utils for Rotation
-    // check if the dimension of the room is good 
-    public static boolean isGood(Rotation r, Size level, Size room){
+    // check if the dimension of the room fits inside the available space for the room
+    public static boolean fitsInside(Rotation r, Size level, Size room){
         if(r == Rotation.NONE || r == Rotation.DEG180){
             return checkSize(level, room);
         } else {
-            return checkSize(room, level);
+            return checkSize(level, new Size(room.getHeight(), room.getWidth()));
         }
     }
     
-    public static boolean checkSize(Size size1, Size size2){
-        if((size1.getHeight() < size2.getHeight()) || (size1.getWidth()) < size2.getWidth()){
-            return true;
-        } else 
+    public static boolean checkSize(Size available, Size toFit){
+        if ( (available.getHeight() < toFit.getHeight()) || (available.getWidth() < toFit.getWidth()) ){
             return false;
+        } else 
+            return true;
+    }
+    
+    public static float coversArea(Size size1, Size size2) {
+        if (size1 == null || size2 == null) 
+            throw new IllegalArgumentException("Sizes cannot be null");
+        return (float) size1.getArea() / size2.getArea();
     }
 }

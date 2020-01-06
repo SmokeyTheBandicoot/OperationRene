@@ -1,18 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package operationrene.utils;
 
 import operationrene.mapframework.LevelMap;
-import operationrene.mapframework.pointsofinterest.Room;
 import operationrene.mapframework.matrixprops.*;
 
-/**
- *
- * @author Giuse
- */
 public class RoomUtils {
     
     // Utils for rotation
@@ -27,20 +17,60 @@ public class RoomUtils {
         if (null != r)
             switch (r) {
             case RIGHT:
+                // Rotate matrix
                 for (int i=0; i<n; i++)
                     for (int j=0;j<m; j++)
                         output [j][n-1-i] = mat[i][j];
+                // Rotate HashMaps
+                room.setLockedObjects(
+                        HashMapUtils.rotate(room.getLockedObjects(), 
+                        Rotation.RIGHT, 
+                        new Size(m, n)));
+                room.setUnlockingObjects(
+                        HashMapUtils.rotate(room.getUnlockingObjects(), 
+                        Rotation.RIGHT, 
+                        new Size(m, n)));
+                room.setOtherObjects(
+                        HashMapUtils.rotate(room.getOtherObjects(), 
+                        Rotation.RIGHT, 
+                        new Size(m, n)));
                 break;
             case LEFT:
                 for (int i=0; i<n; i++)
                     for (int j=0;j<m; j++)
                         output [j][n-1-i] = mat[n-1-i][m-1-j];
+                // Rotate HashMaps
+                room.setLockedObjects(
+                        HashMapUtils.rotate(room.getLockedObjects(), 
+                        Rotation.LEFT, 
+                        new Size(m, n)));
+                room.setUnlockingObjects(
+                        HashMapUtils.rotate(room.getUnlockingObjects(), 
+                        Rotation.LEFT, 
+                        new Size(m, n)));
+                room.setOtherObjects(
+                        HashMapUtils.rotate(room.getOtherObjects(), 
+                        Rotation.LEFT, 
+                        new Size(m, n)));
                 break;
             case DEG180:
                 output = new Integer[n][m];
                 for (int i=0; i<n; i++)
                     for (int j=0;j<m; j++)
                         output [i][j] = mat[n-1-i][m-1-j];
+                // Rotate HashMaps
+                room.setLockedObjects(
+                        HashMapUtils.rotate(room.getLockedObjects(), 
+                        Rotation.DEG180, 
+                        new Size(n, m)));
+                room.setUnlockingObjects(
+                        HashMapUtils.rotate(room.getUnlockingObjects(), 
+                        Rotation.DEG180, 
+                        new Size(n, m)));
+                room.setOtherObjects(
+                        HashMapUtils.rotate(room.getOtherObjects(), 
+                        Rotation.DEG180, 
+                        new Size(n, m)));
                 break;
             default:
                 break;
@@ -65,6 +95,19 @@ public class RoomUtils {
                 for (int i = 0; i < r; i++){
                     mat[i] = reverseArray(mat[i]);
                 }
+                // Rotate HashMaps
+                room.setLockedObjects(
+                        HashMapUtils.flip(room.getLockedObjects(), 
+                        Flipping.HORIZONTAL, 
+                        new Size(c, r)));
+                room.setUnlockingObjects(
+                        HashMapUtils.flip(room.getUnlockingObjects(), 
+                        Flipping.HORIZONTAL, 
+                        new Size(c, r)));
+                room.setOtherObjects(
+                        HashMapUtils.flip(room.getOtherObjects(), 
+                        Flipping.HORIZONTAL, 
+                        new Size(c, r)));
                 break;
             case VERTICAL:
                 for(int i=0; i < r/2; i++){
@@ -72,7 +115,20 @@ public class RoomUtils {
                     System.arraycopy(mat[i], 0, temp, 0, mat[i].length);
                     System.arraycopy(mat[r-1-i], 0, mat[i], 0, mat[i].length);
                     System.arraycopy(temp, 0, mat[r-1-i], 0, temp.length);
-                }   
+                }
+                // Rotate HashMaps
+                room.setLockedObjects(
+                        HashMapUtils.flip(room.getLockedObjects(), 
+                        Flipping.VERTICAL, 
+                        new Size(c, r)));
+                room.setUnlockingObjects(
+                        HashMapUtils.flip(room.getUnlockingObjects(), 
+                        Flipping.VERTICAL, 
+                        new Size(c, r)));
+                room.setOtherObjects(
+                        HashMapUtils.flip(room.getOtherObjects(), 
+                        Flipping.VERTICAL, 
+                        new Size(c, r)));
                 break;
             case BOTH:
                 return rotateRoom(room, Rotation.DEG180);
@@ -100,14 +156,14 @@ public class RoomUtils {
      * @param leveldir Derired direction
      * @return The rotation needed to achieve the desired direction
      */
-    public static Rotation calculateRotation(Room.Direction leveldir){
+    public static Rotation calculateRotation(Direction leveldir){
         if (leveldir != null)
             switch (leveldir) {
-                case Up:
+                case UP:
                     return Rotation.RIGHT;
-                case Down:
+                case DOWN:
                     return Rotation.LEFT;
-                case Left:
+                case LEFT:
                     return Rotation.NONE;
                 default:
                     return Rotation.DEG180;

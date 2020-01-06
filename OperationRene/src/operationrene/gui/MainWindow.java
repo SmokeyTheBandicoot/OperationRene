@@ -2,6 +2,8 @@ package operationrene.gui;
 
 
 import operationrene.OperationRene;
+import operationrene.core.SoundEngine;
+import operationrene.core.SoundTrack;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -41,6 +43,9 @@ public class MainWindow extends BasicGameState {
         setting = new Button(ButtonType.SETTINGS, OperationRene.WIDTH / 2, 550);
         exit = new Button(ButtonType.EXIT, OperationRene.WIDTH / 2, 750);
         credits= new Button (ButtonType.CREDITS,OperationRene.WIDTH/2,650);
+        
+        SoundEngine.getIstance().playBackgroundMusic(SoundTrack.MENU_MUSIC);
+        
     }
 
     @Override

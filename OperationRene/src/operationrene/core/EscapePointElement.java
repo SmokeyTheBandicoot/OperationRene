@@ -39,6 +39,10 @@ public class EscapePointElement extends Element implements InteractiveObjectInte
                 Logger.getLogger(EscapePointElement.class.getName()).log(Level.SEVERE, null, ex);
             }
             sbg.enterState(StateID.GAME_WIN_ID, new  FadeOutTransition(),new FadeInTransition());
+        }else{
+            
+            SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_LOCKED_DOOR);
+            
         }
         
     }

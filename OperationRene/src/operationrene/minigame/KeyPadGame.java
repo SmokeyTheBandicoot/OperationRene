@@ -16,6 +16,8 @@ import org.newdawn.slick.geom.RoundedRectangle;
 import org.newdawn.slick.state.StateBasedGame;
 import operationrene.OperationRene;
 import static operationrene.OperationRene.font;
+import operationrene.core.SoundEffect;
+import operationrene.core.SoundEngine;
 import org.newdawn.slick.TrueTypeFont;
 
 
@@ -157,10 +159,12 @@ public class KeyPadGame extends MinigameState {
          
             if(this.solution.compareTo(this.playerInput)==0){
             
+                SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_CORRECT);
                 this.completed = true;
                 
             }else{
                 
+                SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_WRONG);
                 this.errorDone();
                 this.resetInput();
                 
@@ -168,6 +172,7 @@ public class KeyPadGame extends MinigameState {
             
         }else if(this.deleteButton.contains(x,y)){
             
+            SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_PRESS_BUTTON);
             this.resetInput();
             
         }else{
@@ -179,6 +184,8 @@ public class KeyPadGame extends MinigameState {
                     flag = false;
                     
                     if(this.padColorLeds[i]==Color.gray){
+                        
+                        SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_PRESS_BUTTON);
                         
                         this.padColorLeds[i]=Color.green;
                         this.playerInput = this.playerInput+this.padValues.get(i);

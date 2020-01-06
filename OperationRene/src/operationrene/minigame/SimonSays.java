@@ -3,6 +3,8 @@ package operationrene.minigame;
 import java.util.ArrayList;
 import operationrene.OperationRene;
 import static operationrene.OperationRene.font;
+import operationrene.core.SoundEffect;
+import operationrene.core.SoundEngine;
 import operationrene.core.StateID;
 import operationrene.minigame.MinigameState;
 import org.newdawn.slick.AppGameContainer;
@@ -133,9 +135,11 @@ public class SimonSays extends MinigameState {
         for(int i=0;i<4;i++){
             if (buttons[i].contains(x, y)){
                 if(color.getcolor(i) == btpress[serialnumber%2][strike][this.currentColor]){
+                    SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_PRESS_BUTTON);
                     this.currentColor=((int)(Math.random()*10))%4;
                     iteration++;
                 } else {
+                    SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_WRONG);
                     this.errorDone();
                     if (strike <2){
                         strike++;
@@ -146,6 +150,7 @@ public class SimonSays extends MinigameState {
         }
         }
         if (iteration >= endgame){
+            SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_CORRECT);
             this.completed = true;
         }
     }

@@ -2,6 +2,7 @@ package operationrene.mapframework.pointsofinterest;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import operationrene.mapframework.matrixprops.Size;
 
 public abstract class PointOfInterest implements Serializable {
@@ -52,9 +53,11 @@ public abstract class PointOfInterest implements Serializable {
     
     @Override
     public String toString() {
-        return String.format("POINT_OF_INTEREST: %s, roomID: %d, reqKeys: %s, w: %d, h: %d", pointType.toString(), roomID, requiredKeysID.toString(), size.getWidth(), size.getHeight());
+        if (requiredKeysID != null)
+            return String.format("POINT_OF_INTEREST: %s, roomID: %d, reqKeys: %s, w: %d, h: %d", pointType.toString(), roomID, requiredKeysID.toString(), size.getWidth(), size.getHeight());   
+        else    
+            return String.format("POINT_OF_INTEREST: %s, roomID: %d, reqKeys: [], w: %d, h: %d", pointType.toString(), roomID, size.getWidth(), size.getHeight());   
     }
-
     
     
     public enum PointType {

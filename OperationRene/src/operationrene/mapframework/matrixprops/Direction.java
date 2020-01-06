@@ -1,4 +1,4 @@
-package operationrene.mapframework.pointsofinterest;
+package operationrene.mapframework.matrixprops;
 
 public enum Direction {
     UP,

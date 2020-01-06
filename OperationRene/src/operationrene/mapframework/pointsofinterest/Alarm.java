@@ -1,11 +1,12 @@
 package operationrene.mapframework.pointsofinterest;
 
+import java.util.ArrayList;
 import operationrene.mapframework.matrixprops.Size;
 
 public class Alarm extends PointOfInterest {
     
     public Alarm(int roomID, Size size) {
-        super(PointType.AlarmZone, roomID, null, size);
+        super(PointType.AlarmZone, roomID, new ArrayList<>(), size);
     }
     
     @Override

@@ -15,9 +15,9 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public abstract class GameplayState extends BasicGameState {
 
     public GameTimer timer = null;
-    private boolean outOfTime;
     protected int difficulty;
 
+    protected static boolean lastSeconds = false;
     
     public GameplayState(int difficulty){
         
@@ -28,20 +28,26 @@ public abstract class GameplayState extends BasicGameState {
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         
         this.timer = GameTimer.getIstance();
-        this.outOfTime = false;
         
     }
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         
+        if(this.timer.getTime() <= 9 && !GameplayState.lastSeconds){
+        
+            SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_CLOCK_TICK);
+            GameplayState.lastSeconds = true;
+            
+        }
+        
         if(this.timer.getTime() <= 0 ){
             
-            this.outOfTime = true;
             sbg.addState(new GameOverWindow());
             sbg.getState(StateID.GAME_OVER_ID).init(gc, sbg);
             sbg.enterState(StateID.GAME_OVER_ID, new  FadeOutTransition(),new FadeInTransition());
-            }
+        
+        }
         
     }
     

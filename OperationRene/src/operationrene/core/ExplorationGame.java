@@ -39,11 +39,13 @@ public class ExplorationGame extends GameplayState {
         return StateID.EXPLORATION_ID;
     }
 
-    
+    @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         
         super.init(container, game);
         this.timer.startTimer(300);
+        GameplayState.lastSeconds = false;
+        SoundEngine.getIstance().playBackgroundMusic(SoundTrack.GAME_MUSIC);
         this.keys = new ArrayList<Integer>();
         this.elementID = -1;
         this.collisionedElement = null;
@@ -62,10 +64,6 @@ public class ExplorationGame extends GameplayState {
 
         this.map.draw();
         this.player.draw();
-        
-        /*for(Element e: this.map.getElements()){
-            g.draw(e.shape );
-        }*/
         
         font.drawString(10, 50, "TIME REMAINING: " + this.timer.getTime(), Color.red);
         font.drawString(10, 80, "GOAL: "+goal, Color.green);
@@ -101,7 +99,7 @@ public class ExplorationGame extends GameplayState {
                 this.player.update(CommandCode.DOWN);
             }
         } else if (input.isKeyDown(1)) {
-            setPauseInstance(container,game,getID());
+            setPauseInstance(container,game,this.getID());
             game.enterState(StateID.PAUSE_MENU_ID);
         } else {
             if (!this.map.checkCollision(this.player.posX, this.player.posY, this.player.width, this.player.height)) {
@@ -113,6 +111,7 @@ public class ExplorationGame extends GameplayState {
         
     }
 
+    @Override
     public void keyReleased(int key, char c){
         
         if(key == CommandCode.INTERACT){
@@ -125,6 +124,7 @@ public class ExplorationGame extends GameplayState {
         
     }
     
+    @Override
     public void enter(GameContainer container, StateBasedGame game) throws SlickException{
         
         OperationRene sbg = (OperationRene)game;

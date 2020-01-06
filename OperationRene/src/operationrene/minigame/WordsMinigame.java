@@ -16,6 +16,8 @@ import org.newdawn.slick.state.StateBasedGame;
 import java.util.HashMap;
 import operationrene.OperationRene;
 import static operationrene.OperationRene.font;
+import operationrene.core.SoundEffect;
+import operationrene.core.SoundEngine;
 import operationrene.core.StateID;
 import operationrene.minigame.MinigameState;
 import org.newdawn.slick.geom.Rectangle;
@@ -283,14 +285,19 @@ public class WordsMinigame extends MinigameState {
         for (int i = 0; i < 6; i++) {
             if (this.rec[i].contains(x, y)) {
                 if (findSolution() == i) {
+                    
+                    SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_CORRECT);
                     resultWordsMinigame = 1;
                     System.out.println("Corretto");
                     this.completed = true;
+                    
                 } else {
+                    
+                    SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_WRONG);
                     this.errorDone();
                     System.out.println("Sbagliato!");
                     resultWordsMinigame = -1;
-                    // RIDURRE IL TEMPO
+
                 }
                 break;
             }

@@ -1,13 +1,11 @@
 package operationrene;
 
 import java.io.File;
-import java.util.ArrayList;
 import operationrene.core.StateID;
 import operationrene.gui.MainWindow;
 import org.lwjgl.LWJGLUtil;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
@@ -22,7 +20,6 @@ public class OperationRene extends StateBasedGame {
     public static final int FPS_LIMIT = 200;
     public static boolean MUSIC_SOUND = true;
     public static boolean EFFECT_SOUND = true;
-    public static Music MUSIC;
     public static final String PATH_RESOURCES = "assets/sprites/";
     private static final String PATH_MUSIC = "assets/music/";
     public static TrueTypeFont font;
@@ -48,8 +45,6 @@ public class OperationRene extends StateBasedGame {
         app.setDisplayMode(WIDTH, HEIGHT, FULLSCREEN);
         app.setTargetFrameRate(FPS_LIMIT);
         app.setShowFPS(SHOW_FPS);
-        MUSIC = new Music(PATH_MUSIC + "music2.ogg");
-        MUSIC.loop();
         app.start();
 
     }
