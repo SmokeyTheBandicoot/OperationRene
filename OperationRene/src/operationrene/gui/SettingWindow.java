@@ -26,13 +26,13 @@ public class SettingWindow extends BasicGameState {
     
     /// VOID SINGLETHON
     public SettingWindow(int id){
-        this.previous_state=id;
+       this.previous_state=id;
     }
-    
+
     public int getPrevious_state() {
         return previous_state;
     }
-    
+
     public static void setSettingInstance(GameContainer gc,StateBasedGame sbg,int ID) throws SlickException{
         if(INSTANCE==null){
           INSTANCE= new SettingWindow(ID);
@@ -42,9 +42,9 @@ public class SettingWindow extends BasicGameState {
           INSTANCE.previous_state=ID;
         }
     }
-    
-    
-    public static void setSettingInstance(GameContainer gc,StateBasedGame sbg) throws SlickException{
+       
+        
+     public static void setSettingInstance(GameContainer gc,StateBasedGame sbg) throws SlickException{
         setSettingInstance(gc,sbg,StateID.MENU_ID);    
     } 
     
