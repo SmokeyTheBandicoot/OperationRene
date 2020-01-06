@@ -19,10 +19,10 @@ public class MatrixUtilsTest {
     }
     
     /**
-     * Test of addMatrix method, of class Utils.
+     * Test of pasteMatrix method, of class Utils.
      */
     @Test
-    public void testAddMatrix() {
+    public void testPasteMatrix() {
         System.out.println("addMatrix");
         Integer [][] matrix = new Integer [][]{
             {0, 0, 0, 0, 0, 0, 0, 0},
@@ -46,7 +46,30 @@ public class MatrixUtilsTest {
             {0, 0, 0, 0, 0, 0, 0, 0}
         };
         
-        Integer [][] actual = MatrixUtils.addMatrix(matrix, paste, new Location(1, 2));     
+        Integer [][] actual = MatrixUtils.pasteMatrix(matrix, paste, new Location(2, 1), new Size(3, 3), Direction.UP);     
+        
+        MatrixUtils.debugMatrix(matrix);
+        
+        Assert.assertArrayEquals(expected, actual);
+        
+        expected = new Integer [][]{
+            {0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 1, 3, 3, 6, 6, 6, 0},
+            {0, 0, 4, 4, 6, 6, 6, 0},
+            {0, 0, 5, 5, 6, 6, 6, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0}
+        };
+        
+        paste = new Integer [][] {
+            {6, 6, 6},
+            {6, 6, 6},
+            {6, 6, 6}
+        };
+        
+        actual = MatrixUtils.pasteMatrix(matrix, paste, new Location(2, 1), new Size(5, 3), Direction.RIGHT);
+        
+        MatrixUtils.debugMatrix(actual);
+        
         Assert.assertArrayEquals(expected, actual);
         
     }

@@ -5,6 +5,7 @@
  */
 package operationrene.mapframework.levelbuilder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import operationrene.mapframework.LevelMap;
 import operationrene.mapframework.matrixprops.Location;
@@ -30,9 +31,11 @@ public class ProgressionRandomizerTest {
     HashMap<Location, PointOfInterest> other = new HashMap<>();
     
     public ProgressionRandomizerTest() {
-        //lockeds.put(new Location(0, 0), new Safe(0, new int[]{}, new Size(1, 1)));
-        //lockeds.put(new Location(1, 1), new Door(0, new int[]{}, new Size(1, 1), false));
-        //unlockeds.put(new Location(2, 2), new Key(0, new int[]{57}));
+        lockeds.put(new Location(0, 0), new Safe(0, new ArrayList<>(), new Size(1, 1)));
+        lockeds.put(new Location(1, 1), new Door(0, new ArrayList<>(), new Size(1, 1), false));
+        ArrayList<Integer> arr = new ArrayList<>();
+        arr.add(57);
+        unlockeds.put(new Location(2, 2), new Key(0, -1, arr));
     }
 
     /**
@@ -96,8 +99,6 @@ public class ProgressionRandomizerTest {
                 testTree(lm, current.right);
                 fail("A locked object is followed by another locked object (right)");  
             }
-        }
-        
-        
+        }   
     }
 }
