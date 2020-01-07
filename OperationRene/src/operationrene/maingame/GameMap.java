@@ -1,19 +1,23 @@
 package operationrene.maingame;
 
-import operationrene.StateID;
-import operationrene.element.SafeElement;
-import operationrene.element.DoorElement;
-import operationrene.element.Element;
-import operationrene.element.MinigameElement;
-import operationrene.element.EscapePointElement;
 import java.util.ArrayList;
 import operationrene.OperationRene;
+import operationrene.StateID;
+import operationrene.element.DoorElement;
+import operationrene.element.Element;
+import operationrene.element.EscapePointElement;
+import operationrene.element.MinigameElement;
+import operationrene.element.SafeElement;
+import operationrene.mapframework.LevelMap;
+import operationrene.mapframework.levelbuilder.LevelBuilder;
 import operationrene.mapframework.matrixprops.Location;
 import operationrene.mapframework.matrixprops.Size;
 import operationrene.mapframework.pointsofinterest.Door;
 import operationrene.mapframework.pointsofinterest.EscapePoint;
 import operationrene.mapframework.pointsofinterest.Key;
+import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import operationrene.mapframework.pointsofinterest.Safe;
+import operationrene.utils.MatrixUtils;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -29,6 +33,7 @@ public class GameMap {
     private ArrayList<Element> elements;
     private ArrayList<Rectangle> alarms;
     private Location playerStartPosition;
+    Integer [][] matrix;
     /*Integer[][] matrix = new Integer [][]{
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
@@ -183,11 +188,49 @@ public class GameMap {
                 
                 
                 break;
-               
+                
             case MapID.LEVEL_RANDOM:
                 //DA COMPLETARE
-                break;
+                
+                LevelBuilder lb = new LevelBuilder();
+                lb.buildLevel();
+                LevelMap lm = lb.getBuildingLevel();
+                matrix = lm.getMatrix();
+                this.map = new TiledMap("assets/tilesets/levelprocedural/level.tmx");
+                this.drawMap(map);
+                for (Location l : lm.getOtherObjects().keySet()){
+                    if(lm.getOtherObjects().get(l).getPointType()== PointOfInterest.PointType.EntryPoint)
+                        this.playerStartPosition = new Location(l.getX(),l.getY());        
+                    }
+                for (Location l : lm.getLockedObjects().keySet()) {
+                    
+                    if (lm.getLockedObjects().get(l).getPointType() == PointOfInterest.PointType.Door){
+                        Door d = (Door) lm.getLockedObjects().get(l);
+                        this.elements.add(new DoorElement(new Door(d.getRoomID(),d.getRequiredKeysID(),d.getSize(),true),1,l.getX(),l.getY()));
+                    }
+                    
+                    if (lm.getLockedObjects().get(l).getPointType() == PointOfInterest.PointType.Safe){
+                        Safe s = (Safe) lm.getLockedObjects().get(l);
+                        this.elements.add(new SafeElement(new Safe(s.getRoomID(), s.getRequiredKeysID(), s.getSize()),2,l.getX(),l.getY()));
+                        
+                        map.setTileId(l.getX(), l.getY(), 2, 11);
+                        map.setTileId(l.getX()+1, l.getY(), 2, 12);
+                        map.setTileId(l.getX(), l.getY()+1, 2, 21);
+                        map.setTileId(l.getX()+1, l.getY()+1, 2, 22);
+                        
+                    
+                    }
+                    
+                }
+                
+                
+                this.width = OperationRene.WIDTH;
+                this.height = OperationRene.HEIGHT;
+//                this.posX = 0;
+//                this.posY = 0;
 
+                
+                break;
         }
         
     }
@@ -217,7 +260,7 @@ public class GameMap {
 
         int wallLayer = map.getLayerIndex("walls");
         int objectLayer = map.getLayerIndex("objects");
-        
+  
         if ((map.getTileId(posX / 32, posY / 32, objectLayer) != 0)||(map.getTileId(posX / 32, posY / 32, wallLayer) != 0)) {//ANGOLO ALTO-SINISTRA
             return true;
         } else if ((map.getTileId((posX + width) / 32, (posY + height) / 32, objectLayer) != 0)||(map.getTileId((posX + width) / 32, (posY + height) / 32, wallLayer) != 0)) {//ANGOLO BASSO-DESTRA
@@ -300,24 +343,37 @@ public class GameMap {
         
     }
     
-    /*
-    public void drawMap(){
+    
+    public void drawMap(TiledMap map){
        for(int i=0;i<matrix.length;i++){
            for (int j = 0; j < matrix[0].length; j++) {
+               
                switch(matrix[i][j]){
                        case 0 :
-                           mappa.setTileId(j,i, 1, 92);
+                           map.setTileId(j,i,map.getLayerIndex("floor"), 4);
                            break;
                        case 1:
-                           mappa.setTileId(j,i, 1, 132);
+                           map.setTileId(j, i, map.getLayerIndex("walls"), 2);
                            break;
                        case 2:
-                           mappa.setTileId(j,i, 1, 141);
+                           map.setTileId(j,i, map.getLayerIndex("walls"), 5);
+                           map.setTileId(j,i,map.getLayerIndex("floor"), 4);
+                           break;
+                       case 3:
+                           map.setTileId(j, i, map.getLayerIndex("floor"), 3);
+                           break;
+                       case 4:
+                           map.setTileId(j, i, map.getLayerIndex("floor"), 6);
+                           break;
+                       case 5:
+                           map.setTileId(j, i, map.getLayerIndex("floor"), 7);
+                           break;
+                           
                }
            }
        }
     }
-    */
+    
     
     /*
     public void drawroom(int x,int y, int xdim,int ydim,int id){
