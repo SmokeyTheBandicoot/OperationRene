@@ -192,6 +192,7 @@ public class LevelBuilder {
         }
         
         // ####################### - PHASE 3: Setting up traps
+        
         // This part is responsible for randomly choosing which alarms to show and 
         // setting up the corresponding identifiers in the matrix
         HashMap<Location, PointOfInterest> cache = buildingLevel.getOtherObjects();
