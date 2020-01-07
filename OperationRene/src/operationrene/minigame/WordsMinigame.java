@@ -19,9 +19,11 @@ import static operationrene.OperationRene.font;
 import operationrene.core.SoundEffect;
 import operationrene.core.SoundEngine;
 import operationrene.core.StateID;
+import static operationrene.gui.PauseWindow.setPauseInstance;
 import operationrene.minigame.MinigameState;
 import org.newdawn.slick.geom.Rectangle;
 import operationrene.utils.RandomUtils;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Ellipse;
 
@@ -311,6 +313,7 @@ public class WordsMinigame extends MinigameState {
         if (resultWordsMinigame == -1) {
             this.init(gc, sbg, this.elementID,this.keysID);
         }
+    
     }
 
     private int findSolution() {
@@ -320,5 +323,7 @@ public class WordsMinigame extends MinigameState {
 
         return selectedWords.indexOf(wordSolution);
     }
+    
+    
 }
 
