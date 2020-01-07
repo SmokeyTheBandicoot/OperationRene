@@ -1,7 +1,6 @@
 package operationrene;
 
 import java.io.File;
-import operationrene.core.StateID;
 import operationrene.gui.MainWindow;
 import org.lwjgl.LWJGLUtil;
 import org.newdawn.slick.AppGameContainer;
