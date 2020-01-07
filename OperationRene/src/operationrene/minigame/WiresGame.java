@@ -18,6 +18,8 @@ import org.newdawn.slick.geom.Line;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;
 import operationrene.core.StateID;
+import static operationrene.gui.PauseWindow.setPauseInstance;
+import org.newdawn.slick.Input;
 
 public class WiresGame extends MinigameState{
 
@@ -209,6 +211,19 @@ public class WiresGame extends MinigameState{
             
         }
         
+    }
+    
+    @Override
+    public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+        
+        super.update(gc, sbg, delta);
+        
+        Input input = gc.getInput();
+        
+       if (input.isKeyDown(1)) {
+            setPauseInstance(gc,sbg,this.getID());
+            sbg.enterState(StateID.PAUSE_MENU_ID);
+        }
     }
     
 }

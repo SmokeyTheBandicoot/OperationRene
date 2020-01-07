@@ -14,7 +14,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import operationrene.core.SoundEffect;
 import operationrene.core.SoundEngine;
+import static operationrene.gui.PauseWindow.setPauseInstance;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Rectangle;
@@ -314,6 +316,19 @@ public class StrongBoxGame extends MinigameState {
         lucchetto = 1;
         rotation();
 
+    }
+    
+    @Override
+    public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+        
+        super.update(gc, sbg, delta);
+        
+        Input input = gc.getInput();
+        
+       if (input.isKeyDown(1)) {
+            setPauseInstance(gc,sbg,this.getID());
+            sbg.enterState(StateID.PAUSE_MENU_ID);
+        }
     }
 
 }//chiusura classe

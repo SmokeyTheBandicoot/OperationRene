@@ -18,6 +18,8 @@ import operationrene.OperationRene;
 import static operationrene.OperationRene.font;
 import operationrene.core.SoundEffect;
 import operationrene.core.SoundEngine;
+import static operationrene.gui.PauseWindow.setPauseInstance;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.TrueTypeFont;
 
 
@@ -219,8 +221,16 @@ public class KeyPadGame extends MinigameState {
     }
 
     @Override
-    public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+        
+        super.update(gc, sbg, delta);
+        
+        Input input = gc.getInput();
+        
+       if (input.isKeyDown(1)) {
+            setPauseInstance(gc,sbg,this.getID());
+            sbg.enterState(StateID.PAUSE_MENU_ID);
+        }
     }
     
 }
