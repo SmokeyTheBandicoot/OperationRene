@@ -25,7 +25,8 @@ public class ProceduralLevelPartsGenerator {
     public static final int MAX_MATRIX_HEIGHT = 26;
     public static final int MAX_MATRIX_WIDTH = 48;
     
-    private static ArrayList<Integer> escapeKey; 
+    // Keys for escaping the procedural generated level
+    private static ArrayList<Integer> escapeKey;
     
     /**
      * @param args the command line arguments

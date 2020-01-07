@@ -66,7 +66,6 @@ public abstract class PointOfInterest implements Serializable {
         Safe,
         Room,
         AlarmZone,
-        Minigame,
         EntryPoint,
         EscapePoint,
         AlarmID
