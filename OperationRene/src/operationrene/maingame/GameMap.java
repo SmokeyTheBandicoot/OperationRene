@@ -196,6 +196,7 @@ public class GameMap {
                 lb.buildLevel();
                 LevelMap lm = lb.getBuildingLevel();
                 matrix = lm.getMatrix();
+                MatrixUtils.debugMatrix(matrix);
                 this.map = new TiledMap("assets/tilesets/levelprocedural/level.tmx");
                 this.drawMap(map);
                 for (Location l : lm.getOtherObjects().keySet()){
