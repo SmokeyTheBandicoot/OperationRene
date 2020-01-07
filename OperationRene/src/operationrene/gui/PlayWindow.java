@@ -7,9 +7,9 @@ package operationrene.gui;
 
 import javax.swing.JOptionPane;
 import operationrene.OperationRene;
-import operationrene.core.ExplorationGame;
-import operationrene.core.MapID;
-import operationrene.core.StateID;
+import operationrene.maingame.ExplorationGame;
+import operationrene.maingame.MapID;
+import operationrene.StateID;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;

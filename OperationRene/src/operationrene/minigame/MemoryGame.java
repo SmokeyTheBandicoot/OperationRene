@@ -9,9 +9,9 @@ import org.newdawn.slick.state.StateBasedGame;
 import java.util.Random;
 import operationrene.OperationRene;
 import static operationrene.OperationRene.font;
-import operationrene.core.SoundEffect;
-import operationrene.core.SoundEngine;
-import operationrene.core.StateID;
+import operationrene.sound.SoundEffect;
+import operationrene.sound.SoundEngine;
+import operationrene.StateID;
 import static operationrene.gui.PauseWindow.setPauseInstance;
 
 

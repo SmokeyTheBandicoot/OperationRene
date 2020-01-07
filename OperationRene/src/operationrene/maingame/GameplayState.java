@@ -1,5 +1,8 @@
-package operationrene.core;
+package operationrene.maingame;
 
+import operationrene.StateID;
+import operationrene.sound.SoundEngine;
+import operationrene.sound.SoundEffect;
 import javax.swing.JOptionPane;
 import operationrene.gui.GameOverWindow;
 import operationrene.gui.PlayWindow;
@@ -15,7 +18,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public abstract class GameplayState extends BasicGameState {
 
     public GameTimer timer = null;
-    protected int difficulty;
+    public int difficulty;
 
     protected static boolean lastSeconds = false;
     

@@ -1,7 +1,13 @@
-package operationrene.core;
+package operationrene.maingame;
 
 import java.util.ArrayList;
 import operationrene.OperationRene;
+import operationrene.StateID;
+import operationrene.element.DoorElement;
+import operationrene.element.Element;
+import operationrene.element.EscapePointElement;
+import operationrene.element.MinigameElement;
+import operationrene.element.SafeElement;
 import operationrene.mapframework.LevelMap;
 import operationrene.mapframework.levelbuilder.LevelBuilder;
 import operationrene.mapframework.matrixprops.Location;
@@ -207,10 +213,10 @@ public class GameMap {
                         Safe s = (Safe) lm.getLockedObjects().get(l);
                         this.elements.add(new SafeElement(new Safe(s.getRoomID(), s.getRequiredKeysID(), s.getSize()),2,l.getX(),l.getY()));
                         
-                        map.setTileId(l.getY(), l.getX(), 2, 11);
-                        map.setTileId(l.getY()+1, l.getX(), 2, 12);
-                        map.setTileId(l.getY(), l.getX()+1, 2, 21);
-                        map.setTileId(l.getY()+1, l.getX()+1, 2, 22);
+                        map.setTileId(l.getX(), l.getY(), 2, 11);
+                        map.setTileId(l.getX()+1, l.getY(), 2, 12);
+                        map.setTileId(l.getX(), l.getY()+1, 2, 21);
+                        map.setTileId(l.getX()+1, l.getY()+1, 2, 22);
                         
                     
                     }

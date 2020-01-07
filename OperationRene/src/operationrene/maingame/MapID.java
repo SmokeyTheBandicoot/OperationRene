@@ -1,4 +1,4 @@
-package operationrene.core;
+package operationrene.maingame;
 
 public class MapID {
     

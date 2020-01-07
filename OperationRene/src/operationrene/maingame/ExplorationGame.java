@@ -1,5 +1,13 @@
-package operationrene.core;
+package operationrene.maingame;
 
+import operationrene.StateID;
+import operationrene.element.PlayerState;
+import operationrene.element.Player;
+import operationrene.element.SafeElement;
+import operationrene.element.InteractiveObjectInterface;
+import operationrene.element.Element;
+import operationrene.sound.SoundTrack;
+import operationrene.sound.SoundEngine;
 import java.util.ArrayList;
 import java.util.Iterator;
 import org.newdawn.slick.*;

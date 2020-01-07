@@ -5,10 +5,10 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import operationrene.core.StateID;
+import operationrene.StateID;
 import operationrene.OperationRene;
-import operationrene.core.SoundEngine;
-import operationrene.core.SoundTrack;
+import operationrene.sound.SoundEngine;
+import operationrene.sound.SoundTrack;
 
 /**
  *

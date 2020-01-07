@@ -1,4 +1,4 @@
-package operationrene.core;
+package operationrene.maingame;
 
 import org.newdawn.slick.Input;
 

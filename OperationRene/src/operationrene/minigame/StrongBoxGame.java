@@ -1,7 +1,7 @@
 package operationrene.minigame;
 
 import java.util.ArrayList;
-import operationrene.core.StateID;
+import operationrene.StateID;
 import operationrene.OperationRene;
 import static operationrene.OperationRene.font;
 import org.newdawn.slick.GameContainer;
@@ -12,8 +12,8 @@ import org.newdawn.slick.state.StateBasedGame;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import operationrene.core.SoundEffect;
-import operationrene.core.SoundEngine;
+import operationrene.sound.SoundEffect;
+import operationrene.sound.SoundEngine;
 import static operationrene.gui.PauseWindow.setPauseInstance;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Input;

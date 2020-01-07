@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package operationrene.core;
+package operationrene.element;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import operationrene.maingame.ExplorationGame;
+import operationrene.StateID;
 import operationrene.mapframework.pointsofinterest.Key;
 import operationrene.mapframework.pointsofinterest.Safe;
 import operationrene.minigame.KeyPadGame;
