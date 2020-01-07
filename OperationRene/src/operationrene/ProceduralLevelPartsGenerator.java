@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Random;
 import operationrene.alarm.MapAlarm;
 import operationrene.alarm.MapAlarm.Dimension;
-import operationrene.alarm.MapAlarmFactory;
 import operationrene.mapframework.*;
 import operationrene.mapframework.levelbuilder.LevelSerializer;
 import operationrene.mapframework.matrixprops.*;
@@ -115,8 +114,9 @@ public class ProceduralLevelPartsGenerator {
         lockeds.put(new Location(8, 2), new Safe(1, null, new Size(2, 2)));
         lockeds.put(new Location(0, 3), new Door(1, null, new Size(1, 2), false));
         unlocks.put(new Location(9, 5), new Key(1, -1, null));
-        others.put(new Location(3, 1), new Alarm(1, new Size(5, 5)));
-        others.put(new Location(2, 1), new MinigameIdentifier(1, MinigameIdentifier.AlarmType.UNSELECTED));
+        AlarmIdentifier identifier = new AlarmIdentifier(1, AlarmIdentifier.AlarmType.UNSELECTED);
+        others.put(new Location(3, 1), new AlarmZone(1, new Size(5, 5), identifier));
+        others.put(new Location(2, 1), identifier);
         
         // Put the door in
         matrix[3][0] = 2;
@@ -145,8 +145,9 @@ public class ProceduralLevelPartsGenerator {
         lockeds.put(new Location(11, 1), new Safe(1, null, new Size(1, 1)));
         lockeds.put(new Location(0, 4), new Door(1, null, new Size(1, 2), false));
         unlocks.put(new Location(11, 7), new Key(1, -1, null));
-        others.put(new Location(3, 1), new Alarm(1, new Size(7, 7)));    
-        others.put(new Location(2, 1), new MinigameIdentifier(1, MinigameIdentifier.AlarmType.UNSELECTED));
+        AlarmIdentifier identifier = new AlarmIdentifier(1, AlarmIdentifier.AlarmType.UNSELECTED);
+        others.put(new Location(3, 1), new AlarmZone(1, new Size(7, 7), identifier));    
+        others.put(new Location(2, 1), identifier);
         
         matrix[4][0] = 2;
         matrix[5][0] = 2;
@@ -173,8 +174,9 @@ public class ProceduralLevelPartsGenerator {
         lockeds.put(new Location(13, 1), new Safe(1, null, new Size(1, 1)));
         lockeds.put(new Location(0, 4), new Door(1, null, new Size(1, 2), false));
         unlocks.put(new Location(13, 9), new Key(1, -1, null));
-        others.put(new Location(3, 1), new Alarm(1, new Size(9, 9)));    
-        others.put(new Location(2, 1), new MinigameIdentifier(1, MinigameIdentifier.AlarmType.UNSELECTED));
+        AlarmIdentifier identifier = new AlarmIdentifier(1, AlarmIdentifier.AlarmType.UNSELECTED);
+        others.put(new Location(3, 1), new AlarmZone(1, new Size(9, 9), identifier));    
+        others.put(new Location(2, 1), identifier);
         
         matrix[2][0] = 2;
         matrix[3][0] = 2;
@@ -231,7 +233,7 @@ public class ProceduralLevelPartsGenerator {
         // lockeds.put(new Location(13, 1), new Safe(1, null, new Size(1, 1)));
         lockeds.put(new Location(0, 2), new Door(1, null, new Size(1, 2), false));
         unlocks.put(new Location(13, 9), new Key(1, -1, null));
-        others.put(new Location(3, 1), new Alarm(1, new Size(9, 9)));
+        others.put(new Location(3, 1), new AlarmZone(1, new Size(9, 9)));
         
         // In order to put a potential alarm, get the maximum useful area
         final int maxW = width - 4;
@@ -246,7 +248,7 @@ public class ProceduralLevelPartsGenerator {
         if (minigameDim != null) {
             MapAlarmFactory factory = new MapAlarmFactory();
             factory.createRandomMapAlarm(minigameDim);
-            others.put(new Location(1, 2), new Alarm(-1, minigameDim.getDimSize()));
+            others.put(new Location(1, 2), new AlarmZone(-1, minigameDim.getDimSize()));
         }
         
         matrix[doorOffset][0] = 2;
@@ -272,15 +274,12 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
         // Generate door randomly in the left door
-        // lockeds.put(new Location(doorOffset, 0), new Door(-1, new int[]{}, new Size(1, 2), false));
         lockeds.put(new Location(0, doorOffset), new Door(-1, new ArrayList<>(), new Size(1, 2), false));
-        // unlocks.put(new Location(unlockOffset, width - 2), new Key(-1, new int[]{-1}));
-        // unlocks.put(new Location(width - 2, unlockOffset), new Key(-1, new int[]{-1}));
         unlocks.put(new Location(width - 2, 1), new Key(-1, -1, new ArrayList<>()));
         
         // In order to put a potential alarm, get the maximum useful area
-        final int maxW = width - 4;
-        final int maxH = height - 4;
+        final int maxW = width - 6; // Excludes 2 side walls, 2 black spaces on the left and on the right
+        final int maxH = height - 2;
         int curX = 0;
         
         int index = SizeUtils.getBiggestFittingSize(MapAlarm.getMinigameDimensions(), new Size(maxW, maxH), true);
@@ -289,9 +288,11 @@ public class ProceduralLevelPartsGenerator {
             minigameDim = MapAlarm.getMinigameDimensions().get(index);
 
         if (minigameDim != null) {
-            MapAlarmFactory factory = new MapAlarmFactory();
-            factory.createRandomMapAlarm(minigameDim);
-            others.put(new Location(1, 2), new Alarm(-1, minigameDim.getDimSize()));
+            // MapAlarmFactory factory = new MapAlarmFactory();
+            // factory.createRandomMapAlarm(minigameDim);
+            AlarmIdentifier identifier = new AlarmIdentifier(-1, AlarmIdentifier.AlarmType.UNSELECTED);
+            others.put(new Location(3, 1), new AlarmZone(-1, minigameDim.getDimSize(), identifier));
+            others.put(new Location(2, 1), identifier);
         }
         
         matrix[doorOffset][0] = 2;

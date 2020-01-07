@@ -39,7 +39,7 @@ public class LevelSerializerTest {
         
         //unlocks.put(new Location(1, 2), new Key(-1, new int[]{-1}));
         //lockeds.put(new Location(2, 3), new Door(-1, new int[]{-1}, new Size(1, 1), false));
-        other.put(new Location(5, 6), new Alarm(-1, new Size(5, 5)));
+        other.put(new Location(5, 6), new AlarmZone(-1, new Size(5, 5), null));
         rooms.put(new Location(1, 1), new Room(-1, new Size(111, 222), Direction.LEFT));
         
         LevelMap level = new LevelMap(-1, matrix, unlocks, lockeds, other, rooms);

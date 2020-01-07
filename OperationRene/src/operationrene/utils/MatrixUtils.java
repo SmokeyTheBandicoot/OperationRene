@@ -24,28 +24,6 @@ public class MatrixUtils {
      */
     public static Integer[][] pasteMatrix (Integer [][] levelMatrix, Integer [][] roomMatrix, Location loc, Size originSize, Direction anchor){
         
-        /*
-        Location offSetLocation;
-        if (anchor == Direction.UP) offSetLocation = loc;
-        if (anchor == Direction.RIGHT) offSetLocation = new Location(loc.getX() + originSize.getWidth() - roomMatrix[0].length, loc.getY());
-        if (anchor == Direction.DOWN) offSetLocation = new Location(loc.getY(), loc.getY() + originSize.getHeight() - roomMatrix.length);
-        else offSetLocation = new Location(loc.getX() + originSize.getWidth() - roomMatrix[0].length, loc.getY() + originSize.getHeight() - roomMatrix.length);
-        
-        
-        for (int y = 0; y < roomMatrix[0].length; y++)
-            for (int x = 0; x < roomMatrix.length; x++){
-                int curY = offSetLocation.getY() + y;
-                int curX = offSetLocation.getX() + x;
-                try {
-                    levelMatrix[curY][curX] = roomMatrix[y][x];
-                } catch (Exception ex) {
-                    System.out.println("curY: " + curY + " curX: " + curX);
-                }
-                         
-            }     
-        return levelMatrix;
-        */
-        
         Location offsetLoc = getOffsetLoc(loc, new Size(roomMatrix[0].length, roomMatrix.length), originSize, anchor);
         
         for (int y = 0; y < roomMatrix.length; y++) {
@@ -74,6 +52,39 @@ public class MatrixUtils {
                 return null;
         }
         return null;
+    }
+    
+    public static Integer [][] rotateMatrix(int [][] mat, Rotation r) {
+        int n = mat.length;
+        int m = mat[0].length;
+        Integer [][] output = new Integer [m][n];
+        
+        if (null != r)
+            switch (r) {
+            case RIGHT:
+                // Rotate matrix
+                for (int i=0; i<n; i++)
+                    for (int j=0;j<m; j++)
+                        output [j][n-1-i] = mat[i][j];
+                return output;
+            case LEFT:
+                for (int i=0; i<n; i++)
+                    for (int j=0;j<m; j++)
+                        output [j][n-1-i] = mat[n-1-i][m-1-j];
+                return output;
+            case DEG180:
+                output = new Integer [n][m];
+                for (int i=0; i<n; i++)
+                    for (int j=0;j<m; j++)
+                        output [i][j] = mat[n-1-i][m-1-j];
+                return output;
+            }
+        // Just transform from int[][] to Integer[][]
+        output = new Integer [n][m];
+        for (int i=0; i<n; i++)
+            for (int j=0; j<m; j++)
+                output[i][j] = mat[i][j];
+        return output;
     }
     
     /**

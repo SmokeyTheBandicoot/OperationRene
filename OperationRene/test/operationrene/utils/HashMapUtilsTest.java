@@ -9,12 +9,10 @@ import java.util.HashMap;
 import java.util.Set;
 import operationrene.mapframework.matrixprops.Flipping;
 import operationrene.mapframework.matrixprops.Location;
-import operationrene.mapframework.matrixprops.Rotation;
 import operationrene.mapframework.matrixprops.Size;
-import operationrene.mapframework.pointsofinterest.Alarm;
+import operationrene.mapframework.pointsofinterest.AlarmZone;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -33,16 +31,16 @@ public class HashMapUtilsTest {
         
         System.out.println("rotate");    
         HashMap<Location, PointOfInterest> hash = new HashMap<>();
-        hash.put(new Location(1, 1), new Alarm(-1, new Size(5, 5)));
+        hash.put(new Location(1, 1), new AlarmZone(-1, new Size(5, 5), null));
         Size roomSize = new Size (9, 9);
         hash = new HashMap<>(HashMapUtils.flip(hash, Flipping.BOTH, roomSize));
         System.out.println(printHash(hash.keySet(), roomSize));
         System.out.println("end");
         
         /*
-        hash.put(new Location(1, 2), new Alarm(0, new Size(5, 5)));
-        hash.put(new Location(1, 1), new Alarm(0, new Size(5, 5)));
-        hash.put(new Location(1, 0), new Alarm(0, new Size(5, 5)));
+        hash.put(new Location(1, 2), new AlarmZone(0, new Size(5, 5)));
+        hash.put(new Location(1, 1), new AlarmZone(0, new Size(5, 5)));
+        hash.put(new Location(1, 0), new AlarmZone(0, new Size(5, 5)));
         
         Size s = new Size(7, 7);
         String str = "";

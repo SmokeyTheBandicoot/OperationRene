@@ -9,11 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import operationrene.alarm.FixedLasersAlarm;
-import operationrene.alarm.MapAlarm;
+import operationrene.alarm.*;
 import operationrene.alarm.MapAlarm.Dimension;
-import operationrene.alarm.MapAlarmFactory;
-import operationrene.alarm.PressureTilesAlarm;
 import operationrene.core.StateID;
 import operationrene.datastructures.ProgressTree;
 import operationrene.mapframework.*;
@@ -35,9 +32,8 @@ public class LevelBuilder {
     }
 
     public void buildLevel() {
-        
+
         // ####################### - PHASE 1: Building the levelroom by room
-        
         // Loads the choosen corridor
         this.buildingLevel = loadRandomCorridor();
 
@@ -102,7 +98,7 @@ public class LevelBuilder {
         }
 
         // Adding safe room
-        addRoom(1, safe, roomLoc, roomS.getSize(), roomS.getDir()); 
+        addRoom(1, safe, roomLoc, roomS.getSize(), roomS.getDir());
         // ---# Set the room id in the building level
 
         // Iteration on all rooms
@@ -172,7 +168,7 @@ public class LevelBuilder {
                     // Add the room to the matrix
                     // roomID starts from 2 because 0 is the corridor and 1 is 
                     // the room containing the safe, generated above
-                    System.out.println("Choosen room with ID " + i+2 + ": " + path);
+                    System.out.println("Choosen room with ID " + i + 2 + ": " + path);
                     addRoom(i + 2, room, roomArray.get(i), levelSize, roomDir);
                     // ---# change room id of the building level
                     break;
@@ -181,7 +177,6 @@ public class LevelBuilder {
         }
 
         // ####################### - PHASE 2: Randomize the progression in the rooms
-        
         // Row randomize progression
         ProgressionRandomizer pr = new ProgressionRandomizer(buildingLevel);
         try {
@@ -190,63 +185,57 @@ public class LevelBuilder {
             Logger.getLogger(LevelBuilder.class.getName()).log(Level.SEVERE, null, ex);
             // System.out.println(Arrays.toString(ex.getStackTrace()));
         }
-        
+
         // ####################### - PHASE 3: Setting up traps
-        
         // This part is responsible for randomly choosing which alarms to show and 
         // setting up the corresponding identifiers in the matrix
         HashMap<Location, PointOfInterest> cache = buildingLevel.getOtherObjects();
         ArrayList<Location> alarmLocations = new ArrayList<>();
-        for (Location loc : cache.keySet()){
+        for (Location loc : cache.keySet()) {
             if (cache.get(loc).getPointType() == PointOfInterest.PointType.AlarmZone) {
                 alarmLocations.add(loc);
             }
         }
-        
+
         // For each AlarmZone, generate a random MapAlarm
         for (Location l : alarmLocations) {
             MapAlarmFactory mapFactory = new MapAlarmFactory();
-            Alarm alarm = (Alarm) buildingLevel.getOtherObjects().get(l);
+            AlarmZone alarm = (AlarmZone) buildingLevel.getOtherObjects().get(l);
             ArrayList<Dimension> sizes = MapAlarm.getMinigameDimensions();
             Dimension d = sizes.get(SizeUtils.getBiggestFittingSize(sizes, alarm.getSize(), true));
-            
-            MapAlarm ma = mapFactory.createRandomMapAlarm(MapAlarm.Dimension.MEDIUM);
-            
-            // Get the room in which the alarm is contained (needed for rotation)
-            int roomID = alarm.getRoomID();
-            Rotation rot = null;
-            for (Location loc : buildingLevel.getRooms().keySet())
-                if (buildingLevel.getRooms().get(loc).getRoomID() == roomID)
-                    // Store the rotation needed for this particular alarm
-                    rot = RoomUtils.calculateRotation(buildingLevel.getRooms().get(loc).getDir());
-            
-            // Get the Location where the Location of the MapAlarmIdentifier is ubicated
-            // This is done assuming that the identifier is always next to the top-left
-            // corner of the alarm (adjacent on the left)
-            Location identifierLoc = null;
-            if (null != rot) switch (rot) {
-                case NONE:
-                    identifierLoc = new Location(l.getX() - 1, l.getY());
-                    break;
-                case RIGHT:
-                    identifierLoc = new Location(l.getX(), l.getY() - 1);
-                    break;
-                case DEG180:
-                    identifierLoc = new Location(l.getX() + alarm.getSize().getWidth(), l.getY() + alarm.getSize().getHeight() - 1);
-                    break; 
-            }
-            
+
+            MapAlarm ma = mapFactory.createRandomMapAlarm(d);
+
+            // Now set the AlarmZone Identifiers correctly
             if (ma instanceof PressureTilesAlarm) {
-                
+                alarm.getAlarmIdentifier().setAlarmID(AlarmIdentifier.AlarmType.PRESSURE_TILES);
             } else if (ma instanceof FixedLasersAlarm) {
-                
-            } else if (ma instanceof PressureTilesAlarm) {
-                
+                alarm.getAlarmIdentifier().setAlarmID(AlarmIdentifier.AlarmType.FIXED_LASERS);
+            } else if (ma instanceof PulsatingLasersAlarm) {
+                alarm.getAlarmIdentifier().setAlarmID(AlarmIdentifier.AlarmType.PULSATING_LASERS);
             }
-            
+
+            // Now get the matrix from the map alarms and paste it, taking rotation into account
+            int roomID = alarm.getRoomID();
+            Room alarmRoom = null;
+
+            for (Location loc : this.buildingLevel.getRooms().keySet()) {
+                Room r = (Room) buildingLevel.getRooms().get(loc);
+                if (r.getRoomID() == roomID) {
+                    alarmRoom = r;
+                }
+            }
+
+            Rotation rot = RoomUtils.calculateRotation(alarmRoom.getDir());
+
+            int[][] matrix = ma.getMatrix();
+
+            Integer[][] newMat = MatrixUtils.rotateMatrix(matrix, rot);
+
+            MatrixUtils.pasteMatrix(buildingLevel.getMatrix(), newMat, l, alarm.getSize(), Direction.LEFT);
+
         }
-        
-        
+
         // ####################### - PHASE 4: Setting up minigames (KEY gameType)
         for (Location loc : buildingLevel.getUnlockingObjects().keySet()) {
             Key key = (Key) buildingLevel.getUnlockingObjects().get(loc);
@@ -271,19 +260,18 @@ public class LevelBuilder {
                     break;
             }
         }
-        
-        
+
     }
-    
-    private LevelMap loadRandomCorridor(){
-        
+
+    private LevelMap loadRandomCorridor() {
+
         // Loads a random corridor
         ArrayList<String> corridors = FileUtils.listFilesInDirectory("assets/levels/proceduralgeneration/corridors");
         int randomCorridor = RandomUtils.genRandomInt(0, corridors.size() - 1);
-        
+
         return LevelSerializer.loadLevel(corridors.get(randomCorridor));
     }
-    
+
     /**
      * Function responsible for overwriting the matrix and chaining the hashmaps
      *
@@ -301,25 +289,27 @@ public class LevelBuilder {
                 loc.getX() + maxSize.getWidth() - lm.getMatrixWidth(),
                 loc.getY() + maxSize.getHeight() - lm.getMatrixHeight()
         );*/
-        
-        if (null != dir) switch (dir) {
-            case RIGHT:
-                offsetLocation = new Location(loc.getX() + maxSize.getWidth() - lm.getMatrixWidth(), loc.getY());
-                break;
-            case DOWN:
-                offsetLocation = new Location(loc.getX(), loc.getY() + maxSize.getHeight() - lm.getMatrixHeight());
-                break;
-            default:
-                break;
+
+        if (null != dir) {
+            switch (dir) {
+                case RIGHT:
+                    offsetLocation = new Location(loc.getX() + maxSize.getWidth() - lm.getMatrixWidth(), loc.getY());
+                    break;
+                case DOWN:
+                    offsetLocation = new Location(loc.getX(), loc.getY() + maxSize.getHeight() - lm.getMatrixHeight());
+                    break;
+                default:
+                    break;
+            }
         }
-        
+
         if (lm.getLockedObjects() != null) {
             if (buildingLevel.getLockedObjects() == null) {
                 buildingLevel.setLockedObjects(HashMapUtils.traslate(lm.getLockedObjects(), offsetLocation));
             } else {
                 for (Location iter : lm.getLockedObjects().keySet()) {
                     lm.getLockedObjects().get(iter).setRoomID(roomID);
-                    
+
                 }
                 buildingLevel.getLockedObjects().putAll(HashMapUtils.traslate(lm.getLockedObjects(), offsetLocation));
             }
@@ -351,7 +341,7 @@ public class LevelBuilder {
         MatrixUtils.debugMatrix(buildingLevel.getMatrix());
         MatrixUtils.debugMatrix(lm.getMatrix());
         System.out.println(loc);
-        */
+         */
         buildingLevel.setMatrix(MatrixUtils.pasteMatrix(buildingLevel.getMatrix(), lm.getMatrix(), loc, maxSize, dir));
     }
 

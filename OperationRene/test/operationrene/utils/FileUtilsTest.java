@@ -28,8 +28,8 @@ public class FileUtilsTest {
         ArrayList<String> expResult = new ArrayList<>();
         expResult.add(path + "/corridor1.dat");
         expResult.add(path + "/corridor2.dat");
-        expResult.add(path + "/corridor3.dat");
-        expResult.add(path + "/corridor4.dat");
+        // expResult.add(path + "/corridor3.dat");
+        // expResult.add(path + "/corridor4.dat");
         
         ArrayList<String> result = FileUtils.listFilesInDirectory(path);
 
