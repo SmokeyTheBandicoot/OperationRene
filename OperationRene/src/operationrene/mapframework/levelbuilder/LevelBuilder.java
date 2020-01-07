@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import operationrene.alarm.*;
 import operationrene.alarm.MapAlarm.Dimension;
-import operationrene.core.StateID;
+import operationrene.StateID;
 import operationrene.datastructures.ProgressTree;
 import operationrene.mapframework.*;
 import operationrene.mapframework.matrixprops.Direction;

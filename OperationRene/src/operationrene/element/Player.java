@@ -1,6 +1,7 @@
-package operationrene.core;
+package operationrene.element;
 
 import java.util.ArrayList;
+import operationrene.maingame.CommandCode;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 

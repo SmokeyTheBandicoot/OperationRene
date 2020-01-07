@@ -1,7 +1,11 @@
-package operationrene.core;
+package operationrene.element;
 
+import operationrene.sound.SoundEngine;
+import operationrene.sound.SoundEffect;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import operationrene.maingame.ExplorationGame;
+import operationrene.StateID;
 import operationrene.gui.GameWinWindow;
 import operationrene.mapframework.pointsofinterest.Door;
 import operationrene.mapframework.pointsofinterest.EscapePoint;
@@ -15,7 +19,7 @@ public class EscapePointElement extends Element implements InteractiveObjectInte
     
     private EscapePoint info;
 
-    EscapePointElement(EscapePoint info, int elementID, int posX, int posY) {
+    public EscapePointElement(EscapePoint info, int elementID, int posX, int posY) {
         
         this.elementId = elementID;
         this.info = info;

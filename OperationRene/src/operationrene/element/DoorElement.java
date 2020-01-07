@@ -1,5 +1,9 @@
- package operationrene.core;
+ package operationrene.element;
 
+import operationrene.maingame.ExplorationGame;
+import operationrene.StateID;
+import operationrene.sound.SoundEngine;
+import operationrene.sound.SoundEffect;
 import operationrene.mapframework.pointsofinterest.Door;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.StateBasedGame;

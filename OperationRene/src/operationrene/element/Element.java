@@ -1,4 +1,4 @@
-package operationrene.core;
+package operationrene.element;
 
 import org.newdawn.slick.geom.Shape;
 

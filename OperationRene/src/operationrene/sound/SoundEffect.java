@@ -1,4 +1,4 @@
-package operationrene.core;
+package operationrene.sound;
 
 public class SoundEffect {
     

@@ -1,11 +1,11 @@
 package operationrene.minigame;
 
 import java.util.ArrayList;
-import operationrene.core.CommandCode;
-import operationrene.core.Difficulty;
-import operationrene.core.ExplorationGame;
-import operationrene.core.GameplayState;
-import operationrene.core.StateID;
+import operationrene.maingame.CommandCode;
+import operationrene.maingame.Difficulty;
+import operationrene.maingame.ExplorationGame;
+import operationrene.maingame.GameplayState;
+import operationrene.StateID;
 import static operationrene.gui.PauseWindow.setPauseInstance;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;

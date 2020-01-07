@@ -1,5 +1,11 @@
-package operationrene.core;
+package operationrene.maingame;
 
+import operationrene.StateID;
+import operationrene.element.SafeElement;
+import operationrene.element.DoorElement;
+import operationrene.element.Element;
+import operationrene.element.MinigameElement;
+import operationrene.element.EscapePointElement;
 import java.util.ArrayList;
 import operationrene.OperationRene;
 import operationrene.mapframework.matrixprops.Location;

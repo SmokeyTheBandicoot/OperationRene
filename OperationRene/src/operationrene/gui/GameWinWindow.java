@@ -6,9 +6,9 @@
 package operationrene.gui;
 
 import operationrene.OperationRene;
-import operationrene.core.SoundEffect;
-import operationrene.core.SoundEngine;
-import operationrene.core.StateID;
+import operationrene.sound.SoundEffect;
+import operationrene.sound.SoundEngine;
+import operationrene.StateID;
 import operationrene.utils.GameTimer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
