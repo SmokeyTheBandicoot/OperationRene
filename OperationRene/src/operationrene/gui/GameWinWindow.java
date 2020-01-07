@@ -6,6 +6,8 @@
 package operationrene.gui;
 
 import operationrene.OperationRene;
+import operationrene.core.SoundEffect;
+import operationrene.core.SoundEngine;
 import operationrene.core.StateID;
 import operationrene.utils.GameTimer;
 import org.newdawn.slick.GameContainer;
@@ -32,6 +34,8 @@ public class GameWinWindow extends BasicGameState {
         GameTimer.deleteInstance();
         title = new Image("assets/sprites/controls/WinScreen.PNG");
         menu = new Button(ButtonType.MENU, OperationRene.WIDTH / 2, 600);
+        SoundEngine.getIstance().stopBackgroundMusic();
+        SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_WIN);
     }
 
     @Override
@@ -44,6 +48,9 @@ public class GameWinWindow extends BasicGameState {
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         menu.update(gc);
         if (menu.isClicked()) {
+            SoundEngine.getIstance().stopSoundEffect();
+            sbg.addState(new MainWindow());
+            sbg.getState(StateID.MENU_ID).init(gc, sbg);
             sbg.enterState(StateID.MENU_ID);
         }
     }

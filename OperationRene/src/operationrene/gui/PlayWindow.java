@@ -7,7 +7,6 @@ package operationrene.gui;
 
 import javax.swing.JOptionPane;
 import operationrene.OperationRene;
-import static operationrene.OperationRene.MUSIC;
 import operationrene.core.ExplorationGame;
 import operationrene.core.MapID;
 import operationrene.core.StateID;

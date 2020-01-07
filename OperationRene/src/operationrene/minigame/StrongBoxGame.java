@@ -12,6 +12,8 @@ import org.newdawn.slick.state.StateBasedGame;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import operationrene.core.SoundEffect;
+import operationrene.core.SoundEngine;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.TrueTypeFont;
@@ -145,11 +147,11 @@ public class StrongBoxGame extends MinigameState {
               }
 
         } else if (this.rotateleft5.contains(x, y)) {
-            System.out.println("-5 gradi");
+            SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_TICK);
             rotate -= 5;
             rotation();
         } else if (this.rotateright5.contains(x, y)) {
-            System.out.println("+5 gradi");
+            SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_TICK);
             rotate += 5;
             rotation();
           } 
@@ -185,6 +187,7 @@ public class StrongBoxGame extends MinigameState {
                 if (contagiro.getRotation() == 35 || contagiro.getRotation() == -325) {
                     System.out.println("Esatto" + rotate + "-->" + contagiro.getRotation());
                     lucchetto++;
+                    SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_UNLOCK);
                     lock[0] = new Image(PATH + "unlock.png");
                 } else { this.reset(); }
             break;
@@ -194,7 +197,7 @@ public class StrongBoxGame extends MinigameState {
                 if (contagiro.getRotation() == 310 || contagiro.getRotation() == -50) {
                     System.out.println("Esatto" + rotate + "-->" + contagiro.getRotation());
                     lucchetto++;
-
+                    SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_UNLOCK);
                     lock[1] = new Image(PATH + "unlock.png");
                 } else { this.reset(); }
             break;
@@ -204,6 +207,7 @@ public class StrongBoxGame extends MinigameState {
                 if ((contagiro.getRotation() == 290 || contagiro.getRotation() == -70)) {
                     System.out.println("Esatto" + rotate + "-->" + contagiro.getRotation());
                     lucchetto++;
+                    SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_UNLOCK);
                     lock[2] = new Image(PATH + "unlock.png");
                 } else { this.reset(); }
             break;
@@ -213,6 +217,7 @@ public class StrongBoxGame extends MinigameState {
                 if (contagiro.getRotation() == 180 || contagiro.getRotation() == -180) {
                     System.out.println("Esatto" + rotate + "-->" + contagiro.getRotation());
                     lucchetto++;
+                    SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_UNLOCK);
                     lock[3] = new Image(PATH + "unlock.png");
                 } else { this.reset(); }
             break;
@@ -222,6 +227,7 @@ public class StrongBoxGame extends MinigameState {
                 if (contagiro.getRotation() == 355 || contagiro.getRotation() == -5) {
                     System.out.println("Esatto" + rotate + "-->" + contagiro.getRotation());
                     lucchetto++;
+                    SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_UNLOCK);
                     lock[4] = new Image(PATH + "unlock.png");
                 } else { this.reset(); }
             break;
@@ -243,7 +249,7 @@ public class StrongBoxGame extends MinigameState {
                 if (contagiro.getRotation() == -20 || contagiro.getRotation() == 340) {
                     System.out.println("Esatto" + rotate + "-->" + contagiro.getRotation());
                     lucchetto++;
-                    System.out.print(lucchetto);
+                    SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_UNLOCK);
                     lock[0] = new Image(PATH + "unlock.png");
                 } else { this.reset(); }
             break;
@@ -253,6 +259,7 @@ public class StrongBoxGame extends MinigameState {
                 if (contagiro.getRotation() == -10 || contagiro.getRotation() == 350) {
                     System.out.println("Esatto" + rotate + "-->" + contagiro.getRotation());
                     lucchetto++;
+                    SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_UNLOCK);
                     lock[1] = new Image(PATH + "unlock.png");
                 } else { this.reset(); }
             break;
@@ -262,6 +269,7 @@ public class StrongBoxGame extends MinigameState {
                 if (contagiro.getRotation() == 25 || contagiro.getRotation() == -335) {
                     System.out.println("Esatto" + rotate + "-->" + contagiro.getRotation());
                     lucchetto++;
+                    SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_UNLOCK);
                     lock[2] = new Image(PATH + "unlock.png");
                 } else { this.reset(); }
             break;
@@ -271,6 +279,7 @@ public class StrongBoxGame extends MinigameState {
                 if (contagiro.getRotation() == 310 || contagiro.getRotation() == -50) {
                     System.out.println("Esatto" + rotate + "-->" + contagiro.getRotation());
                     lucchetto++;
+                    SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_UNLOCK);
                     lock[3] = new Image(PATH + "unlock.png");
                 } else { this.reset(); }
             break;
@@ -280,6 +289,7 @@ public class StrongBoxGame extends MinigameState {
                 if (contagiro.getRotation() == 340 || contagiro.getRotation() == -20) {
                     System.out.println("Esatto" + rotate + "-->" + contagiro.getRotation());
                     lucchetto++;
+                    SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_UNLOCK);
                     lock[4] = new Image(PATH + "unlock.png");
                 } else {this.reset(); }
             break;
@@ -293,6 +303,7 @@ public class StrongBoxGame extends MinigameState {
 
     public void reset() throws SlickException {
         
+        SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_LOCK);
         this.errorDone();
         
         for (int i = 0; i < 5; i++) {

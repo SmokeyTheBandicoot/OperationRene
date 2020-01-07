@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Random;
 import operationrene.OperationRene;
 import static operationrene.OperationRene.font;
+import operationrene.core.SoundEffect;
+import operationrene.core.SoundEngine;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -58,9 +60,6 @@ public class WiresGame extends MinigameState{
         super.init(gc, sbg, elementID, keysID);
 
         this.circuit = (new Image(PATH+"/circuit.jpg")).getScaledCopy(640, 350);
-        
-        //this.screw =  (new Image("C:/Users/gavos/Desktop/images/vite.png")).getScaledCopy(15,15);
-        //gc.setMouseCursor((new Image("C:/Users/gavos/Desktop/images/scissor.png")).getScaledCopy((float)1), 5, 5); aggiungere forbici forse
         
         Random rand = new Random();
         
@@ -192,10 +191,12 @@ public class WiresGame extends MinigameState{
                     flag = false;
                     if(i==this.solution){
                         
+                        SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_WIRE_CUT);
                         this.completed = true;
                         
                     }else{
                         
+                        SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_WIRE_CUT);
                         this.errorDone();
                         this.deletedLines.add(i);
                         

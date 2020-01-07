@@ -7,6 +7,8 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import operationrene.core.StateID;
 import operationrene.OperationRene;
+import operationrene.core.SoundEngine;
+import operationrene.core.SoundTrack;
 
 /**
  *
@@ -24,18 +26,24 @@ public class SettingWindow extends BasicGameState {
     
     /// VOID SINGLETHON
     public SettingWindow(int id){
-        this.previous_state=id;
+       this.previous_state=id;
     }
-    
+
+    public int getPrevious_state() {
+        return previous_state;
+    }
+
     public static void setSettingInstance(GameContainer gc,StateBasedGame sbg,int ID) throws SlickException{
         if(INSTANCE==null){
           INSTANCE= new SettingWindow(ID);
           sbg.addState(INSTANCE);
           sbg.getState(StateID.SETTING_ID).init(gc, sbg);
+        }else{
+          INSTANCE.previous_state=ID;
         }
+    }
        
         
-    }
      public static void setSettingInstance(GameContainer gc,StateBasedGame sbg) throws SlickException{
         setSettingInstance(gc,sbg,StateID.MENU_ID);    
     } 
@@ -69,13 +77,32 @@ public class SettingWindow extends BasicGameState {
         returnButton.update(gc);
 
         if (returnButton.isClicked()) {
+            
+            int flag = 0;
+            
+            if(!OperationRene.MUSIC_SOUND && musicButton.getValue()){
+                
+                if (this.previous_state == StateID.MENU_ID){
+                    flag = 1;
+                }else{
+                    flag = 2;
+                }
+                
+            }
+            
             OperationRene.EFFECT_SOUND = effectMusicButton.getValue();
             OperationRene.MUSIC_SOUND = musicButton.getValue();
-            if (OperationRene.MUSIC.playing() && OperationRene.MUSIC_SOUND == false) {
-                OperationRene.MUSIC.pause();
-            } else if (!OperationRene.MUSIC.playing() && OperationRene.MUSIC_SOUND == true) {
-                OperationRene.MUSIC.resume();
+            
+            
+            SoundEngine.getIstance().enabledBackgroudMusic(OperationRene.MUSIC_SOUND);
+            SoundEngine.getIstance().enabledSoundEffect(OperationRene.EFFECT_SOUND);
+            
+            if(flag == 1){
+                SoundEngine.getIstance().playBackgroundMusic(SoundTrack.MENU_MUSIC);
+            }else if(flag == 2){
+                SoundEngine.getIstance().playBackgroundMusic(SoundTrack.GAME_MUSIC);
             }
+            
             sbg.enterState(this.previous_state);
 
         }

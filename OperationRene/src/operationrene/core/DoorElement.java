@@ -39,9 +39,11 @@ public class DoorElement extends Element implements InteractiveObjectInterface{
             
             game.getMap().getElements().remove(this);
             
+            SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_OPEN_DOOR);
             
         }else{
-            System.out.println("False");
+            
+            SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_LOCKED_DOOR);
             
         }
         

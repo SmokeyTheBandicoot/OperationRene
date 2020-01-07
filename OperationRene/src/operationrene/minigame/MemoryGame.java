@@ -8,6 +8,8 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import java.util.Random;
 import operationrene.OperationRene;
+import operationrene.core.SoundEffect;
+import operationrene.core.SoundEngine;
 import operationrene.core.StateID;
 
 
@@ -250,7 +252,7 @@ public class MemoryGame extends MinigameState{
         if(this.level < 6){
             this.screenValues[this.level-1] = new Random().nextInt(4)+1;
         }else{
-
+            SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_CORRECT);
             this.completed = true;
             
         }
@@ -268,13 +270,13 @@ public class MemoryGame extends MinigameState{
             if(this.buttons[i].contains(x,y)){
                 flag = true;
                 if(i == this.solution){
-                    
+                    SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_PRESS_BUTTON);
                     this.positions[this.level-1] = i;
                     this.generateLevel();
                     
                 }
                 else{
-                    
+                    SoundEngine.getIstance().playSoundEffect(SoundEffect.SOUND_WRONG);
                     this.errorDone();
                     this.resetAll();
                 }
