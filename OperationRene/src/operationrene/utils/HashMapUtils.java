@@ -127,10 +127,6 @@ public class HashMapUtils {
         for (Location oldLoc : set) {
             PointOfInterest POI = hash.remove(oldLoc);
             Location newLoc = new Location(oldLoc.getX() + offset.getX(), oldLoc.getY() + offset.getY());
-            System.out.println("Tralsated point: " + POI.toString() + 
-                    "\nfrom location" + oldLoc.toString() + 
-                    "\ninto new location " + newLoc.toString() + 
-                    "\ntraslating of " + offset.toString());
             hash.put(newLoc, POI);
         }
         return new HashMap<>(hash);
