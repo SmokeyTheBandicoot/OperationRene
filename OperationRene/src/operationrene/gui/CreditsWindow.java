@@ -28,7 +28,7 @@ public class CreditsWindow extends BasicGameState{
     Image title;
     Image font;
     
-    int j=0;
+    int i =0,j=0;
     
     @Override
     public int getID() {
@@ -49,12 +49,9 @@ public class CreditsWindow extends BasicGameState{
         returnButton.render(grphcs);
         title.draw(OperationRene.WIDTH / 2 - title.getWidth() / 2, 0);
         font.draw(OperationRene.WIDTH / 2 - font.getWidth() /2 ,title.getHeight());
-        try {
-            sleep(1000);
-                    } catch (InterruptedException ex) {
-            Logger.getLogger(CreditsWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        j=(j+1)%10;
+        i = (i+1)%300;
+        if(i == 0)
+            j = (j+1)%10;
         
     }
 

@@ -19,6 +19,7 @@ import  static operationrene.OperationRene.font;
 import operationrene.OperationRene;
 import static operationrene.gui.PauseWindow.setPauseInstance;
 import operationrene.minigame.WiresGame;
+import org.newdawn.slick.geom.Shape;
 
 public class ExplorationGame extends GameplayState {
 
@@ -79,7 +80,9 @@ public class ExplorationGame extends GameplayState {
             g.draw(k.shape);
             
         }
-        
+        for(Rectangle r: map.getAlarms()){
+            g.draw(r);
+        }
         font.drawString(10, 50, "TIME REMAINING: " + this.timer.getTime(), Color.red);
         font.drawString(10, 80, "GOAL: "+goal, Color.green);
         

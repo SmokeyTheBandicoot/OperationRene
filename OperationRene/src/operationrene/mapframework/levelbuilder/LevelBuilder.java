@@ -209,11 +209,15 @@ public class LevelBuilder {
             // Now set the AlarmZone Identifiers correctly
             if (ma instanceof PressureTilesAlarm) {
                 alarm.getAlarmIdentifier().setAlarmID(AlarmIdentifier.AlarmType.PRESSURE_TILES);
+                alarm.setAlarmType(AlarmIdentifier.AlarmType.PRESSURE_TILES);
             } else if (ma instanceof FixedLasersAlarm) {
                 alarm.getAlarmIdentifier().setAlarmID(AlarmIdentifier.AlarmType.FIXED_LASERS);
+                alarm.setAlarmType(AlarmIdentifier.AlarmType.FIXED_LASERS);
             } else if (ma instanceof PulsatingLasersAlarm) {
                 alarm.getAlarmIdentifier().setAlarmID(AlarmIdentifier.AlarmType.PULSATING_LASERS);
+                alarm.setAlarmType(AlarmIdentifier.AlarmType.PULSATING_LASERS);
             }
+            alarm.setMapAlarm(ma);
 
             // Now get the matrix from the map alarms and paste it, taking rotation into account
             int roomID = alarm.getRoomID();
