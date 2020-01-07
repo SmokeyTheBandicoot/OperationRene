@@ -6,7 +6,9 @@ import operationrene.core.Difficulty;
 import operationrene.core.ExplorationGame;
 import operationrene.core.GameplayState;
 import operationrene.core.StateID;
+import static operationrene.gui.PauseWindow.setPauseInstance;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -48,6 +50,18 @@ public abstract class MinigameState extends GameplayState{
         if(this.completed || this.escPressed){
             sbg.enterState(StateID.EXPLORATION_ID);
             System.out.println("MA lo fa");
+        }
+        
+        Input input = gc.getInput();
+        
+         if (input.isKeyDown(Input.KEY_W) && input.isKeyDown(Input.KEY_LSHIFT)) {
+           
+           this.completed = true;
+        }
+        
+       if (input.isKeyDown(1)) {
+            setPauseInstance(gc,sbg,this.getID());
+            sbg.enterState(StateID.PAUSE_MENU_ID);
         }
     }
     

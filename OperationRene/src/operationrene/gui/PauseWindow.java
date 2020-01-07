@@ -28,7 +28,7 @@ public class PauseWindow extends GameplayState{
     Button menu;
     Button setting;
     Button resume;
-    int previous_state;
+    private int previous_state;
     private static PauseWindow INSTANCE;
      
     @Override
@@ -48,6 +48,10 @@ public class PauseWindow extends GameplayState{
           sbg.addState(INSTANCE);
           sbg.getState(StateID.PAUSE_MENU_ID).init(gc, sbg);
         }
+        else{
+            INSTANCE.previous_state = ID;
+            
+        }
     }
 
     @Override
@@ -66,7 +70,7 @@ public class PauseWindow extends GameplayState{
         setting.render(grphcs);
         resume.render(grphcs);
         title.draw(OperationRene.WIDTH / 2 - title.getWidth() / 2, 0);
-        font.drawString(10, 50, "TIME REMAINING: " + this.timer.getTime() , Color.red);
+        font.drawString(10, 50, "TIME REMAINING: " + timer.getTime() , Color.red);
         //super.timer.getTime();
         //font.drawString(10, 50, "TIME REMAINING: " + super.timer.getTime(), Color.red);
     }
@@ -92,6 +96,10 @@ public class PauseWindow extends GameplayState{
             SettingWindow.setSettingInstance(gc, sbg,this.getID());
             sbg.enterState(StateID.SETTING_ID);
         }
+    }
+    
+    public static void deleteInstance () {
+    INSTANCE = null;
     }
     
 }

@@ -6,6 +6,7 @@ import static operationrene.OperationRene.font;
 import operationrene.core.SoundEffect;
 import operationrene.core.SoundEngine;
 import operationrene.core.StateID;
+import static operationrene.gui.PauseWindow.setPauseInstance;
 import operationrene.minigame.MinigameState;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -14,6 +15,7 @@ import org.newdawn.slick.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Circle;
@@ -176,5 +178,7 @@ public class SimonSays extends MinigameState {
         font.drawString(518,385,"Strikes:",Color.red);
         font.drawString(518, 350, "Seriale: "+serialnumber);
     }
+    
+    
 
 }

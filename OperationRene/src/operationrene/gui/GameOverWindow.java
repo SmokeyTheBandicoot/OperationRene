@@ -39,6 +39,7 @@ public class GameOverWindow extends BasicGameState{
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         
         GameTimer.deleteInstance();
+        PauseWindow.deleteInstance();
         title = new Image("assets/sprites/controls/GameOver.PNG");
         menu = new Button(ButtonType.MENU, OperationRene.WIDTH / 2, 600);
         

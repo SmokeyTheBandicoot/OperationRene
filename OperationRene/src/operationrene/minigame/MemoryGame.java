@@ -8,9 +8,11 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import java.util.Random;
 import operationrene.OperationRene;
+import static operationrene.OperationRene.font;
 import operationrene.core.SoundEffect;
 import operationrene.core.SoundEngine;
 import operationrene.core.StateID;
+import static operationrene.gui.PauseWindow.setPauseInstance;
 
 
 public class MemoryGame extends MinigameState{
@@ -100,6 +102,7 @@ public class MemoryGame extends MinigameState{
     
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
+        font.drawString(10, 50, "TIME REMAINING: " + this.timer.getTime(), Color.red);
 
         if(!this.completed){
         
@@ -110,7 +113,7 @@ public class MemoryGame extends MinigameState{
             //schermo
             grphcs.setColor(Color.darkGray);
             grphcs.fill(screen);
-            System.out.println(this.level+","+this.completed);
+            //System.out.println(this.level+","+this.completed);
             //testo schermo
             fontScreen.drawString(this.screen.getCenterX()-30, this.screen.getCenterY()-60, ""+this.screenValues[this.level-1],Color.pink);
 
@@ -129,6 +132,8 @@ public class MemoryGame extends MinigameState{
             }
         
         }
+        else
+            System.out.println(this.level+","+this.completed);
     }   
     
     private ArrayList<Integer> getRandomIndices(int max){
@@ -285,6 +290,8 @@ public class MemoryGame extends MinigameState{
         }
         
     }
+    
+   
     
     
 }
