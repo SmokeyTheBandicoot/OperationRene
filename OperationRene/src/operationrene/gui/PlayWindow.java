@@ -66,13 +66,11 @@ public class PlayWindow extends BasicGameState{
         if (undo.isClicked()) {
             sbg.enterState(StateID.MENU_ID);
         }
-//        if (quickMach.isClicked()){
-//            sbg.addState(new ExplorationGame(difficulty,MapID.LEVEL_RANDOM));
-//            sbg.getState(StateID.EXPLORATION_ID).init(gc, sbg);
-//            sbg.enterState(StateID.EXPLORATION_ID);
-//         
-//            
-//        }
+        if (quickMach.isClicked()){
+            sbg.addState(new ExplorationGame(getDifficulty(),MapID.LEVEL_RANDOM));
+            sbg.getState(StateID.EXPLORATION_ID).init(gc, sbg);
+            sbg.enterState(StateID.EXPLORATION_ID);
+        }
         
         if (!info) {
                 JOptionPane.showMessageDialog(null,

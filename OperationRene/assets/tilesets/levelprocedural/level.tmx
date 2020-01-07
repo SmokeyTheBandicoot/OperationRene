@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.1" orientation="orthogonal" renderorder="right-down" compressionlevel="-1" width="48" height="26" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="1">
+<map version="1.2" tiledversion="1.3.1" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="48" height="26" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="1">
+ <tileset firstgid="1" source="finaltileset.tsx"/>
  <layer id="1" name="floor" width="48" height="26">
-  <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20KP6AAAAAAgJcBE4AAAQ==
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAECu3QQQ0AAAjEsAP8ewYRPLtkBlpJ+p5bBAgQIECAAAECBAgQIECAAAECBAj8CixxRFyqgBMAAA==
   </data>
  </layer>
  <layer id="2" name="walls" width="48" height="26">
-  <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20KP6AAAAAAgJcBE4AAAQ==
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAECu3QMQEAAADCoPVPbQo/iEBhwIABAwYMGDBgwIABAwYMGDBgwMBrYAi9nPmAEwAA
   </data>
  </layer>
- <layer id="3" name="object" width="48" height="26">
-  <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20KP6AAAAAAgJcBE4AAAQ==
+ <layer id="3" name="objects" width="48" height="26">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAECu3QMQEAAADCoPVPbQo/iEBhwIABAwYMGDBgwIABAwYMGDBgwMBrYAi9nPmAEwAA
   </data>
  </layer>
  <layer id="4" name="empty" width="48" height="26">
-  <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20KP6AAAAAAgJcBE4AAAQ==
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAECu3QMQEAAADCoPVPbQo/iEBhwIABAwYMGDBgwIABAwYMGDBgwMBrYAi9nPmAEwAA
   </data>
  </layer>
 </map>
