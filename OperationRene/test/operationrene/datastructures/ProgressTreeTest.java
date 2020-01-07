@@ -1,5 +1,7 @@
 package operationrene.datastructures;
 
+import junit.framework.Assert;
+import operationrene.mapframework.matrixprops.Location;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -11,23 +13,26 @@ public class ProgressTreeTest {
     /**
      * Test of getRoot method, of class ProgressTree.
      *
-     * @Test public void testGetRoot() { System.out.println("getRoot");
-     * ProgressTree instance = null; ProgressTree.Node expResult = null;
-     * ProgressTree.Node result = instance.getRoot(); assertEquals(expResult,
-     * result); // TODO review the generated test code and remove the default
-     * call to fail. fail("The test case is a prototype."); }
-     *
-     * /**
-     * Test of insert method, of class ProgressTree.
-     *
-     * @Test public void testInsert() { System.out.println("insert"); Object
-     * nodeKey = null; Object parentKey = null; ProgressTree instance = null;
-     * boolean expResult = false; boolean result = instance.insert(nodeKey,
-     * parentKey); assertEquals(expResult, result); // TODO review the generated
-     * test code and remove the default call to fail. fail("The test case is a
-     * prototype."); }
-     *
-     * /**
+     */
+    @Test 
+    public void testGetRoot() { System.out.println("getRoot");
+        Location l = new Location(1, 1);
+        ProgressTree<Location> pt = new ProgressTree<>(l);
+        assertEquals(true, pt.contains(l, pt.getRoot())); 
+    }
+    
+    
+     
+     @Test 
+     public void testInsert() { 
+         System.out.println("insert");
+         Location l = new Location(1, 1);
+         Location l2 = new Location(2, 2);
+         ProgressTree<Location> pt = new ProgressTree<>(l);
+         
+     } 
+     
+     /**
      * Test of contains method, of class ProgressTree.
      *
      * @Test public void testContains() { System.out.println("contains");
@@ -55,7 +60,9 @@ public class ProgressTreeTest {
      * generated test code and remove the default call to fail. fail("The test
      * case is a prototype."); }
      *
-     * /**
+     */
+
+    /*
      * Test of printTree method, of class ProgressTree.
      */
     @Test

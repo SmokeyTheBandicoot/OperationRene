@@ -25,12 +25,18 @@ public class ProceduralLevelPartsGenerator {
     public static final int MAX_MATRIX_HEIGHT = 26;
     public static final int MAX_MATRIX_WIDTH = 48;
     
+    // Keys for escaping the procedural generated level
+    private static ArrayList<Integer> escapeKey;
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
         LevelMap lm;
+        
+        escapeKey = new ArrayList<>();
+        escapeKey.add(-7);
         
         lm = generateVerticalCorridor(8, 4, MAX_MATRIX_WIDTH / 2 - 5);
         LevelSerializer.saveLevel(lm, "assets/levels/proceduralgeneration/corridors/corridor1.dat");
@@ -309,12 +315,12 @@ public class ProceduralLevelPartsGenerator {
             // Generate escape point on top
             matrix[0][leftRoomsOffset + width / 2 - 1] = 2;
             matrix[0][leftRoomsOffset + width / 2] = 2;
-            others.put(new Location(leftRoomsOffset + width / 2, 1), new EscapePoint(0, new ArrayList<>()));
+            others.put(new Location(leftRoomsOffset + width / 2, 1), new EscapePoint(0, escapeKey));
         } else {
             // Generate escape point on bottom
             matrix[MAX_MATRIX_HEIGHT - 1][leftRoomsOffset + width / 2 - 1] = 2;
             matrix[MAX_MATRIX_HEIGHT - 1][leftRoomsOffset + width / 2] = 2;
-            others.put(new Location(leftRoomsOffset + width / 2,MAX_MATRIX_HEIGHT - 2), new EscapePoint(0, new ArrayList<>()));
+            others.put(new Location(leftRoomsOffset + width / 2,MAX_MATRIX_HEIGHT - 2), new EscapePoint(0, escapeKey));
         }
         
         LevelMap lm = new LevelMap(0, matrix, null, null, others, rooms);
@@ -366,12 +372,12 @@ public class ProceduralLevelPartsGenerator {
             // Put escape point to the left
             matrix[upperRoomsOffset + width / 2 - 1][0] = 2;
             matrix[upperRoomsOffset + width / 2][0] = 2;
-            others.put(new Location(0, upperRoomsOffset + width / 2 -1), new EscapePoint(0, new ArrayList<>()));
+            others.put(new Location(0, upperRoomsOffset + width / 2 -1), new EscapePoint(0, escapeKey));
         } else {
             // Put escape point to the right
             matrix[upperRoomsOffset + width / 2 - 1][MAX_MATRIX_WIDTH - 1] = 2;
             matrix[upperRoomsOffset + width / 2][MAX_MATRIX_WIDTH - 1] = 2;
-            others.put(new Location(0, upperRoomsOffset + width / 2 -1), new EscapePoint(0, new ArrayList<>()));
+            others.put(new Location(0, upperRoomsOffset + width / 2 -1), new EscapePoint(0, escapeKey));
         }
         
         LevelMap lm = new LevelMap(0, matrix, null, null, others, rooms);

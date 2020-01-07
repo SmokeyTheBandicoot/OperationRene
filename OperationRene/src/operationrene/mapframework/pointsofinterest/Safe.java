@@ -8,11 +8,4 @@ public class Safe extends PointOfInterest {
     public Safe(int roomID, ArrayList<Integer> requiredKeysID, Size size) {
         super(PointType.Safe, roomID, requiredKeysID, size);
     }
-
-    
-    
-    
-    
-   
-    
 }
