@@ -21,37 +21,18 @@ public class ProgressTreeTest {
         assertEquals(true, pt.contains(l, pt.getRoot())); 
     }
     
-    
-     
      @Test 
      public void testInsert() { 
          System.out.println("insert");
          Location l = new Location(1, 1);
          Location l2 = new Location(2, 2);
          ProgressTree<Location> pt = new ProgressTree<>(l);
-         
+         pt.insert(l2, l);
+         assertTrue(pt.contains(l, pt.getRoot()));
+         assertTrue(pt.contains(l2, pt.getRoot()));
      } 
      
      /**
-     * Test of contains method, of class ProgressTree.
-     *
-     * @Test public void testContains() { System.out.println("contains");
-     * ProgressTree instance = null; boolean expResult = false; boolean result =
-     * instance.contains(null); assertEquals(expResult, result); // TODO review
-     * the generated test code and remove the default call to fail. fail("The
-     * test case is a prototype."); }
-     *
-     * /**
-     * Test of getNode method, of class ProgressTree.
-     *
-     * @Test public void testGetNode() { System.out.println("getNode");
-     * ProgressTree instance = null; ProgressTree.Node expResult = null;
-     * ProgressTree.Node result = instance.getNode(null);
-     * assertEquals(expResult, result); // TODO review the generated test code
-     * and remove the default call to fail. fail("The test case is a
-     * prototype."); }
-     *
-     * /**
      * Test of height method, of class ProgressTree.
      *
      * @Test public void testHeight() { System.out.println("height"); Object key
