@@ -239,7 +239,7 @@ public class LevelBuilder {
         // ####################### - PHASE 4: Setting up minigames (KEY gameType)
         for (Location loc : buildingLevel.getUnlockingObjects().keySet()) {
             Key key = (Key) buildingLevel.getUnlockingObjects().get(loc);
-            switch (RandomUtils.genRandomInt(0, 5)) {
+            switch (RandomUtils.genRandomInt(0, 4)) {
                 case 0:
                     key.setGameType(StateID.KEYPAD_ID);
                     break;
@@ -250,13 +250,10 @@ public class LevelBuilder {
                     key.setGameType(StateID.SIMONSAYS_ID);
                     break;
                 case 3:
-                    key.setGameType(StateID.STRONGBOX_ID);
+                    key.setGameType(StateID.WORDS_ID);
                     break;
                 case 4:
                     key.setGameType(StateID.WIRES_ID);
-                    break;
-                case 5:
-                    key.setGameType(StateID.WORDS_ID);
                     break;
             }
         }
