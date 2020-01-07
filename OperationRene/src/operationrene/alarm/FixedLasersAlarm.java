@@ -261,7 +261,7 @@ public class FixedLasersAlarm extends MapAlarm {
         for(int i = 0; i < 9; i++)
             for(int j = 0; j < 11; j++)
                 if((i >= 2 && i <= 3 && j <= 7) ||
-                   (i >= 3 && i <= 4 && j >= 6 && j <= 7) ||
+                   (i >= 4 && i <= 5 && j >= 6 && j <= 7) ||
                    (i >= 6 && i <= 7 && j >= 6))
                     this.getMatrix()[i][j] = 0;
                 else

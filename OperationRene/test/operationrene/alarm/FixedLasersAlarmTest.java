@@ -34,11 +34,11 @@ public class FixedLasersAlarmTest {
         
         for(int i = 0; i < 5; i++)
             for(int j = 0; j < 5; j++)
-                if((i >= 2 && i <= 3 && j <= 3) ||
-                   (i >= 0 && i <= 1 && j >= 2))
+                if((i <= 1 && j >= 2) ||
+                   (i >= 2 && i <= 3 && j <= 3))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -58,7 +58,7 @@ public class FixedLasersAlarmTest {
                    (i >= 3 && j <= 2))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -74,10 +74,11 @@ public class FixedLasersAlarmTest {
         
         for(int i = 0; i < 5; i++)
             for(int j = 0; j < 5; j++)
-                if(i <= 1 || j >= 3)
+                if((i >= 1 && i <= 2) ||
+                   (j >= 3))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -99,7 +100,7 @@ public class FixedLasersAlarmTest {
                    (i <= 1 && j == 4))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -119,7 +120,7 @@ public class FixedLasersAlarmTest {
                    (i >= 4 && i <= 5 && j >= 2))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -135,12 +136,11 @@ public class FixedLasersAlarmTest {
         
         for(int i = 0; i < 7; i++)
             for(int j = 0; j < 7; j++)
-                if((i <= 1) ||
-                   (j <= 1) ||
-                   (i <= 3 && j >= 5))
+                if((i >= 1 && j <= 1) ||
+                   (i >= 1 && i <= 2))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -160,7 +160,7 @@ public class FixedLasersAlarmTest {
                    (i >= 3 && i <= 4 && j >= 6))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -176,14 +176,12 @@ public class FixedLasersAlarmTest {
         
         for(int i = 0; i < 9; i++)
             for(int j = 0; j < 9; j++)
-                if((i <= 3 && j >= 2 && j <= 3) ||
-                   (i >= 2 && i <= 3 && j >= 2 && j <= 6) ||
-                   (i >= 2 && i <= 6 && j >= 5 && j <= 6) ||
-                   (i >= 5 && i <= 6 && j >= 1 && j <= 6) ||
-                   (i >= 5 && j >= 1 && j <= 2))
+                if((i >= 2 && i <= 3 && j >= 3 && j <= 7) ||
+                   (i >= 4 && i <= 5 && j >= 3 && j != 5) ||
+                   (i >= 5 && i <= 6 && j <= 4))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -199,14 +197,12 @@ public class FixedLasersAlarmTest {
         
         for(int i = 0; i < 9; i++)
             for(int j = 0; j < 9; j++)
-                if((i <= 2 && j <= 1) ||
-                   (i >= 1 && i <= 2 && j <= 6) ||
-                   (i >= 1 && i <= 7 && j >= 5 && j <= 6) ||
-                   (i >= 6 && i <= 7 && j >= 2 && j <= 6) ||
-                   (i >= 6 && j >= 2 && j <= 3))
+                if((i >= 1 && i <= 2 && j <= 6) ||
+                   (i >= 3 && i <= 7 && j >= 5 && j <= 6) ||
+                   (i >= 6 && i <= 7 && j >= 7))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -225,7 +221,7 @@ public class FixedLasersAlarmTest {
                 if(i >= 2 && i <= 3)
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -241,10 +237,11 @@ public class FixedLasersAlarmTest {
         
         for(int i = 0; i < 5; i++)
             for(int j = 0; j < 7; j++)
-                if(j <= 1 || i >= 3)
+                if((i >= 1 && j <= 1) ||
+                   (i >= 3))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -265,7 +262,7 @@ public class FixedLasersAlarmTest {
                    (i <= 1 && j >= 6))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -281,14 +278,12 @@ public class FixedLasersAlarmTest {
         
         for(int i = 0; i < 9; i++)
             for(int j = 0; j < 11; j++)
-                if((i <= 1 && j <= 3) ||
-                   (i <= 3 && j >= 2 && j <= 3) ||
-                   (i >= 2 && i <= 3 && j >= 2 && j <= 7) ||
-                   (i >= 2 && i <= 7 && j >= 6 && j <= 7) ||
+                if((i >= 2 && i <= 3 && j <= 7) ||
+                   (i >= 4 && i <= 5 && j >= 6 && j <= 7) ||
                    (i >= 6 && i <= 7 && j >= 6))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
     
 }

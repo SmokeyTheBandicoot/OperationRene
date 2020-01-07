@@ -111,7 +111,7 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(8, 2), new Safe(1, null, new Size(2, 2)));
+        lockeds.put(new Location(8, 1), new Safe(1, null, new Size(2, 2)));
         lockeds.put(new Location(0, 3), new Door(1, null, new Size(1, 2), false));
         unlocks.put(new Location(9, 5), new Key(1, -1, null));
         AlarmIdentifier identifier = new AlarmIdentifier(1, AlarmIdentifier.AlarmType.UNSELECTED);
@@ -142,7 +142,7 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(11, 1), new Safe(1, null, new Size(1, 1)));
+        lockeds.put(new Location(10, 1), new Safe(1, null, new Size(2, 2)));
         lockeds.put(new Location(0, 4), new Door(1, null, new Size(1, 2), false));
         unlocks.put(new Location(11, 7), new Key(1, -1, null));
         AlarmIdentifier identifier = new AlarmIdentifier(1, AlarmIdentifier.AlarmType.UNSELECTED);
@@ -171,7 +171,7 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(13, 1), new Safe(1, null, new Size(1, 1)));
+        lockeds.put(new Location(12, 1), new Safe(1, null, new Size(2, 2)));
         lockeds.put(new Location(0, 4), new Door(1, null, new Size(1, 2), false));
         unlocks.put(new Location(13, 9), new Key(1, -1, null));
         AlarmIdentifier identifier = new AlarmIdentifier(1, AlarmIdentifier.AlarmType.UNSELECTED);
@@ -200,7 +200,7 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
-        lockeds.put(new Location(7, 1), new Safe(1, null, new Size(1, 1)));
+        lockeds.put(new Location(6, 1), new Safe(1, null, new Size(2, 2)));
         lockeds.put(new Location(0, 3), new Door(1, null, new Size(1, 2), false));
         unlocks.put(new Location(7, 5), new Key(1, -1, null));
         
@@ -219,52 +219,8 @@ public class ProceduralLevelPartsGenerator {
         return lm;
     }
     
-            
-    // Minigame rooms with alarm
-    /* private static LevelMap generateEasyRoom(int width, int height, int doorOffset, int unlockOffset) {
-        
-        Integer [][] matrix = generateMatrix(height, width);
-        
-        HashMap<Location, PointOfInterest> lockeds = new HashMap<>();   
-        HashMap<Location, PointOfInterest> unlocks = new HashMap<>();
-        HashMap<Location, PointOfInterest> others = new HashMap<>();
-        
-        // Generate door randomly in the left door
-        // lockeds.put(new Location(13, 1), new Safe(1, null, new Size(1, 1)));
-        lockeds.put(new Location(0, 2), new Door(1, null, new Size(1, 2), false));
-        unlocks.put(new Location(13, 9), new Key(1, -1, null));
-        others.put(new Location(3, 1), new AlarmZone(1, new Size(9, 9)));
-        
-        // In order to put a potential alarm, get the maximum useful area
-        final int maxW = width - 4;
-        final int maxH = height - 4;
-        int curX = 0;
-        
-        int index = SizeUtils.getBiggestFittingSize(MapAlarm.getMinigameDimensions(), new Size(maxW, maxH), true);
-        Dimension minigameDim = null;
-        if (index != -1)
-            minigameDim = MapAlarm.getMinigameDimensions().get(index);
 
-        if (minigameDim != null) {
-            MapAlarmFactory factory = new MapAlarmFactory();
-            factory.createRandomMapAlarm(minigameDim);
-            others.put(new Location(1, 2), new AlarmZone(-1, minigameDim.getDimSize()));
-        }
-        
-        matrix[doorOffset][0] = 2;
-        matrix[doorOffset + 1][0] = 2;
-        
-        LevelMap lm = new LevelMap(-1, matrix, lockeds, unlocks, others, null);
-        
-        debugMatrix(matrix);
-        debugPoints(lockeds);
-        debugPoints(unlocks);
-        debugPoints(others);
-        
-        return lm;
-    }*/
     
-    // Minigame rooms with alarm
     private static LevelMap generateEasyRoom(int width, int height, int doorOffset, int unlockOffset) {
         
         Integer [][] matrix = generateMatrix(height, width);

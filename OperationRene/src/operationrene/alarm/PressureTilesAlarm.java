@@ -273,7 +273,7 @@ public class PressureTilesAlarm extends MapAlarm {
     // Size RL type 2 minigame
     public void randomizeRL2() {
         
-        white = 61 - (blue + red);
+        white = 65 - (blue + red);
         
         for(int i = 0; i < 9; i++)
             for(int j = 0; j < 11; j++)

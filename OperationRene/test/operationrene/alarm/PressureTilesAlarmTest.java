@@ -34,11 +34,11 @@ public class PressureTilesAlarmTest {
         
         for(int i = 0; i < 5; i++)
             for(int j = 0; j < 5; j++)
-                if((i <= 3 && j <= 1) ||
+                if((i == 1 && j <= 1) ||
                    (i >= 2 && i <= 3))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -54,10 +54,10 @@ public class PressureTilesAlarmTest {
         
         for(int i = 0; i < 5; i++)
             for(int j = 0; j < 5; j++)
-                if(j >= 3)
+                if(i >= 3)
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -78,7 +78,7 @@ public class PressureTilesAlarmTest {
                    (i == 4 && j >= 3))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -94,12 +94,11 @@ public class PressureTilesAlarmTest {
         
         for(int i = 0; i < 7; i++)
             for(int j = 0; j < 7; j++)
-                if((i <= 1 && j <= 2) ||
-                   (i >= 2 && i <= 3 && j >= 1 && j <= 3) ||
+                if((i >= 2 && i <= 3 && j <= 3) ||
                    (i >= 4 && i <= 5 && j >= 2))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -115,11 +114,12 @@ public class PressureTilesAlarmTest {
         
         for(int i = 0; i < 7; i++)
             for(int j = 0; j < 7; j++)
-                if((i <= 2 && j >= 3 && j <= 4) ||
-                   (i >= 1 && j >= 2 && j <= 3))
+                if((i >= 1 && i <= 2 && j <= 2) ||
+                   (i >= 3 && i <= 4 && j >= 1 && j <= 3) ||
+                   (i >= 5 && j >= 2))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -135,12 +135,12 @@ public class PressureTilesAlarmTest {
         
         for(int i = 0; i < 7; i++)
             for(int j = 0; j < 7; j++)
-                if((j <= 1) ||
+                if((i >= 2 && j <= 1) ||
                    (i >= 5 && j <= 5) ||
                    (i >= 3 && i <= 4 && j >= 4))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -156,14 +156,12 @@ public class PressureTilesAlarmTest {
         
         for(int i = 0; i < 9; i++)
             for(int j = 0; j < 9; j++)
-                if((i <= 7 && j >= 1 && j <= 2) ||
-                   (i >= 6 && i <= 7 && j >= 1 && j <= 5) ||
-                   (i >= 1 && i <= 7 && j >= 4 && j <= 5) ||
-                   (i >= 1 && i <= 2 && j >= 4) ||
-                   (i >= 0 && i <= 1 && j == 0))
+                if((i >= 1 && i <= 2 && j != 3) ||
+                   (i >= 3 && i <= 7 && (j >= 1 && j <= 2 || j >= 4 && j <= 5)) ||
+                   (i >= 7 && i <= 8 && j == 3))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -183,7 +181,7 @@ public class PressureTilesAlarmTest {
                    (i >= 4 && i <= 5 && j >= 1))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -206,7 +204,7 @@ public class PressureTilesAlarmTest {
                    (i >= 7 && i <= 8 && j == 0))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
     
     @Test
@@ -223,7 +221,7 @@ public class PressureTilesAlarmTest {
                    (i <= 1 && j >= 4))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -239,12 +237,11 @@ public class PressureTilesAlarmTest {
         
         for(int i = 0; i < 5; i++)
             for(int j = 0; j < 7; j++)
-                if((i <= 1 && j <= 2) ||
-                   (i == 2 && j >= 1 && j <= 2) ||
+                if((i >= 1 && i <= 2 && j <= 2) ||
                    (i >= 3 && j >= 1))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -267,7 +264,7 @@ public class PressureTilesAlarmTest {
                    (i >= 6 && i <= 7 && j <= 8))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
 
     /**
@@ -283,13 +280,12 @@ public class PressureTilesAlarmTest {
         
         for(int i = 0; i < 9; i++)
             for(int j = 0; j < 11; j++)
-                if((i <= 6 && j >= 1 && j <= 2) ||
-                   (i >= 5 && i <= 6 && j >= 1 && j <= 5) ||
-                   (i >= 3 && i <= 4 && j >= 4) ||
-                   (i >= 0 && i <= 1 && j == 0))
+                if((i >= 1 && i <= 2 && j <= 2) ||
+                   (i >= 3 && i <= 4 && j != 0 && j != 3) ||
+                   (i >= 5 && i <= 6 && j >= 1 && j <= 5))
                     assertEquals(0, instance.getMatrix()[i][j]);
                 else
-                    assertTrue(instance.getMatrix()[i][j] >= 1 && instance.getMatrix()[i][j] <= 3);
+                    assertTrue(instance.getMatrix()[i][j] >= 3 && instance.getMatrix()[i][j] <= 5);
     }
     
 }
