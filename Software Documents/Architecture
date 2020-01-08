@@ -1,15 +1,15 @@
-**Architecture of the project: Structural design**
+##Architecture of the project: Structural design
 
 The structure of the software is *component-based* and made-up of 6 modules:
 
-*Core, GUI, Minigame, Map Framework, Map Alarm and Utils*
+#Core, GUI, Minigame, Map Framework, Map Alarm and Utils
 
 The first 5 modules have a general client-server architecture, since the core module, which is the main module of the game, 
 handles the main aspects, such as user interaction, player collision, state transition, in-game timer, level loading, mouse and keyboard 
 input and object interaction. 
 
-In order to archieve such functionality the module acts as a *client* asks for *services* to the other 4 
-modules, which act as a *server*, responding to the Core module's requests. For example, if the user clicks on the settings button, 
+In order to archieve such functionality the module acts as a #client# asks for #services# to the other 4 
+modules, which act as a #server#, responding to the Core module's requests. For example, if the user clicks on the settings button, 
 he Core registers the click, and asks the GUI module to draw the elements of such menu on-screen, while the core handles the state 
 transition; 
 
@@ -28,7 +28,7 @@ Graphical overview of the design can be found in the file architecture.png
 
 
 
-**Component Design**
+##Component Design
 
 Components like Map Framework are complex enough to have a deep component design. Such module is split into 4 smaller parts, which are 
 part of a soft of Pipe/Layered architecture. Such parts are Level Serializer, Level Builder, Progression Randomizer and Level 
