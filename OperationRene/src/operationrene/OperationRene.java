@@ -24,12 +24,13 @@ public class OperationRene extends StateBasedGame {
     public static TrueTypeFont font;
 
     public OperationRene(String title) {
-        super(title + " Options");
+        super(" "+title);
     }
 
     @Override
     public void initStatesList(GameContainer gc) throws SlickException {
         font = new TrueTypeFont(new java.awt.Font("Cominc Sans", java.awt.Font.BOLD, 28), false);
+        
         this.addState(new MainWindow());
         this.getState(StateID.MENU_ID).init(gc, this);
         this.enterState(StateID.MENU_ID);
@@ -39,8 +40,8 @@ public class OperationRene extends StateBasedGame {
     public static void main(String[] args) throws SlickException {
         System.setProperty("org.lwjgl.librarypath", new File(System.getProperty("user.dir"), "lib/natives/" + LWJGLUtil.getPlatformName()).getAbsolutePath());
         System.setProperty("net.java.games.input.librarypath", System.getProperty("org.lwjgl.librarypath"));
-        AppGameContainer app = new AppGameContainer(new OperationRene("Rene"));
-        //app.setIcon(PATH_RESOURCES+"logo.png");
+        AppGameContainer app = new AppGameContainer(new OperationRene(TITLE));
+        app.setIcon(PATH_RESOURCES+"logo/IconLogo.PNG");
         app.setDisplayMode(WIDTH, HEIGHT, FULLSCREEN);
         app.setTargetFrameRate(FPS_LIMIT);
         app.setShowFPS(SHOW_FPS);
