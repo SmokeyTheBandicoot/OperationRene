@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import operationrene.OperationRene;
-import operationrene.ProceduralLevelPartsGenerator;
 import operationrene.StateID;
 import operationrene.alarm.PulsatingLasersAlarm;
 import operationrene.element.DoorElement;
@@ -39,6 +38,7 @@ public class GameMap {
     private int height;
     private int posX;
     private int posY;
+    private int type;
     private ArrayList<Element> elements;
     private ArrayList<Rectangle> alarms;
     private HashMap<Rectangle, int[]> pulsatingAlarms;
@@ -50,6 +50,7 @@ public class GameMap {
 
         this.elements = new ArrayList<Element>();
         this.alarms = null;
+        this.type = type;
 
         switch (type) {
 
@@ -295,14 +296,13 @@ public class GameMap {
             }
         }
 
-        for (Rectangle r : pulsatingAlarms.keySet()) {
-
-            if (r.intersects(playerShape) && !arrayContains(pulsatingAlarms.get(r), GameTimer.getIstance().getTime() % 10)) {
-
-                System.out.println(Arrays.toString(pulsatingAlarms.get(r)));
-                return true;
+        if (type == MapID.LEVEL_RANDOM) {
+            for (Rectangle r : pulsatingAlarms.keySet()) {
+                if (r.intersects(playerShape) && !arrayContains(pulsatingAlarms.get(r), GameTimer.getIstance().getTime() % 10)) {
+                    System.out.println(Arrays.toString(pulsatingAlarms.get(r)));
+                    return true;
+                }
             }
-
         }
 
         return false;
