@@ -190,6 +190,10 @@ public class ExplorationGame extends GameplayState {
                                 break;
 
                             case MapID.LEVEL_RANDOM:
+                                this.map.setTileId(s.posX, s.posY, 2, 43);
+                                this.map.setTileId(s.posX + 1, s.posY, 2, 44);
+                                this.map.setTileId(s.posX, s.posY + 1, 2, 53);
+                                this.map.setTileId(s.posX + 1, s.posY + 1, 2, 54);
                                 break;
 
                         }
