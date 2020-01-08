@@ -1,4 +1,4 @@
-##Architecture of the project: Structural design
+## Architecture of the project: Structural design
 
 The structure of the software is *component-based* and made-up of 6 modules:
 
@@ -28,7 +28,7 @@ Graphical overview of the design can be found in the file architecture.png
 
 
 
-##Component Design
+## Component Design
 
 Components like Map Framework are complex enough to have a deep component design. Such module is split into 4 smaller parts, which are 
 part of a soft of Pipe/Layered architecture. Such parts are Level Serializer, Level Builder, Progression Randomizer and Level 
