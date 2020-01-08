@@ -188,7 +188,7 @@ public class PressureTilesAlarm extends MapAlarm {
             for(int j = 0; j < 9; j++)
                 if((i >= 1 && i <= 2 && j != 3) ||
                    (i >= 3 && i <= 7 && (j >= 1 && j <= 2 || j >= 4 && j <= 5)) ||
-                   (i >= 7 && i <= 8 && j == 3))
+                   (i >= 6 && i <= 7 && j == 3))
                     this.getMatrix()[i][j] = 0;
                 else
                     updateColoredTile(i, j);
