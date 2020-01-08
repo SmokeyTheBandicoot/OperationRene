@@ -199,18 +199,14 @@ public class GameMap {
                 break;
 
             case MapID.LEVEL_RANDOM:
-                //DA COMPLETARE
+
                 this.alarms = new ArrayList<Rectangle>();
                 this.pulsatingAlarms = new HashMap<>();
                 LevelBuilder lb = new LevelBuilder();
                 lb.buildLevel();
                 LevelMap lm = lb.getBuildingLevel();
                 matrix = lm.getMatrix();
-                MatrixUtils.debugMatrix(matrix);
-                ProceduralLevelPartsGenerator.debugPoints(lm.getLockedObjects());
-                ProceduralLevelPartsGenerator.debugPoints(lm.getUnlockingObjects());
-                ProceduralLevelPartsGenerator.debugPoints(lm.getOtherObjects());
-                ProceduralLevelPartsGenerator.debugRooms(lm.getRooms());
+
                 this.map = new TiledMap("assets/tilesets/levelprocedural/level.tmx");
                 this.drawMap(map);
                 for (Location l : lm.getOtherObjects().keySet()) {
@@ -226,35 +222,34 @@ public class GameMap {
 
                         case AlarmZone:
                             AlarmZone alarmZone = (AlarmZone) lm.getOtherObjects().get(l);
-                            
+
                             int roomID = alarmZone.getRoomID();
-                                Room alarmRoom = null;
+                            Room alarmRoom = null;
 
-                                for (Location loc : lm.getRooms().keySet()) {
-                                    Room r = (Room) lm.getRooms().get(loc);
-                                    if (r.getRoomID() == roomID) {
-                                        alarmRoom = r;
-                                    }
+                            for (Location loc : lm.getRooms().keySet()) {
+                                Room r = (Room) lm.getRooms().get(loc);
+                                if (r.getRoomID() == roomID) {
+                                    alarmRoom = r;
                                 }
+                            }
 
-                                Rotation rot = RoomUtils.calculateRotation(alarmRoom.getDir());
+                            Rotation rot = RoomUtils.calculateRotation(alarmRoom.getDir());
 
-                                int[][] matrix = alarmZone.getMapAlarm().getMatrix();
+                            int[][] AlarmMatrix = alarmZone.getMapAlarm().getMatrix();
 
-                                Integer[][] newMat = MatrixUtils.rotateMatrix(matrix, rot);
+                            Integer[][] newMat = MatrixUtils.rotateMatrix(AlarmMatrix, rot);
 
-                            
                             if (alarmZone.getAlarmType() == AlarmIdentifier.AlarmType.PULSATING_LASERS) {
                                 for (int i = 0; i < newMat.length; i++) {
                                     for (int j = 0; j < newMat[0].length; j++) {
                                         if (newMat[i][j] != 0 && newMat[i][j] != 1) {
-                                            this.pulsatingAlarms.put(new Rectangle((l.getX() + j) * 32, (l.getY() + i) * 32, 32, 32), ((PulsatingLasersAlarm)alarmZone.getMapAlarm()).getOffSecs());
+                                            this.pulsatingAlarms.put(new Rectangle((l.getX() + j) * 32, (l.getY() + i) * 32, 32, 32), ((PulsatingLasersAlarm) alarmZone.getMapAlarm()).getOffSecs());
                                         }
                                     }
                                 }
-                                //this.pulsatingAlarms.put(new Rectangle(l.getX(), l.getY(), 32, 32), ((PulsatingLasersAlarm) alarmZone.getMapAlarm()).getOffSecs());
+
                             } else {
-                                
+
                                 for (int i = 0; i < newMat.length; i++) {
                                     for (int j = 0; j < newMat[0].length; j++) {
                                         if (newMat[i][j] != 0 && newMat[i][j] != 1) {
@@ -262,9 +257,9 @@ public class GameMap {
                                         }
                                     }
                                 }
-                                // this.alarms.add(new Rectangle(l.getX(), l.getY(), 32, 32));
+
                             }
-                            //
+
                             break;
                     };
 
@@ -296,7 +291,7 @@ public class GameMap {
                         case Key:
 
                             Key k = (Key) lm.getUnlockingObjects().get(l);
-                            System.out.println("Type miniGame: " + k.getGameType());
+
                             this.elements.add(new MinigameElement(new Key(4, k.getGameType(), k.getRequiredKeysID()), x, l.getX(), l.getY()));
                             map.setTileId(l.getX(), l.getY(), 2, 38);
                             break;
@@ -304,7 +299,6 @@ public class GameMap {
                     x++;
                 }
 
-                System.out.println("Lunghezza: " + alarms.size());
                 this.width = OperationRene.WIDTH;
                 this.height = OperationRene.HEIGHT;
 
@@ -325,18 +319,16 @@ public class GameMap {
         }
         for (Rectangle e : this.alarms) {
             if (e.intersects(playerShape)) {
-                System.out.println("Primo IF");
                 return true;
             }
         }
 
         for (Rectangle r : pulsatingAlarms.keySet()) {
 
-            if (r.intersects(playerShape) && !arrayContains(pulsatingAlarms.get(r), GameTimer.getIstance().getTime()%10)) {
-                
-                System.out.println("Secondo IF");
-                System.out.println(Arrays.toString(pulsatingAlarms.get(r)));    
-            //return true;
+            if (r.intersects(playerShape) && !arrayContains(pulsatingAlarms.get(r), GameTimer.getIstance().getTime() % 10)) {
+
+                System.out.println(Arrays.toString(pulsatingAlarms.get(r)));
+                return true;
             }
 
         }
@@ -366,16 +358,17 @@ public class GameMap {
         }
 
     }
-    
-    public static boolean arrayContains (int [] array, int x){
-    
+
+    public static boolean arrayContains(int[] array, int x) {
+
         for (int i : array) {
-            if (i == x)
+            if (i == x) {
                 return true;
-            
+            }
+
         }
-    return false;
-    } 
+        return false;
+    }
 
     public ArrayList<Element> getElements() {
 

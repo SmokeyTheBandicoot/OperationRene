@@ -12,6 +12,7 @@ import operationrene.maingame.MapID;
 import operationrene.StateID;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -26,7 +27,8 @@ public class PlayWindow extends BasicGameState{
     ToggleButton difficultyButton;
     boolean test = true;
     private boolean info = true;
-    public static int difficulty = 0;
+    public static int difficulty;
+    Image infoDiff;
     
     @Override
     public int getID() {
@@ -35,11 +37,12 @@ public class PlayWindow extends BasicGameState{
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-        
+        difficulty = 0;
         campaign = new Button(ButtonType.CAMPAIGN, OperationRene.WIDTH / 3, 200);
         quickMach = new Button(ButtonType.QUICK_PLAY, OperationRene.WIDTH / 3*2, 200);
         difficultyButton = new ToggleButton(ButtonType.DIFFICULTY, OperationRene.WIDTH / 2, 400);
         undo = new Button(ButtonType.RETURN, OperationRene.WIDTH / 2, 700);
+        infoDiff = new Image("assets/sprites/controls/infodiff.PNG");
     }
 
     @Override
@@ -48,6 +51,7 @@ public class PlayWindow extends BasicGameState{
         quickMach.render(grphcs);
         difficultyButton.render(grphcs);
         undo.render(grphcs);
+        infoDiff.draw(OperationRene.WIDTH / 2 - infoDiff.getWidth() / 2, 450);
     }
 
     @Override

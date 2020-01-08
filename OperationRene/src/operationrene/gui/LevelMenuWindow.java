@@ -16,6 +16,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import static operationrene.gui.PlayWindow.getDifficulty;
+import org.newdawn.slick.Image;
 
 
 public class LevelMenuWindow extends BasicGameState {
@@ -23,7 +24,8 @@ public class LevelMenuWindow extends BasicGameState {
     Button Level2;
     Button Level3;
     Button undo;
-     private boolean info = true;
+    
+     private boolean info = false;
     
     @Override
     public int getID() {
@@ -36,6 +38,7 @@ public class LevelMenuWindow extends BasicGameState {
         Level2 = new Button(ButtonType.LEVEL2, OperationRene.WIDTH / 2, 300);
         Level3 = new Button(ButtonType.LEVEL3, OperationRene.WIDTH - 250 , 300);
         undo= new Button(ButtonType.RETURN, OperationRene.WIDTH / 2, 700);
+        
     }
 
     @Override
@@ -44,6 +47,7 @@ public class LevelMenuWindow extends BasicGameState {
         Level2.render(grphcs);
         Level3.render(grphcs);
         undo.render(grphcs);
+
     }
 
     @Override

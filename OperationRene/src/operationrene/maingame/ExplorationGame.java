@@ -76,13 +76,13 @@ public class ExplorationGame extends GameplayState {
         
         // TESTING
 
-        for (Element k: map.getElements()) {
-            g.draw(k.shape);
-            
-        }
-        for(Rectangle r: map.getAlarms()){
-            g.draw(r);
-        }
+//        for (Element k: map.getElements()) {
+//            g.draw(k.shape);
+//            
+//        }
+//        for(Rectangle r: map.getAlarms()){
+//            g.draw(r);
+//        }
         font.drawString(10, 50, "TIME REMAINING: " + this.timer.getTime(), Color.red);
         font.drawString(10, 80, "GOAL: "+goal, Color.green);
         

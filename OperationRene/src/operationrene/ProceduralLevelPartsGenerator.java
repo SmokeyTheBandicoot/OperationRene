@@ -178,7 +178,7 @@ public class ProceduralLevelPartsGenerator {
         HashMap<Location, PointOfInterest> others = new HashMap<>();
         
         lockeds.put(new Location(12, 1), new Safe(1, null, new Size(2, 2)));
-        lockeds.put(new Location(0, 4), new Door(1, null, new Size(1, 2), false));
+        lockeds.put(new Location(0, 2), new Door(1, null, new Size(1, 2), false));
         unlocks.put(new Location(13, 9), new Key(1, -1, null));
         AlarmIdentifier identifier = new AlarmIdentifier(1, AlarmIdentifier.AlarmType.UNSELECTED);
         others.put(new Location(3, 1), new AlarmZone(1, new Size(9, 9), identifier));    
