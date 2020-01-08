@@ -1,0 +1,28 @@
+**Architecture of the project: Structural design**
+
+The structure of the software is *component-based* and made-up of 6 modules:
+
+*Core, GUI, Graphics, Map Framework, Map Alarm and Utils*
+
+The first 5 modules have a general client-server architecture, since the core module, which is the main module of the game, handles the main aspects, such as user interaction, player collision, state transition, in-game timer, level loading, mouse and keyboard input and object interaction. In order to archieve such functionality the module acts as a *client* asks for *services* to the other 4 modules, which act as a *server*, responding to the Core module's requests.
+For example, if the user clicks on the settings button, the Core registers the click, and asks the GUI module to draw the elements of such menu on-screen, while the core handles the state transition
+Another example, if the user clicks on "quick play" button, the Core has to provide a random-generated level, so it asks to the Map Framework module to create a random level, then asks Map Alarm to randomize the alarms and then asks GUI and Graphics to get the new controls to draw on screen and the sprites for the level.
+
+The last 5 modules, are sort of shared-repository architecture, which acts indipendently from the other client-sever interaction.
+The 2 Map Framework and Map Alarm modules require some common methods and routines that have to be used in many different parts of the program. Instead of duplicating the code, we have decided to put all the code in a shared software module, which contains many specialized helper classes which provide shared data and behaviour for the said 2 modules. Examples are Matrix Utils, Size Utils, HashMap Utils and so on.
+
+Graphical overview of the design can be found in the file architecture.png
+
+
+**Component Design**
+
+Components like Map Framework are complex enough to have a deep component design. Such module is split into 4 smaller parts, which are part of a soft of Pipe/Layered architecture. Such parts are Level Serializer, Level Builder, Progression Randomizer and Level Constructor parts. The Level Serializer loads the data from files and the data flows from one part to the other, in order, with each part communicating only with the previous/next layer. 
+The final result is returned by the Levle Builder, which provides a full level that Graphics and Core modules can understand and draw on screen. 
+Details of this design is in the file LevelBuildingProcess.pdf
+
+Another complex component is progression randomizer, which uses a similar design in order to achieve more complex functionality. It's goal is to randomize the progression by assigning IDs to keys and doors, avoiding Dead-lock situations.
+More information on this design can be found in the file ProgressionRandomizer.pdf
+
+
+
+
