@@ -1,15 +1,15 @@
 package operationrene;
 
 import java.util.ArrayList;
-import operationrene.mapframework.matrixprops.Size;
-import operationrene.mapframework.matrixprops.Location;
 import java.util.HashMap;
 import java.util.Random;
 import operationrene.alarm.MapAlarm;
 import operationrene.alarm.MapAlarm.Dimension;
 import operationrene.mapframework.*;
 import operationrene.mapframework.levelbuilder.LevelSerializer;
-import operationrene.mapframework.matrixprops.*;
+import operationrene.mapframework.matrixprops.Direction;
+import operationrene.mapframework.matrixprops.Size;
+import operationrene.mapframework.matrixprops.Location;
 import operationrene.mapframework.pointsofinterest.PointOfInterest;
 import operationrene.mapframework.pointsofinterest.*;
 import static operationrene.utils.MatrixUtils.*;
