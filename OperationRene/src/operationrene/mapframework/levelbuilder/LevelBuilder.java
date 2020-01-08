@@ -190,10 +190,15 @@ public class LevelBuilder {
         // This part is responsible for randomly choosing which alarms to show and 
         // setting up the corresponding identifiers in the matrix
         HashMap<Location, PointOfInterest> cache = buildingLevel.getOtherObjects();
+
         ArrayList<Location> alarmLocations = new ArrayList<>();
+        HashMap<AlarmIdentifier, Location> alarmIDLocations = new HashMap<>();
+
         for (Location loc : cache.keySet()) {
             if (cache.get(loc).getPointType() == PointOfInterest.PointType.AlarmZone) {
                 alarmLocations.add(loc);
+            } else if (cache.get(loc).getPointType() == PointOfInterest.PointType.AlarmID) {
+                alarmIDLocations.put((AlarmIdentifier) cache.get(loc), loc);
             }
         }
 
@@ -201,21 +206,152 @@ public class LevelBuilder {
         for (Location l : alarmLocations) {
             MapAlarmFactory mapFactory = new MapAlarmFactory();
             AlarmZone alarm = (AlarmZone) buildingLevel.getOtherObjects().get(l);
+
+            Location alarmIDloc = null;
+            for (AlarmIdentifier ai : alarmIDLocations.keySet()) {
+                if (alarm.getAlarmIdentifier() == ai) {
+                    alarmIDloc = alarmIDLocations.get(ai);
+                }
+            }
+
             ArrayList<Dimension> sizes = MapAlarm.getMinigameDimensions();
             Dimension d = sizes.get(SizeUtils.getBiggestFittingSize(sizes, alarm.getSize(), true));
 
+
             MapAlarm ma = mapFactory.createRandomMapAlarm(d);
+
+            int x = alarmIDloc.getX();
+            int y = alarmIDloc.getY();
+
 
             // Now set the AlarmZone Identifiers correctly
             if (ma instanceof PressureTilesAlarm) {
                 alarm.getAlarmIdentifier().setAlarmID(AlarmIdentifier.AlarmType.PRESSURE_TILES);
                 alarm.setAlarmType(AlarmIdentifier.AlarmType.PRESSURE_TILES);
+
+                switch (d) {
+                    case SMALL:
+                        buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.RedCircle);
+                        break;
+                    case MEDIUM:
+                        buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.YellowCircle);
+                        break;
+                    case LARGE:
+                        buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.GreenCircle);
+                        break;
+                    case RECT_SMALL:
+                        buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.BlueCircle);
+                        break;
+                    case RECT_LARGE:
+                        buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.PurpleCircle);
+                        break;
+                }
+
             } else if (ma instanceof FixedLasersAlarm) {
                 alarm.getAlarmIdentifier().setAlarmID(AlarmIdentifier.AlarmType.FIXED_LASERS);
                 alarm.setAlarmType(AlarmIdentifier.AlarmType.FIXED_LASERS);
+
+                switch (d) {
+                    case SMALL:
+                        buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.RedSquare);
+                        break;
+                    case MEDIUM:
+                        buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.YellowSquare);
+                        break;
+                    case LARGE:
+                        buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.GreenSquare);
+                        break;
+                    case RECT_SMALL:
+                        buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.BlueSquare);
+                        break;
+                    case RECT_LARGE:
+                        buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.PurpleSquare);
+                        break;
+                }
+
             } else if (ma instanceof PulsatingLasersAlarm) {
+                
                 alarm.getAlarmIdentifier().setAlarmID(AlarmIdentifier.AlarmType.PULSATING_LASERS);
                 alarm.setAlarmType(AlarmIdentifier.AlarmType.PULSATING_LASERS);
+
+                int[][] mm = ma.getMatrix();
+                int alarmNum = 0;
+                
+
+                for (int i = 0; i < mm.length; i++) {
+                    for (int j = 0; j < mm[0].length; j++) {
+                        if (mm[i][j] == 1) {
+                            alarmNum++;
+                        }
+                    }
+                }
+                
+                switch (d) {
+                    case SMALL:
+                        switch (alarmNum) {
+                            case 1:
+                                buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.RedHollow);
+                                break;
+                            case 2:
+                                buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.YellowHollow);
+                                break;
+                            case 4:
+                                buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.GreenHollow);
+                                break;
+                        }
+                        break;
+
+                    case MEDIUM:
+                        switch (alarmNum) {
+                            case 4:
+                                buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.RedStar);
+                                break;
+                            case 13:
+                                buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.YellowStar);
+                                break;
+                            case 8:
+                                buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.GreenStar);
+                                break;
+                        }
+                        break;
+
+                    case LARGE:
+                        switch (alarmNum) {
+                            case 22:
+                                buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.RedCross);
+                                break;
+                            case 43:
+                                buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.YellowCross);
+                                break;
+                            case 34:
+                                buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.GreenCross);
+                                break;
+                        }
+                        break;
+
+                    case RECT_SMALL:
+                        switch (alarmNum) {
+                            case 9:
+                                buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.BlueHollow);
+                                break;
+                            case 13:
+                                buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.PurpleHollow);
+                                break;
+                        }
+                        break;
+
+                    case RECT_LARGE:
+                        switch (alarmNum) {
+                            case 15:
+                                buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.BlueStar);
+                                break;
+                            case 36:
+                                buildingLevel.getMatrix()[y][x] = TileIDMapping.getMapping(TileIDMapping.TileName.PurpleStar);
+                                break;
+                        }
+                        break;
+                }
+
             }
             alarm.setMapAlarm(ma);
 

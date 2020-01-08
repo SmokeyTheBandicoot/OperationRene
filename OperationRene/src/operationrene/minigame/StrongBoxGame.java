@@ -94,7 +94,7 @@ public class StrongBoxGame extends MinigameState {
         int lockX = (int) this.box.getCenterX() - 150;
         int lockY = (int) this.box.getCenterY() + 200;
 
-        Image background = new Image(PATH + "background.jpg");
+        Image background = new Image(PATH + "background.PNG");
         grphcs.drawImage(background.getScaledCopy(600, 600), this.box.getX(), this.box.getY());
 
         // immagine freccia sinistra

@@ -1,6 +1,5 @@
 package operationrene.gui;
 
-
 import operationrene.OperationRene;
 import operationrene.sound.SoundEngine;
 import operationrene.sound.SoundTrack;
@@ -13,18 +12,13 @@ import org.newdawn.slick.state.StateBasedGame;
 import operationrene.StateID;
 import org.newdawn.slick.Image;
 
-
-/**
- *
- * @author Rickma
- */
 public class MainWindow extends BasicGameState {
 
     Button play;
     Button setting;
     Button exit;
     Button credits;
-    
+
     boolean test = true;
     Image title;
     private boolean info = true;
@@ -36,16 +30,16 @@ public class MainWindow extends BasicGameState {
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
- 
+
         title = new Image("assets/sprites/controls/title.PNG");
 
         play = new Button(ButtonType.PLAY, OperationRene.WIDTH / 2, 450);
         setting = new Button(ButtonType.SETTINGS, OperationRene.WIDTH / 2, 550);
         exit = new Button(ButtonType.EXIT, OperationRene.WIDTH / 2, 750);
-        credits= new Button (ButtonType.CREDITS,OperationRene.WIDTH/2,650);
-        
+        credits = new Button(ButtonType.CREDITS, OperationRene.WIDTH / 2, 650);
+
         SoundEngine.getIstance().playBackgroundMusic(SoundTrack.MENU_MUSIC);
-        
+
     }
 
     @Override
@@ -75,12 +69,12 @@ public class MainWindow extends BasicGameState {
         if (setting.isClicked()) {
             SettingWindow.setSettingInstance(gc, sbg);
             sbg.enterState(StateID.SETTING_ID);
-           
+
         }
         if (exit.isClicked()) {
             System.exit(0);
         }
-        if (credits.isClicked()){
+        if (credits.isClicked()) {
             sbg.addState(new CreditsWindow());
             sbg.getState(StateID.CREDITS_MENU_ID).init(gc, sbg);
             sbg.enterState(StateID.CREDITS_MENU_ID);

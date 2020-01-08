@@ -5,10 +5,6 @@
  */
 package operationrene.gui;
 
-/**
- *
- * @author Rickma
- */
 
 /*
 Enum class to list all available buttons.
@@ -36,7 +32,8 @@ public enum ButtonType {
     public final String imageLab;
     public final int type;
     
-    // Type = 0 is a button that apply changes or change view screen. Type = 1 is a button that set on/off its value.
+    // Type = 0 means a button that apply changes or change view screen. Type = 1 means a button that set on/off its value. Type = 3 means a button with preview.
+    // Type = 4 means a button with 3 different views.
 
     private ButtonType(String image1, String image2, int type) {
         this.image = image1;

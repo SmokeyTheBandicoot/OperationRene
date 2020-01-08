@@ -49,7 +49,7 @@ public abstract class MinigameState extends GameplayState{
         
         if(this.completed || this.escPressed){
             sbg.enterState(StateID.EXPLORATION_ID);
-            System.out.println("MA lo fa");
+            //System.out.println("MA lo fa");
         }
         
         Input input = gc.getInput();

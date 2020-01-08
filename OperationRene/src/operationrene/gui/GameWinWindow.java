@@ -17,16 +17,14 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-
-
 public class GameWinWindow extends BasicGameState {
 
     Image title;
     Button menu;
-    
+
     @Override
     public int getID() {
-       return StateID.GAME_WIN_ID;
+        return StateID.GAME_WIN_ID;
     }
 
     @Override
@@ -54,5 +52,5 @@ public class GameWinWindow extends BasicGameState {
             sbg.enterState(StateID.MENU_ID);
         }
     }
-    
+
 }

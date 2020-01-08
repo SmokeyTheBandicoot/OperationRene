@@ -20,7 +20,7 @@ public class OperationRene extends StateBasedGame {
     public static boolean MUSIC_SOUND = true;
     public static boolean EFFECT_SOUND = true;
     public static final String PATH_RESOURCES = "assets/sprites/";
-    private static final String PATH_MUSIC = "assets/music/";
+    public static boolean infoFlag;
     public static TrueTypeFont font;
 
     public OperationRene(String title) {

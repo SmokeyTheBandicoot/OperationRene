@@ -6,7 +6,6 @@ import java.util.HashMap;
 import operationrene.OperationRene;
 import operationrene.ProceduralLevelPartsGenerator;
 import operationrene.StateID;
-import operationrene.alarm.MapAlarm;
 import operationrene.alarm.PulsatingLasersAlarm;
 import operationrene.element.DoorElement;
 import operationrene.element.Element;
@@ -43,37 +42,10 @@ public class GameMap {
     private ArrayList<Element> elements;
     private ArrayList<Rectangle> alarms;
     private HashMap<Rectangle, int[]> pulsatingAlarms;
+
     private Location playerStartPosition;
     Integer[][] matrix;
 
-    /*Integer[][] matrix = new Integer [][]{
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
-        };*/
     public GameMap(int type) throws SlickException {
 
         this.elements = new ArrayList<Element>();
@@ -200,7 +172,7 @@ public class GameMap {
 
             case MapID.LEVEL_RANDOM:
 
-                this.alarms = new ArrayList<Rectangle>();
+                this.alarms = new ArrayList<>();
                 this.pulsatingAlarms = new HashMap<>();
                 LevelBuilder lb = new LevelBuilder();
                 lb.buildLevel();
@@ -275,10 +247,10 @@ public class GameMap {
                             Safe s = (Safe) lm.getLockedObjects().get(l);
                             this.elements.add(new SafeElement(new Safe(s.getRoomID(), this.getFilledArray(new int[]{-7}), s.getSize()), 2, l.getX(), l.getY()));
 
-                            map.setTileId(l.getX(), l.getY(), 2, 11);
-                            map.setTileId(l.getX() + 1, l.getY(), 2, 12);
-                            map.setTileId(l.getX(), l.getY() + 1, 2, 21);
-                            map.setTileId(l.getX() + 1, l.getY() + 1, 2, 22);
+                            map.setTileId(l.getX(), l.getY(), 2, 41);
+                            map.setTileId(l.getX() + 1, l.getY(), 2, 42);
+                            map.setTileId(l.getX(), l.getY() + 1, 2, 51);
+                            map.setTileId(l.getX() + 1, l.getY() + 1, 2, 52);
                             break;
 
                     };
@@ -293,7 +265,7 @@ public class GameMap {
                             Key k = (Key) lm.getUnlockingObjects().get(l);
 
                             this.elements.add(new MinigameElement(new Key(4, k.getGameType(), k.getRequiredKeysID()), x, l.getX(), l.getY()));
-                            map.setTileId(l.getX(), l.getY(), 2, 38);
+                            map.setTileId(l.getX(), l.getY(), 2, 40);
                             break;
                     };
                     x++;
@@ -382,6 +354,10 @@ public class GameMap {
 
     }
 
+    public HashMap<Rectangle, int[]> getPulsatingAlarms() {
+        return pulsatingAlarms;
+    }
+
     public void setTileId(int x, int y, int layer, int id) {
 
         map.setTileId(x, y, layer, id);
@@ -433,28 +409,20 @@ public class GameMap {
     }
 
     public void drawMap(TiledMap map) {
+
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
 
                 switch (matrix[i][j]) {
-                    case 0:
-                        map.setTileId(j, i, map.getLayerIndex("floor"), 4);
-                        break;
                     case 1:
-                        map.setTileId(j, i, map.getLayerIndex("walls"), 2);
+                        map.setTileId(j, i, map.getLayerIndex("walls"), matrix[i][j] + 4);
                         break;
                     case 2:
-                        map.setTileId(j, i, map.getLayerIndex("walls"), 5);
+                        map.setTileId(j, i, map.getLayerIndex("walls"), matrix[i][j] + 4);
                         map.setTileId(j, i, map.getLayerIndex("floor"), 4);
                         break;
-                    case 3:
-                        map.setTileId(j, i, map.getLayerIndex("floor"), 3);
-                        break;
-                    case 4:
-                        map.setTileId(j, i, map.getLayerIndex("floor"), 8);
-                        break;
-                    case 5:
-                        map.setTileId(j, i, map.getLayerIndex("floor"), 9);
+                    default:
+                        map.setTileId(j, i, map.getLayerIndex("floor"), matrix[i][j] + 4);
                         break;
 
                 }
@@ -462,14 +430,4 @@ public class GameMap {
         }
     }
 
-
-    /*
-    public void drawroom(int x,int y, int xdim,int ydim,int id){
-        for(int i=x;i<x+xdim;i++){
-            for(int j=y;j<y+ydim;j++){
-               mappa.setTileId(i,j , 1, id);
-            }
-        }
-    }
-     */
 }

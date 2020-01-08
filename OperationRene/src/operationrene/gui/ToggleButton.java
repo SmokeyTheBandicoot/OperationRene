@@ -11,12 +11,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import static operationrene.gui.PlayWindow.difficulty;
 
-/**
- *
- * @author Massimo
- */
+//this class is used to display the difficulty button
 public class ToggleButton extends Button {
-    
+
     public ToggleButton(ButtonType buttonType, float x, float y) {
         super(buttonType, x, y);
     }
@@ -43,34 +40,30 @@ public class ToggleButton extends Button {
         }
     }
 
+    //Override the parent's method to manage 3 images and set the difficulty variable.
     @Override
     public void SwapImage() {
 
         if (renderImage == buttonImage) {
             renderImage = buttonImagePressed;
             difficulty = 1;
-            
-            
-        }
-        else if (renderImage == buttonImagePressed) {
+
+        } else if (renderImage == buttonImagePressed) {
             renderImage = buttonImageLabel;
             difficulty = 2;
-        }
-        else if (renderImage == buttonImageLabel) {
+        } else if (renderImage == buttonImageLabel) {
             renderImage = buttonImage;
             difficulty = 0;
         }
 
     }
-    
+
     @Override
     public void render(Graphics gr) {
-        
+
         gr.setColor(Color.black);
         renderImage.draw(position.x, position.y, width, height);
-        
-        
-        
+
     }
 
 }
